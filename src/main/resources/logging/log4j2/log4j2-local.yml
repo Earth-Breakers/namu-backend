@@ -1,0 +1,23 @@
+Configuration:
+  name: NamuLocalLogger
+  status: debug
+
+  Appenders:
+    Console:
+      name: NamuConsoleAppender
+      target: SYSTEM_OUT
+      PatternLayout:
+        pattern: "%style{%d}{cyan} %highlight{%-5level} [%style{%t}{bright,blue}] %style{%C}{bright,yellow}: %msg%n%throwable"
+
+  Loggers:
+    Root:
+      level: info
+      AppenderRef:
+        ref: NamuConsoleAppender
+    AsyncLogger:
+      - name: NamuAsyncLogger
+        level: debug
+        additivity: false
+        includeLocation: false
+        AppenderRef:
+          ref: NamuConsoleAppender
