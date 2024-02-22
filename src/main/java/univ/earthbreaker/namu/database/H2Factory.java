@@ -12,6 +12,7 @@ class H2Factory {
 	static @NotNull EmbeddedDatabaseFactory embeddedDatabaseFactory() {
 		EmbeddedDatabaseFactory embeddedDatabaseFactory = new EmbeddedDatabaseFactory();
 		embeddedDatabaseFactory.setDatabaseType(EmbeddedDatabaseType.H2);
+		embeddedDatabaseFactory.setDatabaseName("core");
 		return embeddedDatabaseFactory;
 	}
 }

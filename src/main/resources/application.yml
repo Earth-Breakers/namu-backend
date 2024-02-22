@@ -4,6 +4,7 @@ spring:
   config:
     import:
       - classpath:logging/logging.yml
+      - classpath:database/database.yml
   web.resources.add-mappings: false
 
 ---
