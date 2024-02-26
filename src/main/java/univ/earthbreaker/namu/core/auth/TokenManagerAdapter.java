@@ -2,6 +2,8 @@ package univ.earthbreaker.namu.core.auth;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import univ.earthbreaker.namu.core.domain.account.TokenManager;
 
@@ -29,6 +31,7 @@ public class TokenManagerAdapter implements TokenManager {
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.MANDATORY)
 	public @NotNull String updateRefreshToken(Long memberNo) {
 		RefreshToken refreshToken = jwtManager.createRefreshToken(memberNo);
 		refreshTokenRepository.update(refreshToken, memberNo);
