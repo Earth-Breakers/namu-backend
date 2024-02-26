@@ -5,6 +5,8 @@ spring:
     import:
       - classpath:logging/logging.yml
       - classpath:database/database.yml
+      - classpath:external/external.yml
+      - classpath:token/token.yml
   web.resources.add-mappings: false
 
 ---
