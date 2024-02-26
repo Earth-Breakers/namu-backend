@@ -1,0 +1,19 @@
+spring.profiles.active: local
+
+spring:
+  config:
+    import:
+      - classpath:logging/logging.yml
+      - classpath:database/database.yml
+      - classpath:external/external.yml
+      - classpath:token/token.yml
+  web.resources.add-mappings: false
+
+---
+spring.config.activate.on-profile: local
+
+---
+spring.config.activate.on-profile: dev
+
+---
+spring.config.activate.on-profile: prod
