@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-import univ.earthbreaker.namu.database.DataSourceConfiguration;
+import univ.earthbreaker.namu.database.config.DataSourceConfiguration;
 
 @Configuration
 @Import({DisableAutoConfiguration.class, DataSourceConfiguration.class})
