@@ -10,9 +10,9 @@ public class RefreshToken {
 	private final Long no;
 	private final String value;
 	private final LocalDateTime expiresIn;
-	private final Long memberNo;
+	private final long memberNo;
 
-	public RefreshToken(Long no, String value, LocalDateTime expiresIn, Long memberNo) {
+	public RefreshToken(Long no, String value, LocalDateTime expiresIn, long memberNo) {
 		this.no = no;
 		this.value = value;
 		this.expiresIn = expiresIn;
@@ -23,7 +23,7 @@ public class RefreshToken {
 		return expiresIn.isBefore(current);
 	}
 
-	static @NotNull RefreshToken create(String refreshTokenValue, LocalDateTime expiresIn, Long memberNo) {
+	static @NotNull RefreshToken create(String refreshTokenValue, LocalDateTime expiresIn, long memberNo) {
 		return new RefreshToken(null, refreshTokenValue, expiresIn, memberNo);
 	}
 
@@ -46,8 +46,8 @@ public class RefreshToken {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		RefreshToken that = (RefreshToken)o;
-		return no.equals(that.no) && value.equals(that.value) && expiresIn.equals(that.expiresIn) && memberNo.equals(
-			that.memberNo);
+		return memberNo == that.memberNo && no.equals(that.no) && value.equals(that.value) && expiresIn.equals(
+			that.expiresIn);
 	}
 
 	@Override
