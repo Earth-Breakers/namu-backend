@@ -1,0 +1,73 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.2'
+    id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'univ.earthbreaker'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '17'
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    set('springCloudVersion', "2023.0.0")
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+configurations {
+    configureEach {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    }
+}
+
+dependencies {
+    implementation 'org.jetbrains:annotations:23.0.0'
+
+    // ========== core:api ==========
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // + implementation auth 의존성
+    // + implementation core:domain 의존성
+    // + implementation external:oauth 의존성
+
+    // ========== core:auth ==========
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+    // + implementation core:domain 의존성
+
+    // ========== core:domain ==========
+    compileOnly 'org.springframework:spring-context'
+    implementation 'javax.validation:validation-api:2.0.1.Final'
+
+    // ========== database ==========
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    // + implementation core:domain 의존성
+    // + implementation core:auth 의존성
+
+    // ========== support:logging ==========
+    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml'
+    implementation 'com.lmax:disruptor:3.4.2'
+
+    // ========== external:oauth ==========
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    testImplementation 'com.fasterxml.jackson.core:jackson-databind'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
