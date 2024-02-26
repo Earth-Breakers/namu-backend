@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.database;
+package univ.earthbreaker.namu.database.config;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseFactory;

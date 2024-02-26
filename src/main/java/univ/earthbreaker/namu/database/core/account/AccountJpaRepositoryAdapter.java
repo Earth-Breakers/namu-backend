@@ -27,7 +27,7 @@ public class AccountJpaRepositoryAdapter implements AccountRepository {
 	}
 
 	@Override
-	public @NotNull Account create(AccountCreateCommand command) {
+	public @NotNull Account create(@NotNull AccountCreateCommand command) {
 		return accountJpaRepository.save(
 			new AccountJpaEntity(
 				command.getSocialId(),
