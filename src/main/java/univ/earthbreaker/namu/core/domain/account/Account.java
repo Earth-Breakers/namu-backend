@@ -4,19 +4,19 @@ import java.util.Objects;
 
 public class Account {
 
-	private final Long no;
+	private final long no;
 	private final String socialId;
 	private final SocialType socialType;
-	private final Long memberNo;
+	private final long memberNo;
 
-	public Account(Long no, String socialId, SocialType socialType, Long memberNo) {
+	public Account(long no, String socialId, SocialType socialType, long memberNo) {
 		this.no = no;
 		this.socialId = socialId;
 		this.socialType = socialType;
 		this.memberNo = memberNo;
 	}
 
-	public Long getMemberNo() {
+	public long getMemberNo() {
 		return memberNo;
 	}
 
@@ -27,11 +27,12 @@ public class Account {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		Account account = (Account)o;
-		return no.equals(account.no) && socialId.equals(account.socialId) && memberNo.equals(account.memberNo);
+		return no == account.no && memberNo == account.memberNo && socialId.equals(account.socialId)
+			&& socialType == account.socialType;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(no, socialId, memberNo);
+		return Objects.hash(no, socialId, socialType, memberNo);
 	}
 }
