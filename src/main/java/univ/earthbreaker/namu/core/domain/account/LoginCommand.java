@@ -1,9 +1,8 @@
 package univ.earthbreaker.namu.core.domain.account;
 
-import javax.validation.constraints.NotBlank;
-
 import org.jetbrains.annotations.NotNull;
 
+import jakarta.validation.constraints.NotBlank;
 import univ.earthbreaker.namu.core.domain.common.SelfValidating;
 
 public class LoginCommand extends SelfValidating<LoginCommand> {
@@ -19,7 +18,7 @@ public class LoginCommand extends SelfValidating<LoginCommand> {
 		this.validateSelf("socialId, socialNickname 과 notificationToken 은 공백이 될 수 없습니다");
 	}
 
-	public KakaoAccountCreateCommand toKakaoCommand(Long memberNo) {
+	public AccountCreateCommand toKakaoCommand(Long memberNo) {
 		return new KakaoAccountCreateCommand(socialId, memberNo);
 	}
 
