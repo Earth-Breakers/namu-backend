@@ -2,6 +2,7 @@ package univ.earthbreaker.namu.core.domain.character;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class CurrentCharacterGrower {
@@ -28,7 +29,8 @@ public class CurrentCharacterGrower {
 	 * @param memberNo 회원 번호
 	 * @return LEVEL.END 로 성장한 캐릭터
 	 */
-	@NotNull CurrentCharacter growToNext(long memberNo) {
+	@Transactional
+	public @NotNull CurrentCharacter growToNext(long memberNo) {
 		CurrentCharacter currentCharacter = currentCharacterFinder.find(memberNo);
 		CurrentCharacterValidator.validateCanLevelUp(currentCharacter);
 		CurrentCharacterValidator.validateLevelIsMiddle(currentCharacter);
@@ -48,7 +50,8 @@ public class CurrentCharacterGrower {
 	 * @param memberNo 회원 번호
 	 * @return LEVEL.MIDDLE 로 성장한 캐릭터
 	 */
-	@NotNull CurrentCharacter growToRandom(long memberNo) {
+	@Transactional
+	public @NotNull CurrentCharacter growToRandom(long memberNo) {
 		CurrentCharacter currentCharacter = currentCharacterFinder.find(memberNo);
 		CurrentCharacterValidator.validateCanLevelUp(currentCharacter);
 		CurrentCharacterValidator.validateLevelIsBegin(currentCharacter);
