@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.database.core;
+package univ.earthbreaker.namu.database.core.character;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import univ.earthbreaker.namu.core.domain.character.CharacterType;
 import univ.earthbreaker.namu.core.domain.character.Gender;
+import univ.earthbreaker.namu.core.domain.character.NamuCharacter;
 
 @Entity
 @Table(name = "character")
@@ -52,5 +53,21 @@ public class CharacterJpaEntity {
 	private String mainImagePath;
 
 	protected CharacterJpaEntity() {
+	}
+
+	NamuCharacter toNamuCharacter() {
+		return NamuCharacter.builder()
+			.no(no)
+			.type(type)
+			.gender(gender)
+			.isEndangered(isEndangered)
+			.groupNumber(groupNumber)
+			.level(level)
+			.requiredExp(requiredExp)
+			.name(name)
+			.description(description)
+			.thumbnailImagePath(thumbnailImagePath)
+			.mainImagePath(mainImagePath)
+			.build();
 	}
 }
