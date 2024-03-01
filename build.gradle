@@ -33,10 +33,11 @@ configurations {
 
 dependencies {
     implementation 'org.jetbrains:annotations:23.0.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'junit:junit:4.13.1'
 
     // ========== core:api ==========
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     // + implementation auth 의존성
     // + implementation core:domain 의존성
     // + implementation external:oauth 의존성
