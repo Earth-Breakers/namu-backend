@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import univ.earthbreaker.namu.core.api.auth.support.AuthenticationException;
 import univ.earthbreaker.namu.core.api.auth.support.InternalAuthServerException;
+import univ.earthbreaker.namu.core.domain.common.BadRequestException;
 import univ.earthbreaker.namu.core.domain.common.ForbiddenException;
 import univ.earthbreaker.namu.core.domain.common.InternalServerException;
 import univ.earthbreaker.namu.core.domain.common.NotFoundException;
@@ -42,6 +43,12 @@ public class NamuExceptionResponseHandler {
 	@ExceptionHandler({OAuthClientException.class, UnAuthorizedException.class, AuthenticationException.class})
 	public ResponseEntity<NamuExceptionResponse> unauthorized(@NotNull RuntimeException exception) {
 		return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+			.body(new NamuExceptionResponse(exception.getMessage()));
+	}
+
+	@ExceptionHandler(BadRequestException.class)
+	public ResponseEntity<NamuExceptionResponse> unauthorized(@NotNull BadRequestException exception) {
+		return ResponseEntity.badRequest()
 			.body(new NamuExceptionResponse(exception.getMessage()));
 	}
 

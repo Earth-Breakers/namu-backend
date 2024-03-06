@@ -10,23 +10,19 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import univ.earthbreaker.namu.core.api.auth.support.AuthenticationInterceptor;
 import univ.earthbreaker.namu.core.api.auth.support.LoginMemberArgumentResolver;
-import univ.earthbreaker.namu.core.api.auth.support.RefreshTokenArgumentResolver;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
 	private final AuthenticationInterceptor authenticationInterceptor;
 	private final LoginMemberArgumentResolver loginMemberArgumentResolver;
-	private final RefreshTokenArgumentResolver refreshTokenArgumentResolver;
 
 	public WebConfig(
 		AuthenticationInterceptor authenticationInterceptor,
-		LoginMemberArgumentResolver loginMemberArgumentResolver,
-		RefreshTokenArgumentResolver refreshTokenArgumentResolver
+		LoginMemberArgumentResolver loginMemberArgumentResolver
 	) {
 		this.authenticationInterceptor = authenticationInterceptor;
 		this.loginMemberArgumentResolver = loginMemberArgumentResolver;
-		this.refreshTokenArgumentResolver = refreshTokenArgumentResolver;
 	}
 
 	@Override
@@ -41,6 +37,5 @@ public class WebConfig implements WebMvcConfigurer {
 	@Override
 	public void addArgumentResolvers(@NotNull List<HandlerMethodArgumentResolver> resolvers) {
 		resolvers.add(loginMemberArgumentResolver);
-		resolvers.add(refreshTokenArgumentResolver);
 	}
 }

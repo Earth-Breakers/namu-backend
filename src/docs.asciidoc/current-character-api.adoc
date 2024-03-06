@@ -1,0 +1,44 @@
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+[[Character-API]]
+== 현재 키우는 캐릭터 성장
+'''
+===  레벨 BEGIN -> MIDDLE
+
+operation::current-character-grow-controller-test/grow-to-next-level-random-character[snippets='http-request']
+
+
+==== 성공
+
+operation::current-character-grow-controller-test/grow-to-next-level-random-character[snippets='http-response']
+
+==== 실패
+
+operation::current-character-grow-controller-test/fail_grow-to-next-level-random-character_valid_level_is_begin[snippets='http-response']
+
+operation::current-character-grow-controller-test/fail_grow-to-next-level-random-character_not_found[snippets='http-response']
+
+'''
+
+===  레벨 MIDDLE -> END
+
+==== 성공
+
+operation::current-character-grow-controller-test/grow-to-next-level-character[snippets='http-request,http-response']
+
+==== 실패
+
+operation::current-character-grow-controller-test/fail_grow-to-next-level-character_valid_level_is_middle[snippets='http-response']
+
+operation::current-character-grow-controller-test/fail_grow-to-next-level-character_not_found[snippets='http-response']
+
+=== 공통 예외
+
+operation::current-character-grow-controller-test/fail_grow-to-method_not_found[snippets='http-response']
+
+operation::current-character-grow-controller-test/fail_grow-to-method_invalid[snippets='http-response']

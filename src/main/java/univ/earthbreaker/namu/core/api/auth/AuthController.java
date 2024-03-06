@@ -28,7 +28,7 @@ public class AuthController {
 	}
 
 	@PostMapping("/login/kakao")
-	public ResponseEntity<LoginResponse> login(@RequestBody @NotNull LoginRequest request) {
+	public ResponseEntity<Void> loginOrJoin(@RequestBody @NotNull LoginRequest request) {
 		OAuthMemberInfoResult oAuthResult = oAuthClientApi.getOAuthMemberInfo(request.socialToken());
 		LoginResult loginResult = accountService.loginOrJoin(request.toCommand(oAuthResult.id(), oAuthResult.nickname()));
 		if (loginResult.isNewMember()) {

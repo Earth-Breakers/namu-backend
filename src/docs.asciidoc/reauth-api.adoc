@@ -1,0 +1,22 @@
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+[[ReAuth-API]]
+== 토큰 재발급 - 성공
+
+operation::re-auth-controller-test/reissue[snippets='curl-request,http-request,request-headers,http-response,response-headers']
+
+
+== 토큰 재발급 - 실패
+
+=== 토큰 만료
+
+operation::re-auth-controller-test/fail_reissue_expired[snippets='http-request,http-response']
+
+=== 존재하지 않는 토큰
+
+operation::re-auth-controller-test/fail_reissue_not_found[snippets='http-request,http-response']
