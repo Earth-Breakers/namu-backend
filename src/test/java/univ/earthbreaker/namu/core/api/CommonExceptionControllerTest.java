@@ -1,14 +1,12 @@
 package univ.earthbreaker.namu.core.api;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 class CommonExceptionControllerTest extends PresentationTest {
 
-	@DisplayName("")
 	@Test
-	void exception() throws Exception {
+	void common_exception_docs() throws Exception {
 		// given
 		mockMvc = mockController(new CommonExceptionController());
 

@@ -34,4 +34,4 @@
 
 [[overview-error-response]]
 === HTTP Error Response
-operation::common-exception-controller-test/exception[snippets='response-fields']
+operation::common-exception-controller-test/common_exception_docs[snippets='response-fields']
