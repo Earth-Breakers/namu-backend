@@ -10,11 +10,11 @@ public class NamuCharacterNotFoundException extends NotFoundException {
 		super(domainName);
 	}
 
-	static @NotNull NamuCharacterNotFoundException notFoundNext() {
-		return new NamuCharacterNotFoundException("다음 성장 형태의 캐릭터가 존재하지 않습니다");
+	public static @NotNull NamuCharacterNotFoundException notFoundNext() {
+		return new NamuCharacterNotFoundException("다음 성장 형태의 캐릭터");
 	}
 
-	static @NotNull NamuCharacterNotFoundException notFoundRandom() {
-		return new NamuCharacterNotFoundException("랜덤으로 가져온 캐릭터가 존재하지 않습니다");
+	public static @NotNull NamuCharacterNotFoundException notFoundRandom() {
+		return new NamuCharacterNotFoundException("랜덤으로 가져온 캐릭터");
 	}
 }
