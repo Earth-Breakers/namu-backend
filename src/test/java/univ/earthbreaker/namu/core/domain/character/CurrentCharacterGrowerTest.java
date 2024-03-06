@@ -1,6 +1,5 @@
 package univ.earthbreaker.namu.core.domain.character;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
@@ -36,17 +35,14 @@ class CurrentCharacterGrowerTest {
 		// given
 		when(currentCharacterFinder.find(MEMBER_NO))
 			.thenReturn(MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP);
-		when(namuCharacterFinder.findNext(anyInt(), anyInt(), any()))
+		when(namuCharacterFinder.findNext(anyInt(), anyInt(), any(CharacterType.class)))
 			.thenReturn(END_NAMU_CHARACTER);
 
 		// when
-		CurrentCharacter currentCharacter = currentCharacterGrower.growToNext(MEMBER_NO);
+		currentCharacterGrower.growToNext(MEMBER_NO);
 
 		// then
-		assertAll(
-			() -> assertThat(currentCharacter).isNotNull(),
-			() -> verify(currentCharacterRepository).update(any())
-		);
+		verify(currentCharacterRepository).update(any(CurrentCharacter.class));
 	}
 
 	@DisplayName("""
@@ -57,17 +53,16 @@ class CurrentCharacterGrowerTest {
 		// given
 		when(currentCharacterFinder.find(MEMBER_NO))
 			.thenReturn(BEGIN_CURRENT_CHARACTER_WITH_MAX_EXP);
-		when(namuCharacterFinder.findRandom(anyInt(), anyInt(), anyBoolean(), any()))
+		when(namuCharacterFinder.findRandom(anyInt(), anyInt(), anyBoolean(), any(CharacterType.class)))
 			.thenReturn(END_NAMU_CHARACTER);
 
 		// when
-		CurrentCharacter currentCharacter = currentCharacterGrower.growToRandom(MEMBER_NO);
+		currentCharacterGrower.growToRandom(MEMBER_NO);
 
 		// then
 		assertAll(
-			() -> assertThat(currentCharacter).isNotNull(),
 			() -> verify(endangeredProbabilityPolicy).determineEndangered(),
-			() -> verify(currentCharacterRepository).update(any())
+			() -> verify(currentCharacterRepository).update(any(CurrentCharacter.class))
 		);
 	}
 }

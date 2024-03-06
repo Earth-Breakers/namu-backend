@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import univ.earthbreaker.namu.core.api.auth.support.AuthMapping;
 import univ.earthbreaker.namu.core.api.auth.support.LoginMember;
-import univ.earthbreaker.namu.core.domain.character.CurrentCharacterGrowResult;
 import univ.earthbreaker.namu.core.domain.character.CurrentCharacterGrowService;
 
 @RestController
@@ -22,13 +21,15 @@ public class CurrentCharacterGrowController {
 
 	@AuthMapping
 	@PostMapping("/next")
-	public ResponseEntity<CurrentCharacterGrowResult> growToNextLevelCharacter(@LoginMember long memberNo) {
-		return ResponseEntity.ok(currentCharacterGrowService.growToNextLevel(memberNo));
+	public ResponseEntity<Void> growToNextLevelCharacter(@LoginMember Long memberNo) {
+		currentCharacterGrowService.growToNextLevel(memberNo);
+		return ResponseEntity.noContent().build();
 	}
 
 	@AuthMapping
 	@PostMapping("/random")
-	public ResponseEntity<CurrentCharacterGrowResult> growToNextLevelRandomCharacter(@LoginMember long memberNo) {
-		return ResponseEntity.ok(currentCharacterGrowService.growToNextRandom(memberNo));
+	public ResponseEntity<Void> growToNextLevelRandomCharacter(@LoginMember Long memberNo) {
+		currentCharacterGrowService.growToNextRandom(memberNo);
+		return ResponseEntity.noContent().build();
 	}
 }

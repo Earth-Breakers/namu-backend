@@ -1,0 +1,26 @@
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+[[Auth-API]]
+== 소셜 로그인 및 회원가입 - 성공
+===  회원가입
+
+operation::auth-controller-test/join_login-or-join[snippets='http-request,request-body,request-fields,http-response,response-headers']
+
+=== 로그인
+
+operation::auth-controller-test/login_login-or-join[snippets='http-request,http-response,response-headers']
+
+== 소셜 로그인 - 실패
+
+=== 소셜 api 오류
+
+operation::auth-controller-test/fail_oauth_join[snippets='http-response']
+
+=== 소셜 토큰 만료
+
+operation::auth-controller-test/fail_oauth_unauthorized_join[snippets='http-response']

@@ -11,13 +11,11 @@ public class CurrentCharacterGrowService {
 		this.currentCharacterGrower = currentCharacterGrower;
 	}
 
-	public CurrentCharacterGrowResult growToNextLevel(long memberNo) {
-		CurrentCharacter currentCharacter = currentCharacterGrower.growToNext(memberNo);
-		return CurrentCharacterGrowResult.from(currentCharacter);
+	public void growToNextLevel(long memberNo) {
+		currentCharacterGrower.growToNext(memberNo);
 	}
 
-	public CurrentCharacterGrowResult growToNextRandom(long memberNo) {
-		CurrentCharacter currentCharacter = currentCharacterGrower.growToRandom(memberNo);
-		return CurrentCharacterGrowResult.from(currentCharacter);
+	public void growToNextRandom(long memberNo) {
+		currentCharacterGrower.growToRandom(memberNo);
 	}
 }

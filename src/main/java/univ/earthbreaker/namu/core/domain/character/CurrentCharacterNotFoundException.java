@@ -10,7 +10,7 @@ public class CurrentCharacterNotFoundException extends NotFoundException {
 		super(domainName);
 	}
 
-	static @NotNull CurrentCharacterNotFoundException notFound(long memberNo) {
-		return new CurrentCharacterNotFoundException(String.format("회원 %d 의 현재 캐릭터가 존재하지 않습니다", memberNo));
+	public static @NotNull CurrentCharacterNotFoundException notFound(long memberNo) {
+		return new CurrentCharacterNotFoundException(String.format("회원 %d 의 현재 캐릭터", memberNo));
 	}
 }

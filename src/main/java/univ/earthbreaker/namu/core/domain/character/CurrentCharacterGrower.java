@@ -26,11 +26,11 @@ public class CurrentCharacterGrower {
 
 	/**
 	 * 현재 캐릭터 LEVEL 을 MIDDLE -> END 로 성장시키는 메서드.
+	 * LEVEL 이 MIDDLE 인 캐릭터만 허용한다.
 	 * @param memberNo 회원 번호
-	 * @return LEVEL.END 로 성장한 캐릭터
 	 */
 	@Transactional
-	public @NotNull CurrentCharacter growToNext(long memberNo) {
+	public void growToNext(long memberNo) {
 		CurrentCharacter currentCharacter = currentCharacterFinder.find(memberNo);
 		CurrentCharacterValidator.validateCanLevelUp(currentCharacter);
 		CurrentCharacterValidator.validateLevelIsMiddle(currentCharacter);
@@ -39,7 +39,7 @@ public class CurrentCharacterGrower {
 			currentCharacter.getCharacterGroupNumber(),
 			currentCharacter.getCharacterType()
 		);
-		return updateAndGetCurrentCharacter(currentCharacter, namuCharacter);
+		updateAndGetCurrentCharacter(currentCharacter, namuCharacter);
 	}
 
 	/**
@@ -47,11 +47,11 @@ public class CurrentCharacterGrower {
 	 * 사용자가 주입한 에너지의 종류가 캐릭터 타입을 결정하고,
 	 * 해당 캐릭터 타입에 맞는 랜덤한 LEVEL.MIDDLE 캐릭터로 성장한다.
 	 * 멸종 위기종이 확률 정책에 맞도록 선택된다.
+	 * LEVEL 이 BEGIN 인 캐릭터만 허용한다.
 	 * @param memberNo 회원 번호
-	 * @return LEVEL.MIDDLE 로 성장한 캐릭터
 	 */
 	@Transactional
-	public @NotNull CurrentCharacter growToRandom(long memberNo) {
+	public void growToRandom(long memberNo) {
 		CurrentCharacter currentCharacter = currentCharacterFinder.find(memberNo);
 		CurrentCharacterValidator.validateCanLevelUp(currentCharacter);
 		CurrentCharacterValidator.validateLevelIsBegin(currentCharacter);
@@ -61,15 +61,14 @@ public class CurrentCharacterGrower {
 			endangeredProbabilityPolicy.determineEndangered(),
 			currentCharacter.getCharacterType()
 		);
-		return updateAndGetCurrentCharacter(currentCharacter, randomNamuCharacter);
+		updateAndGetCurrentCharacter(currentCharacter, randomNamuCharacter);
 	}
 
-	private CurrentCharacter updateAndGetCurrentCharacter(
+	private void updateAndGetCurrentCharacter(
 		@NotNull CurrentCharacter currentCharacter,
 		NamuCharacter namuCharacter
 	) {
 		CurrentCharacter grownCurrentCharacter = currentCharacter.growToNext(namuCharacter);
 		currentCharacterRepository.update(grownCurrentCharacter);
-		return grownCurrentCharacter;
 	}
 }
