@@ -1,0 +1,16 @@
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+[[Friend-API]]
+=== 친구 추가
+operation::friend-controller-test/follow[snippets='http-request,request-headers,path-parameters,http-response']
+
+== 친구 목록 조회
+
+== 친구 검색
+
+== 친구 추천
