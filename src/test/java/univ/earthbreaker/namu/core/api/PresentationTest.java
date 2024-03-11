@@ -7,6 +7,7 @@ import org.mockito.Mockito;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
@@ -85,6 +86,14 @@ public abstract class PresentationTest extends ApiDocsAbstract {
 			.header(HttpHeaders.AUTHORIZATION, AUTHORIZATION_TYPE_WITH_ACCESS_TOKEN)
 			.contentType(MediaType.APPLICATION_JSON)
 			.accept(MediaType.APPLICATION_JSON);
+		return mockMvc.perform(requestBuilder);
+	}
+
+	protected ResultActions whenPostWithAuthorization(String uri, Long pathVariable) throws Exception {
+		MockHttpServletRequestBuilder requestBuilder = RestDocumentationRequestBuilders.post(uri,
+				pathVariable)
+			.header(HttpHeaders.AUTHORIZATION, AUTHORIZATION_TYPE_WITH_ACCESS_TOKEN)
+			.contentType(MediaType.APPLICATION_JSON);
 		return mockMvc.perform(requestBuilder);
 	}
 
