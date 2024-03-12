@@ -10,13 +10,14 @@ endif::[]
 :toclevels: 2
 :sectlinks:
 
-include::overview.adoc[]
+include::{docfile}/../overview.adoc[]
 
 == Auth API
 
-* link:auth-api.adoc[소셜 로그인 및 회원가입, window=blank]
-* link:reauth-api.adoc[토큰 재발급, window=blank]
+include::{docfile}/../auth-api.adoc[소셜 로그인 및 회원가입]
+include::{docfile}/../reauth-api.adoc[토큰 재발급]
 
+'''
 
 == Character API
-* link:current-character-api.adoc[현재 캐릭터 성장, window=blank]
+include::{docfile}/../current-character-api.adoc[현재 캐릭터 성장]
