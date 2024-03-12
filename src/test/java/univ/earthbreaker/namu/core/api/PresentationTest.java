@@ -42,9 +42,7 @@ public abstract class PresentationTest extends ApiDocsAbstract {
 			.build();
 	}
 
-	protected MockMvc mockControllerWithAuthorization(
-		Object controller
-	) throws Exception {
+	protected MockMvc mockControllerWithAuthorization(Object controller) throws Exception {
 		return MockMvcBuilders.standaloneSetup(controller)
 			.setControllerAdvice(new NamuExceptionResponseHandler())
 			.setCustomArgumentResolvers(mockLoginMemberArgumentResolver())
@@ -102,6 +100,13 @@ public abstract class PresentationTest extends ApiDocsAbstract {
 			.header(HttpHeaders.AUTHORIZATION, AUTHORIZATION_TYPE_WITH_ACCESS_TOKEN)
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(toJson(requestBody))
+			.accept(MediaType.APPLICATION_JSON);
+		return mockMvc.perform(requestBuilder);
+	}
+
+	protected ResultActions whenGetWithAuthorization(String uri) throws Exception {
+		MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get(uri)
+			.header(HttpHeaders.AUTHORIZATION, AUTHORIZATION_TYPE_WITH_ACCESS_TOKEN)
 			.accept(MediaType.APPLICATION_JSON);
 		return mockMvc.perform(requestBuilder);
 	}
