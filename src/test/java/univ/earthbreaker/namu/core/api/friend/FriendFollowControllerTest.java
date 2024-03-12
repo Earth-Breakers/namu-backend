@@ -20,16 +20,16 @@ import org.springframework.test.web.servlet.ResultActions;
 import univ.earthbreaker.namu.core.api.PresentationTest;
 import univ.earthbreaker.namu.core.domain.member.friend.FriendFollowService;
 
-class FriendControllerTest extends PresentationTest {
+class FriendFollowControllerTest extends PresentationTest {
 
-	private static final String FOLLOW_URI = "/v1/friend/follow/{targetMemberNo}";
+	private static final String FOLLOW_URI = "/v1/friends/follow/{targetMemberNo}";
 
 	private final FriendFollowService friendFollowService = Mockito.mock(FriendFollowService.class);
-	private final FriendController friendController = new FriendController(friendFollowService);
+	private final FriendFollowController friendFollowController = new FriendFollowController(friendFollowService);
 
 	@BeforeEach
 	void setUp() throws Exception {
-		mockMvc = mockControllerWithAuthorization(friendController);
+		mockMvc = mockControllerWithAuthorization(friendFollowController);
 	}
 
 	@DisplayName("팔로우할 상대의 번호를 받아 친구 추가를 하면 204 를 반환한다")
