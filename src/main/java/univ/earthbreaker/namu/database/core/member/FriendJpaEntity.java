@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.database.core.friend;
+package univ.earthbreaker.namu.database.core.member;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -15,7 +15,7 @@ public class FriendJpaEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long no;
 
 	@Column(nullable = false)
 	private Long masterMemberNo;
