@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.domain.friend;
+package univ.earthbreaker.namu.core.domain.member.friend;
 
 import java.util.Objects;
 
@@ -12,6 +12,18 @@ public class Following {
 		this.followerNo = followerNo;
 		this.level = level;
 		this.nickname = nickname;
+	}
+
+	public long getFollowerNo() {
+		return followerNo;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public String getNickname() {
+		return nickname;
 	}
 
 	@Override

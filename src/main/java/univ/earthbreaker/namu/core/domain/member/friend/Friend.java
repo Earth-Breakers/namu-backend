@@ -1,18 +1,20 @@
-package univ.earthbreaker.namu.core.domain.friend;
+package univ.earthbreaker.namu.core.domain.member.friend;
 
 import java.util.List;
 import java.util.Objects;
 
 public class Friend {
 
-	private final long no;
 	private final long masterNo;
 	private final List<Following> followings;
 
-	public Friend(long no, long masterNo, List<Following> followings) {
-		this.no = no;
+	public Friend(long masterNo, List<Following> followings) {
 		this.masterNo = masterNo;
 		this.followings = followings;
+	}
+
+	public List<Following> getFollowings() {
+		return followings;
 	}
 
 	@Override
@@ -22,11 +24,11 @@ public class Friend {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		Friend friend = (Friend)o;
-		return no == friend.no && masterNo == friend.masterNo && followings.equals(friend.followings);
+		return masterNo == friend.masterNo;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(no, masterNo, followings);
+		return Objects.hash(masterNo);
 	}
 }

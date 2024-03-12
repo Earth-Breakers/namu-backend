@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.database.core.friend;
+package univ.earthbreaker.namu.database.core.member;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
