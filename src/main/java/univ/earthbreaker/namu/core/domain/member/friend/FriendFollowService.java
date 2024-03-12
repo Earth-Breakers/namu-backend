@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.domain.friend;
+package univ.earthbreaker.namu.core.domain.member.friend;
 
 import org.springframework.stereotype.Service;
 

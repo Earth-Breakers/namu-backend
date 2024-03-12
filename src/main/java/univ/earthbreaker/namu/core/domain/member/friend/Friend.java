@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.domain.friend;
+package univ.earthbreaker.namu.core.domain.member.friend;
 
 import java.util.List;
 import java.util.Objects;
@@ -11,6 +11,10 @@ public class Friend {
 	public Friend(long masterNo, List<Following> followings) {
 		this.masterNo = masterNo;
 		this.followings = followings;
+	}
+
+	public List<Following> getFollowings() {
+		return followings;
 	}
 
 	@Override
