@@ -1,6 +1,8 @@
 package univ.earthbreaker.namu.core.domain.member.friend;
 
 import static org.mockito.Mockito.verify;
+import static univ.earthbreaker.namu.core.domain.member.friend.FriendFixture.FOLLOWING_MEMBER_NO;
+import static univ.earthbreaker.namu.core.domain.member.friend.FriendFixture.MEMBER_NO;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,9 +14,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 class FriendRegisterTest {
 
-	private static final Long MEMBER_NO = 1L;
-	private static final Long TARGET_MEMBER_NO = 2L;
-
 	private @Mock FriendRepository friendRepository;
 	private @InjectMocks FriendRegister friendRegister;
 
@@ -22,12 +21,12 @@ class FriendRegisterTest {
 	@Test
 	void register() {
 	    // given
-		FriendRelationCommand friendRelationCommand = new FriendRelationCommand(MEMBER_NO, TARGET_MEMBER_NO);
+		FriendRelationCommand friendRelationCommand = new FriendRelationCommand(MEMBER_NO, FOLLOWING_MEMBER_NO);
 
 		// when
 		friendRegister.register(friendRelationCommand);
 
 	    // then
-		verify(friendRepository).register(MEMBER_NO, TARGET_MEMBER_NO);
+		verify(friendRepository).register(MEMBER_NO, FOLLOWING_MEMBER_NO);
 	}
 }
