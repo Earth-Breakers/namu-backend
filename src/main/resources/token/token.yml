@@ -3,3 +3,12 @@ token:
     secret: ${JWT_SECRET_KEY}
     access-valid-duration: ${JWT_ACCESS_VALID_DURATION}
     refresh-valid-duration: ${JWT_REFRESH_VALID_DURATION}
+
+---
+spring.config.activate.on-profile: local
+
+token:
+  jwt:
+    secret: testTokenJwtSecretTestTokenJwtSecretTestTokenJwtSecretTestTokenJwtSecret
+    access-valid-duration: 604800000
+    refresh-valid-duration: 604800000
