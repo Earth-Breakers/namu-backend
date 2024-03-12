@@ -18,7 +18,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.test.web.servlet.ResultActions;
 
 import univ.earthbreaker.namu.core.api.PresentationTest;
-import univ.earthbreaker.namu.core.domain.friend.FriendFollowService;
+import univ.earthbreaker.namu.core.domain.member.friend.FriendFollowService;
 
 class FriendControllerTest extends PresentationTest {
 

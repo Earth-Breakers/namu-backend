@@ -9,6 +9,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import univ.earthbreaker.namu.core.domain.member.friend.FriendRegister;
+import univ.earthbreaker.namu.core.domain.member.friend.FriendRelationCommand;
+import univ.earthbreaker.namu.core.domain.member.friend.FriendRepository;
+
 @ExtendWith(MockitoExtension.class)
 class FriendRegisterTest {
 
