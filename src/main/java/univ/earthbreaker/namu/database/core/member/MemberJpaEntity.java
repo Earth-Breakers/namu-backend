@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import univ.earthbreaker.namu.core.domain.member.MemberStatus;
+import univ.earthbreaker.namu.core.domain.member.friend.Following;
 
 @Entity
 @Table(name = "member")
@@ -37,6 +38,10 @@ public class MemberJpaEntity {
 		this.nickname = nickname;
 		this.level = level;
 		this.status = status;
+	}
+
+	Following toFollowing() {
+		return new Following(no, level, nickname);
 	}
 
 	static @NotNull MemberJpaEntity create(String socialNickname) {

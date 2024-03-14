@@ -1,0 +1,22 @@
+ifndef::snippets[]
+:snippets: ./build/generated-snippets
+endif::[]
+
+= API 문서 (글의 제목)
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left // 문서의 목차를 왼쪽에 부여한다.
+:toclevels: 2
+:sectlinks:
+
+include::{docfile}/../overview.adoc[]
+
+== Auth API
+
+include::{docfile}/../auth-api.adoc[소셜 로그인 및 회원가입, window=blank]
+include::{docfile}/../reauth-api.adoc[토큰 재발급, window=blank]
+
+
+== Character API
+include::{docfile}/../current-character-api.adoc[현재 캐릭터 성장, window=blank]
