@@ -88,8 +88,7 @@ public abstract class PresentationTest extends ApiDocsAbstract {
 	}
 
 	protected ResultActions whenPostWithAuthorization(String uri, Long pathVariable) throws Exception {
-		MockHttpServletRequestBuilder requestBuilder = RestDocumentationRequestBuilders.post(uri,
-				pathVariable)
+		MockHttpServletRequestBuilder requestBuilder = RestDocumentationRequestBuilders.post(uri, pathVariable)
 			.header(HttpHeaders.AUTHORIZATION, AUTHORIZATION_TYPE_WITH_ACCESS_TOKEN)
 			.contentType(MediaType.APPLICATION_JSON);
 		return mockMvc.perform(requestBuilder);
@@ -97,6 +96,15 @@ public abstract class PresentationTest extends ApiDocsAbstract {
 
 	protected ResultActions whenPostWithAuthorization(String uri, Object requestBody) throws Exception {
 		MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.post(uri)
+			.header(HttpHeaders.AUTHORIZATION, AUTHORIZATION_TYPE_WITH_ACCESS_TOKEN)
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(toJson(requestBody))
+			.accept(MediaType.APPLICATION_JSON);
+		return mockMvc.perform(requestBuilder);
+	}
+
+	protected ResultActions whenPostWithAuthorization(String uri, Long pathVariable, Object requestBody) throws Exception {
+		MockHttpServletRequestBuilder requestBuilder = RestDocumentationRequestBuilders.post(uri, pathVariable)
 			.header(HttpHeaders.AUTHORIZATION, AUTHORIZATION_TYPE_WITH_ACCESS_TOKEN)
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(toJson(requestBody))
