@@ -1,0 +1,23 @@
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+[[Energy-API]]
+== 포인트 선물
+
+=== 요청
+
+operation::energy-gift-controller-test/success_gift-to-friend[snippets='request-headers,path-parameters,request-body,request-fields,http-request']
+
+=== 성공
+
+operation::energy-gift-controller-test/success_gift-to-friend[snippets='http-response']
+
+=== 실패
+
+operation::energy-gift-controller-test/fail_gift-to-friend_point_lack[snippets='http-response']
+
+operation::energy-gift-controller-test/fail_gift-to-friend_point_lack[snippets='http-response']

@@ -12,11 +12,14 @@ endif::[]
 
 include::{docfile}/../overview.adoc[]
 
-== Auth API
+= Auth API
 
 include::{docfile}/../auth-api.adoc[소셜 로그인 및 회원가입, window=blank]
 include::{docfile}/../reauth-api.adoc[토큰 재발급, window=blank]
 
 
-== Character API
+= Character API
 include::{docfile}/../current-character-api.adoc[현재 캐릭터 성장, window=blank]
+
+= Energy API
+include::{docfile}/../energy-api.adoc[에너지 포인트, window=blank]
