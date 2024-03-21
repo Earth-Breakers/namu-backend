@@ -10,12 +10,12 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.response
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static univ.earthbreaker.namu.core.domain.member.friend.FriendFixture.FOLLOWING_MEMBER_LEVEL;
-import static univ.earthbreaker.namu.core.domain.member.friend.FriendFixture.FOLLOWING_MEMBER_NICKNAME;
-import static univ.earthbreaker.namu.core.domain.member.friend.FriendFixture.FOLLOWING_MEMBER_NO;
-import static univ.earthbreaker.namu.core.domain.member.friend.FriendFixture.FRIEND_EXIST;
-import static univ.earthbreaker.namu.core.domain.member.friend.FriendFixture.FRIEND_NOT_EXIST;
-import static univ.earthbreaker.namu.core.domain.member.friend.FriendFixture.MEMBER_NO;
+import static univ.earthbreaker.namu.core.domain.member.MemberFixture.FOLLOWING_MEMBER_LEVEL;
+import static univ.earthbreaker.namu.core.domain.member.MemberFixture.FOLLOWING_MEMBER_NICKNAME;
+import static univ.earthbreaker.namu.core.domain.member.MemberFixture.FOLLOWING_MEMBER_NO;
+import static univ.earthbreaker.namu.core.domain.member.MemberFixture.FRIEND_EXIST;
+import static univ.earthbreaker.namu.core.domain.member.MemberFixture.FRIEND_NOT_EXIST;
+import static univ.earthbreaker.namu.core.domain.member.MemberFixture.MEMBER_NO;
 import static univ.earthbreaker.namu.support.apidocs.ApiDocsUtils.API_DOCUMENT_IDENTIFIER;
 import static univ.earthbreaker.namu.support.apidocs.ApiDocsUtils.operationRequestPreprocessor;
 import static univ.earthbreaker.namu.support.apidocs.ApiDocsUtils.operationResponsePreprocessor;
@@ -74,9 +74,9 @@ class FriendListControllerTest extends PresentationTest {
 						headerWithName(HttpHeaders.AUTHORIZATION).description("회원의 access 토큰 값")
 					),
 					responseFields(
-						fieldWithPath("results[].memberNo").type(NUMBER).description("회원이 팔로잉하는 회원의 번호"),
-						fieldWithPath("results[].nickname").type(STRING).description("회원이 팔로잉하는 회원의 닉네임"),
-						fieldWithPath("results[].level").type(NUMBER).description("회원이 팔로잉하는 회원의 레벨")
+						fieldWithPath("notificationTokens[].memberNo").type(NUMBER).description("회원이 팔로잉하는 회원의 번호"),
+						fieldWithPath("notificationTokens[].nickname").type(STRING).description("회원이 팔로잉하는 회원의 닉네임"),
+						fieldWithPath("notificationTokens[].level").type(NUMBER).description("회원이 팔로잉하는 회원의 레벨")
 					)
 				)
 			);
@@ -110,7 +110,7 @@ class FriendListControllerTest extends PresentationTest {
 						headerWithName(HttpHeaders.AUTHORIZATION).description("회원의 access 토큰 값")
 					),
 					responseFields(
-						fieldWithPath("results[]").description("친구가 없으면 빈 배열을 반환합니다")
+						fieldWithPath("notificationTokens[]").description("친구가 없으면 빈 배열을 반환합니다")
 					)
 				)
 			);
