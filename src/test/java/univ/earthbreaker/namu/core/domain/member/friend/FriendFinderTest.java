@@ -1,9 +1,9 @@
 package univ.earthbreaker.namu.core.domain.member.friend;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static univ.earthbreaker.namu.core.domain.member.friend.FriendFixture.FRIEND_EXIST;
-import static univ.earthbreaker.namu.core.domain.member.friend.FriendFixture.FRIEND_NOT_EXIST;
-import static univ.earthbreaker.namu.core.domain.member.friend.FriendFixture.MEMBER_NO;
+import static univ.earthbreaker.namu.core.domain.member.MemberFixture.FRIEND_EXIST;
+import static univ.earthbreaker.namu.core.domain.member.MemberFixture.FRIEND_NOT_EXIST;
+import static univ.earthbreaker.namu.core.domain.member.MemberFixture.MEMBER_NO;
 
 import java.util.stream.Stream;
 
