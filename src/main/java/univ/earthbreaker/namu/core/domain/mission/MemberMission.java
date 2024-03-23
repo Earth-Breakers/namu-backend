@@ -1,32 +1,79 @@
 package univ.earthbreaker.namu.core.domain.mission;
 
-import java.util.List;
-
-import org.jetbrains.annotations.NotNull;
+import java.util.Objects;
 
 public class MemberMission {
 
+	private final long no;
 	private final long memberNo;
-	private final Missions missions;
+	private final String title;
+	private final MissionType type;
+	private final MissionStatus status;
 
-	private MemberMission(long memberNo, Missions missions) {
+	public MemberMission(long no, long memberNo, String title, MissionType type, MissionStatus status) {
+		this.no = no;
 		this.memberNo = memberNo;
-		this.missions = missions;
+		this.title = title;
+		this.type = type;
+		this.status = status;
 	}
 
-	public static @NotNull MemberMission create(long memberNo, List<Mission> missions) {
-		return new MemberMission(memberNo, Missions.from(missions));
+	MemberMission process() {
+		return new MemberMission(no, memberNo, title, type, MissionStatus.IN_PROGRESS);
 	}
 
-	List<Mission> findTodayMissionList() {
-		return missions.findTodayMissions();
+	MemberMission failure() {
+		return new MemberMission(no, memberNo, title, type, MissionStatus.FAILURE);
 	}
 
-	List<Mission> findDefaultMissionList() {
-		return missions.findDefaultMissions();
+	MemberMission success() {
+		return new MemberMission(no, memberNo, title, type, MissionStatus.SUCCESS);
 	}
 
-	List<Mission> findSpecialMissionList() {
-		return missions.findSpecialMissions();
+	boolean isDefault() {
+		return type.isDefault();
+	}
+
+	boolean isToday() {
+		return type.isToday();
+	}
+
+	boolean isSpecial() {
+		return type.isSpecial();
+	}
+
+	public long getNo() {
+		return no;
+	}
+
+	public long getMemberNo() {
+		return memberNo;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public MissionStatus getStatus() {
+		return status;
+	}
+
+	MissionType getType() {
+		return type;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		MemberMission mission = (MemberMission)o;
+		return no == mission.no && title.equals(mission.title) && type == mission.type && status == mission.status;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(no, title, type, status);
 	}
 }

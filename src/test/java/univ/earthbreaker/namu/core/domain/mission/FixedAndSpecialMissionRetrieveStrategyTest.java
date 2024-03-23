@@ -15,10 +15,10 @@ class FixedAndSpecialMissionRetrieveStrategyTest {
 	@Test
 	void retrieve() {
 		// given
-		MemberMission memberMission = MissionFixture.MEMBER_MISSION;
+		MemberMissions memberMissions = MissionFixture.MEMBER_MISSIONS;
 
 		// when
-		MemberMissionQueryResult actual = fixedAndSpecialMissionRetrieveStrategy.retrieve(memberMission);
+		MemberMissionQueryResult actual = fixedAndSpecialMissionRetrieveStrategy.retrieve(memberMissions);
 
 		// then
 		assertAll(

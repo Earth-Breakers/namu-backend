@@ -1,7 +1,7 @@
 package univ.earthbreaker.namu.core.domain.mission;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.MEMBER_MISSION;
+import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.MEMBER_MISSIONS;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ class MemberMissionTest {
 	@Test
 	void findTodayMissionList() {
 		// when
-		List<Mission> actual = MEMBER_MISSION.findTodayMissionList();
+		List<MemberMission> actual = MEMBER_MISSIONS.findTodayMissions();
 
 		// then
 		assertThat(actual)
@@ -26,7 +26,7 @@ class MemberMissionTest {
 	@Test
 	void findDefaultMissionList() {
 		// when
-		List<Mission> actual = MEMBER_MISSION.findDefaultMissionList();
+		List<MemberMission> actual = MEMBER_MISSIONS.findTodayMissions();
 
 		// then
 		assertThat(actual)
@@ -38,7 +38,7 @@ class MemberMissionTest {
 	@Test
 	void findSpecialMissionList() {
 		// when
-		List<Mission> actual = MEMBER_MISSION.findSpecialMissionList();
+		List<MemberMission> actual = MEMBER_MISSIONS.findSpecialMissions();
 
 		// then
 		assertThat(actual)

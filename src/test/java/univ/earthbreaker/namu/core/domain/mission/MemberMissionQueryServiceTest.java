@@ -1,9 +1,9 @@
 package univ.earthbreaker.namu.core.domain.mission;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.Mockito.when;
-import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.MEMBER_MISSION;
+import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.MEMBER_MISSIONS;
 import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.MEMBER_NO;
 
 import org.junit.jupiter.api.DisplayName;
@@ -24,8 +24,8 @@ class MemberMissionQueryServiceTest {
 	@Test
 	void retrieveMemberMissions() {
 	    // given
-		when(memberMissionFinder.find(MEMBER_NO))
-			.thenReturn(MEMBER_MISSION);
+		when(memberMissionFinder.findAll(MEMBER_NO))
+			.thenReturn(MEMBER_MISSIONS);
 		when(missionRetrieveStrategyFactory.get())
 			.thenReturn(new FixedAndSpecialMissionRetrieveStrategy());
 

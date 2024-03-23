@@ -1,5 +1,7 @@
 package univ.earthbreaker.namu.core.domain.mission;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,7 +13,8 @@ public class MemberMissionFinder {
 		this.memberMissionRepository = memberMissionRepository;
 	}
 
-	MemberMission find(long memberNo) {
-		return memberMissionRepository.find(memberNo);
+	MemberMissions findAll(long memberNo) {
+		List<MemberMission> memberMissions = memberMissionRepository.findAll(memberNo);
+		return new MemberMissions(memberMissions);
 	}
 }

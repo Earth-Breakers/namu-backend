@@ -17,8 +17,8 @@ public class MemberMissionQueryService {
 	}
 
 	public MemberMissionQueryResult retrieveMemberMissions(long memberNo) {
-		MemberMission memberMission = memberMissionFinder.find(memberNo);
+		MemberMissions memberMissions = memberMissionFinder.findAll(memberNo);
 		MissionRetrieveStrategy missionRetrieveStrategy = missionRetrieveStrategyFactory.get();
-		return missionRetrieveStrategy.retrieve(memberMission);
+		return missionRetrieveStrategy.retrieve(memberMissions);
 	}
 }
