@@ -45,6 +45,7 @@ dependencies {
     // + implementation project(":core:domain")
     // + implementation project(":external:oauth")
     // + implementation project(":external:aws")
+    // + implementation project(":external:notification")
     // + testImplementation project(":support:apidocs")
 
     // ========== core:auth ==========
@@ -76,6 +77,10 @@ dependencies {
 
     // ========== event ==========
     // compileOnly 'org.springframework:spring-context' // Kafka 또는 RabbitMQ 등 교체 가능
+
+    // ========== external:notification ==========
+    implementation 'com.google.firebase:firebase-admin:9.2.0'
+
 
     // ========== support:logging ==========
     implementation 'org.springframework.boot:spring-boot-starter-log4j2'

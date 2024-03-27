@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import univ.earthbreaker.namu.core.domain.member.Member;
 import univ.earthbreaker.namu.core.domain.member.MemberStatus;
 import univ.earthbreaker.namu.core.domain.member.friend.Following;
 
@@ -38,6 +39,10 @@ public class MemberJpaEntity {
 		this.nickname = nickname;
 		this.level = level;
 		this.status = status;
+	}
+
+	Member toMember() {
+		return new Member(no, nickname, level, status);
 	}
 
 	Following toFollowing() {

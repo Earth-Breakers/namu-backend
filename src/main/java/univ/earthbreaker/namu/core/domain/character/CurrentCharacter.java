@@ -81,11 +81,12 @@ public class CurrentCharacter {
 		int requiredExp,
 		int currentExp,
 		int groupNumber,
+		String name,
 		String mainImagePath
 	) {
 		return new CurrentCharacter(
 			new Master(memberNo),
-			new TargetCharacter(characterNo, groupNumber, mainImagePath),
+			new TargetCharacter(characterNo, groupNumber, name, mainImagePath),
 			energyType,
 			CharacterStatus.of(level, requiredExp, currentExp)
 		);
@@ -96,11 +97,12 @@ public class CurrentCharacter {
 		long characterNo,
 		int requiredExp,
 		int groupNumber,
+		String name,
 		String mainImagePath
 	) {
 		return new CurrentCharacter(
 			new Master(memberNo),
-			new TargetCharacter(characterNo, groupNumber, mainImagePath),
+			new TargetCharacter(characterNo, groupNumber, name, mainImagePath),
 			CharacterType.INITIAL,
 			CharacterStatus.initialize(requiredExp)
 		);
@@ -113,11 +115,12 @@ public class CurrentCharacter {
 		int level,
 		int requiredExp,
 		int groupNumber,
+		String name,
 		String mainImagePath
 	) {
 		return new CurrentCharacter(
 			new Master(memberNo),
-			new TargetCharacter(characterNo, groupNumber, mainImagePath),
+			new TargetCharacter(characterNo, groupNumber, name, mainImagePath),
 			energyType,
 			CharacterStatus.createNext(level, requiredExp)
 		);
@@ -137,6 +140,10 @@ public class CurrentCharacter {
 
 	public long getTargetCharacterNo() {
 		return character.getCharacterNo();
+	}
+
+	public String getCharacterName() {
+		return character.getName();
 	}
 
 	public String getTargetCharacterMainImage() {

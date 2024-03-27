@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MemberRepository {
 
-	@Nullable Long findMemberNoOrNull(String socialId);
+	@Nullable Member findMemberNoOrNull(long memberNo);
 
 	@NotNull Long create(String socialNickname);
 }
