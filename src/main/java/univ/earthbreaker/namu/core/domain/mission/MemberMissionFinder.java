@@ -17,4 +17,8 @@ public class MemberMissionFinder {
 		List<MemberMission> memberMissions = memberMissionRepository.findAll(memberNo);
 		return new MemberMissions(memberMissions);
 	}
+
+	MemberMission find(long memberNo, long missionNo) {
+		return memberMissionRepository.find(memberNo, missionNo);
+	}
 }

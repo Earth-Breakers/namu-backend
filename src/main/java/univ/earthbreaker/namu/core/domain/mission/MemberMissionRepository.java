@@ -9,4 +9,8 @@ import org.springframework.stereotype.Repository;
 public interface MemberMissionRepository {
 
 	@NotNull List<MemberMission> findAll(long memberNo);
+
+	@NotNull MemberMission find(long memberNo, long missionNo);
+
+	void update(MemberMission memberMission);
 }

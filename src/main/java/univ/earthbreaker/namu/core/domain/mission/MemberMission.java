@@ -58,8 +58,8 @@ public class MemberMission {
 		return status;
 	}
 
-	MissionType getType() {
-		return type;
+	int getRewardPoint() {
+		return type.getPoint();
 	}
 
 	@Override
