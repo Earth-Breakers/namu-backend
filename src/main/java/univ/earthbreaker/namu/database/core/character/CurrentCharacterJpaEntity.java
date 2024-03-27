@@ -45,6 +45,9 @@ public class CurrentCharacterJpaEntity {
 	@Column(nullable = false)
 	private Integer requiredExp;
 
+	@Column(nullable = false)
+	private String name;
+
 	@Column(nullable = false, length = 500)
 	private String mainImagePath;
 
@@ -96,6 +99,7 @@ public class CurrentCharacterJpaEntity {
 			requiredExp,
 			exp,
 			groupNumber,
+			name,
 			mainImagePath
 		);
 	}
@@ -108,6 +112,7 @@ public class CurrentCharacterJpaEntity {
 			level,
 			requiredExp,
 			groupNumber,
+			name,
 			mainImagePath
 		);
 	}
@@ -118,6 +123,7 @@ public class CurrentCharacterJpaEntity {
 			characterNo,
 			requiredExp,
 			groupNumber,
+			name,
 			mainImagePath
 		);
 	}

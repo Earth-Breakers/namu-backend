@@ -4,3 +4,8 @@ feign:
       kakao:
         name: kakaoAuthApiCaller
         url: https://kapi.kakao.com
+
+firebase:
+  fcm:
+    config:
+      path: external/firebase/namu-firebase-adminsdk.json

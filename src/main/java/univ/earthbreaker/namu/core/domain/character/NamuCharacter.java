@@ -145,6 +145,10 @@ public class NamuCharacter {
 		return groupNumber;
 	}
 
+	public String getName() {
+		return name;
+	}
+
 	public int getLevelValue() {
 		return level;
 	}

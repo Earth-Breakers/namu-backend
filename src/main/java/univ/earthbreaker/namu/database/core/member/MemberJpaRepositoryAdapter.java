@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Repository;
 
+import univ.earthbreaker.namu.core.domain.member.Member;
 import univ.earthbreaker.namu.core.domain.member.MemberRepository;
 
 @Repository
@@ -16,8 +17,10 @@ public class MemberJpaRepositoryAdapter implements MemberRepository {
 	}
 
 	@Override
-	public @Nullable Long findMemberNoOrNull(String socialId) {
-		return null;
+	public @Nullable Member findMemberNoOrNull(long memberNo) {
+		return memberJpaRepository.findById(memberNo)
+			.map(MemberJpaEntity::toMember)
+			.orElse(null);
 	}
 
 	@Override

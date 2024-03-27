@@ -8,11 +8,13 @@ public class TargetCharacter {
 
 	private final long characterNo;
 	private final int groupNumber;
+	private final String name;
 	private final String mainImagePath;
 
-	TargetCharacter(long characterNo, int groupNumber, String mainImagePath) {
+	TargetCharacter(long characterNo, int groupNumber, String name, String mainImagePath) {
 		this.characterNo = characterNo;
 		this.groupNumber = groupNumber;
+		this.name = name;
 		this.mainImagePath = mainImagePath;
 	}
 
@@ -20,6 +22,7 @@ public class TargetCharacter {
 		return new TargetCharacter(
 			namuCharacter.getNo(),
 			namuCharacter.getGroupNumber(),
+			namuCharacter.getName(),
 			namuCharacter.getMainImagePath()
 		);
 	}
@@ -30,6 +33,10 @@ public class TargetCharacter {
 
 	int getGroupNumber() {
 		return groupNumber;
+	}
+
+	String getName() {
+		return name;
 	}
 
 	String getMainImagePath() {
@@ -43,12 +50,12 @@ public class TargetCharacter {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		TargetCharacter that = (TargetCharacter)o;
-		return characterNo == that.characterNo && groupNumber == that.groupNumber && mainImagePath.equals(
-			that.mainImagePath);
+		return characterNo == that.characterNo && groupNumber == that.groupNumber && name.equals(that.name)
+			&& mainImagePath.equals(that.mainImagePath);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(characterNo, groupNumber, mainImagePath);
+		return Objects.hash(characterNo, groupNumber, name, mainImagePath);
 	}
 }

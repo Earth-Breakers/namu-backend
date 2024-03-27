@@ -44,6 +44,7 @@ dependencies {
     // + implementation project(":core:auth")
     // + implementation project(":core:domain")
     // + implementation project(":external:oauth")
+    // + implementation project(":external:notification")
     // + testImplementation project(":support:apidocs")
 
     // ========== core:auth ==========
@@ -65,6 +66,9 @@ dependencies {
 
     // ========== external:oauth ==========
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+
+    // ========== external:notification ==========
+    implementation 'com.google.firebase:firebase-admin:9.2.0'
 
     // ========== support:logging ==========
     implementation 'org.springframework.boot:spring-boot-starter-log4j2'
