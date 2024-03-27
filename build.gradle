@@ -44,6 +44,7 @@ dependencies {
     // + implementation project(":core:auth")
     // + implementation project(":core:domain")
     // + implementation project(":external:oauth")
+    // + implementation project(":external:aws")
     // + testImplementation project(":support:apidocs")
 
     // ========== core:auth ==========
@@ -55,6 +56,7 @@ dependencies {
     // ========== core:domain ==========
     compileOnly 'org.springframework:spring-context'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+    // implementation project(":event")
 
     // ========== database ==========
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -65,6 +67,15 @@ dependencies {
 
     // ========== external:oauth ==========
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+
+    // ========== external:aws ==========
+    implementation 'com.amazonaws:aws-java-sdk-s3:1.12.685'
+    implementation 'org.testcontainers:localstack'
+    testImplementation 'org.testcontainers:junit-jupiter'
+    // implementation project(":event")
+
+    // ========== event ==========
+    // compileOnly 'org.springframework:spring-context' // Kafka 또는 RabbitMQ 등 교체 가능
 
     // ========== support:logging ==========
     implementation 'org.springframework.boot:spring-boot-starter-log4j2'
