@@ -1,9 +1,12 @@
 package univ.earthbreaker.namu.database.core.pushnotification;
 
+import java.util.List;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Repository;
 
+import univ.earthbreaker.namu.core.domain.pushnotification.FriendsQuery;
 import univ.earthbreaker.namu.core.domain.pushnotification.PushNotification;
 import univ.earthbreaker.namu.core.domain.pushnotification.PushNotificationRepository;
 
@@ -17,7 +20,7 @@ public class PushNotificationRepositoryAdapter implements PushNotificationReposi
 	}
 
 	@Override
-	public @Nullable PushNotification findOrNull(Long memberNo) {
+	public @Nullable PushNotification findOrNull(long memberNo) {
 		PushNotificationJpaEntity pushNotificationJpaEntity = pushNotificationJpaRepository.findByMemberNo(memberNo);
 		if (pushNotificationJpaEntity != null) {
 			return pushNotificationJpaEntity.toPushNotification();
@@ -31,7 +34,23 @@ public class PushNotificationRepositoryAdapter implements PushNotificationReposi
 	}
 
 	@Override
-	public void register(Long memberNo, String pushNotificationToken) {
+	public void register(long memberNo, String pushNotificationToken) {
 		pushNotificationJpaRepository.save(PushNotificationJpaEntity.initialize(memberNo, pushNotificationToken));
+	}
+
+	@Override
+	public @NotNull List<PushNotification> findAll() {
+		return pushNotificationJpaRepository.findAll()
+			.stream()
+			.map(PushNotificationJpaEntity::toPushNotification)
+			.toList();
+	}
+
+	@Override
+	public @NotNull List<PushNotification> findAll(@NotNull FriendsQuery friends) {
+		return pushNotificationJpaRepository.findAllByMemberNoIn(friends.memberNos())
+			.stream()
+			.map(PushNotificationJpaEntity::toPushNotification)
+			.toList();
 	}
 }

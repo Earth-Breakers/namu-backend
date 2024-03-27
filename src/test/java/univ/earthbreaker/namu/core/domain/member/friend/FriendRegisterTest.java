@@ -1,8 +1,8 @@
 package univ.earthbreaker.namu.core.domain.member.friend;
 
 import static org.mockito.Mockito.verify;
-import static univ.earthbreaker.namu.core.domain.member.friend.FriendFixture.FOLLOWING_MEMBER_NO;
-import static univ.earthbreaker.namu.core.domain.member.friend.FriendFixture.MEMBER_NO;
+import static univ.earthbreaker.namu.core.domain.member.MemberFixture.FOLLOWING_MEMBER_NO;
+import static univ.earthbreaker.namu.core.domain.member.MemberFixture.MEMBER_NO;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

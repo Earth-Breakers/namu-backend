@@ -1,0 +1,22 @@
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+[[Push-Notification-API]]
+== 모든 회원에게 자랑하기
+operation::push-notification-controller-test/all_push-notification[snippets='http-request,request-headers,http-response']
+
+== 친구에게 자랑하기
+operation::push-notification-controller-test/friends_push-notification[snippets='http-request,request-headers,http-response']
+
+== 공통 예외
+
+=== 회원 조회 실패
+operation::push-notification-controller-test/fail_push-notification_member_not_found[snippets='http-response']
+
+=== 회원의 현재 캐릭터 조회 실패
+operation::push-notification-controller-test/fail_push-notification_current_character_not_found[snippets='http-response']
+

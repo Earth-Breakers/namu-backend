@@ -38,3 +38,6 @@ out/
 
 ### log ###
 logs
+
+### firebase ###
+src/main/resources/external/firebase

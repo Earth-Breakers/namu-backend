@@ -1,5 +1,7 @@
 package univ.earthbreaker.namu.database.core.pushnotification;
 
+import org.jetbrains.annotations.NotNull;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,11 +36,15 @@ public class PushNotificationJpaEntity {
 		this.memberNo = memberNo;
 	}
 
-	static PushNotificationJpaEntity initialize(Long memberNo, String pushNotificationToken) {
-		return new PushNotificationJpaEntity(pushNotificationToken, true, memberNo);
-	}
-
 	PushNotification toPushNotification() {
 		return new PushNotification(no, memberNo, token, enable);
+	}
+
+	/**
+	 * 현재 ANDROID 를 기본 값으로 초기화함.
+	 * 추후 디바이스 종류가 다양해진다면 해당 메서드 분리 가능.
+	 */
+	static @NotNull PushNotificationJpaEntity initialize(Long memberNo, String pushNotificationToken) {
+		return new PushNotificationJpaEntity(pushNotificationToken, true, memberNo);
 	}
 }

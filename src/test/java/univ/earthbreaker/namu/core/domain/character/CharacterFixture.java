@@ -5,6 +5,7 @@ public class CharacterFixture {
 	static final long MEMBER_NO = 1L;
 	static final long CHARACTER_NO = 1L;
 	static final int GROUP_NO = 1;
+	public static final String NAME = "characterName";
 	static final CharacterType CHARACTER_TYPE = CharacterType.BEAUTY;
 
 	static final int INITIAL_EXP = 0;
@@ -18,47 +19,48 @@ public class CharacterFixture {
 	static final int END_LEVEL_VALUE = 3;
 
 	static final CharacterStatus BEGIN_STATUS = CharacterStatus.initialize(BEGIN_REQUIRED_EXP);
-	static final CharacterStatus MIDDLE_STATUS = CharacterStatus.of(MIDDLE_LEVEL_VALUE, MIDDLE_REQUIRED_EXP, INITIAL_EXP);
+	static final CharacterStatus MIDDLE_STATUS = CharacterStatus.of(MIDDLE_LEVEL_VALUE, MIDDLE_REQUIRED_EXP,
+		INITIAL_EXP);
 	static final CharacterStatus END_STATUS = CharacterStatus.of(END_LEVEL_VALUE, END_REQUIRED_EXP, INITIAL_EXP);
 
 	static final CurrentCharacter BEGIN_CURRENT_CHARACTER = new CurrentCharacter(
 		new Master(MEMBER_NO),
-		new TargetCharacter(CHARACTER_NO, GROUP_NO, "currentMainImagePath"),
+		new TargetCharacter(CHARACTER_NO, GROUP_NO, NAME, "currentMainImagePath"),
 		CharacterType.INITIAL,
 		BEGIN_STATUS
 	);
 
 	static final CurrentCharacter BEGIN_CURRENT_CHARACTER_WITH_MAX_EXP = new CurrentCharacter(
 		new Master(MEMBER_NO),
-		new TargetCharacter(CHARACTER_NO, GROUP_NO, "currentMainImagePath"),
+		new TargetCharacter(CHARACTER_NO, GROUP_NO, NAME, "currentMainImagePath"),
 		CHARACTER_TYPE,
 		CharacterStatus.of(BEGIN_LEVEL_VALUE, BEGIN_REQUIRED_EXP, BEGIN_REQUIRED_EXP)
 	);
 
 	static final CurrentCharacter MIDDLE_CURRENT_CHARACTER = new CurrentCharacter(
 		new Master(MEMBER_NO),
-		new TargetCharacter(CHARACTER_NO, GROUP_NO, "currentMainImagePath"),
+		new TargetCharacter(CHARACTER_NO, GROUP_NO, NAME, "currentMainImagePath"),
 		CHARACTER_TYPE,
 		MIDDLE_STATUS
 	);
 
 	static final CurrentCharacter MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP = new CurrentCharacter(
 		new Master(MEMBER_NO),
-		new TargetCharacter(CHARACTER_NO, GROUP_NO, "currentMainImagePath"),
+		new TargetCharacter(CHARACTER_NO, GROUP_NO, NAME, "currentMainImagePath"),
 		CHARACTER_TYPE,
 		CharacterStatus.of(MIDDLE_LEVEL_VALUE, MIDDLE_REQUIRED_EXP, MIDDLE_REQUIRED_EXP)
 	);
 
 	static final CurrentCharacter END_CURRENT_CHARACTER = new CurrentCharacter(
 		new Master(MEMBER_NO),
-		new TargetCharacter(CHARACTER_NO, GROUP_NO, "currentMainImagePath"),
+		new TargetCharacter(CHARACTER_NO, GROUP_NO, NAME, "currentMainImagePath"),
 		CHARACTER_TYPE,
 		END_STATUS
 	);
 
 	static final CurrentCharacter END_CURRENT_CHARACTER_WITH_MAX_EXP = new CurrentCharacter(
 		new Master(MEMBER_NO),
-		new TargetCharacter(CHARACTER_NO, GROUP_NO, "currentMainImagePath"),
+		new TargetCharacter(CHARACTER_NO, GROUP_NO, NAME, "currentMainImagePath"),
 		CHARACTER_TYPE,
 		CharacterStatus.of(END_LEVEL_VALUE, END_REQUIRED_EXP, END_REQUIRED_EXP)
 	);
