@@ -24,4 +24,19 @@ public class MemberMissionRepositoryAdapter implements MemberMissionRepository {
 			.map(MemberMissionJpaEntity::toMemberMission)
 			.toList();
 	}
+
+	@Override
+	public @NotNull MemberMission find(long memberNo, long missionNo) {
+		return memberMissionJpaRepository.findByMemberNoAndMissionNo(memberNo, missionNo)
+			.toMemberMission();
+	}
+
+	@Override
+	public void update(@NotNull MemberMission memberMission) {
+		memberMissionJpaRepository.updateMemberMission(
+			memberMission.getMemberNo(),
+			memberMission.getNo(),
+			memberMission.getStatus()
+		);
+	}
 }
