@@ -1,0 +1,50 @@
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+[[Mission-API]]
+== 미션 목록 조회
+=== 요청
+operation::member-mission-query-controller-test/retrieve_normal_day[snippets='http-request,request-headers']
+
+=== 응답
+==== Mission Status
+
+|===
+| status | 타입 | 설명
+
+| `READY`
+| String
+| 도전하기 전 상태
+
+| `IN_PROGRESS`
+| String
+| 도전 중인 상태
+
+| `SUCCESS`
+| String
+| 인증에 성공한 상태
+
+| `FAILURE`
+| String
+| 인증에 실패한 상태
+|===
+
+
+==== 특별한 날이 아닌 경우
+operation::member-mission-query-controller-test/retrieve_normal_day[snippets='http-response,response-fields']
+
+'''
+
+==== 특별한 날인 경우
+operation::member-mission-query-controller-test/retrieve_special_day[snippets='http-response,response-fields']
+
+== 미션 인증
+=== 인증 성공
+operation::member-mission-certify-controller-test/success[snippets='http-request,request-headers,path-parameters,request-parts,http-response']
+
+=== 인증 실패
+operation::member-mission-certify-controller-test/failure[snippets='http-request,request-headers,path-parameters,http-response']
