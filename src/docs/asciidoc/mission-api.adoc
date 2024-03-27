@@ -41,3 +41,10 @@ operation::member-mission-query-controller-test/retrieve_normal_day[snippets='ht
 
 ==== 특별한 날인 경우
 operation::member-mission-query-controller-test/retrieve_special_day[snippets='http-response,response-fields']
+
+== 미션 인증
+=== 인증 성공
+operation::member-mission-certify-controller-test/success[snippets='http-request,request-headers,path-parameters,request-parts,http-response']
+
+=== 인증 실패
+operation::member-mission-certify-controller-test/failure[snippets='http-request,request-headers,path-parameters,http-response']
