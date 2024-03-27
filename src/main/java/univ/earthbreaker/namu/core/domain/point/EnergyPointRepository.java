@@ -5,9 +5,9 @@ import org.springframework.stereotype.Repository;
 import jakarta.validation.constraints.NotNull;
 
 @Repository
-public interface PointRepository {
+public interface EnergyPointRepository {
 
-	@NotNull Point find(long memberNo);
+	@NotNull Energy find(long memberNo);
 
 	void update(PointUpdateDbCommand command);
 }

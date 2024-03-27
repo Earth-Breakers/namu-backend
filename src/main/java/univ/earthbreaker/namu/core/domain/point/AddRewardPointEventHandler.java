@@ -10,15 +10,15 @@ import univ.earthbreaker.namu.event.point.AddRewardPointEvent;
 @Component
 public class AddRewardPointEventHandler {
 
-	private final PointRepository pointRepository;
+	private final EnergyPointRepository energyPointRepository;
 
-	public AddRewardPointEventHandler(PointRepository pointRepository) {
-		this.pointRepository = pointRepository;
+	public AddRewardPointEventHandler(EnergyPointRepository energyPointRepository) {
+		this.energyPointRepository = energyPointRepository;
 	}
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void giveRewardPoint(@NotNull AddRewardPointEvent event) {
 		PointUpdateDbCommand command = new PointUpdateDbCommand(event.memberNo(), event.point());
-		pointRepository.update(command);
+		energyPointRepository.update(command);
 	}
 }
