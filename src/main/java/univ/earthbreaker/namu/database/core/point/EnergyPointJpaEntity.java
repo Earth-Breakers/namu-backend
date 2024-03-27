@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.database.core;
+package univ.earthbreaker.namu.database.core.point;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
