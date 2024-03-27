@@ -8,7 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import univ.earthbreaker.namu.core.domain.mission.Mission;
+import univ.earthbreaker.namu.core.domain.mission.MemberMission;
 import univ.earthbreaker.namu.core.domain.mission.MissionStatus;
 import univ.earthbreaker.namu.core.domain.mission.MissionType;
 import univ.earthbreaker.namu.database.core.common.BaseTimeJpaEntity;
@@ -41,7 +41,7 @@ public class MemberMissionJpaEntity extends BaseTimeJpaEntity {
 	protected MemberMissionJpaEntity() {
 	}
 
-	Mission toMission() {
-		return new Mission(missionNo, title, type, status);
+	MemberMission toMemberMission() {
+		return new MemberMission(missionNo, memberNo, title, type, status);
 	}
 }

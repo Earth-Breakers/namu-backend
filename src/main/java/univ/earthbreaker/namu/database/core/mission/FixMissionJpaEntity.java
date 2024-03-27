@@ -13,7 +13,7 @@ import univ.earthbreaker.namu.database.core.common.BaseTimeJpaEntity;
 
 @Entity
 @Table(name = "fix_mission")
-public class MissionJpaEntity extends BaseTimeJpaEntity {
+public class FixMissionJpaEntity extends BaseTimeJpaEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

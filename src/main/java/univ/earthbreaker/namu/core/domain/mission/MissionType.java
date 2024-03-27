@@ -26,4 +26,8 @@ public enum MissionType {
 	boolean isSpecial() {
 		return this == SPECIAL;
 	}
+
+	int getPoint() {
+		return point;
+	}
 }

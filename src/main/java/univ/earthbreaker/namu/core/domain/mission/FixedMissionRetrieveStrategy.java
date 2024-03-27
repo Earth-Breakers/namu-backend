@@ -7,10 +7,10 @@ import org.jetbrains.annotations.NotNull;
 public class FixedMissionRetrieveStrategy implements MissionRetrieveStrategy {
 
 	@Override
-	public @NotNull MemberMissionQueryResult retrieve(@NotNull MemberMission memberMission) {
+	public @NotNull MemberMissionQueryResult retrieve(@NotNull MemberMissions memberMissions) {
 		return new MemberMissionQueryResult(
-			memberMission.findTodayMissionList(),
-			memberMission.findDefaultMissionList(),
+			memberMissions.findTodayMissions(),
+			memberMissions.findDefaultMissions(),
 			Collections.emptyList()
 		);
 	}

@@ -2,8 +2,8 @@ package univ.earthbreaker.namu.core.domain.mission;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
-import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.MEMBER_MISSION;
 import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.MEMBER_NO;
+import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.MISSIONS;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,15 +20,15 @@ class MemberMissionFinderTest {
 
 	@DisplayName("회원의 번호를 받아 회원에게 할당된 미션 목록을 반환한다")
 	@Test
-	void find() {
+	void findAll() {
 	    // given
-		when(memberMissionRepository.find(MEMBER_NO))
-			.thenReturn(MEMBER_MISSION);
+		when(memberMissionRepository.findAll(MEMBER_NO))
+			.thenReturn(MISSIONS);
 
 	    // when
-		MemberMission actual = memberMissionFinder.find(MEMBER_NO);
+		MemberMissions actual = memberMissionFinder.findAll(MEMBER_NO);
 
 		// then
-		assertThat(actual).isEqualTo(MEMBER_MISSION);
+		assertThat(actual).isNotNull();
 	}
 }

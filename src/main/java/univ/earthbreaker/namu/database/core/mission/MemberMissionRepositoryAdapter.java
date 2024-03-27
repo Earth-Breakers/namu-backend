@@ -5,9 +5,8 @@ import java.util.List;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Repository;
 
-import univ.earthbreaker.namu.core.domain.mission.MemberMission;
 import univ.earthbreaker.namu.core.domain.mission.MemberMissionRepository;
-import univ.earthbreaker.namu.core.domain.mission.Mission;
+import univ.earthbreaker.namu.core.domain.mission.MemberMission;
 
 @Repository
 public class MemberMissionRepositoryAdapter implements MemberMissionRepository {
@@ -19,11 +18,25 @@ public class MemberMissionRepositoryAdapter implements MemberMissionRepository {
 	}
 
 	@Override
-	public @NotNull MemberMission find(long memberNo) {
-		List<Mission> missions = memberMissionJpaRepository.findAllByMemberNo(memberNo)
+	public @NotNull List<MemberMission> findAll(long memberNo) {
+		return memberMissionJpaRepository.findAllByMemberNo(memberNo)
 			.stream()
-			.map(MemberMissionJpaEntity::toMission)
+			.map(MemberMissionJpaEntity::toMemberMission)
 			.toList();
-		return MemberMission.create(memberNo, missions);
+	}
+
+	@Override
+	public @NotNull MemberMission find(long memberNo, long missionNo) {
+		return memberMissionJpaRepository.findByMemberNoAndMissionNo(memberNo, missionNo)
+			.toMemberMission();
+	}
+
+	@Override
+	public void update(@NotNull MemberMission memberMission) {
+		memberMissionJpaRepository.updateMemberMission(
+			memberMission.getMemberNo(),
+			memberMission.getNo(),
+			memberMission.getStatus()
+		);
 	}
 }

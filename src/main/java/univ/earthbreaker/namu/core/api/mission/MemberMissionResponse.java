@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
 import univ.earthbreaker.namu.core.domain.mission.MemberMissionQueryResult;
-import univ.earthbreaker.namu.core.domain.mission.Mission;
+import univ.earthbreaker.namu.core.domain.mission.MemberMission;
 import univ.earthbreaker.namu.core.domain.mission.MissionStatus;
 
 public record MemberMissionResponse(
@@ -26,7 +26,7 @@ public record MemberMissionResponse(
 		String title,
 		MissionStatus status
 	) {
-		static @NotNull MissionResponse toResponse(@NotNull Mission mission) {
+		static @NotNull MissionResponse toResponse(@NotNull MemberMission mission) {
 			return new MissionResponse(mission.getNo(), mission.getTitle(), mission.getStatus());
 		}
 	}

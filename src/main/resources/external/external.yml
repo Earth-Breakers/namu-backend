@@ -4,3 +4,14 @@ feign:
       kakao:
         name: kakaoAuthApiCaller
         url: https://kapi.kakao.com
+
+cloud:
+  aws:
+    s3:
+      bucket-name: localstack-bucket
+      localstack:
+        endpoint: http://localhost:4566
+        bucket-name: localstack-bucket
+
+image:
+  post-dir: complete_mission_post

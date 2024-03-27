@@ -1,12 +1,15 @@
 package univ.earthbreaker.namu.core.api;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.springframework.http.HttpMethod.POST;
 
 import org.jetbrains.annotations.NotNull;
 import org.mockito.Mockito;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.mock.web.MockPart;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -88,8 +91,7 @@ public abstract class PresentationTest extends ApiDocsAbstract {
 	}
 
 	protected ResultActions whenPostWithAuthorization(String uri, Long pathVariable) throws Exception {
-		MockHttpServletRequestBuilder requestBuilder = RestDocumentationRequestBuilders.post(uri,
-				pathVariable)
+		MockHttpServletRequestBuilder requestBuilder = RestDocumentationRequestBuilders.post(uri, pathVariable)
 			.header(HttpHeaders.AUTHORIZATION, AUTHORIZATION_TYPE_WITH_ACCESS_TOKEN)
 			.contentType(MediaType.APPLICATION_JSON);
 		return mockMvc.perform(requestBuilder);
@@ -104,10 +106,31 @@ public abstract class PresentationTest extends ApiDocsAbstract {
 		return mockMvc.perform(requestBuilder);
 	}
 
+	protected ResultActions whenPostMultipartWithAuthorization(
+		String uri,
+		Long pathVariable,
+		MockPart contentPart,
+		MockMultipartFile imageFile
+	) throws Exception {
+		MockHttpServletRequestBuilder requestBuilder = RestDocumentationRequestBuilders.multipart(uri, pathVariable)
+			.file(imageFile)
+			.part(contentPart)
+			.header(HttpHeaders.AUTHORIZATION, AUTHORIZATION_TYPE_WITH_ACCESS_TOKEN)
+			.accept(MediaType.APPLICATION_JSON);
+		return mockMvc.perform(requestBuilder);
+	}
+
 	protected ResultActions whenGetWithAuthorization(String uri) throws Exception {
 		MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get(uri)
 			.header(HttpHeaders.AUTHORIZATION, AUTHORIZATION_TYPE_WITH_ACCESS_TOKEN)
 			.accept(MediaType.APPLICATION_JSON);
+		return mockMvc.perform(requestBuilder);
+	}
+
+	protected ResultActions whenPatchWithAuthorization(String uri, Long pathVariable) throws Exception {
+		MockHttpServletRequestBuilder requestBuilder = RestDocumentationRequestBuilders.patch(uri, pathVariable)
+			.header(HttpHeaders.AUTHORIZATION, AUTHORIZATION_TYPE_WITH_ACCESS_TOKEN)
+			.contentType(MediaType.APPLICATION_JSON);
 		return mockMvc.perform(requestBuilder);
 	}
 
@@ -119,7 +142,7 @@ public abstract class PresentationTest extends ApiDocsAbstract {
 		}
 	}
 
-	private  <T> T fromJson(String content, Class<T> clazz) {
+	private <T> T fromJson(String content, Class<T> clazz) {
 		try {
 			return new ObjectMapper().readValue(content, clazz);
 		} catch (JsonProcessingException e) {
