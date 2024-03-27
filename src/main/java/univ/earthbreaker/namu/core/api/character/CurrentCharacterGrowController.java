@@ -10,7 +10,7 @@ import univ.earthbreaker.namu.core.api.auth.support.LoginMember;
 import univ.earthbreaker.namu.core.domain.character.CurrentCharacterGrowService;
 
 @RestController
-@RequestMapping("/v1/character/grow")
+@RequestMapping("/v1/characters/grow")
 public class CurrentCharacterGrowController {
 
 	private final CurrentCharacterGrowService currentCharacterGrowService;
