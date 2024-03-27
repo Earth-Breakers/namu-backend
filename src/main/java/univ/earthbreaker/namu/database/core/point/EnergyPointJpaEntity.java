@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import univ.earthbreaker.namu.core.domain.point.Energy;
 
 @Entity
 @Table(name = "energy_point")
@@ -22,5 +23,9 @@ public class EnergyPointJpaEntity {
 	private Long memberNo;
 
 	protected EnergyPointJpaEntity() {
+	}
+
+	Energy toEnergy() {
+		return Energy.of(no, memberNo, point);
 	}
 }
