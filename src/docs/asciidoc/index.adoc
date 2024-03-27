@@ -12,21 +12,24 @@ endif::[]
 
 include::{docfile}/../overview.adoc[]
 
-
 = 인증 API
 
-include::{docfile}/../auth-api.adoc[소셜 로그인 및 회원가입, window=blank]
-include::{docfile}/../reauth-api.adoc[토큰 재발급, window=blank]
+include::{docfile}/../auth-api.adoc[소셜 로그인 및 회원가입,window=blank]
+include::{docfile}/../reauth-api.adoc[토큰 재발급,window=blank]
+
+= 홈 API
+
+include::{docfile}/../home-api.adoc[홈 페이지,window=blank]
 
 = 캐릭터 API
 
-include::{docfile}/../current-character-api.adoc[현재 캐릭터 성장, window=blank]
+include::{docfile}/../current-character-api.adoc[현재 캐릭터 성장,window=blank]
 
 = 미션 API
 
-include::{docfile}/../mission-api.adoc[미션 api, window=blank]
+include::{docfile}/../mission-api.adoc[미션 api,window=blank]
 
 = 푸시 알림 전송 API
 
-include::{docfile}/../push-notification-api.adoc[캐릭터 자랑하기, window=blank]
+include::{docfile}/../push-notification-api.adoc[캐릭터 자랑하기,window=blank]
 
