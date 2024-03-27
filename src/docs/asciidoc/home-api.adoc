@@ -1,0 +1,16 @@
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+[[Home-API]]
+=== 회원의 현재 캐릭터 조회
+operation::home-character-retrieve-controller-test/retrieve[snippets='http-request,request-headers,http-response,response-fields']
+
+=== 회원의 현재 보유 에너지 포인트 조회
+operation::home-point-retrieve-controller-test/retrieve[snippets='http-request,request-headers,http-response,response-fields']
+
+=== 회원의 현재 레벨과 경험치 조회
+operation::member-retrieve-controller-test/retrieve[snippets='http-request,request-headers,http-response,response-fields']

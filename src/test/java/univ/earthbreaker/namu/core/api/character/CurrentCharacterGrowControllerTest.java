@@ -25,8 +25,8 @@ import univ.earthbreaker.namu.core.domain.character.NamuCharacterNotFoundExcepti
 
 class CurrentCharacterGrowControllerTest extends PresentationTest {
 
-	private static final String GROW_TO_NEXT_URI = "/v1/character/grow/next";
-	private static final String GROW_TO_RANDOM_URI = "/v1/character/grow/random";
+	private static final String GROW_TO_NEXT_URI = "/v1/characters/grow/next";
+	private static final String GROW_TO_RANDOM_URI = "/v1/characters/grow/random";
 
 	private final CurrentCharacterGrowService currentCharacterGrowService
 		= Mockito.mock(CurrentCharacterGrowService.class);
