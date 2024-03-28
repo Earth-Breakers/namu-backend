@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.domain.character;
+package univ.earthbreaker.namu.core.domain.character.current;
 
 import java.util.Objects;
 
@@ -40,7 +40,7 @@ public class CharacterStatus {
 		return level.isBegin();
 	}
 
-	static @NotNull CharacterStatus of(int levelValue, int requiredExp, int currentExp) {
+	public static @NotNull CharacterStatus of(int levelValue, int requiredExp, int currentExp) {
 		Level level = Level.of(levelValue);
 		Exp exp = Exp.of(requiredExp, currentExp);
 		if (checkCanLevelUp(exp, level)) {
@@ -53,7 +53,7 @@ public class CharacterStatus {
 		return calculagteAfterExp.isFull() && level.isGrowable();
 	}
 
-	static @NotNull CharacterStatus initialize(int requiredExp) {
+	public static @NotNull CharacterStatus initialize(int requiredExp) {
 		return new CharacterStatus(Level.BEGIN, Exp.initialize(requiredExp), false);
 	}
 

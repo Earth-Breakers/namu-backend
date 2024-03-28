@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.domain.character;
+package univ.earthbreaker.namu.core.domain.character.current;
 
 public enum Level {
 
@@ -40,11 +40,11 @@ public enum Level {
 		};
 	}
 
-	int getValue() {
+	public int getValue() {
 		return value;
 	}
 
-	boolean isGrowable() {
+	public boolean isGrowable() {
 		return growable;
 	}
 }

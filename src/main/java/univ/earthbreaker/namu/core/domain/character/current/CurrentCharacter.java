@@ -1,8 +1,11 @@
-package univ.earthbreaker.namu.core.domain.character;
+package univ.earthbreaker.namu.core.domain.character.current;
 
 import java.util.Objects;
 
 import org.jetbrains.annotations.NotNull;
+
+import univ.earthbreaker.namu.core.domain.character.CharacterType;
+import univ.earthbreaker.namu.core.domain.character.NamuCharacter;
 
 public class CurrentCharacter {
 
@@ -11,7 +14,7 @@ public class CurrentCharacter {
 	private final CharacterType characterType;
 	private final CharacterStatus status;
 
-	CurrentCharacter(
+	public CurrentCharacter(
 		Master master,
 		TargetCharacter character,
 		CharacterType characterType,
@@ -126,11 +129,11 @@ public class CurrentCharacter {
 		);
 	}
 
-	int getCharacterGroupNumber() {
+	public int getCharacterGroupNumber() {
 		return character.getGroupNumber();
 	}
 
-	CharacterType getCharacterType() {
+	public CharacterType getCharacterType() {
 		return characterType;
 	}
 

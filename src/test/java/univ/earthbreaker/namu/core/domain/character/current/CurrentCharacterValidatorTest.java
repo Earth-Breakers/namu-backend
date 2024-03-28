@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.domain.character;
+package univ.earthbreaker.namu.core.domain.character.current;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatNoException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -11,6 +11,8 @@ import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.MIDD
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacterValidator;
 
 class CurrentCharacterValidatorTest {
 

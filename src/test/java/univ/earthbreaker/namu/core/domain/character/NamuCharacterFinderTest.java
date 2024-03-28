@@ -31,7 +31,7 @@ class NamuCharacterFinderTest {
 
 		// when
 		NamuCharacter namuCharacter = namuCharacterFinder.findNext(
-			MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP.calculateExpectedNextLevel(),
+			3,
 			MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP.getCharacterGroupNumber(),
 			MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP.getCharacterType()
 		);
@@ -49,7 +49,7 @@ class NamuCharacterFinderTest {
 
 		// when, then
 		assertThatThrownBy(() -> namuCharacterFinder.findNext(
-			MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP.calculateExpectedNextLevel(),
+			3,
 			MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP.getCharacterGroupNumber(),
 			MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP.getCharacterType()
 		))

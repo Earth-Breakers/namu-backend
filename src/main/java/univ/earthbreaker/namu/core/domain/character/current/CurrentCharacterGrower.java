@@ -1,8 +1,11 @@
-package univ.earthbreaker.namu.core.domain.character;
+package univ.earthbreaker.namu.core.domain.character.current;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import univ.earthbreaker.namu.core.domain.character.NamuCharacter;
+import univ.earthbreaker.namu.core.domain.character.NamuCharacterFinder;
 
 @Component
 public class CurrentCharacterGrower {

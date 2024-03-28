@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.domain.character;
+package univ.earthbreaker.namu.core.domain.character.current;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -12,6 +12,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacter;
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacterFinder;
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacterNotFoundException;
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacterRepository;
 
 @ExtendWith(MockitoExtension.class)
 class CurrentCharacterFinderTest {

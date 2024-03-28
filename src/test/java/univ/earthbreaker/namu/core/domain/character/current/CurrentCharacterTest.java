@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.domain.character;
+package univ.earthbreaker.namu.core.domain.character.current;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -22,6 +22,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+
+import univ.earthbreaker.namu.core.domain.character.CharacterType;
+import univ.earthbreaker.namu.core.domain.character.Gender;
+import univ.earthbreaker.namu.core.domain.character.NamuCharacter;
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacter;
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacterBadRequestException;
+import univ.earthbreaker.namu.core.domain.character.current.Level;
 
 class CurrentCharacterTest {
 

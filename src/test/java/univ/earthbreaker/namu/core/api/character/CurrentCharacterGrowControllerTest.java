@@ -19,8 +19,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.test.web.servlet.ResultActions;
 
 import univ.earthbreaker.namu.core.api.PresentationTest;
-import univ.earthbreaker.namu.core.domain.character.CurrentCharacterGrowService;
-import univ.earthbreaker.namu.core.domain.character.CurrentCharacterNotFoundException;
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacterGrowService;
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacterNotFoundException;
 import univ.earthbreaker.namu.core.domain.character.NamuCharacterNotFoundException;
 
 class CurrentCharacterGrowControllerTest extends PresentationTest {

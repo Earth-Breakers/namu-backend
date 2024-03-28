@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.domain.character;
+package univ.earthbreaker.namu.core.domain.character.current;
 
 import java.util.Objects;
 
@@ -6,7 +6,7 @@ public class Master {
 
 	private final long memberNo;
 
-	Master(long memberNo) {
+	public Master(long memberNo) {
 		this.memberNo = memberNo;
 	}
 

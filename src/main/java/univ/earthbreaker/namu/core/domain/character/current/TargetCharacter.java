@@ -1,8 +1,10 @@
-package univ.earthbreaker.namu.core.domain.character;
+package univ.earthbreaker.namu.core.domain.character.current;
 
 import java.util.Objects;
 
 import org.jetbrains.annotations.NotNull;
+
+import univ.earthbreaker.namu.core.domain.character.NamuCharacter;
 
 public class TargetCharacter {
 
@@ -11,7 +13,7 @@ public class TargetCharacter {
 	private final String name;
 	private final String mainImagePath;
 
-	TargetCharacter(long characterNo, int groupNumber, String name, String mainImagePath) {
+	public TargetCharacter(long characterNo, int groupNumber, String name, String mainImagePath) {
 		this.characterNo = characterNo;
 		this.groupNumber = groupNumber;
 		this.name = name;

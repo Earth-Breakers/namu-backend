@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.domain.character;
+package univ.earthbreaker.namu.core.domain.character.current;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.ArgumentMatchers.any;
@@ -17,6 +17,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import univ.earthbreaker.namu.core.domain.character.CharacterType;
+import univ.earthbreaker.namu.core.domain.character.NamuCharacterFinder;
 
 @ExtendWith(MockitoExtension.class)
 class CurrentCharacterGrowerTest {

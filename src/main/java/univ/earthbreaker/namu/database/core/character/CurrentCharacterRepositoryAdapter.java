@@ -5,8 +5,8 @@ import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Repository;
 
 import univ.earthbreaker.namu.core.domain.character.CharacterType;
-import univ.earthbreaker.namu.core.domain.character.CurrentCharacter;
-import univ.earthbreaker.namu.core.domain.character.CurrentCharacterRepository;
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacter;
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacterRepository;
 
 @Repository
 public class CurrentCharacterRepositoryAdapter implements CurrentCharacterRepository {

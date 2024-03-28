@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.domain.character;
+package univ.earthbreaker.namu.core.domain.character.current;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

@@ -1,5 +1,11 @@
 package univ.earthbreaker.namu.core.domain.character;
 
+import univ.earthbreaker.namu.core.domain.character.current.CharacterStatus;
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacter;
+import univ.earthbreaker.namu.core.domain.character.current.Level;
+import univ.earthbreaker.namu.core.domain.character.current.Master;
+import univ.earthbreaker.namu.core.domain.character.current.TargetCharacter;
+
 public class CharacterFixture {
 
 	public static final long MEMBER_NO = 1L;
@@ -13,16 +19,16 @@ public class CharacterFixture {
 	public static final int BEGIN_REQUIRED_EXP = 3;
 	public static final int BEGIN_LEVEL_VALUE = 1;
 
-	static final int MIDDLE_REQUIRED_EXP = 5;
-	static final int MIDDLE_LEVEL_VALUE = 2;
+	public static final int MIDDLE_REQUIRED_EXP = 5;
+	public static final int MIDDLE_LEVEL_VALUE = 2;
 
-	static final int END_REQUIRED_EXP = 10;
-	static final int END_LEVEL_VALUE = 3;
+	public static final int END_REQUIRED_EXP = 10;
+	public static final int END_LEVEL_VALUE = 3;
 
-	static final CharacterStatus BEGIN_STATUS = CharacterStatus.initialize(BEGIN_REQUIRED_EXP);
-	static final CharacterStatus MIDDLE_STATUS = CharacterStatus.of(MIDDLE_LEVEL_VALUE, MIDDLE_REQUIRED_EXP,
+	public static final CharacterStatus BEGIN_STATUS = CharacterStatus.initialize(BEGIN_REQUIRED_EXP);
+	public static final CharacterStatus MIDDLE_STATUS = CharacterStatus.of(MIDDLE_LEVEL_VALUE, MIDDLE_REQUIRED_EXP,
 		INITIAL_EXP);
-	static final CharacterStatus END_STATUS = CharacterStatus.of(END_LEVEL_VALUE, END_REQUIRED_EXP, INITIAL_EXP);
+	public static final CharacterStatus END_STATUS = CharacterStatus.of(END_LEVEL_VALUE, END_REQUIRED_EXP, INITIAL_EXP);
 
 	public static final CurrentCharacter BEGIN_CURRENT_CHARACTER = new CurrentCharacter(
 		new Master(MEMBER_NO),
@@ -31,42 +37,42 @@ public class CharacterFixture {
 		BEGIN_STATUS
 	);
 
-	static final CurrentCharacter BEGIN_CURRENT_CHARACTER_WITH_MAX_EXP = new CurrentCharacter(
+	public static final CurrentCharacter BEGIN_CURRENT_CHARACTER_WITH_MAX_EXP = new CurrentCharacter(
 		new Master(MEMBER_NO),
 		new TargetCharacter(CHARACTER_NO, GROUP_NO, NAME, CHARACTER_IMAGE_PATH),
 		CHARACTER_TYPE,
 		CharacterStatus.of(BEGIN_LEVEL_VALUE, BEGIN_REQUIRED_EXP, BEGIN_REQUIRED_EXP)
 	);
 
-	static final CurrentCharacter MIDDLE_CURRENT_CHARACTER = new CurrentCharacter(
+	public static final CurrentCharacter MIDDLE_CURRENT_CHARACTER = new CurrentCharacter(
 		new Master(MEMBER_NO),
 		new TargetCharacter(CHARACTER_NO, GROUP_NO, NAME, CHARACTER_IMAGE_PATH),
 		CHARACTER_TYPE,
 		MIDDLE_STATUS
 	);
 
-	static final CurrentCharacter MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP = new CurrentCharacter(
+	public static final CurrentCharacter MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP = new CurrentCharacter(
 		new Master(MEMBER_NO),
 		new TargetCharacter(CHARACTER_NO, GROUP_NO, NAME, CHARACTER_IMAGE_PATH),
 		CHARACTER_TYPE,
 		CharacterStatus.of(MIDDLE_LEVEL_VALUE, MIDDLE_REQUIRED_EXP, MIDDLE_REQUIRED_EXP)
 	);
 
-	static final CurrentCharacter END_CURRENT_CHARACTER = new CurrentCharacter(
+	public static final CurrentCharacter END_CURRENT_CHARACTER = new CurrentCharacter(
 		new Master(MEMBER_NO),
 		new TargetCharacter(CHARACTER_NO, GROUP_NO, NAME, CHARACTER_IMAGE_PATH),
 		CHARACTER_TYPE,
 		END_STATUS
 	);
 
-	static final CurrentCharacter END_CURRENT_CHARACTER_WITH_MAX_EXP = new CurrentCharacter(
+	public static final CurrentCharacter END_CURRENT_CHARACTER_WITH_MAX_EXP = new CurrentCharacter(
 		new Master(MEMBER_NO),
 		new TargetCharacter(CHARACTER_NO, GROUP_NO, NAME, CHARACTER_IMAGE_PATH),
 		CHARACTER_TYPE,
 		CharacterStatus.of(END_LEVEL_VALUE, END_REQUIRED_EXP, END_REQUIRED_EXP)
 	);
 
-	static final NamuCharacter BEGIN_NAMU_CHARACTER = NamuCharacter.builder()
+	public static final NamuCharacter BEGIN_NAMU_CHARACTER = NamuCharacter.builder()
 		.no(Long.MIN_VALUE)
 		.type(CharacterType.INITIAL)
 		.gender(Gender.MALE)
@@ -80,7 +86,7 @@ public class CharacterFixture {
 		.mainImagePath("beginMainImagePath")
 		.build();
 
-	static final NamuCharacter MIDDLE_NAMU_CHARACTER = NamuCharacter.builder()
+	public static final NamuCharacter MIDDLE_NAMU_CHARACTER = NamuCharacter.builder()
 		.no(Long.MAX_VALUE / 2)
 		.type(CHARACTER_TYPE)
 		.gender(Gender.MALE)
@@ -94,7 +100,7 @@ public class CharacterFixture {
 		.mainImagePath("middleMainImagePath")
 		.build();
 
-	static final NamuCharacter END_NAMU_CHARACTER = NamuCharacter.builder()
+	public static final NamuCharacter END_NAMU_CHARACTER = NamuCharacter.builder()
 		.no(Long.MAX_VALUE)
 		.type(CHARACTER_TYPE)
 		.gender(Gender.MALE)

@@ -13,7 +13,7 @@ public enum CharacterType {
 		this.value = value;
 	}
 
-	boolean isInitial() {
+	public boolean isInitial() {
 		return this == INITIAL;
 	}
 }
