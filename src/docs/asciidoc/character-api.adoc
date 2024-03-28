@@ -7,6 +7,7 @@
 
 [[Character-API]]
 == 현재 키우는 캐릭터 성장
+
 '''
 ===  레벨 BEGIN -> MIDDLE
 
@@ -42,3 +43,13 @@ operation::current-character-grow-controller-test/fail_grow-to-next-level-charac
 operation::current-character-grow-controller-test/fail_grow-to-method_not_found[snippets='http-response']
 
 operation::current-character-grow-controller-test/fail_grow-to-method_invalid[snippets='http-response']
+
+== 캐릭터 도감 조회
+
+=== 전체 조회
+
+operation::character-book-read-controller-test/read-all[snippets='http-request,request-headers,http-response,response-fields']
+
+=== 상세 조회
+
+operation::character-book-read-controller-test/read-detail[snippets='http-request,request-headers,path-parameters,http-response,response-fields']
