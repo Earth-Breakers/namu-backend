@@ -133,6 +133,18 @@ public class NamuCharacter {
 		}
 	}
 
+	public Gender getGender() {
+		return gender;
+	}
+
+	public boolean isEndangered() {
+		return isEndangered;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
 	public long getNo() {
 		return no;
 	}
