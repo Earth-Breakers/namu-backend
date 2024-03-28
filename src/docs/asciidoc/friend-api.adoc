@@ -7,7 +7,7 @@
 
 [[Friend-API]]
 === 친구 추가
-operation::friend-controller-test/follow[snippets='http-request,request-headers,path-parameters,http-response']
+operation::friend-follow-controller-test/follow[snippets='http-request,request-headers,path-parameters,http-response']
 
 == 친구 목록 조회
 
