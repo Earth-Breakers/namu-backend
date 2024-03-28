@@ -13,7 +13,7 @@ import univ.earthbreaker.namu.core.domain.character.Gender;
 import univ.earthbreaker.namu.core.domain.character.NamuCharacter;
 
 @Entity
-@Table(name = "character")
+@Table(name = "namu_character")
 public class CharacterJpaEntity {
 
 	@Id
