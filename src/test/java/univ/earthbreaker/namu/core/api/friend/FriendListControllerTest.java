@@ -74,9 +74,9 @@ class FriendListControllerTest extends PresentationTest {
 						headerWithName(HttpHeaders.AUTHORIZATION).description("회원의 access 토큰 값")
 					),
 					responseFields(
-						fieldWithPath("notificationTokens[].memberNo").type(NUMBER).description("회원이 팔로잉하는 회원의 번호"),
-						fieldWithPath("notificationTokens[].nickname").type(STRING).description("회원이 팔로잉하는 회원의 닉네임"),
-						fieldWithPath("notificationTokens[].level").type(NUMBER).description("회원이 팔로잉하는 회원의 레벨")
+						fieldWithPath("results[].memberNo").type(NUMBER).description("회원이 팔로잉하는 회원의 번호"),
+						fieldWithPath("results[].nickname").type(STRING).description("회원이 팔로잉하는 회원의 닉네임"),
+						fieldWithPath("results[].level").type(NUMBER).description("회원이 팔로잉하는 회원의 레벨")
 					)
 				)
 			);
@@ -110,7 +110,7 @@ class FriendListControllerTest extends PresentationTest {
 						headerWithName(HttpHeaders.AUTHORIZATION).description("회원의 access 토큰 값")
 					),
 					responseFields(
-						fieldWithPath("notificationTokens[]").description("친구가 없으면 빈 배열을 반환합니다")
+						fieldWithPath("results[]").description("친구가 없으면 빈 배열을 반환합니다")
 					)
 				)
 			);
