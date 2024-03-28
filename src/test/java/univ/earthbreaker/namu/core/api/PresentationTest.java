@@ -127,6 +127,13 @@ public abstract class PresentationTest extends ApiDocsAbstract {
 		return mockMvc.perform(requestBuilder);
 	}
 
+	protected ResultActions whenGetWithAuthorization(String uri, Long pathVariable) throws Exception {
+		MockHttpServletRequestBuilder requestBuilder = RestDocumentationRequestBuilders.get(uri, pathVariable)
+			.header(HttpHeaders.AUTHORIZATION, AUTHORIZATION_TYPE_WITH_ACCESS_TOKEN)
+			.accept(MediaType.APPLICATION_JSON);
+		return mockMvc.perform(requestBuilder);
+	}
+
 	protected ResultActions whenPatchWithAuthorization(String uri, Long pathVariable) throws Exception {
 		MockHttpServletRequestBuilder requestBuilder = RestDocumentationRequestBuilders.patch(uri, pathVariable)
 			.header(HttpHeaders.AUTHORIZATION, AUTHORIZATION_TYPE_WITH_ACCESS_TOKEN)
