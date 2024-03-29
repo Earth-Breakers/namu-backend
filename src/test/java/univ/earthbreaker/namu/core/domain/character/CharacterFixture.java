@@ -36,9 +36,12 @@ public class CharacterFixture {
 	public static final int END_REQUIRED_EXP = 10;
 	public static final int END_LEVEL_VALUE = 3;
 
+	public static final int FINAL_LEVEL_VALUE = 4;
+
 	public static final CharacterStatus BEGIN_STATUS = CharacterStatus.initialize(BEGIN_REQUIRED_EXP);
 	public static final CharacterStatus MIDDLE_STATUS = CharacterStatus.of(MIDDLE_LEVEL_VALUE, MIDDLE_REQUIRED_EXP, INITIAL_EXP);
 	public static final CharacterStatus END_STATUS = CharacterStatus.of(END_LEVEL_VALUE, END_REQUIRED_EXP, INITIAL_EXP);
+	public static final CharacterStatus FINAL_STATUS = CharacterStatus.of(FINAL_LEVEL_VALUE, INITIAL_EXP, INITIAL_EXP);
 
 	public static final CurrentCharacter BEGIN_CURRENT_CHARACTER = new CurrentCharacter(
 		new Master(MEMBER_NO),
@@ -82,6 +85,13 @@ public class CharacterFixture {
 		CharacterStatus.of(END_LEVEL_VALUE, END_REQUIRED_EXP, END_REQUIRED_EXP)
 	);
 
+	public static final CurrentCharacter FINAL_CURRENT_CHARACTER = new CurrentCharacter(
+		new Master(MEMBER_NO),
+		new TargetCharacter(CHARACTER_NO, GROUP_NO, NAME, CHARACTER_IMAGE_PATH),
+		CHARACTER_TYPE,
+		FINAL_STATUS
+	);
+
 	public static final NamuCharacter BEGIN_NAMU_CHARACTER = NamuCharacter.builder()
 		.no(Long.MIN_VALUE)
 		.type(INITIAL)
@@ -120,6 +130,20 @@ public class CharacterFixture {
 		.requiredExp(END_REQUIRED_EXP)
 		.name("endName")
 		.description("endDescription")
+		.thumbnailImagePath(CHARACTER_IMAGE_PATH)
+		.mainImagePath(CHARACTER_IMAGE_PATH)
+		.build();
+
+	public static final NamuCharacter FINAL_NAMU_CHARACTER = NamuCharacter.builder()
+		.no(Long.MAX_VALUE)
+		.type(CHARACTER_TYPE)
+		.gender(Gender.MALE)
+		.isEndangered(true)
+		.groupNumber(GROUP_NO)
+		.level(Level.FINAL.getValue())
+		.requiredExp(INITIAL_EXP)
+		.name("finalName")
+		.description("finalDescription")
 		.thumbnailImagePath(CHARACTER_IMAGE_PATH)
 		.mainImagePath(CHARACTER_IMAGE_PATH)
 		.build();
