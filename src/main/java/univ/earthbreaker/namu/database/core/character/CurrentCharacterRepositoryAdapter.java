@@ -50,7 +50,7 @@ public class CurrentCharacterRepositoryAdapter implements CurrentCharacterReposi
 	}
 
 	private @NotNull CurrentCharacterJpaEntity initializeCurrentCharacterJpaEntity(long memberNo) {
-		CharacterProjection characterInitialProjection = characterJpaRepository.findByType(CharacterType.INITIAL);
+		CharacterProjection characterInitialProjection = characterJpaRepository.findByType(CharacterType.DEFAULT);
 		return CurrentCharacterJpaEntity.initialize(characterInitialProjection, memberNo);
 	}
 

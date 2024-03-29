@@ -55,10 +55,28 @@ public class CurrentCharacterGrower {
 	 * @param memberNo 회원 번호
 	 */
 	@Transactional
-	public void growToNext(long memberNo) {
+	public void growToEnd(long memberNo) {
 		CurrentCharacter currentCharacter = currentCharacterFinder.find(memberNo);
 		CurrentCharacterValidator.validateCanLevelUp(currentCharacter);
 		CurrentCharacterValidator.validateLevelIsMiddle(currentCharacter);
+		NamuCharacter namuCharacter = namuCharacterFinder.findNext(
+			currentCharacter.calculateExpectedNextLevel(),
+			currentCharacter.getCharacterGroupNumber(),
+			currentCharacter.getCharacterType()
+		);
+		updateCurrentCharacter(currentCharacter, namuCharacter);
+	}
+
+	/**
+	 * 현재 캐릭터 LEVEL 을 BEGIN -> MIDDLE 로 성장시키는 메서드.
+	 * LEVEL 이 MIDDLE 인 캐릭터만 허용한다.
+	 * @param memberNo 회원 번호
+	 */
+	@Transactional
+	public void growToMiddle(long memberNo) {
+		CurrentCharacter currentCharacter = currentCharacterFinder.find(memberNo);
+		CurrentCharacterValidator.validateCanLevelUp(currentCharacter);
+		CurrentCharacterValidator.validateLevelIsBegin(currentCharacter);
 		NamuCharacter namuCharacter = namuCharacterFinder.findNext(
 			currentCharacter.calculateExpectedNextLevel(),
 			currentCharacter.getCharacterGroupNumber(),
@@ -76,6 +94,7 @@ public class CurrentCharacterGrower {
 	 * @param memberNo 회원 번호
 	 */
 	@Transactional
+	@Deprecated(since = "현재 기획 변경으로 졸업 프로젝트 개발 종료까지 사용되지 않을 예정입니다. 이후 다시 사용될 가능성이 있습니다")
 	public void growToRandom(long memberNo) {
 		CurrentCharacter currentCharacter = currentCharacterFinder.find(memberNo);
 		CurrentCharacterValidator.validateCanLevelUp(currentCharacter);

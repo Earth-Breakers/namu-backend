@@ -1,7 +1,7 @@
 package univ.earthbreaker.namu.core.domain.character;
 
 import static univ.earthbreaker.namu.core.domain.character.CharacterType.BEAUTY;
-import static univ.earthbreaker.namu.core.domain.character.CharacterType.INITIAL;
+import static univ.earthbreaker.namu.core.domain.character.CharacterType.DEFAULT;
 import static univ.earthbreaker.namu.core.domain.character.CharacterType.PURIFY;
 import static univ.earthbreaker.namu.core.domain.character.CharacterType.VITALITY;
 
@@ -46,7 +46,7 @@ public class CharacterFixture {
 	public static final CurrentCharacter BEGIN_CURRENT_CHARACTER = new CurrentCharacter(
 		new Master(MEMBER_NO),
 		new TargetCharacter(CHARACTER_NO, GROUP_NO, NAME, CHARACTER_IMAGE_PATH),
-		INITIAL,
+		DEFAULT,
 		BEGIN_STATUS
 	);
 
@@ -94,7 +94,7 @@ public class CharacterFixture {
 
 	public static final NamuCharacter BEGIN_NAMU_CHARACTER = NamuCharacter.builder()
 		.no(Long.MIN_VALUE)
-		.type(INITIAL)
+		.type(DEFAULT)
 		.gender(Gender.MALE)
 		.isEndangered(true)
 		.groupNumber(GROUP_NO)
