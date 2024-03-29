@@ -3,16 +3,7 @@ package univ.earthbreaker.namu.core.domain.character.current;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.BEGIN_CURRENT_CHARACTER;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.BEGIN_CURRENT_CHARACTER_WITH_MAX_EXP;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.BEGIN_REQUIRED_EXP;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.END_CURRENT_CHARACTER;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.END_CURRENT_CHARACTER_WITH_MAX_EXP;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.END_LEVEL_VALUE;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.MIDDLE_CURRENT_CHARACTER;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.MIDDLE_LEVEL_VALUE;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.MIDDLE_REQUIRED_EXP;
+import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.*;
 
 import java.util.stream.Stream;
 
@@ -26,9 +17,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import univ.earthbreaker.namu.core.domain.character.CharacterType;
 import univ.earthbreaker.namu.core.domain.character.Gender;
 import univ.earthbreaker.namu.core.domain.character.NamuCharacter;
-import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacter;
-import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacterBadRequestException;
-import univ.earthbreaker.namu.core.domain.character.current.Level;
 
 class CurrentCharacterTest {
 
@@ -59,7 +47,8 @@ class CurrentCharacterTest {
 	@Test
 	void fail_giveInitialEnergyExp() {
 		// when, then
-		assertThatThrownBy(() -> MIDDLE_CURRENT_CHARACTER.giveInitialEnergyExp(CharacterType.BEAUTY, BEGIN_REQUIRED_EXP))
+		assertThatThrownBy(
+			() -> MIDDLE_CURRENT_CHARACTER.giveInitialEnergyExp(CharacterType.BEAUTY, BEGIN_REQUIRED_EXP))
 			.isInstanceOf(CurrentCharacterBadRequestException.class)
 			.hasMessage(CurrentCharacterBadRequestException.shouldBeInitial().getMessage());
 	}
@@ -124,10 +113,12 @@ class CurrentCharacterTest {
 			() -> assertThat(nextCharacter.getTargetCharacterNo()).isEqualTo(nextNamuCharacter.getNo()),
 			() -> assertThat(nextCharacter.getStatusLevel()).isEqualTo(nextNamuCharacter.getLevelValue()),
 			() -> assertThat(nextCharacter.getStatusRequiredExp()).isEqualTo(nextNamuCharacter.getRequiredExp()),
-			() -> assertThat(nextCharacter.getTargetCharacterMainImage()).isEqualTo(nextNamuCharacter.getMainImagePath()),
+			() -> assertThat(nextCharacter.getTargetCharacterMainImage()).isEqualTo(
+				nextNamuCharacter.getMainImagePath()),
 			() -> assertThat(nextCharacter.getStatusCurrentExp()).isZero(),
 			() -> assertThat(nextCharacter.getMasterNo()).isEqualTo(beforeCharacter.getMasterNo()),
-			() -> assertThat(nextCharacter.getCharacterGroupNumber()).isEqualTo(beforeCharacter.getCharacterGroupNumber()),
+			() -> assertThat(nextCharacter.getCharacterGroupNumber()).isEqualTo(
+				beforeCharacter.getCharacterGroupNumber()),
 			() -> assertThat(nextCharacter.getCharacterType()).isEqualTo(beforeCharacter.getCharacterType())
 		);
 	}
@@ -163,19 +154,21 @@ class CurrentCharacterTest {
 		// given, when
 		int middleLevelExpect = BEGIN_CURRENT_CHARACTER.calculateExpectedNextLevel();
 		int endLevelExpect = MIDDLE_CURRENT_CHARACTER.calculateExpectedNextLevel();
+		int finalLevelExpect = END_CURRENT_CHARACTER.calculateExpectedNextLevel();
 
 		// then
 		assertAll(
 			() -> assertThat(middleLevelExpect).isEqualTo(MIDDLE_LEVEL_VALUE),
-			() -> assertThat(endLevelExpect).isEqualTo(END_LEVEL_VALUE)
+			() -> assertThat(endLevelExpect).isEqualTo(END_LEVEL_VALUE),
+			() -> assertThat(finalLevelExpect).isEqualTo(FINAL_LEVEL_VALUE)
 		);
 	}
 
-	@DisplayName("현재 캐릭터의 레벨이 END 일 때, 다음 레벨 기댓값을 계산하면 예외를 발생시킨다")
+	@DisplayName("현재 캐릭터의 레벨이 FINAL 일 때, 다음 레벨 기댓값을 계산하면 예외를 발생시킨다")
 	@Test
 	void fail_calculateExpectedNextLevel() {
 		// when, then
-		assertThatThrownBy(END_CURRENT_CHARACTER::calculateExpectedNextLevel)
+		assertThatThrownBy(FINAL_CURRENT_CHARACTER::calculateExpectedNextLevel)
 			.isInstanceOf(IllegalStateException.class)
 			.hasMessage("잘못된 요청으로 현재 혀용하는 level 의 최대치를 초과했습니다");
 	}
@@ -230,7 +223,8 @@ class CurrentCharacterTest {
 			Arguments.of(MIDDLE_CURRENT_CHARACTER, true),
 			Arguments.of(MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP, false),
 			Arguments.of(END_CURRENT_CHARACTER, true),
-			Arguments.of(END_CURRENT_CHARACTER_WITH_MAX_EXP, true)
+			Arguments.of(END_CURRENT_CHARACTER_WITH_MAX_EXP, false),
+			Arguments.of(FINAL_CURRENT_CHARACTER, true)
 		);
 	}
 }

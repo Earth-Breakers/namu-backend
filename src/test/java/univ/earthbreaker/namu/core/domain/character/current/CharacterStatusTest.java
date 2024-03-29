@@ -47,7 +47,7 @@ class CharacterStatusTest {
 
 	@DisplayName("다음 기대 레벨값이 허용하는 레벨값을 초과했다면 true 를, 초과하지 않았다면 false 를 반환한다")
 	@ParameterizedTest
-	@CsvSource({"3, false", "4, true"})
+	@CsvSource({"3, false", "4, false", "5, true"})
 	void isLevelOverFlow(int expectLevelValue, boolean expect) {
 		// when
 		boolean actual = BEGIN_STATUS.isExpectLevelOverFlow(expectLevelValue);

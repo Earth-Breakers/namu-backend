@@ -2,17 +2,16 @@ package univ.earthbreaker.namu.core.domain.character.current;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatNoException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.BEGIN_CURRENT_CHARACTER;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.BEGIN_CURRENT_CHARACTER_WITH_MAX_EXP;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.END_CURRENT_CHARACTER;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.END_CURRENT_CHARACTER_WITH_MAX_EXP;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.MIDDLE_CURRENT_CHARACTER;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP;
+import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.*;
 
+import java.util.stream.Stream;
+
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacterValidator;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class CurrentCharacterValidatorTest {
 
@@ -24,19 +23,16 @@ class CurrentCharacterValidatorTest {
 			.isThrownBy(() -> {
 				CurrentCharacterValidator.validateCanLevelUp(BEGIN_CURRENT_CHARACTER_WITH_MAX_EXP);
 				CurrentCharacterValidator.validateCanLevelUp(MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP);
+				CurrentCharacterValidator.validateCanLevelUp(END_CURRENT_CHARACTER_WITH_MAX_EXP);
 			});
 	}
 
 	@DisplayName("현재 캐릭터의 상태가 레벨업이 불가능하다면 예외를 발생시킨다")
-	@Test
-	void fail_validateCanLevelUp() {
+	@ParameterizedTest
+	@MethodSource("provideCannotLevelUpCurrentCharacter")
+	void fail_validateCanLevelUp(CurrentCharacter currentCharacter) {
 		// when, then
-		assertThatThrownBy(() -> {
-			CurrentCharacterValidator.validateCanLevelUp(BEGIN_CURRENT_CHARACTER);
-			CurrentCharacterValidator.validateCanLevelUp(MIDDLE_CURRENT_CHARACTER);
-			CurrentCharacterValidator.validateCanLevelUp(END_CURRENT_CHARACTER);
-			CurrentCharacterValidator.validateCanLevelUp(END_CURRENT_CHARACTER_WITH_MAX_EXP);
-		})
+		assertThatThrownBy(() -> CurrentCharacterValidator.validateCanLevelUp(currentCharacter))
 			.isInstanceOf(IllegalStateException.class)
 			.hasMessage("현재 캐릭터는 아직 성장할 수 없는 상태입니다");
 	}
@@ -53,15 +49,11 @@ class CurrentCharacterValidatorTest {
 	}
 
 	@DisplayName("현재 캐릭터의 레벨이 BEGIN 이 아니면 예외를 발생시킨다")
-	@Test
-	void fail_validateLevelIsBegin() {
+	@ParameterizedTest
+	@MethodSource("provideNotBeginCurrentCharacter")
+	void fail_validateLevelIsBegin(CurrentCharacter currentCharacter) {
 		// when, then
-		assertThatThrownBy(() -> {
-			CurrentCharacterValidator.validateLevelIsBegin(MIDDLE_CURRENT_CHARACTER);
-			CurrentCharacterValidator.validateLevelIsBegin(MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP);
-			CurrentCharacterValidator.validateLevelIsBegin(END_CURRENT_CHARACTER);
-			CurrentCharacterValidator.validateLevelIsBegin(END_CURRENT_CHARACTER_WITH_MAX_EXP);
-		})
+		assertThatThrownBy(() -> CurrentCharacterValidator.validateLevelIsBegin(currentCharacter))
 			.isInstanceOf(IllegalStateException.class)
 			.hasMessage("레벨이 BEGIN 인 캐릭터만 growToRandom 메서드를 호출할 수 있습니다");
 	}
@@ -78,16 +70,99 @@ class CurrentCharacterValidatorTest {
 	}
 
 	@DisplayName("현재 캐릭터의 레벨이 MIDDLE 이 아니면 예외를 발생시킨다")
-	@Test
-	void fail_validateLevelIsMiddle() {
+	@ParameterizedTest
+	@MethodSource("provideNotMiddleCurrentCharacter")
+	void fail_validateLevelIsMiddle(CurrentCharacter currentCharacter) {
 		// when, then
-		assertThatThrownBy(() -> {
-			CurrentCharacterValidator.validateLevelIsMiddle(BEGIN_CURRENT_CHARACTER);
-			CurrentCharacterValidator.validateLevelIsMiddle(BEGIN_CURRENT_CHARACTER_WITH_MAX_EXP);
-			CurrentCharacterValidator.validateLevelIsMiddle(END_CURRENT_CHARACTER);
-			CurrentCharacterValidator.validateLevelIsMiddle(END_CURRENT_CHARACTER_WITH_MAX_EXP);
-		})
+		assertThatThrownBy(() -> CurrentCharacterValidator.validateLevelIsMiddle(currentCharacter))
 			.isInstanceOf(IllegalStateException.class)
 			.hasMessage("레벨이 MIDDLE 인 캐릭터만 growToNext 메서드를 호출할 수 있습니다");
+	}
+
+	@DisplayName("현재 캐릭터의 레벨이 END 이면 아무런 예외도 발생하지 않는다")
+	@Test
+	void success_validateLevelIsEnd() {
+		// when, then
+		assertThatNoException()
+			.isThrownBy(() -> {
+				CurrentCharacterValidator.validateLevelIsEnd(END_CURRENT_CHARACTER);
+				CurrentCharacterValidator.validateLevelIsEnd(END_CURRENT_CHARACTER_WITH_MAX_EXP);
+			});
+	}
+
+	@DisplayName("현재 캐릭터의 레벨이 END 이 아니면 예외를 발생시킨다")
+	@ParameterizedTest
+	@MethodSource("provideNotEndCurrentCharacter")
+	void fail_validateLevelIsEnd(CurrentCharacter currentCharacter) {
+		// when, then
+		assertThatThrownBy(() -> CurrentCharacterValidator.validateLevelIsEnd(currentCharacter))
+			.isInstanceOf(IllegalStateException.class)
+			.hasMessage("레벨이 END 인 캐릭터만 growToFinal 메서드를 호출할 수 있습니다");
+	}
+
+	@DisplayName("현재 캐릭터의 레벨이 FINAL 이면 아무런 예외도 발생하지 않는다")
+	@Test
+	void success_validateLevelIsFinal() {
+		// when, then
+		assertThatNoException()
+			.isThrownBy(() -> CurrentCharacterValidator.validateLevelIsFinal(FINAL_CURRENT_CHARACTER));
+	}
+
+	@DisplayName("현재 캐릭터의 레벨이 FINAL 이 아니면 예외를 발생시킨다")
+	@ParameterizedTest
+	@MethodSource("provideNotFinalCurrentCharacter")
+	void fail_validateLevelIsFinal(CurrentCharacter currentCharacter) {
+		// when, then
+		assertThatThrownBy(() -> CurrentCharacterValidator.validateLevelIsFinal(currentCharacter))
+			.isInstanceOf(IllegalStateException.class)
+			.hasMessage("레벨이 FINAL 인 캐릭터만 initialize 메서드를 호출할 수 있습니다");
+	}
+
+	private static @NotNull Stream<Arguments> provideCannotLevelUpCurrentCharacter() {
+		return Stream.of(
+			Arguments.of(BEGIN_CURRENT_CHARACTER),
+			Arguments.of(MIDDLE_CURRENT_CHARACTER),
+			Arguments.of(END_CURRENT_CHARACTER),
+			Arguments.of(FINAL_CURRENT_CHARACTER)
+		);
+	}
+
+	private static @NotNull Stream<Arguments> provideNotBeginCurrentCharacter() {
+		return Stream.of(
+			Arguments.of(MIDDLE_CURRENT_CHARACTER),
+			Arguments.of(MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP),
+			Arguments.of(END_CURRENT_CHARACTER),
+			Arguments.of(END_CURRENT_CHARACTER_WITH_MAX_EXP),
+			Arguments.of(FINAL_CURRENT_CHARACTER)
+		);
+	}
+
+	private static @NotNull Stream<Arguments> provideNotMiddleCurrentCharacter() {
+		return Stream.of(
+			Arguments.of(BEGIN_CURRENT_CHARACTER),
+			Arguments.of(BEGIN_CURRENT_CHARACTER_WITH_MAX_EXP),
+			Arguments.of(END_CURRENT_CHARACTER),
+			Arguments.of(END_CURRENT_CHARACTER_WITH_MAX_EXP),
+			Arguments.of(FINAL_CURRENT_CHARACTER)
+		);
+	}
+
+	private static @NotNull Stream<Arguments> provideNotEndCurrentCharacter() {
+		return Stream.of(
+			Arguments.of(BEGIN_CURRENT_CHARACTER),
+			Arguments.of(BEGIN_CURRENT_CHARACTER_WITH_MAX_EXP),
+			Arguments.of(MIDDLE_CURRENT_CHARACTER),
+			Arguments.of(MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP),
+			Arguments.of(FINAL_CURRENT_CHARACTER)
+		);
+	}
+
+	private static @NotNull Stream<Arguments> provideNotFinalCurrentCharacter() {
+		return Stream.of(
+			Arguments.of(BEGIN_CURRENT_CHARACTER),
+			Arguments.of(BEGIN_CURRENT_CHARACTER_WITH_MAX_EXP),
+			Arguments.of(MIDDLE_CURRENT_CHARACTER),
+			Arguments.of(MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP)
+		);
 	}
 }
