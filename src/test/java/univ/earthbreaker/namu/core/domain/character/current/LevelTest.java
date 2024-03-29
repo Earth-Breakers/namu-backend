@@ -14,8 +14,6 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import univ.earthbreaker.namu.core.domain.character.current.Level;
-
 class LevelTest {
 
 	@DisplayName("레벨값을 받아 해당 레벨 객체를 생성할 수 있다")
@@ -36,15 +34,16 @@ class LevelTest {
 		return Stream.of(
 			Arguments.of(1, Level.BEGIN, true),
 			Arguments.of(2, Level.MIDDLE, true),
-			Arguments.of(3, Level.END, false)
+			Arguments.of(3, Level.END, true),
+			Arguments.of(4, Level.FINAL, false)
 		);
 	}
 
-	@DisplayName("END 레벨값 이상의 값이 들어오면 예외를 발생시킨다")
+	@DisplayName("FINAL 레벨값 이상의 값이 들어오면 예외를 발생시킨다")
 	@Test
 	void fail_of() {
 		// given
-		int overflowLevelValue = Level.END.up();
+		int overflowLevelValue = Level.FINAL.up();
 
 		// when, then
 		assertThatThrownBy(() -> Level.of(overflowLevelValue))
@@ -54,21 +53,24 @@ class LevelTest {
 
 	@DisplayName("Level 의 종류에 상관없이, 받은 레벨값이 허용하는 최대 레벨값보다 크면 true 를, 작거나 같으면 false 를 반환한다")
 	@ParameterizedTest
-	@CsvSource({"4, 3"})
+	@CsvSource({"5, 4"})
 	void isOverflow(int overflowLevelValue, int boundaryLevelValue) {
 		// given
 		Level begin = Level.BEGIN;
 		Level middle = Level.MIDDLE;
 		Level end = Level.END;
+		Level fin = Level.FINAL;
 
 		// when, then
 		assertAll(
 			() -> assertThat(begin.isOverflow(overflowLevelValue)).isTrue(),
 			() -> assertThat(middle.isOverflow(overflowLevelValue)).isTrue(),
 			() -> assertThat(end.isOverflow(overflowLevelValue)).isTrue(),
+			() -> assertThat(fin.isOverflow(overflowLevelValue)).isTrue(),
 			() -> assertThat(begin.isOverflow(boundaryLevelValue)).isFalse(),
 			() -> assertThat(middle.isOverflow(boundaryLevelValue)).isFalse(),
-			() -> assertThat(end.isOverflow(boundaryLevelValue)).isFalse()
+			() -> assertThat(end.isOverflow(boundaryLevelValue)).isFalse(),
+			() -> assertThat(fin.isOverflow(boundaryLevelValue)).isFalse()
 		);
 	}
 }

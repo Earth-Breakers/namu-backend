@@ -12,8 +12,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacterBridgeAdapter;
-import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacterFinder;
 import univ.earthbreaker.namu.core.domain.pushnotification.CharacterQuery;
 
 @ExtendWith(MockitoExtension.class)
