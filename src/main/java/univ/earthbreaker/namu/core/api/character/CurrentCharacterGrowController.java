@@ -20,21 +20,21 @@ public class CurrentCharacterGrowController {
 		this.currentCharacterGrowService = currentCharacterGrowService;
 	}
 
-	@PostMapping("/next")
-	public ResponseEntity<Void> growToNextLevelCharacter(@LoginMember Long memberNo) {
-		currentCharacterGrowService.growToNextLevel(memberNo);
+	@PostMapping("/end")
+	public ResponseEntity<Void> growToEndLevelCharacter(@LoginMember Long memberNo) {
+		currentCharacterGrowService.growToEndLevel(memberNo);
 		return ResponseEntity.noContent().build();
 	}
 
-	@PostMapping("/random")
-	public ResponseEntity<Void> growToNextLevelRandomCharacter(@LoginMember Long memberNo) {
-		currentCharacterGrowService.growToNextRandom(memberNo);
+	@PostMapping("/middle")
+	public ResponseEntity<Void> growToMiddleLevelCharacter(@LoginMember Long memberNo) {
+		currentCharacterGrowService.growToMiddleLevel(memberNo);
 		return ResponseEntity.noContent().build();
 	}
 
 	@PostMapping("/final")
 	public ResponseEntity<Void> growToRandomFinalCharacter(@LoginMember Long memberNo) {
-		currentCharacterGrowService.growToFinal(memberNo);
+		currentCharacterGrowService.growToFinalRandom(memberNo);
 		return ResponseEntity.noContent().build();
 	}
 }

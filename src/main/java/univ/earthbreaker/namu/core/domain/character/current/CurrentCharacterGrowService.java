@@ -16,15 +16,15 @@ public class CurrentCharacterGrowService {
 		this.eventPublisher = eventPublisher;
 	}
 
-	public void growToNextLevel(long memberNo) {
-		currentCharacterGrower.growToNext(memberNo);
+	public void growToEndLevel(long memberNo) {
+		currentCharacterGrower.growToEnd(memberNo);
 	}
 
-	public void growToNextRandom(long memberNo) {
-		currentCharacterGrower.growToRandom(memberNo);
+	public void growToMiddleLevel(long memberNo) {
+		currentCharacterGrower.growToMiddle(memberNo);
 	}
 
-	public void growToFinal(long memberNo) {
+	public void growToFinalRandom(long memberNo) {
 		CurrentCharacter finalCurrentCharacter = currentCharacterGrower.growToFinal(memberNo);
 		eventPublisher.publish(new AddCharacterBookEvent(memberNo, finalCurrentCharacter.getTargetCharacterNo()));
 	}

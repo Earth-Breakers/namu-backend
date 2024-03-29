@@ -114,7 +114,7 @@ public class CurrentCharacter {
 		return new CurrentCharacter(
 			new Master(memberNo),
 			new TargetCharacter(characterNo, groupNumber, name, mainImagePath),
-			CharacterType.INITIAL,
+			CharacterType.DEFAULT,
 			CharacterStatus.initialize(requiredExp)
 		);
 	}
