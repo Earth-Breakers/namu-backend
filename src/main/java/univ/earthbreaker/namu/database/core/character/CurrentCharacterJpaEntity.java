@@ -11,7 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import univ.earthbreaker.namu.core.domain.character.CharacterType;
-import univ.earthbreaker.namu.core.domain.character.CurrentCharacter;
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacter;
 
 @Entity
 @Table(name = "current_character")

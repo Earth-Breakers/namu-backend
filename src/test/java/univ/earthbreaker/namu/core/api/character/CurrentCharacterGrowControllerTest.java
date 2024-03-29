@@ -19,14 +19,15 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.test.web.servlet.ResultActions;
 
 import univ.earthbreaker.namu.core.api.PresentationTest;
-import univ.earthbreaker.namu.core.domain.character.CurrentCharacterGrowService;
-import univ.earthbreaker.namu.core.domain.character.CurrentCharacterNotFoundException;
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacterGrowService;
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacterNotFoundException;
 import univ.earthbreaker.namu.core.domain.character.NamuCharacterNotFoundException;
 
 class CurrentCharacterGrowControllerTest extends PresentationTest {
 
-	private static final String GROW_TO_NEXT_URI = "/v1/characters/grow/next";
-	private static final String GROW_TO_RANDOM_URI = "/v1/characters/grow/random";
+	private static final String GROW_TO_NEXT_URI = "/v1/characters/grow/end";
+	private static final String GROW_TO_RANDOM_URI = "/v1/characters/grow/middle";
+	private static final String GROW_TO_FINAL_URI = "/v1/characters/grow/final";
 
 	private final CurrentCharacterGrowService currentCharacterGrowService
 		= Mockito.mock(CurrentCharacterGrowService.class);
@@ -82,6 +83,28 @@ class CurrentCharacterGrowControllerTest extends PresentationTest {
 		);
 	}
 
+	@DisplayName("레벨이 END 인 캐릭터를 랜덤 최종 형태 캐릭터로 성장시키고, 204 를 반환한다")
+	@Test
+	void growToRandomFinalCharacter() throws Exception {
+		// when
+		ResultActions resultActions = whenPostWithAuthorization(GROW_TO_FINAL_URI);
+
+		// then
+		resultActions.andExpect(status().isNoContent());
+
+		// apidocs
+		resultActions.andDo(
+			document(
+				API_DOCUMENT_IDENTIFIER,
+				operationRequestPreprocessor(),
+				operationResponsePreprocessor(),
+				requestHeaders(
+					headerWithName(HttpHeaders.AUTHORIZATION).description("회원의 access 토큰 값")
+				)
+			)
+		);
+	}
+
 	@DisplayName("현재 캐릭터가 성장할 수 없는 상태이거나, 성장 가능한 레벨 값을 초과하면 예외를 발생시키고 400 을 반환한다")
 	@ParameterizedTest
 	@ValueSource(strings = {
@@ -92,7 +115,7 @@ class CurrentCharacterGrowControllerTest extends PresentationTest {
 		// given
 		Mockito.doThrow(new IllegalStateException(exceptionMessage))
 			.when(currentCharacterGrowService)
-			.growToNextLevel(AUTHORIZED_MEMBER_NO);
+			.growToEndLevel(AUTHORIZED_MEMBER_NO);
 
 		// when
 		ResultActions resultActions = whenPostWithAuthorization(GROW_TO_NEXT_URI);
@@ -114,7 +137,7 @@ class CurrentCharacterGrowControllerTest extends PresentationTest {
 		// given
 		Mockito.doThrow(CurrentCharacterNotFoundException.notFound(AUTHORIZED_MEMBER_NO))
 			.when(currentCharacterGrowService)
-			.growToNextLevel(AUTHORIZED_MEMBER_NO);
+			.growToEndLevel(AUTHORIZED_MEMBER_NO);
 
 		// when
 		ResultActions resultActions = whenPostWithAuthorization(GROW_TO_NEXT_URI);
@@ -130,6 +153,29 @@ class CurrentCharacterGrowControllerTest extends PresentationTest {
 			.andDo(commonExceptionDocumentResultHandler());
 	}
 
+	@DisplayName("회원이 성장시킬 현재 캐릭터의 레벨이 END 가 아니면 예외를 발생시키고 400 을 반환한다")
+	@Test
+	void fail_growToNextLevelCharacter_valid_level_is_end() throws Exception {
+		// given
+		final String EXCEPTION_MESSAGE = "레벨이 END 인 캐릭터만 growToFinal 메서드를 호출할 수 있습니다";
+		Mockito.doThrow(new IllegalStateException(EXCEPTION_MESSAGE))
+			.when(currentCharacterGrowService)
+			.growToFinalRandom(AUTHORIZED_MEMBER_NO);
+
+		// when
+		ResultActions resultActions = whenPostWithAuthorization(GROW_TO_FINAL_URI);
+
+		// then, apidocs
+		resultActions
+			.andExpect(status().isBadRequest())
+			.andExpect(result ->
+				assertThat(result.getResolvedException())
+					.isInstanceOf(IllegalStateException.class)
+					.hasMessage(EXCEPTION_MESSAGE)
+			)
+			.andDo(commonExceptionDocumentResultHandler());
+	}
+
 	@DisplayName("회원이 성장시킬 현재 캐릭터의 레벨이 MIDDLE 이 아니면 예외를 발생시키고 400 을 반환한다")
 	@Test
 	void fail_growToNextLevelCharacter_valid_level_is_middle() throws Exception {
@@ -137,7 +183,7 @@ class CurrentCharacterGrowControllerTest extends PresentationTest {
 		final String EXCEPTION_MESSAGE = "레벨이 MIDDLE 인 캐릭터만 growToNext 메서드를 호출할 수 있습니다";
 		Mockito.doThrow(new IllegalStateException(EXCEPTION_MESSAGE))
 			.when(currentCharacterGrowService)
-			.growToNextLevel(AUTHORIZED_MEMBER_NO);
+			.growToEndLevel(AUTHORIZED_MEMBER_NO);
 
 		// when
 		ResultActions resultActions = whenPostWithAuthorization(GROW_TO_NEXT_URI);
@@ -159,7 +205,7 @@ class CurrentCharacterGrowControllerTest extends PresentationTest {
 		// given
 		Mockito.doThrow(NamuCharacterNotFoundException.notFoundNext())
 			.when(currentCharacterGrowService)
-			.growToNextLevel(AUTHORIZED_MEMBER_NO);
+			.growToEndLevel(AUTHORIZED_MEMBER_NO);
 
 		// when
 		ResultActions resultActions = whenPostWithAuthorization(GROW_TO_NEXT_URI);
@@ -182,7 +228,7 @@ class CurrentCharacterGrowControllerTest extends PresentationTest {
 		final String EXCEPTION_MESSAGE = "레벨이 BEGIN 인 캐릭터만 growToRandom 메서드를 호출할 수 있습니다";
 		Mockito.doThrow(new IllegalStateException(EXCEPTION_MESSAGE))
 			.when(currentCharacterGrowService)
-			.growToNextRandom(AUTHORIZED_MEMBER_NO);
+			.growToMiddleLevel(AUTHORIZED_MEMBER_NO);
 
 		// when
 		ResultActions resultActions = whenPostWithAuthorization(GROW_TO_RANDOM_URI);
@@ -204,7 +250,7 @@ class CurrentCharacterGrowControllerTest extends PresentationTest {
 		// given
 		Mockito.doThrow(NamuCharacterNotFoundException.notFoundRandom())
 			.when(currentCharacterGrowService)
-			.growToNextRandom(AUTHORIZED_MEMBER_NO);
+			.growToMiddleLevel(AUTHORIZED_MEMBER_NO);
 
 		// when
 		ResultActions resultActions = whenPostWithAuthorization(GROW_TO_RANDOM_URI);

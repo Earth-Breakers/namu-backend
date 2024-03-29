@@ -5,7 +5,7 @@ public enum CharacterType {
 	BEAUTY("아름다움"),
 	VITALITY("생명력"),
 	PURIFY("정화"),
-	INITIAL("묘목");
+	DEFAULT("묘목");
 
 	private final String value;
 
@@ -13,7 +13,7 @@ public enum CharacterType {
 		this.value = value;
 	}
 
-	boolean isInitial() {
-		return this == INITIAL;
+	public boolean isInitial() {
+		return this == DEFAULT;
 	}
 }

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import univ.earthbreaker.namu.core.api.auth.support.AuthMapping;
 import univ.earthbreaker.namu.core.api.auth.support.LoginMember;
-import univ.earthbreaker.namu.core.domain.character.CurrentCharacter;
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacter;
 import univ.earthbreaker.namu.core.domain.character.HomeCharacterRetrieveService;
 
 @RestController

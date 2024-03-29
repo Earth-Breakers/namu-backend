@@ -22,7 +22,7 @@ import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.ResultActions;
 
 import univ.earthbreaker.namu.core.api.PresentationTest;
-import univ.earthbreaker.namu.core.domain.character.CurrentCharacterNotFoundException;
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacterNotFoundException;
 import univ.earthbreaker.namu.core.domain.member.MemberNotFoundException;
 import univ.earthbreaker.namu.core.domain.pushnotification.PushNotificationConstructService;
 import univ.earthbreaker.namu.external.notification.NotificationPort;

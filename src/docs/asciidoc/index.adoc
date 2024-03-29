@@ -23,7 +23,7 @@ include::{docfile}/../home-api.adoc[홈 페이지,window=blank]
 
 = 캐릭터 API
 
-include::{docfile}/../current-character-api.adoc[현재 캐릭터 성장,window=blank]
+include::{docfile}/../character-api.adoc[현재 캐릭터 성장,window=blank]
 
 = 미션 API
 
