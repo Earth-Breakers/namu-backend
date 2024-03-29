@@ -1,5 +1,10 @@
 package univ.earthbreaker.namu.database.core.character;
 
+import static univ.earthbreaker.namu.core.domain.character.book.CharacterBookEventHandler.AddFinalCharacterDbCommand;
+import static univ.earthbreaker.namu.core.domain.character.book.CharacterBookMapper.CharacterSummaryInfoCollectionMapper;
+import static univ.earthbreaker.namu.core.domain.character.book.CharacterBookMapper.CharacterSummaryInfoMapper;
+import static univ.earthbreaker.namu.core.domain.character.book.CharacterBookMapper.CharactersMapper;
+
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -54,21 +59,21 @@ public class MemberCharacterRepositoryAdapter implements MemberCharacterReposito
 		).mapping();
 	}
 
-	private @NotNull CharacterBookMapper.CharactersMapper getCharactersMapper(
+	private @NotNull CharactersMapper getCharactersMapper(
 		@NotNull List<MemberCharacterBookProjection> characterBookProjections,
 		int totalCountPerType
 	) {
-		return new CharacterBookMapper.CharactersMapper(
+		return new CharactersMapper(
 			characterBookProjections.stream()
 				.collect(Collectors.groupingBy(MemberCharacterBookProjection::getType))
 				.entrySet()
 				.stream()
 				.collect(Collectors.toMap(
 						Map.Entry::getKey,
-						entry -> new CharacterBookMapper.CharacterSummaryInfoCollectionMapper(
+						entry -> new CharacterSummaryInfoCollectionMapper(
 							totalCountPerType,
 							entry.getValue().stream()
-								.map(p -> new CharacterBookMapper.CharacterSummaryInfoMapper(
+								.map(p -> new CharacterSummaryInfoMapper(
 									p.getCharacterNo().orElse(DEFAULT_NO_IF_NOT_EXIST),
 									p.getCount().orElse(ZERO),
 									p.getThumbnailImagePath(),
@@ -79,5 +84,18 @@ public class MemberCharacterRepositoryAdapter implements MemberCharacterReposito
 					)
 				)
 		);
+	}
+
+	@Override
+	public void createOrUpdate(@NotNull AddFinalCharacterDbCommand command) {
+		MemberCharacterJpaEntity memberCharacterJpaEntity = memberCharacterJpaRepository
+			.findByMemberNoAndCharacterNo(command.memberNo(), command.characterNo());
+		if (memberCharacterJpaEntity != null) {
+			memberCharacterJpaEntity.plusOneCount();
+		} else {
+			memberCharacterJpaRepository.save(
+				MemberCharacterJpaEntity.initialize(command.memberNo(), command.characterNo())
+			);
+		}
 	}
 }

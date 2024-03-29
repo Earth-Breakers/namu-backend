@@ -38,7 +38,7 @@ public class CurrentCharacterRepositoryAdapter implements CurrentCharacterReposi
 	}
 
 	@Override
-	public @NotNull CurrentCharacter updateToInitial(long memberNo) {
+	public void updateToInitial(long memberNo) {
 		CurrentCharacterJpaEntity currentCharacterJpaEntity = initializeCurrentCharacterJpaEntity(memberNo);
 		currentCharacterJpaRepository.updateCurrentCharacter(
 			currentCharacterJpaEntity.getCharacterNo(),
@@ -47,7 +47,6 @@ public class CurrentCharacterRepositoryAdapter implements CurrentCharacterReposi
 			currentCharacterJpaEntity.getMainImagePath(),
 			memberNo
 		);
-		return currentCharacterJpaEntity.toInitCurrentCharacter();
 	}
 
 	private @NotNull CurrentCharacterJpaEntity initializeCurrentCharacterJpaEntity(long memberNo) {
