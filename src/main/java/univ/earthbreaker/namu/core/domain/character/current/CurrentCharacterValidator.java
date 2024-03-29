@@ -24,4 +24,16 @@ public class CurrentCharacterValidator {
 			throw new IllegalStateException("레벨이 MIDDLE 인 캐릭터만 growToNext 메서드를 호출할 수 있습니다");
 		}
 	}
+
+	static void validateLevelIsEnd(@NotNull CurrentCharacter currentCharacter) {
+		if (currentCharacter.levelIsNotEnd()) {
+			throw new IllegalStateException("레벨이 END 인 캐릭터만 growToFinal 메서드를 호출할 수 있습니다");
+		}
+	}
+
+	static void validateLevelIsFinal(@NotNull CurrentCharacter currentCharacter) {
+		if (currentCharacter.levelIsNotFinal()) {
+			throw new IllegalStateException("레벨이 FINAL 인 캐릭터만 initialize 메서드를 호출할 수 있습니다");
+		}
+	}
 }

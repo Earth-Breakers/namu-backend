@@ -2,6 +2,7 @@ package univ.earthbreaker.namu.core.domain.character.current;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class CurrentCharacterInitializer {
@@ -12,7 +13,8 @@ public class CurrentCharacterInitializer {
 		this.currentCharacterRepository = currentCharacterRepository;
 	}
 
-	@NotNull CurrentCharacter initialize(long memberNo) {
-		return currentCharacterRepository.updateToInitial(memberNo);
+	@Transactional
+	public void initialize(@NotNull CurrentCharacter currentCharacter) {
+		currentCharacterRepository.updateToInitial(currentCharacter.getMasterNo());
 	}
 }

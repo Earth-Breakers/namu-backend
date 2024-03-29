@@ -4,7 +4,8 @@ public enum Level {
 
 	BEGIN(1, true),
 	MIDDLE(2, true),
-	END(3, false),
+	END(3, true),
+	FINAL(4, false)
 	;
 
 	private final int value;
@@ -20,7 +21,15 @@ public enum Level {
 	}
 
 	boolean isOverflow(int expectedNextLevel) {
-		return expectedNextLevel > END.value;
+		return expectedNextLevel > FINAL.value;
+	}
+
+	boolean isFinal() {
+		return this == FINAL;
+	}
+
+	boolean isEnd() {
+		return this == END;
 	}
 
 	boolean isMiddle() {
@@ -36,6 +45,7 @@ public enum Level {
 			case 1 -> BEGIN;
 			case 2 -> MIDDLE;
 			case 3 -> END;
+			case 4 -> FINAL;
 			default -> throw new IllegalArgumentException("허용하지 않는 level 값입니다");
 		};
 	}

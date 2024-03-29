@@ -32,6 +32,14 @@ public class CharacterStatus {
 		return level.isOverflow(expectedNextLevelValue);
 	}
 
+	boolean isLevelFinal() {
+		return level.isFinal();
+	}
+
+	boolean isLevelEnd() {
+		return level.isEnd();
+	}
+
 	boolean isLevelMiddle() {
 		return level.isMiddle();
 	}
