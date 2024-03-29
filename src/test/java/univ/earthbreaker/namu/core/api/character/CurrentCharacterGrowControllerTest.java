@@ -27,6 +27,7 @@ class CurrentCharacterGrowControllerTest extends PresentationTest {
 
 	private static final String GROW_TO_NEXT_URI = "/v1/characters/grow/next";
 	private static final String GROW_TO_RANDOM_URI = "/v1/characters/grow/random";
+	private static final String GROW_TO_FINAL_URI = "/v1/characters/grow/final";
 
 	private final CurrentCharacterGrowService currentCharacterGrowService
 		= Mockito.mock(CurrentCharacterGrowService.class);
@@ -65,6 +66,28 @@ class CurrentCharacterGrowControllerTest extends PresentationTest {
 	void growToNextLevelRandomCharacter() throws Exception {
 		// when
 		ResultActions resultActions = whenPostWithAuthorization(GROW_TO_RANDOM_URI);
+
+		// then
+		resultActions.andExpect(status().isNoContent());
+
+		// apidocs
+		resultActions.andDo(
+			document(
+				API_DOCUMENT_IDENTIFIER,
+				operationRequestPreprocessor(),
+				operationResponsePreprocessor(),
+				requestHeaders(
+					headerWithName(HttpHeaders.AUTHORIZATION).description("회원의 access 토큰 값")
+				)
+			)
+		);
+	}
+
+	@DisplayName("레벨이 END 인 캐릭터를 랜덤 최종 형태 캐릭터로 성장시키고, 204 를 반환한다")
+	@Test
+	void growToRandomFinalCharacter() throws Exception {
+		// when
+		ResultActions resultActions = whenPostWithAuthorization(GROW_TO_FINAL_URI);
 
 		// then
 		resultActions.andExpect(status().isNoContent());
@@ -126,6 +149,29 @@ class CurrentCharacterGrowControllerTest extends PresentationTest {
 				assertThat(result.getResolvedException())
 					.isInstanceOf(CurrentCharacterNotFoundException.class)
 					.hasMessage(CurrentCharacterNotFoundException.notFound(AUTHORIZED_MEMBER_NO).getMessage())
+			)
+			.andDo(commonExceptionDocumentResultHandler());
+	}
+
+	@DisplayName("회원이 성장시킬 현재 캐릭터의 레벨이 END 가 아니면 예외를 발생시키고 400 을 반환한다")
+	@Test
+	void fail_growToNextLevelCharacter_valid_level_is_end() throws Exception {
+		// given
+		final String EXCEPTION_MESSAGE = "레벨이 END 인 캐릭터만 growToFinal 메서드를 호출할 수 있습니다";
+		Mockito.doThrow(new IllegalStateException(EXCEPTION_MESSAGE))
+			.when(currentCharacterGrowService)
+			.growToFinal(AUTHORIZED_MEMBER_NO);
+
+		// when
+		ResultActions resultActions = whenPostWithAuthorization(GROW_TO_FINAL_URI);
+
+		// then, apidocs
+		resultActions
+			.andExpect(status().isBadRequest())
+			.andExpect(result ->
+				assertThat(result.getResolvedException())
+					.isInstanceOf(IllegalStateException.class)
+					.hasMessage(EXCEPTION_MESSAGE)
 			)
 			.andDo(commonExceptionDocumentResultHandler());
 	}

@@ -12,19 +12,19 @@ public class NamuCharacterFinder {
 		this.characterRepository = characterRepository;
 	}
 
-	public @NotNull NamuCharacter findNext(int level, int groupNumber, CharacterType characterType) {
-		NextDeterminedRequestDto requestDto = new NextDeterminedRequestDto(level, groupNumber, characterType);
-		NamuCharacter namuCharacter = characterRepository.findOrNull(requestDto);
+	public @NotNull NamuCharacter findNext(int level, int groupNumber, CharacterType type) {
+		NextDeterminedDbQuery nextDeterminedDbQuery = new NextDeterminedDbQuery(level, groupNumber, type);
+		NamuCharacter namuCharacter = characterRepository.findOrNull(nextDeterminedDbQuery);
 		if (namuCharacter != null) {
 			return namuCharacter;
 		}
 		throw NamuCharacterNotFoundException.notFoundNext();
 	}
 
-	public @NotNull NamuCharacter findRandom(int level, int groupNumber, boolean isEndangered, CharacterType characterType) {
-		NextRandomCharacterRequestDto requestDto =
-			new NextRandomCharacterRequestDto(level, groupNumber, isEndangered, characterType);
-		NamuCharacter namuCharacter = characterRepository.findRandomOrNull(requestDto);
+	public @NotNull NamuCharacter findRandom(int level, int groupNumber, boolean isEndangered, CharacterType type) {
+		NextRandomCharacterDbQuery nextRandomCharacterDbQuery
+			= new NextRandomCharacterDbQuery(level, groupNumber, isEndangered, type);
+		NamuCharacter namuCharacter = characterRepository.findRandomOrNull(nextRandomCharacterDbQuery);
 		if (namuCharacter != null) {
 			return namuCharacter;
 		}

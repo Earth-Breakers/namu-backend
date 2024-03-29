@@ -28,6 +28,28 @@ public class CurrentCharacterGrower {
 	}
 
 	/**
+	 * 현재 캐릭터 LEVEL 을 END -> FINAL 로 성장하시키는 메서드.
+	 * LEVEL 이 END 인 캐릭터만 허용한다.
+	 * 최종 진화 형태로, 회원이 해당 캐릭터를 획득했음을 의미한다.
+	 * @param memberNo 회원 번호
+	 * @return currentCharacter - 최종 진화 시킨 캐릭터
+	 */
+	@Transactional
+	public CurrentCharacter growToFinal(long memberNo) {
+		CurrentCharacter currentCharacter = currentCharacterFinder.find(memberNo);
+		CurrentCharacterValidator.validateCanLevelUp(currentCharacter);
+		CurrentCharacterValidator.validateLevelIsEnd(currentCharacter);
+		NamuCharacter randomNamuCharacter = namuCharacterFinder.findRandom(
+			currentCharacter.calculateExpectedNextLevel(),
+			currentCharacter.getCharacterGroupNumber(),
+			endangeredProbabilityPolicy.determineEndangered(),
+			currentCharacter.getCharacterType()
+		);
+		updateCurrentCharacter(currentCharacter, randomNamuCharacter);
+		return currentCharacter;
+	}
+
+	/**
 	 * 현재 캐릭터 LEVEL 을 MIDDLE -> END 로 성장시키는 메서드.
 	 * LEVEL 이 MIDDLE 인 캐릭터만 허용한다.
 	 * @param memberNo 회원 번호
@@ -42,7 +64,7 @@ public class CurrentCharacterGrower {
 			currentCharacter.getCharacterGroupNumber(),
 			currentCharacter.getCharacterType()
 		);
-		updateAndGetCurrentCharacter(currentCharacter, namuCharacter);
+		updateCurrentCharacter(currentCharacter, namuCharacter);
 	}
 
 	/**
@@ -64,10 +86,10 @@ public class CurrentCharacterGrower {
 			endangeredProbabilityPolicy.determineEndangered(),
 			currentCharacter.getCharacterType()
 		);
-		updateAndGetCurrentCharacter(currentCharacter, randomNamuCharacter);
+		updateCurrentCharacter(currentCharacter, randomNamuCharacter);
 	}
 
-	private void updateAndGetCurrentCharacter(
+	private void updateCurrentCharacter(
 		@NotNull CurrentCharacter currentCharacter,
 		NamuCharacter namuCharacter
 	) {

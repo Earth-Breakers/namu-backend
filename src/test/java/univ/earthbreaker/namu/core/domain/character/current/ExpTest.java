@@ -9,9 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacterBadRequestException;
-import univ.earthbreaker.namu.core.domain.character.current.Exp;
-
 class ExpTest {
 
 	@DisplayName("요구 경험치와 현재 경험치를 받아 Exp 를 생성할 수 있다 - 현재 경험치와 요구 경험치가 같으면 isFull 이 true 를 반환한다")

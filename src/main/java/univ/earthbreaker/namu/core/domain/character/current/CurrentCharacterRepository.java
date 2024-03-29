@@ -11,7 +11,7 @@ public interface CurrentCharacterRepository {
 
 	@NotNull CurrentCharacter register(long memberNo);
 
-	@NotNull CurrentCharacter updateToInitial(long memberNo);
+	void updateToInitial(long memberNo);
 
 	void update(CurrentCharacter updatedCurrentCharacter);
 }

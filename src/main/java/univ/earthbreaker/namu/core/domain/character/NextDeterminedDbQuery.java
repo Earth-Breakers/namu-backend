@@ -1,6 +1,6 @@
 package univ.earthbreaker.namu.core.domain.character;
 
-public record NextDeterminedRequestDto(
+public record NextDeterminedDbQuery(
 	int level,
 	int groupNumber,
 	CharacterType characterType

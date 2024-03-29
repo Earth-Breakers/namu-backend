@@ -1,6 +1,6 @@
 package univ.earthbreaker.namu.core.domain.character;
 
-public record NextRandomCharacterRequestDto(
+public record NextRandomCharacterDbQuery(
 	int level,
 	int groupNumber,
 	boolean isEndangered,

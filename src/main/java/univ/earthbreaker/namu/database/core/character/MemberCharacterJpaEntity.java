@@ -30,6 +30,16 @@ public class MemberCharacterJpaEntity {
 	protected MemberCharacterJpaEntity() {
 	}
 
+	private MemberCharacterJpaEntity(Long memberNo, Long characterNo, Integer count) {
+		this.memberNo = memberNo;
+		this.characterNo = characterNo;
+		this.count = count;
+	}
+
+	static @NotNull MemberCharacterJpaEntity initialize(Long memberNo, Long characterNo) {
+		return new MemberCharacterJpaEntity(memberNo, characterNo, 1);
+	}
+
 	MemberCharacter toMemberCharacter(@NotNull CharacterJpaEntity characterJpaEntity) {
 		return new MemberCharacter(
 			no,
@@ -37,5 +47,9 @@ public class MemberCharacterJpaEntity {
 			count,
 			characterJpaEntity.toNamuCharacter()
 		);
+	}
+
+	void plusOneCount() {
+		this.count++;
 	}
 }

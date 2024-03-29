@@ -68,6 +68,14 @@ public class CurrentCharacter {
 		return !status.isCanLevelUp();
 	}
 
+	boolean levelIsNotFinal() {
+		return !status.isLevelFinal();
+	}
+
+	boolean levelIsNotEnd() {
+		return !status.isLevelEnd();
+	}
+
 	boolean levelIsNotMiddle() {
 		return !status.isLevelMiddle();
 	}

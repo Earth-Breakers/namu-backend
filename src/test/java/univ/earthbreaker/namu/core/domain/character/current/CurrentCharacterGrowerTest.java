@@ -1,5 +1,6 @@
 package univ.earthbreaker.namu.core.domain.character.current;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
@@ -7,7 +8,9 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.BEGIN_CURRENT_CHARACTER_WITH_MAX_EXP;
+import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.END_CURRENT_CHARACTER_WITH_MAX_EXP;
 import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.END_NAMU_CHARACTER;
+import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.FINAL_NAMU_CHARACTER;
 import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.MEMBER_NO;
 import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP;
 
@@ -64,6 +67,28 @@ class CurrentCharacterGrowerTest {
 
 		// then
 		assertAll(
+			() -> verify(endangeredProbabilityPolicy).determineEndangered(),
+			() -> verify(currentCharacterRepository).update(any(CurrentCharacter.class))
+		);
+	}
+
+	@DisplayName("""
+		회원 번호를 받아, 현재 캐릭터를 같은 타입인 랜덤의 최종 진화 캐릭터로 성장시킬 수 있다
+		- 현재 캐릭터 LEVEL 을 END -> FINAL 로 성장시키고, LEVEL.FINAL 로 최종 진화한 캐릭터를 반환한다""")
+	@Test
+	void growToFinal() {
+		// given
+		when(currentCharacterFinder.find(MEMBER_NO))
+			.thenReturn(END_CURRENT_CHARACTER_WITH_MAX_EXP);
+		when(namuCharacterFinder.findRandom(anyInt(), anyInt(), anyBoolean(), any(CharacterType.class)))
+			.thenReturn(FINAL_NAMU_CHARACTER);
+
+		// when
+		CurrentCharacter actual = currentCharacterGrower.growToFinal(MEMBER_NO);
+
+		// then
+		assertAll(
+			() -> assertThat(actual).isNotNull(),
 			() -> verify(endangeredProbabilityPolicy).determineEndangered(),
 			() -> verify(currentCharacterRepository).update(any(CurrentCharacter.class))
 		);

@@ -18,7 +18,7 @@ public class NamuCharacter {
 	private final String thumbnailImagePath;
 	private final String mainImagePath;
 
-	public NamuCharacter(
+	private NamuCharacter(
 		long no,
 		CharacterType type,
 		Gender gender,
