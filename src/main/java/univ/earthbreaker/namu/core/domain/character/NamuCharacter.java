@@ -18,7 +18,7 @@ public class NamuCharacter {
 	private final String thumbnailImagePath;
 	private final String mainImagePath;
 
-	public NamuCharacter(
+	private NamuCharacter(
 		long no,
 		CharacterType type,
 		Gender gender,
@@ -131,6 +131,18 @@ public class NamuCharacter {
 				this.mainImagePath
 			);
 		}
+	}
+
+	public Gender getGender() {
+		return gender;
+	}
+
+	public boolean isEndangered() {
+		return isEndangered;
+	}
+
+	public String getDescription() {
+		return description;
 	}
 
 	public long getNo() {

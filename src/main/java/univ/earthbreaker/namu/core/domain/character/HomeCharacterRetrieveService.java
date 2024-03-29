@@ -2,6 +2,9 @@ package univ.earthbreaker.namu.core.domain.character;
 
 import org.springframework.stereotype.Service;
 
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacter;
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacterFinder;
+
 @Service
 public class HomeCharacterRetrieveService {
 

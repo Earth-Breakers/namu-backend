@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 
 import univ.earthbreaker.namu.core.domain.character.CharacterRepository;
 import univ.earthbreaker.namu.core.domain.character.NamuCharacter;
-import univ.earthbreaker.namu.core.domain.character.NextDeterminedRequestDto;
-import univ.earthbreaker.namu.core.domain.character.NextRandomCharacterRequestDto;
+import univ.earthbreaker.namu.core.domain.character.NextDeterminedDbQuery;
+import univ.earthbreaker.namu.core.domain.character.NextRandomCharacterDbQuery;
 
 @Repository
 public class CharacterRepositoryAdapter implements CharacterRepository {
@@ -19,22 +19,22 @@ public class CharacterRepositoryAdapter implements CharacterRepository {
 	}
 
 	@Override
-	public @Nullable NamuCharacter findOrNull(@NotNull NextDeterminedRequestDto requestDto) {
+	public @Nullable NamuCharacter findOrNull(@NotNull NextDeterminedDbQuery determinedDbQuery) {
 		CharacterJpaEntity characterJpaEntity = characterJpaRepository.findByLevelAndGroupNumberAndType(
-			requestDto.level(),
-			requestDto.groupNumber(),
-			requestDto.characterType()
+			determinedDbQuery.level(),
+			determinedDbQuery.groupNumber(),
+			determinedDbQuery.characterType()
 		);
 		return getNamuCharacter(characterJpaEntity);
 	}
 
 	@Override
-	public @Nullable NamuCharacter findRandomOrNull(@NotNull NextRandomCharacterRequestDto requestDto) {
+	public @Nullable NamuCharacter findRandomOrNull(@NotNull NextRandomCharacterDbQuery randomDbQuery) {
 		CharacterJpaEntity characterJpaEntity = characterJpaRepository.findRandomBy(
-			requestDto.level(),
-			requestDto.groupNumber(),
-			requestDto.isEndangered(),
-			requestDto.characterType()
+			randomDbQuery.level(),
+			randomDbQuery.groupNumber(),
+			randomDbQuery.isEndangered(),
+			randomDbQuery.characterType()
 		);
 		return getNamuCharacter(characterJpaEntity);
 	}

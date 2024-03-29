@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CharacterRepository {
 
-	@Nullable NamuCharacter findOrNull(NextDeterminedRequestDto requestDto);
+	@Nullable NamuCharacter findOrNull(NextDeterminedDbQuery requestDto);
 
-	@Nullable NamuCharacter findRandomOrNull(NextRandomCharacterRequestDto requestDto);
+	@Nullable NamuCharacter findRandomOrNull(NextRandomCharacterDbQuery requestDto);
 }

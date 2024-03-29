@@ -5,8 +5,8 @@ import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Repository;
 
 import univ.earthbreaker.namu.core.domain.character.CharacterType;
-import univ.earthbreaker.namu.core.domain.character.CurrentCharacter;
-import univ.earthbreaker.namu.core.domain.character.CurrentCharacterRepository;
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacter;
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacterRepository;
 
 @Repository
 public class CurrentCharacterRepositoryAdapter implements CurrentCharacterRepository {
@@ -38,7 +38,7 @@ public class CurrentCharacterRepositoryAdapter implements CurrentCharacterReposi
 	}
 
 	@Override
-	public @NotNull CurrentCharacter updateToInitial(long memberNo) {
+	public void updateToInitial(long memberNo) {
 		CurrentCharacterJpaEntity currentCharacterJpaEntity = initializeCurrentCharacterJpaEntity(memberNo);
 		currentCharacterJpaRepository.updateCurrentCharacter(
 			currentCharacterJpaEntity.getCharacterNo(),
@@ -47,11 +47,10 @@ public class CurrentCharacterRepositoryAdapter implements CurrentCharacterReposi
 			currentCharacterJpaEntity.getMainImagePath(),
 			memberNo
 		);
-		return currentCharacterJpaEntity.toInitCurrentCharacter();
 	}
 
 	private @NotNull CurrentCharacterJpaEntity initializeCurrentCharacterJpaEntity(long memberNo) {
-		CharacterProjection characterInitialProjection = characterJpaRepository.findByType(CharacterType.INITIAL);
+		CharacterProjection characterInitialProjection = characterJpaRepository.findByType(CharacterType.DEFAULT);
 		return CurrentCharacterJpaEntity.initialize(characterInitialProjection, memberNo);
 	}
 
