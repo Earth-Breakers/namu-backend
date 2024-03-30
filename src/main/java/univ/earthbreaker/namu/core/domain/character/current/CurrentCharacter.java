@@ -26,18 +26,24 @@ public class CurrentCharacter {
 		this.status = status;
 	}
 
-	CurrentCharacter giveInitialEnergyExp(@NotNull CharacterType givenEnergyType, int energyExp) {
+	/**
+	 * 캐릭터에 에너지 경험치를 추가하고, 초기 상태일 경우 타입을 결정하는 메서드.
+	 * 초기 상태에서 주어진 에너지 타입으로 캐릭터의 타입이 결정되며,
+	 * 초기 상태가 아닐 경우에는 주어진 에너지 타입이 현재의 캐릭터 타입과 일치해야 합니다.
+	 *
+	 * @param givenEnergyType 회원이 선택한 에너지 종류
+	 * @param energyExp 에너지 포인트
+	 * @return 에너지를 받은 현재 캐릭터
+	 * @throws CurrentCharacterBadRequestException 타입 불일치 시 예외 발생
+	 */
+	CurrentCharacter giveEnergyExp(@NotNull CharacterType givenEnergyType, int energyExp) {
 		if (characterType.isInitial()) {
 			return new CurrentCharacter(master, character, givenEnergyType, status.addExp(energyExp));
+		} else if (characterType.equals(givenEnergyType)) {
+			return new CurrentCharacter(master, character, characterType, status.addExp(energyExp));
+		} else {
+			throw CurrentCharacterBadRequestException.missMatch();
 		}
-		throw CurrentCharacterBadRequestException.shouldBeInitial();
-	}
-
-	CurrentCharacter giveEnergyExp(@NotNull CharacterType givenEnergyType, int energyExp) {
-		if (characterType.equals(givenEnergyType)) {
-			return new CurrentCharacter(master, character, givenEnergyType, status.addExp(energyExp));
-		}
-		throw CurrentCharacterBadRequestException.missMatch();
 	}
 
 	CurrentCharacter growToNext(@NotNull NamuCharacter namuCharacter) {
