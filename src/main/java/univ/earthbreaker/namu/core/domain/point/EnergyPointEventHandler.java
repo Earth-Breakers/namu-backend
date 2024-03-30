@@ -8,11 +8,11 @@ import org.springframework.transaction.event.TransactionalEventListener;
 import univ.earthbreaker.namu.event.point.AddRewardPointEvent;
 
 @Component
-public class AddRewardPointEventHandler {
+public class EnergyPointEventHandler {
 
 	private final EnergyPointRepository energyPointRepository;
 
-	public AddRewardPointEventHandler(EnergyPointRepository energyPointRepository) {
+	public EnergyPointEventHandler(EnergyPointRepository energyPointRepository) {
 		this.energyPointRepository = energyPointRepository;
 	}
 
