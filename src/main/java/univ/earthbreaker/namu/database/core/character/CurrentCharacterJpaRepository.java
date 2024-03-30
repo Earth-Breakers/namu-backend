@@ -10,10 +10,10 @@ public interface CurrentCharacterJpaRepository extends JpaRepository<CurrentChar
 	@Modifying
 	@Query("""
 		UPDATE CurrentCharacterJpaEntity cc
-		SET cc.characterNo = :characterNo, cc.level = :level, cc.exp = 0,
+		SET cc.characterNo = :characterNo, cc.level = :level, cc.exp = :currentExp,
 		    cc.requiredExp = :requiredExp, cc.mainImagePath = :mainImagePath
 		WHERE cc.memberNo = :memberNo""")
-	void updateCurrentCharacter(long characterNo, int level, int requiredExp, String mainImagePath, long memberNo);
+	void updateCurrentCharacter(long characterNo, int level, int requiredExp, int currentExp, String mainImagePath, long memberNo);
 
 	@Nullable CurrentCharacterJpaEntity findByMemberNo(long memberNo);
 }
