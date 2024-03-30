@@ -31,26 +31,13 @@ class CurrentCharacterTest {
 		CharacterType giveCharacterType = CharacterType.BEAUTY;
 
 		// when
-		CurrentCharacter currentCharacter = BEGIN_CURRENT_CHARACTER.giveInitialEnergyExp(
-			giveCharacterType,
-			BEGIN_REQUIRED_EXP
-		);
+		CurrentCharacter actual = BEGIN_CURRENT_CHARACTER.giveEnergyExp(giveCharacterType, BEGIN_REQUIRED_EXP);
 
 		// then
 		assertAll(
-			() -> assertThat(currentCharacter.getCharacterType()).isEqualTo(giveCharacterType),
-			() -> assertThat(currentCharacter.getStatusCurrentExp()).isEqualTo(BEGIN_REQUIRED_EXP)
+			() -> assertThat(actual.getCharacterType()).isEqualTo(giveCharacterType),
+			() -> assertThat(actual.getStatusCurrentExp()).isEqualTo(BEGIN_REQUIRED_EXP)
 		);
-	}
-
-	@DisplayName("현재 캐릭터가 기본 타입(INITIAL)이 아닐때, 다른 종류의 캐릭터 타입을 제공하면 예외를 발생시킨다")
-	@Test
-	void fail_giveInitialEnergyExp() {
-		// when, then
-		assertThatThrownBy(
-			() -> MIDDLE_CURRENT_CHARACTER.giveInitialEnergyExp(CharacterType.BEAUTY, BEGIN_REQUIRED_EXP))
-			.isInstanceOf(CurrentCharacterBadRequestException.class)
-			.hasMessage(CurrentCharacterBadRequestException.shouldBeInitial().getMessage());
 	}
 
 	@DisplayName("현재 캐릭터의 타입과 일치하는 캐릭터 타입과 경험치를 제공하면, 제공받은 경험치 만큼 경험치가 증가한다")
@@ -60,19 +47,16 @@ class CurrentCharacterTest {
 		CharacterType sameCharacterType = MIDDLE_CURRENT_CHARACTER.getCharacterType();
 
 		// when
-		CurrentCharacter currentCharacter = MIDDLE_CURRENT_CHARACTER.giveEnergyExp(
-			sameCharacterType,
-			BEGIN_REQUIRED_EXP
-		);
+		CurrentCharacter actual = MIDDLE_CURRENT_CHARACTER.giveEnergyExp(sameCharacterType, BEGIN_REQUIRED_EXP);
 
 		// then
 		assertAll(
-			() -> assertThat(currentCharacter.getCharacterType()).isEqualTo(sameCharacterType),
-			() -> assertThat(currentCharacter.getStatusCurrentExp()).isEqualTo(BEGIN_REQUIRED_EXP)
+			() -> assertThat(actual.getCharacterType()).isEqualTo(sameCharacterType),
+			() -> assertThat(actual.getStatusCurrentExp()).isEqualTo(BEGIN_REQUIRED_EXP)
 		);
 	}
 
-	@DisplayName("현재 캐릭터의 타입과 일치하는 캐릭터 타입과 경험치를 제공하면, 제공받은 경험치 만큼 경험치가 증가한다")
+	@DisplayName("현재 캐릭터의 타입과 일치하지 않는 캐릭터 타입과 경험치를 제공하면 예외를 발생시킨다")
 	@Test
 	void fail_giveEnergyExp() {
 		// when, then
@@ -106,20 +90,18 @@ class CurrentCharacterTest {
 			.build();
 
 		// when
-		CurrentCharacter nextCharacter = beforeCharacter.growToNext(nextNamuCharacter);
+		CurrentCharacter actual = beforeCharacter.growToNext(nextNamuCharacter);
 
 		// then
 		assertAll(
-			() -> assertThat(nextCharacter.getTargetCharacterNo()).isEqualTo(nextNamuCharacter.getNo()),
-			() -> assertThat(nextCharacter.getStatusLevel()).isEqualTo(nextNamuCharacter.getLevelValue()),
-			() -> assertThat(nextCharacter.getStatusRequiredExp()).isEqualTo(nextNamuCharacter.getRequiredExp()),
-			() -> assertThat(nextCharacter.getTargetCharacterMainImage()).isEqualTo(
-				nextNamuCharacter.getMainImagePath()),
-			() -> assertThat(nextCharacter.getStatusCurrentExp()).isZero(),
-			() -> assertThat(nextCharacter.getMasterNo()).isEqualTo(beforeCharacter.getMasterNo()),
-			() -> assertThat(nextCharacter.getCharacterGroupNumber()).isEqualTo(
-				beforeCharacter.getCharacterGroupNumber()),
-			() -> assertThat(nextCharacter.getCharacterType()).isEqualTo(beforeCharacter.getCharacterType())
+			() -> assertThat(actual.getTargetCharacterNo()).isEqualTo(nextNamuCharacter.getNo()),
+			() -> assertThat(actual.getStatusLevel()).isEqualTo(nextNamuCharacter.getLevelValue()),
+			() -> assertThat(actual.getStatusRequiredExp()).isEqualTo(nextNamuCharacter.getRequiredExp()),
+			() -> assertThat(actual.getTargetCharacterMainImage()).isEqualTo(nextNamuCharacter.getMainImagePath()),
+			() -> assertThat(actual.getStatusCurrentExp()).isZero(),
+			() -> assertThat(actual.getMasterNo()).isEqualTo(beforeCharacter.getMasterNo()),
+			() -> assertThat(actual.getCharacterGroupNumber()).isEqualTo(beforeCharacter.getCharacterGroupNumber()),
+			() -> assertThat(actual.getCharacterType()).isEqualTo(beforeCharacter.getCharacterType())
 		);
 	}
 

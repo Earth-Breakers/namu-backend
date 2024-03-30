@@ -44,6 +44,7 @@ public class CurrentCharacterRepositoryAdapter implements CurrentCharacterReposi
 			currentCharacterJpaEntity.getCharacterNo(),
 			currentCharacterJpaEntity.getLevel(),
 			currentCharacterJpaEntity.getRequiredExp(),
+			currentCharacterJpaEntity.getExp(),
 			currentCharacterJpaEntity.getMainImagePath(),
 			memberNo
 		);
@@ -60,6 +61,7 @@ public class CurrentCharacterRepositoryAdapter implements CurrentCharacterReposi
 			updatedCurrentCharacter.getTargetCharacterNo(),
 			updatedCurrentCharacter.getStatusLevel(),
 			updatedCurrentCharacter.getStatusRequiredExp(),
+			updatedCurrentCharacter.getStatusCurrentExp(),
 			updatedCurrentCharacter.getTargetCharacterMainImage(),
 			updatedCurrentCharacter.getMasterNo()
 		);

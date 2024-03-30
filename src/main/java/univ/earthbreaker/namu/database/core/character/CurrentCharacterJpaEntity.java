@@ -144,6 +144,10 @@ public class CurrentCharacterJpaEntity {
 		return requiredExp;
 	}
 
+	Integer getExp() {
+		return exp;
+	}
+
 	String getMainImagePath() {
 		return mainImagePath;
 	}
