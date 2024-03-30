@@ -24,7 +24,7 @@ public class CharacterFixture {
 	static final int GROUP_NO = 1;
 	public static final String NAME = "characterName";
 	public static final String CHARACTER_IMAGE_PATH = "/character-dir/test_image.png";
-	static final CharacterType CHARACTER_TYPE = BEAUTY;
+	public static final CharacterType CHARACTER_TYPE = BEAUTY;
 
 	public static final int INITIAL_EXP = 0;
 	public static final int BEGIN_REQUIRED_EXP = 3;

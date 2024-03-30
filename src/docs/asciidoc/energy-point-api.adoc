@@ -1,0 +1,37 @@
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+[[EnergyPoint-API]]
+== 캐릭터에게 에너지 공급
+
+=== 요청
+
+operation::energy-point-provide-controller-test/success_provide-energy-to-character[snippets='http-request,request-headers,request-body']
+
+|===
+| energyType | 설명
+
+| `BEAUTY`
+| 아름다움
+
+| `VITALITY`
+| 생명력
+
+| `PURIFY`
+| 정화
+|===
+
+=== 실패
+
+operation::energy-point-provide-controller-test/fail_provide-energy-to-character_no_point[snippets='http-response']
+operation::energy-point-provide-controller-test/fail_provide-energy-to-character_overflow_point[snippets='http-response']
+operation::energy-point-provide-controller-test/fail_provide-energy-to-character_miss-match[snippets='http-response']
+operation::energy-point-provide-controller-test/fail_provide-energy-to-character_exp-overflow[snippets='http-response']
+
+=== 성공
+
+operation::energy-point-provide-controller-test/success_provide-energy-to-character[snippets='http-response']

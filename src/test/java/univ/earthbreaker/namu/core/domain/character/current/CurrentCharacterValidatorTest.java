@@ -2,7 +2,13 @@ package univ.earthbreaker.namu.core.domain.character.current;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatNoException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.*;
+import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.BEGIN_CURRENT_CHARACTER;
+import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.BEGIN_CURRENT_CHARACTER_WITH_MAX_EXP;
+import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.END_CURRENT_CHARACTER;
+import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.END_CURRENT_CHARACTER_WITH_MAX_EXP;
+import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.FINAL_CURRENT_CHARACTER;
+import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.MIDDLE_CURRENT_CHARACTER;
+import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP;
 
 import java.util.stream.Stream;
 
