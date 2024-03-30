@@ -41,3 +41,6 @@ logs
 
 ### firebase ###
 src/main/resources/external/firebase
+
+### .http auth
+http/local/auth
