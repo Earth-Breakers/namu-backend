@@ -2,13 +2,13 @@ package univ.earthbreaker.namu.database.config;
 
 import org.springframework.context.annotation.Profile;
 
-import jakarta.transaction.NotSupportedException;
+import com.zaxxer.hikari.HikariConfig;
 
 public interface SeparatedProfileDataSourceConfigurable<P> {
 
-	@Profile({"local", "test"})
+	@Profile({"local"})
 	P embedded();
 
-	@Profile({"dev", "prod"})
-	P remote() throws NotSupportedException;
+	@Profile({"local-dev", "dev"})
+	P remote(HikariConfig config);
 }
