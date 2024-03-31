@@ -14,19 +14,14 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 @Profile("dev")
 public class S3Config {
 
-	private final String accessKey;
-	private final String secretKey;
-	private final String region;
+	@Value("${cloud.aws.credentials.access-key}")
+	private String accessKey;
 
-	public S3Config(
-		@Value("${cloud.aws.credentials.access-key}") String accessKey,
-		@Value("${cloud.aws.credentials.secret-key}") String secretKey,
-		@Value("${cloud.aws.region.static}") String region
-	) {
-		this.accessKey = accessKey;
-		this.secretKey = secretKey;
-		this.region = region;
-	}
+	@Value("${cloud.aws.credentials.secret-key}")
+	private String secretKey;
+
+	@Value("${cloud.aws.region.static}")
+	private String region;
 
 	@Bean
 	public AmazonS3 amazonS3() {
