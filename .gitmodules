@@ -1,0 +1,3 @@
+[submodule "src/main/resources/namu-backend-config"]
+	path = src/main/resources/namu-backend-config
+	url = https://github.com/Earth-Breakers/namu-secret.git
