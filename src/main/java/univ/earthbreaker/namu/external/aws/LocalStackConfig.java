@@ -13,7 +13,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 
 @Configuration
-@Profile({"local"})
+@Profile({"local", "local-dev"})
 public class LocalStackConfig {
 
 	private static final String AWS_REGION = Regions.US_EAST_1.getName();

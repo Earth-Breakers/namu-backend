@@ -22,7 +22,25 @@ spring:
       enabled: true
 
 ---
-spring.config.activate.on-profile: dev
+spring.config.activate.on-profile: local-dev
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        show_log: true
+        format_sql: true
+    show-sql: true
+
+database:
+  datasource:
+    core:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://${db.database.core.url}
+      username: ${db.database.core.username}
+      password: ${db.database.core.password}
 
 ---
 spring.config.activate.on-profile: prod

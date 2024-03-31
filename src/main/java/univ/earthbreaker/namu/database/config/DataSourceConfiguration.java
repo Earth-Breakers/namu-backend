@@ -2,11 +2,15 @@ package univ.earthbreaker.namu.database.config;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 
-import jakarta.transaction.NotSupportedException;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 public class DataSourceConfiguration implements SeparatedProfileDataSourceConfigurable<DataSource> {
@@ -16,6 +20,7 @@ public class DataSourceConfiguration implements SeparatedProfileDataSourceConfig
 	@Override
 	@Primary
 	@Bean(DATA_SOURCE_BEAN)
+	@Profile({"local"})
 	public DataSource embedded() {
 		return H2Factory.embeddedDatabaseFactory().getDatabase();
 	}
@@ -23,7 +28,15 @@ public class DataSourceConfiguration implements SeparatedProfileDataSourceConfig
 	@Override
 	@Primary
 	@Bean(DATA_SOURCE_BEAN)
-	public DataSource remote() throws NotSupportedException {
-		throw new NotSupportedException("not support remote datasource now.");
+	@Profile({"local-dev", "dev"})
+	public DataSource remote(@Qualifier("hikariConfig") HikariConfig config) {
+		return new HikariDataSource(config);
+	}
+
+	@Bean
+	@ConfigurationProperties(prefix = "database.datasource.core")
+	@Profile({"local-dev", "dev"})
+	public HikariConfig hikariConfig() {
+		return new HikariConfig();
 	}
 }

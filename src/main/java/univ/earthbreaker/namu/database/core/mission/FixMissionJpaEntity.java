@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import univ.earthbreaker.namu.core.domain.mission.MissionActivity;
 import univ.earthbreaker.namu.core.domain.mission.MissionType;
 import univ.earthbreaker.namu.database.core.common.BaseTimeJpaEntity;
 
@@ -19,8 +20,9 @@ public class FixMissionJpaEntity extends BaseTimeJpaEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long no;
 
+	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length = 100)
-	private String title;
+	private MissionActivity activity;
 
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)

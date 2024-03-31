@@ -42,6 +42,7 @@ public class CurrentCharacterRepositoryAdapter implements CurrentCharacterReposi
 		CurrentCharacterJpaEntity currentCharacterJpaEntity = initializeCurrentCharacterJpaEntity(memberNo);
 		currentCharacterJpaRepository.updateCurrentCharacter(
 			currentCharacterJpaEntity.getCharacterNo(),
+			currentCharacterJpaEntity.getCharacterType(),
 			currentCharacterJpaEntity.getLevel(),
 			currentCharacterJpaEntity.getRequiredExp(),
 			currentCharacterJpaEntity.getExp(),
@@ -59,6 +60,7 @@ public class CurrentCharacterRepositoryAdapter implements CurrentCharacterReposi
 	public void update(@NotNull CurrentCharacter updatedCurrentCharacter) {
 		currentCharacterJpaRepository.updateCurrentCharacter(
 			updatedCurrentCharacter.getTargetCharacterNo(),
+			updatedCurrentCharacter.getCharacterType(),
 			updatedCurrentCharacter.getStatusLevel(),
 			updatedCurrentCharacter.getStatusRequiredExp(),
 			updatedCurrentCharacter.getStatusCurrentExp(),
