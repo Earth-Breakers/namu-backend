@@ -125,24 +125,6 @@ public class CurrentCharacter {
 		);
 	}
 
-	public static @NotNull CurrentCharacter createNext(
-		long memberNo,
-		long characterNo,
-		CharacterType energyType,
-		int level,
-		int requiredExp,
-		int groupNumber,
-		String name,
-		String mainImagePath
-	) {
-		return new CurrentCharacter(
-			new Master(memberNo),
-			new TargetCharacter(characterNo, groupNumber, name, mainImagePath),
-			energyType,
-			CharacterStatus.createNext(level, requiredExp)
-		);
-	}
-
 	public int getCharacterGroupNumber() {
 		return character.getGroupNumber();
 	}

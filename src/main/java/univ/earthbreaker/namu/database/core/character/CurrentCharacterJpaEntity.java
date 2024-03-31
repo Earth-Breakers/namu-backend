@@ -104,19 +104,6 @@ public class CurrentCharacterJpaEntity {
 		);
 	}
 
-	CurrentCharacter toNextCurrentCharacter() {
-		return CurrentCharacter.createNext(
-			memberNo,
-			characterNo,
-			characterType,
-			level,
-			requiredExp,
-			groupNumber,
-			name,
-			mainImagePath
-		);
-	}
-
 	CurrentCharacter toInitCurrentCharacter() {
 		return CurrentCharacter.initialize(
 			memberNo,
@@ -134,6 +121,10 @@ public class CurrentCharacterJpaEntity {
 
 	Long getCharacterNo() {
 		return characterNo;
+	}
+
+	CharacterType getCharacterType() {
+		return characterType;
 	}
 
 	Integer getLevel() {
