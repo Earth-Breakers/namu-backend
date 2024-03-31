@@ -34,7 +34,7 @@ jobs:
       - name: Check Out
         uses: actions/checkout@v3
         with:
-          token: ${{ secrets.YML_CONFIG_CREDENTIAL }}
+          token: ${{ secrets.SUBMODULE_YML_CONFIG }}
           submodules: true
 
       - name: Set up JDK 17
