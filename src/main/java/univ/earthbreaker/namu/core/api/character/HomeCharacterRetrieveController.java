@@ -11,7 +11,6 @@ import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacter;
 import univ.earthbreaker.namu.core.domain.character.HomeCharacterRetrieveService;
 
 @RestController
-@AuthMapping
 @RequestMapping("/v1/characters")
 public class HomeCharacterRetrieveController {
 
@@ -21,6 +20,7 @@ public class HomeCharacterRetrieveController {
 		this.homeCharacterRetrieveService = homeCharacterRetrieveService;
 	}
 
+	@AuthMapping
 	@GetMapping("/home")
 	public ResponseEntity<HomeCharacterResponse> retrieve(@LoginMember Long memberNo) {
 		CurrentCharacter homeCharacter = homeCharacterRetrieveService.retrieveHomeCharacter(memberNo);
