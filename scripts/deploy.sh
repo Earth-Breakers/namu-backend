@@ -1,17 +1,15 @@
 BASE_PATH="/home/ubuntu"
 
-BUILD_JAR_FILE="$BASE_PATH/namu-server/build/libs/*.jar"
+BUILD_JAR_FILE=$(ls $BASE_PATH/namu-server/build/libs/*.jar)
 
 DEPLOY_LOG="$BASE_PATH/deploy.log"
 APP_LOG="$BASE_PATH/application.log"
 
 CURRENT_TIME=$(date +%c)
 
-echo "> build 파일 복사" >> $DEPLOY_LOG
+echo "$CURRENT_TIME >  build 파일 복사" >> $DEPLOY_LOG
 DEPLOY_PATH=$BASE_PATH/deploy-jar/
 cp "$BUILD_JAR_FILE" $DEPLOY_PATH
-
-cd $BASE_PATH
 
 SPRING_PROFILES_ACTIVE="dev"
 IMAGE_ACCESS_URL="https://namu-bucket.s3.ap-northeast-2.amazonaws.com/"
