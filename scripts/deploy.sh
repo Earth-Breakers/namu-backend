@@ -15,17 +15,15 @@ cp "$BUILD_JAR_FILE" $DEPLOY_PATH
 SPRING_PROFILES_ACTIVE="dev"
 IMAGE_ACCESS_URL="https://namu-bucket.s3.ap-northeast-2.amazonaws.com/"
 LOG4J_CONTEXT_SELECTOR="org.apache.logging.log4j.core.async.AsyncLoggerContextSelector"
-LOG4J2_ENABLE_THREADLOCALS="true"
-LOG4J2_ENABLE_DIRECT_ENCODERS="true"
 
-COMMAND="java -jar -Dspring.profiles.active=${SPRING_PROFILES_ACTIVE} \
--DimageAccessUrl=${IMAGE_ACCESS_URL} \
--DLog4jContextSelector=${LOG4J_CONTEXT_SELECTOR} \
--Dlog4j2.enable.threadlocals=${LOG4J2_ENABLE_THREADLOCALS} \
--Dlog4j2.enable.direct.encoders=${LOG4J2_ENABLE_DIRECT_ENCODERS} \
-${BUILD_JAR_FILE}"
+#COMMAND="java -jar -Dspring.profiles.active=${SPRING_PROFILES_ACTIVE} \
+#-DimageAccessUrl=${IMAGE_ACCESS_URL} \
+#-DLog4jContextSelector=${LOG4J_CONTEXT_SELECTOR} \
+#-Dlog4j2.enable.threadlocals=${LOG4J2_ENABLE_THREADLOCALS} \
+#-Dlog4j2.enable.direct.encoders=${LOG4J2_ENABLE_DIRECT_ENCODERS} \
+#${BUILD_JAR_FILE}"
 
-nohup "$COMMAND" > $APP_LOG 2>&1 &
+nohup java -jar -Dspring.profiles.active=$SPRING_PROFILES_ACTIVE -DimageAccessUrl=$IMAGE_ACCESS_URL -DLog4jContextSelector=$LOG4J_CONTEXT_SELECTOR -Dlog4j2.enable.threadlocals=true -Dlog4j2.enable.direct.encoders=true "$BUILD_JAR_FILE" > $APP_LOG 2>&1 &
 echo "$CURRENT_TIME > build jar 파일 실헹" >> $DEPLOY_LOG
 
 EXECUTED_PROCESS_PID=$(lsof -t -i tcp:8080)
