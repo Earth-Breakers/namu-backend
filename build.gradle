@@ -35,6 +35,7 @@ configurations {
     asciidoctorExt
     configureEach {
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+        exclude group: 'commons-logging', module: 'commons-logging'
     }
 }
 
@@ -59,7 +60,7 @@ dependencies {
     // + implementation project(":core:domain")
 
     // ========== core:domain ==========
-    compileOnly 'org.springframework:spring-context'
+    // compileOnly 'org.springframework:spring-context'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     // implementation project(":event")
 
