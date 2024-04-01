@@ -20,6 +20,25 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
 
+    services:
+      localstack:
+        image: localstack/localstack
+        env:
+          SERVICES: s3
+          DEFAULT_REGION: us-east-1
+          DATA_DIR: /tmp/localstack/data
+          AWS_ACCESS_KEY_ID: access-key
+          AWS_SECRET_ACCESS_KEY: secret-key
+          AWS_REGION: us-east-1
+        ports:
+          - 4566:4566
+        options: >-
+          --name=localstack
+          --health-cmd="curl -sS 127.0.0.1:4566 || exit 1"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=3
+
     steps:
       - name: Check Out
         uses: actions/checkout@v3
@@ -36,7 +55,7 @@ jobs:
       - name: Build with Gradle
         uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
         with:
-          arguments: clean build --debug
+          arguments: clean build
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
