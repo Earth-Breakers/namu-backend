@@ -2000,6 +2000,117 @@ Host: namu.api.docs</code></pre>
 </table>
 </div>
 <div class="sect3">
+<h4 id="_mission_activity"><a class="link" href="#_mission_activity">Mission Activity</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">status</th>
+<th class="tableblock halign-left valign-top">타입</th>
+<th class="tableblock halign-left valign-top">미션 종류</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>USE_PUBLIC_TRANSPORT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">기본 미션</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">대중교통 이용하기 (따릉이 포함)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>RECYCLE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">기본 미션</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">분리수거 하기</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>USE_STAIRS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">기본 미션</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">엘리베이터 대신 계단 이용하기</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>USE_DIGITAL_RECEIPTS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">기본 미션</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">종이 영수증 대신 스마트 영수증 받기</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>USE_TUMBLER</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">기본 미션</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">텀블러 사용하기</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>UNPLUG_ELECTRONICS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">기본 미션</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">사용하지 않는 전기 코드 뽑기</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>USE_REUSABLE_CONTAINERS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">오늘의 미션</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">다회용기에 음식 포장하기</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>VISIT_VEGAN_CAFE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">오늘의 미션</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">비건 카페 가기</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>USE_SHOPPING_BAGS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">오늘의 미션</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">장바구니 이용하기</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>BUY_LOCAL_PRODUCE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">오늘의 미션</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">지역 농산품 구매하기</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>USE_ECO_FRIENDLY_PRODUCTS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">오늘의 미션</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">친환경 제품 사용하기</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>VISIT_REFILL_STORES</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">오늘의 미션</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">리필샵 방문하기</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PLOGGING</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">오늘의 미션</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">플로깅</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PLANT_TREES</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">스페셜 미션</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">나무 심기</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>BEACH_COMBING</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">스페셜 미션</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">비치코밍</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
 <h4 id="_특별한_날이_아닌_경우"><a class="link" href="#_특별한_날이_아닌_경우">특별한 날이 아닌 경우</a></h4>
 <div class="sect4">
 <h5 id="_특별한_날이_아닌_경우_http_response"><a class="link" href="#_특별한_날이_아닌_경우_http_response">HTTP response</a></h5>
@@ -2007,17 +2118,17 @@ Host: namu.api.docs</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 239
+Content-Length: 240
 
 {
   "todayMissions" : [ {
     "missionNo" : 1,
-    "title" : "todayTitle",
+    "title" : "VISIT_VEGAN_CAFE",
     "status" : "READY"
   } ],
   "defaultMissions" : [ {
     "missionNo" : 2,
-    "title" : "defaultTitle",
+    "title" : "RECYCLE",
     "status" : "READY"
   } ],
   "specialMissions" : [ ]
@@ -2099,22 +2210,22 @@ Content-Length: 239
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 319
+Content-Length: 321
 
 {
   "todayMissions" : [ {
     "missionNo" : 1,
-    "title" : "todayTitle",
+    "title" : "VISIT_VEGAN_CAFE",
     "status" : "READY"
   } ],
   "defaultMissions" : [ {
     "missionNo" : 2,
-    "title" : "defaultTitle",
+    "title" : "RECYCLE",
     "status" : "READY"
   } ],
   "specialMissions" : [ {
     "missionNo" : 3,
-    "title" : "specialTitle",
+    "title" : "BEACH_COMBING",
     "status" : "READY"
   } ]
 }</code></pre>
