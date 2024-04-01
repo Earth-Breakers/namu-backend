@@ -17,13 +17,13 @@ public class MissionFixture {
 	public static final long DEFAULT_MISSION_NO = 2;
 	public static final long SPECIAL_MISSION_NO = 3;
 
-	public static final String TODAY_MISSION_TITLE = "todayTitle";
-	public static final String DEFAULT_MISSION_TITLE = "defaultTitle";
-	public static final String SPECIAL_MISSION_TITLE = "specialTitle";
+	public static final MissionActivity TODAY_MISSION_ACTIVITY_TITLE = MissionActivity.VISIT_VEGAN_CAFE;
+	public static final MissionActivity DEFAULT_MISSION_ACTIVITY_TITLE = MissionActivity.RECYCLE;
+	public static final MissionActivity SPECIAL_MISSION_ACTIVITY_TITLE = MissionActivity.BEACH_COMBING;
 
-	public static final MemberMission TODAY_MISSION_READY = new MemberMission(TODAY_MISSION_NO, MEMBER_NO, TODAY_MISSION_TITLE, TODAY, READY);
-	public static final MemberMission DEFAULT_MISSION_READY = new MemberMission(DEFAULT_MISSION_NO, MEMBER_NO, DEFAULT_MISSION_TITLE, DEFAULT, READY);
-	public static final MemberMission SPECIAL_MISSION_READY = new MemberMission(SPECIAL_MISSION_NO, MEMBER_NO, SPECIAL_MISSION_TITLE, SPECIAL, READY);
+	public static final MemberMission TODAY_MISSION_READY = new MemberMission(TODAY_MISSION_NO, MEMBER_NO, TODAY_MISSION_ACTIVITY_TITLE, TODAY, READY);
+	public static final MemberMission DEFAULT_MISSION_READY = new MemberMission(DEFAULT_MISSION_NO, MEMBER_NO, DEFAULT_MISSION_ACTIVITY_TITLE, DEFAULT, READY);
+	public static final MemberMission SPECIAL_MISSION_READY = new MemberMission(SPECIAL_MISSION_NO, MEMBER_NO, SPECIAL_MISSION_ACTIVITY_TITLE, SPECIAL, READY);
 
 	public static final List<MemberMission> MISSIONS = List.of(TODAY_MISSION_READY, DEFAULT_MISSION_READY, SPECIAL_MISSION_READY);
 	public static final MemberMissions MEMBER_MISSIONS = new MemberMissions(MISSIONS);

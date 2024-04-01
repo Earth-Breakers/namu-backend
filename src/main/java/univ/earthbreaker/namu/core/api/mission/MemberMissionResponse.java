@@ -27,7 +27,7 @@ public record MemberMissionResponse(
 		MissionStatus status
 	) {
 		static @NotNull MissionResponse toResponse(@NotNull MemberMission mission) {
-			return new MissionResponse(mission.getNo(), mission.getTitle(), mission.getStatus());
+			return new MissionResponse(mission.getNo(), mission.getActivity(), mission.getStatus());
 		}
 	}
 }

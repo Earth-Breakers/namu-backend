@@ -54,7 +54,7 @@ class MemberMissionCertifyServiceTest {
 				.publish(new AddRewardPointEvent(successMission.getMemberNo(), successMission.getRewardPoint())),
 			() -> verify(eventPublisher)
 				.publish(new PostCreateEvent(
-					MEMBER_NO, successMission.getTitle(), MISSION_POST_CONTENT,
+					MEMBER_NO, successMission.getActivity(), MISSION_POST_CONTENT,
 					MISSION_POST_IMAGE_PATH_KEY, successMission.getNo()
 				)),
 			() -> verify(eventPublisher).publish(new DeleteUploadedImageEvent(MISSION_POST_IMAGE_PATH_KEY))

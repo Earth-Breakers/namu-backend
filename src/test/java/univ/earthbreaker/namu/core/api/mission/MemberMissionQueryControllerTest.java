@@ -11,7 +11,15 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.response
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.*;
+import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.DEFAULT_MISSION_ACTIVITY_TITLE;
+import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.DEFAULT_MISSION_NO;
+import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.MEMBER_NO;
+import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.NORMAL_DAY_RESULT;
+import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.SPECIAL_DAY_RESULT;
+import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.SPECIAL_MISSION_ACTIVITY_TITLE;
+import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.SPECIAL_MISSION_NO;
+import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.TODAY_MISSION_ACTIVITY_TITLE;
+import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.TODAY_MISSION_NO;
 import static univ.earthbreaker.namu.core.domain.mission.MissionStatus.READY;
 import static univ.earthbreaker.namu.support.apidocs.ApiDocsUtils.API_DOCUMENT_IDENTIFIER;
 import static univ.earthbreaker.namu.support.apidocs.ApiDocsUtils.operationRequestPreprocessor;
@@ -58,12 +66,12 @@ class MemberMissionQueryControllerTest extends PresentationTest {
 			.andExpect(jsonPath("$.todayMissions").exists())
 			.andExpect(jsonPath("$.todayMissions").isArray())
 			.andExpect(jsonPath("$.todayMissions[0].missionNo").value(TODAY_MISSION_NO))
-			.andExpect(jsonPath("$.todayMissions[0].title").value(TODAY_MISSION_TITLE))
+			.andExpect(jsonPath("$.todayMissions[0].title").value(TODAY_MISSION_ACTIVITY_TITLE.name()))
 			.andExpect(jsonPath("$.todayMissions[0].status").value(READY.name()))
 			.andExpect(jsonPath("$.defaultMissions").exists())
 			.andExpect(jsonPath("$.defaultMissions").isArray())
 			.andExpect(jsonPath("$.defaultMissions[0].missionNo").value(DEFAULT_MISSION_NO))
-			.andExpect(jsonPath("$.defaultMissions[0].title").value(DEFAULT_MISSION_TITLE))
+			.andExpect(jsonPath("$.defaultMissions[0].title").value(DEFAULT_MISSION_ACTIVITY_TITLE.name()))
 			.andExpect(jsonPath("$.defaultMissions[0].status").value(READY.name()))
 			.andExpect(jsonPath("$.specialMissions").exists())
 			.andExpect(jsonPath("$.specialMissions").isArray())
@@ -111,17 +119,17 @@ class MemberMissionQueryControllerTest extends PresentationTest {
 			.andExpect(jsonPath("$.todayMissions").exists())
 			.andExpect(jsonPath("$.todayMissions").isArray())
 			.andExpect(jsonPath("$.todayMissions[0].missionNo").value(TODAY_MISSION_NO))
-			.andExpect(jsonPath("$.todayMissions[0].title").value(TODAY_MISSION_TITLE))
+			.andExpect(jsonPath("$.todayMissions[0].title").value(TODAY_MISSION_ACTIVITY_TITLE.name()))
 			.andExpect(jsonPath("$.todayMissions[0].status").value(READY.name()))
 			.andExpect(jsonPath("$.defaultMissions").exists())
 			.andExpect(jsonPath("$.defaultMissions").isArray())
 			.andExpect(jsonPath("$.defaultMissions[0].missionNo").value(DEFAULT_MISSION_NO))
-			.andExpect(jsonPath("$.defaultMissions[0].title").value(DEFAULT_MISSION_TITLE))
+			.andExpect(jsonPath("$.defaultMissions[0].title").value(DEFAULT_MISSION_ACTIVITY_TITLE.name()))
 			.andExpect(jsonPath("$.defaultMissions[0].status").value(READY.name()))
 			.andExpect(jsonPath("$.specialMissions").exists())
 			.andExpect(jsonPath("$.specialMissions").isArray())
 			.andExpect(jsonPath("$.specialMissions[0].missionNo").value(SPECIAL_MISSION_NO))
-			.andExpect(jsonPath("$.specialMissions[0].title").value(SPECIAL_MISSION_TITLE))
+			.andExpect(jsonPath("$.specialMissions[0].title").value(SPECIAL_MISSION_ACTIVITY_TITLE.name()))
 			.andExpect(jsonPath("$.specialMissions[0].status").value(READY.name()));
 
 		// apidocs

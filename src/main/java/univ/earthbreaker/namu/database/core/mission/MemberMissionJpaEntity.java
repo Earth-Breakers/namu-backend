@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import univ.earthbreaker.namu.core.domain.mission.MemberMission;
+import univ.earthbreaker.namu.core.domain.mission.MissionActivity;
 import univ.earthbreaker.namu.core.domain.mission.MissionStatus;
 import univ.earthbreaker.namu.core.domain.mission.MissionType;
 import univ.earthbreaker.namu.database.core.common.BaseTimeJpaEntity;
@@ -28,7 +29,7 @@ public class MemberMissionJpaEntity extends BaseTimeJpaEntity {
 	private Long missionNo;
 
 	@Column(nullable = false, length = 100)
-	private String title;
+	private MissionActivity activity;
 
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
@@ -42,6 +43,6 @@ public class MemberMissionJpaEntity extends BaseTimeJpaEntity {
 	}
 
 	MemberMission toMemberMission() {
-		return new MemberMission(missionNo, memberNo, title, type, status);
+		return new MemberMission(missionNo, memberNo, activity, type, status);
 	}
 }
