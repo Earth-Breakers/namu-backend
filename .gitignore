@@ -41,3 +41,4 @@ logs
 
 ### .http auth
 http/local/auth
+http/dev/
