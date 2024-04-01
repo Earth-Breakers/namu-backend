@@ -1,6 +1,6 @@
-BASE_PATH="/home/ubuntu"
+BASE_PATH="/home/ubuntu/namu-server"
 
-BUILD_JAR_FILE="$BASE_PATH/namu-server/build/libs/*.jar"
+BUILD_JAR_FILE="$BASE_PATH/build/libs/*.jar"
 
 DEPLOY_LOG="$BASE_PATH/deploy.log"
 APP_LOG="$BASE_PATH/application.log"
@@ -26,11 +26,11 @@ COMMAND="java -jar -Dspring.profiles.active=${SPRING_PROFILES_ACTIVE} \
 -Dlog4j2.enable.direct.encoders=${LOG4J2_ENABLE_DIRECT_ENCODERS} \
 ${DEPLOY_PATH}"
 
-nohup $COMMAND > $APP_LOG 2>&1 &
-echo "> build jar 파일 실헹" >> $DEPLOY_LOG
+nohup "$COMMAND" > $APP_LOG 2>&1 &
+echo "$CURRENT_TIME > build jar 파일 실헹" >> $DEPLOY_LOG
 
 CURRENT_PID=$(pgrep -f $DEPLOY_PATH)
-echo "$TIME_NOW > 현재 애플리케이션이 $CURRENT_PID pid 에서 실행중입니다." >> $DEPLOY_LOG
+echo "$CURRENT_TIME > 현재 애플리케이션이 $CURRENT_PID pid 에서 실행중입니다." >> $DEPLOY_LOG
 
 HEALTH_CHECK=$(curl -s http://localhost/health)
-echo "$HEALTH_CHECK 통과"
+echo "$CURRENT_TIME > $HEALTH_CHECK 통과"
