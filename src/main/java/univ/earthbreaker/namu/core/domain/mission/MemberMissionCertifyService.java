@@ -49,7 +49,7 @@ public class MemberMissionCertifyService {
 		eventPublisher.publish(
 			new PostCreateEvent(
 				postCommand.getMemberNo(),
-				successMission.getTitle(),
+				successMission.getActivity(),
 				postCommand.getContent(),
 				postCommand.getImagePathKey(),
 				successMission.getNo())
