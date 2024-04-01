@@ -1,6 +1,6 @@
-BASE_PATH="/home/ubuntu/namu-server"
+BASE_PATH="/home/ubuntu"
 
-BUILD_JAR_FILE="$BASE_PATH/build/libs/*.jar"
+BUILD_JAR_FILE="$BASE_PATH/namu-server/build/libs/*.jar"
 
 DEPLOY_LOG="$BASE_PATH/deploy.log"
 APP_LOG="$BASE_PATH/application.log"
