@@ -1,5 +1,7 @@
 BASE_PATH="/home/ubuntu"
-DEPLOY_LOG="$BASE_PATH/deploy.log"
+
+LOG_PATH="$BASE_PATH/log"
+DEPLOY_LOG="$LOG_PATH/deploy.log"
 CURRENT_TIME=$(date +%c)
 
 CURRENT_PID=$(lsof -t -i tcp:8080)
