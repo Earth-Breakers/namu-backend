@@ -10,7 +10,6 @@ import univ.earthbreaker.namu.core.api.auth.support.LoginMember;
 import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacterGrowService;
 
 @RestController
-@AuthMapping
 @RequestMapping("/v1/characters/grow")
 public class CurrentCharacterGrowController {
 
@@ -20,18 +19,21 @@ public class CurrentCharacterGrowController {
 		this.currentCharacterGrowService = currentCharacterGrowService;
 	}
 
+	@AuthMapping
 	@PostMapping("/end")
 	public ResponseEntity<Void> growToEndLevelCharacter(@LoginMember Long memberNo) {
 		currentCharacterGrowService.growToEndLevel(memberNo);
 		return ResponseEntity.noContent().build();
 	}
 
+	@AuthMapping
 	@PostMapping("/middle")
 	public ResponseEntity<Void> growToMiddleLevelCharacter(@LoginMember Long memberNo) {
 		currentCharacterGrowService.growToMiddleLevel(memberNo);
 		return ResponseEntity.noContent().build();
 	}
 
+	@AuthMapping
 	@PostMapping("/final")
 	public ResponseEntity<Void> growToRandomFinalCharacter(@LoginMember Long memberNo) {
 		currentCharacterGrowService.growToFinalRandom(memberNo);

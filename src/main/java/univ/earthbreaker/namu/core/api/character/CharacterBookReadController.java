@@ -14,7 +14,6 @@ import univ.earthbreaker.namu.core.domain.character.book.BookResult;
 import univ.earthbreaker.namu.core.domain.character.book.CharacterBookReadService;
 
 @RestController
-@AuthMapping
 @RequestMapping("/v1/characters/books")
 public class CharacterBookReadController {
 
@@ -29,11 +28,13 @@ public class CharacterBookReadController {
 		this.characterBookDetailReadService = characterBookDetailReadService;
 	}
 
+	@AuthMapping
 	@GetMapping("/all")
 	public ResponseEntity<BookResult> readAll(@LoginMember Long memberNo) {
 		return ResponseEntity.ok(characterBookReadService.readAll(memberNo));
 	}
 
+	@AuthMapping
 	@GetMapping("/detail/{characterNo}")
 	public ResponseEntity<CharacterDetailResponse> readDetail(
 		@LoginMember Long memberNo,

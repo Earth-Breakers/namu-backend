@@ -21,7 +21,6 @@ import univ.earthbreaker.namu.external.aws.image.ImageManager;
 import univ.earthbreaker.namu.external.aws.image.ImageUploadCommand;
 
 @RestController
-@AuthMapping
 @RequestMapping("/v1/missions")
 public class MemberMissionCertifyController {
 
@@ -36,6 +35,7 @@ public class MemberMissionCertifyController {
 		this.imageManager = imageManager;
 	}
 
+	@AuthMapping
 	@PostMapping(path = "/certification/success/{missionNo}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<Void> success(
 		@LoginMember Long memberNo,
@@ -51,6 +51,7 @@ public class MemberMissionCertifyController {
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
+	@AuthMapping
 	@PatchMapping("/certification/fail/{missionNo}")
 	public ResponseEntity<Void> failure(@LoginMember Long memberNo, @PathVariable Long missionNo) {
 		memberMissionCertifyService.failureMission(new MissionCompleteCommand(memberNo, missionNo));
