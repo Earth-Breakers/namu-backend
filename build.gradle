@@ -12,6 +12,10 @@ java {
     sourceCompatibility = '17'
 }
 
+jar {
+    enabled = false
+}
+
 repositories {
     mavenCentral()
 }
@@ -80,7 +84,6 @@ dependencies {
 
     // ========== external:notification ==========
     implementation 'com.google.firebase:firebase-admin:9.2.0'
-
 
     // ========== support:logging ==========
     implementation 'org.springframework.boot:spring-boot-starter-log4j2'
