@@ -41,4 +41,4 @@ logs
 
 ### .http auth
 http/local/auth
-http/dev/
+http/local/http-client.private.env.json
