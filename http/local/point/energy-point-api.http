@@ -1,0 +1,10 @@
+### 캐릭터에게 에너지 공급
+POST /v1/points/use
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "energyType": "BEAUTY",
+  "pointValue": 3
+}
