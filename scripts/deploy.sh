@@ -16,7 +16,7 @@ SPRING_PROFILES_ACTIVE="dev"
 IMAGE_ACCESS_URL="https://namu-bucket.s3.ap-northeast-2.amazonaws.com/"
 LOG4J_CONTEXT_SELECTOR="org.apache.logging.log4j.core.async.AsyncLoggerContextSelector"
 
-nohup SENTRY_ENVIRONMENT=$SPRING_PROFILES_ACTIVE java -jar -Dspring.profiles.active=$SPRING_PROFILES_ACTIVE -Dimage.access.url=$IMAGE_ACCESS_URL -DLog4jContextSelector=$LOG4J_CONTEXT_SELECTOR -Dlog4j2.enable.threadlocals=true -Dlog4j2.enable.direct.encoders=true "$BUILD_JAR_FILE" > $APP_LOG 2>&1 &
+SENTRY_ENVIRONMENT=$SPRING_PROFILES_ACTIVE nohup java -jar -Dspring.profiles.active=$SPRING_PROFILES_ACTIVE -Dimage.access.url=$IMAGE_ACCESS_URL -DLog4jContextSelector=$LOG4J_CONTEXT_SELECTOR -Dlog4j2.enable.threadlocals=true -Dlog4j2.enable.direct.encoders=true "$BUILD_JAR_FILE" > $APP_LOG 2>&1 &
 echo "$CURRENT_TIME > build jar 파일 실헹" >> $DEPLOY_LOG
 
 EXECUTED_PROCESS_PID=$(lsof -t -i tcp:8080)
