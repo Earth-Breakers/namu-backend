@@ -17,7 +17,7 @@ public class FriendBridgeAdapter implements FriendBridge {
 
 	@Override
 	public @NotNull FriendsQuery findFriends(long memberNo) {
-		Friend friend = friendFinder.find(memberNo);
-		return new FriendsQuery(friend.getFollowingMemberNos());
+		Friend friends = friendFinder.findAll(memberNo);
+		return new FriendsQuery(friends.getFollowingMemberNos());
 	}
 }

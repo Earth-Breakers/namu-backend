@@ -24,7 +24,7 @@ public class FriendFollowController {
 	@AuthMapping
 	@PostMapping("/follow/{targetMemberNo}")
 	public ResponseEntity<Void> follow(@LoginMember Long memberNo, @PathVariable Long targetMemberNo) {
-		friendFollowService.register(new FriendRelationCommand(memberNo, targetMemberNo));
+		friendFollowService.follow(new FriendRelationCommand(memberNo, targetMemberNo));
 		return ResponseEntity.noContent().build();
 	}
 }
