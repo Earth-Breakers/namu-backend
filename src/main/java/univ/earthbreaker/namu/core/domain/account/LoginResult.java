@@ -1,6 +1,7 @@
 package univ.earthbreaker.namu.core.domain.account;
 
 public record LoginResult(
+	long memberNo,
 	String accessToken,
 	String refreshToken,
 	boolean isNewMember

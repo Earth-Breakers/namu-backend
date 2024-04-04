@@ -1,5 +1,7 @@
 package univ.earthbreaker.namu.database.core.point;
 
+import org.jetbrains.annotations.NotNull;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,6 +14,8 @@ import univ.earthbreaker.namu.core.domain.point.Energy;
 @Table(name = "energy_point")
 public class EnergyPointJpaEntity {
 
+	private static final int INITIALIZE_POINT = 0;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long no;
@@ -23,6 +27,15 @@ public class EnergyPointJpaEntity {
 	private Long memberNo;
 
 	protected EnergyPointJpaEntity() {
+	}
+
+	private EnergyPointJpaEntity(Integer point, Long memberNo) {
+		this.point = point;
+		this.memberNo = memberNo;
+	}
+
+	static @NotNull EnergyPointJpaEntity initialize(long memberNo) {
+		return new EnergyPointJpaEntity(INITIALIZE_POINT, memberNo);
 	}
 
 	Energy toEnergy() {

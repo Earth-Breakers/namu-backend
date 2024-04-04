@@ -2,6 +2,7 @@ package univ.earthbreaker.namu.core.domain.account;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
@@ -24,7 +25,7 @@ public class AccountCreateOrLoginManager {
 		this.tokenManager = tokenManager;
 	}
 
-	@Transactional
+	@Transactional(propagation = Propagation.MANDATORY)
 	public LoginResult loginOrJoin(@NotNull LoginCommand command) {
 		Account account = accountRepository.findOrNull(command.getSocialId());
 		if (account == null) {
@@ -42,13 +43,13 @@ public class AccountCreateOrLoginManager {
 		String accessTokenValue = tokenManager.createAccessToken(memberNo);
 		String refreshTokenValue = tokenManager.createRefreshToken(memberNo);
 
-		return new LoginResult(accessTokenValue, refreshTokenValue, true);
+		return new LoginResult(memberNo, accessTokenValue, refreshTokenValue, true);
 	}
 
 	private @NotNull LoginResult login(String pushNotificationToken, Long memberNo) {
 		accountPushNotificationManager.updateIfTokenModified(memberNo, pushNotificationToken);
 		String accessTokenValue = tokenManager.createAccessToken(memberNo);
 		String updatedRefreshTokenValue = tokenManager.updateRefreshToken(memberNo);
-		return new LoginResult(accessTokenValue, updatedRefreshTokenValue, false);
+		return new LoginResult(memberNo, accessTokenValue, updatedRefreshTokenValue, false);
 	}
 }
