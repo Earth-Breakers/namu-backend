@@ -29,11 +29,11 @@ class FriendFinderTest {
 	@MethodSource("provideFriend")
 	void find(Friend expect) {
 		// given
-		Mockito.when(friendRepository.find(MEMBER_NO))
+		Mockito.when(friendRepository.findAll(MEMBER_NO))
 			.thenReturn(expect);
 
 		// when
-		Friend actual = friendFinder.find(MEMBER_NO);
+		Friend actual = friendFinder.findAll(MEMBER_NO);
 
 		// then
 		assertThat(actual).isNotNull();

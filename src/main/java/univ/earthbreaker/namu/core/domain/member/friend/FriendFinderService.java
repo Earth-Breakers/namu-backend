@@ -12,6 +12,6 @@ public class FriendFinderService {
 	}
 
 	public Friend findMyFriendList(long memberNo) {
-		return friendFinder.find(memberNo);
+		return friendFinder.findAll(memberNo);
 	}
 }
