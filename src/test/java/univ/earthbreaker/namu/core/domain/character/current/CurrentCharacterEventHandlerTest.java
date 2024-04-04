@@ -16,6 +16,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import univ.earthbreaker.namu.event.character.AddEnergyPointEvent;
+import univ.earthbreaker.namu.event.character.InitCurrentCharacterEvent;
 
 @ExtendWith(MockitoExtension.class)
 class CurrentCharacterEventHandlerTest {
@@ -37,5 +38,18 @@ class CurrentCharacterEventHandlerTest {
 
 	    // then
 		verify(currentCharacterRepository).update(any(CurrentCharacter.class));
+	}
+
+	@DisplayName("회원 계정 생성 시 초기 캐릭터 지급 이벤트를 구독하고, 이벤트를 받아 초기 캐릭터를 등록한다")
+	@Test
+	void registerInitCurrentCharacter() {
+	    // given
+		InitCurrentCharacterEvent event = new InitCurrentCharacterEvent(1L);
+
+		// when
+		currentCharacterEventHandler.registerInitCurrentCharacter(event);
+
+	    // then
+		verify(currentCharacterRepository).register(event.memberNo());
 	}
 }

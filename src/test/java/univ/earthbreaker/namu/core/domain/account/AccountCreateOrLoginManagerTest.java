@@ -6,6 +6,14 @@ import static org.mockito.ArgumentMatchers.refEq;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static univ.earthbreaker.namu.core.domain.account.AccountFixture.ACCESS_TOKEN;
+import static univ.earthbreaker.namu.core.domain.account.AccountFixture.ACCOUNT;
+import static univ.earthbreaker.namu.core.domain.account.AccountFixture.LOGIN_COMMAND;
+import static univ.earthbreaker.namu.core.domain.account.AccountFixture.MEMBER_NO;
+import static univ.earthbreaker.namu.core.domain.account.AccountFixture.NOTIFICATION_TOKEN;
+import static univ.earthbreaker.namu.core.domain.account.AccountFixture.REFRESH_TOKEN;
+import static univ.earthbreaker.namu.core.domain.account.AccountFixture.SOCIAL_ID;
+import static univ.earthbreaker.namu.core.domain.account.AccountFixture.SOCIAL_NICKNAME;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,18 +24,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 class AccountCreateOrLoginManagerTest {
-
-	private static final String SOCIAL_ID = "socialId";
-	private static final String SOCIAL_NICKNAME = "socialNickname";
-	private static final String NOTIFICATION_TOKEN = "notificationToken";
-	private static final String ACCESS_TOKEN = "accessToken";
-	private static final String REFRESH_TOKEN = "refreshToken";
-	private static final long MEMBER_NO = 1L;
-	private static final LoginCommand LOGIN_COMMAND = LoginCommand.builder()
-		.socialId(SOCIAL_ID)
-		.socialNickname(SOCIAL_NICKNAME)
-		.notificationToken(NOTIFICATION_TOKEN)
-		.build();
 
 	private @Mock AccountRepository accountRepository;
 	private @Mock AccountMemberCreator accountMemberCreator;
@@ -73,7 +69,7 @@ class AccountCreateOrLoginManagerTest {
 	void login() {
 		// given
 		when(accountRepository.findOrNull(SOCIAL_ID))
-			.thenReturn(AccountFixture.ACCOUNT);
+			.thenReturn(ACCOUNT);
 		when(tokenManager.createAccessToken(any()))
 			.thenReturn(ACCESS_TOKEN);
 		when(tokenManager.updateRefreshToken(MEMBER_NO))

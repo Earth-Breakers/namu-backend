@@ -6,6 +6,7 @@ import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 import univ.earthbreaker.namu.event.point.AddRewardPointEvent;
+import univ.earthbreaker.namu.event.point.InitEnergyPointEvent;
 
 @Component
 public class EnergyPointEventHandler {
@@ -20,5 +21,10 @@ public class EnergyPointEventHandler {
 	public void giveRewardPoint(@NotNull AddRewardPointEvent event) {
 		PointUpdateDbCommand command = new PointUpdateDbCommand(event.memberNo(), event.point());
 		energyPointRepository.update(command);
+	}
+
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+	public void registerInitEnergyPoint(@NotNull InitEnergyPointEvent event) {
+		energyPointRepository.register(event.memberNo());
 	}
 }
