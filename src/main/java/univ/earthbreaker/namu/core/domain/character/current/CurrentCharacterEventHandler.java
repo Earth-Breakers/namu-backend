@@ -7,6 +7,7 @@ import org.springframework.transaction.event.TransactionalEventListener;
 
 import univ.earthbreaker.namu.core.domain.character.CharacterType;
 import univ.earthbreaker.namu.event.character.AddEnergyPointEvent;
+import univ.earthbreaker.namu.event.character.InitCurrentCharacterEvent;
 
 @Component
 public class CurrentCharacterEventHandler {
@@ -27,5 +28,10 @@ public class CurrentCharacterEventHandler {
 		CurrentCharacter currentCharacter = currentCharacterFinder.find(event.memberNo());
 		CharacterType characterType = CharacterType.valueOf(event.energyType());
 		currentCharacterRepository.update(currentCharacter.giveEnergyExp(characterType, event.pointValue()));
+	}
+
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
+	public void registerInitCurrentCharacter(@NotNull InitCurrentCharacterEvent event) {
+		currentCharacterRepository.register(event.memberNo());
 	}
 }
