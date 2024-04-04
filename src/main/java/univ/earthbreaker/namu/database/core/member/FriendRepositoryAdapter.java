@@ -27,7 +27,7 @@ public class FriendRepositoryAdapter implements FriendRepository {
 	}
 
 	@Override
-	public @NotNull Friend find(long memberNo) {
+	public @NotNull Friend findAll(long memberNo) {
 		List<MemberJpaEntity> followingMembers = memberJpaRepository.findFriendBy(memberNo);
 		if (followingMembers.isEmpty()) {
 			return new Friend(memberNo, Collections.emptyList());
@@ -37,5 +37,10 @@ public class FriendRepositoryAdapter implements FriendRepository {
 			.map(MemberJpaEntity::toFollowing)
 			.toList();
 		return new Friend(memberNo, followings);
+	}
+
+	@Override
+	public boolean existsBy(long memberNo, long targetMemberNo) {
+		return friendJpaRepository.existsByMasterMemberNoAndTargetMemberNo(memberNo, targetMemberNo);
 	}
 }

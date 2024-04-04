@@ -8,5 +8,7 @@ public interface FriendRepository {
 
 	 void register(long memberNo, long targetMemberNo);
 
-	 @NotNull Friend find(long memberNo);
+	 @NotNull Friend findAll(long memberNo);
+
+	 boolean existsBy(long memberNo, long targetMemberNo);
 }
