@@ -31,11 +31,15 @@ public class MemberMissionCertifyService {
 		@NotNull MissionCompleteCommand missionCommand,
 		@NotNull CertifiedMissionPostCommand postCommand
 	) {
+		publishDeleteUploadImageEventWhenTransactionRollback(postCommand.getImagePathKey());
 		MemberMission memberMission = memberMissionFinder.find(missionCommand.getMemberNo(), missionCommand.getMissionNo());
 		MemberMission successMission = missionCertifyHandler.success(memberMission);
 		publishRewardEventForSuccessMission(successMission);
 		publishCreatePostEventForSuccessMission(postCommand, successMission);
-		publishDeleteUploadImageEventWhenTransactionRollback(postCommand.getImagePathKey());
+	}
+
+	private void publishDeleteUploadImageEventWhenTransactionRollback(@NotNull String imagePathKey) {
+		eventPublisher.publish(new DeleteUploadedImageEvent(imagePathKey));
 	}
 
 	private void publishRewardEventForSuccessMission(@NotNull MemberMission successMission) {
@@ -54,10 +58,6 @@ public class MemberMissionCertifyService {
 				postCommand.getImagePathKey(),
 				successMission.getNo())
 		);
-	}
-
-	private void publishDeleteUploadImageEventWhenTransactionRollback(@NotNull String imagePathKey) {
-		eventPublisher.publish(new DeleteUploadedImageEvent(imagePathKey));
 	}
 
 	public void failureMission(@NotNull MissionCompleteCommand missionCommand) {
