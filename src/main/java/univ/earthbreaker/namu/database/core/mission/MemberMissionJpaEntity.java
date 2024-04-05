@@ -28,6 +28,7 @@ public class MemberMissionJpaEntity extends BaseTimeJpaEntity {
 	@Column(nullable = false)
 	private Long missionNo;
 
+	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length = 100)
 	private MissionActivity activity;
 

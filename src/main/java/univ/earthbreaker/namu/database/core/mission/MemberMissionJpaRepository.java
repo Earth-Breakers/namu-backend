@@ -16,6 +16,6 @@ public interface MemberMissionJpaRepository extends JpaRepository<MemberMissionJ
 	@NotNull MemberMissionJpaEntity findByMemberNoAndMissionNo(long memberNo, long missionNo);
 
 	@Modifying
-	@Query("UPDATE MemberMissionJpaEntity mm SET mm.status =: status WHERE mm.missionNo =: missionNo AND mm.memberNo =: memberNo")
+	@Query("UPDATE MemberMissionJpaEntity mm SET mm.status = :status WHERE mm.missionNo = :missionNo AND mm.memberNo = :memberNo")
 	void updateMemberMission(long memberNo, long missionNo, MissionStatus status);
 }

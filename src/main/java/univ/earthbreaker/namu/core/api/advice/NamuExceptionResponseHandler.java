@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import io.sentry.Sentry;
 import univ.earthbreaker.namu.core.api.auth.support.AuthenticationException;
 import univ.earthbreaker.namu.core.api.auth.support.InternalAuthServerException;
 import univ.earthbreaker.namu.core.domain.common.BadRequestException;
@@ -54,7 +55,7 @@ public class NamuExceptionResponseHandler {
 
 	@ExceptionHandler({InternalServerException.class, InternalAuthServerException.class, RuntimeException.class})
 	public ResponseEntity<NamuExceptionResponse> internalServerError(@NotNull RuntimeException exception) {
-		LOGGER.warn("[500] INTERNAL SERVER ERROR : {}", exception.getMessage());
+		LOGGER.error("[500] INTERNAL SERVER ERROR : {}", exception.getMessage());
 		return ResponseEntity.internalServerError()
 			.body(new NamuExceptionResponse(exception.getMessage()));
 	}

@@ -11,7 +11,7 @@ class FriendFinder {
 		this.friendRepository = friendRepository;
 	}
 
-	Friend find(long memberNo) {
-		return friendRepository.find(memberNo);
+	Friend findAll(long memberNo) {
+		return friendRepository.findAll(memberNo);
 	}
 }

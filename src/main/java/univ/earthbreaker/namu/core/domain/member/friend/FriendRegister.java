@@ -13,6 +13,8 @@ public class FriendRegister {
 	}
 
 	void register(@NotNull FriendRelationCommand command) {
-		friendRepository.register(command.memberNo(), command.targetMemberNo());
+		if (!friendRepository.existsBy(command.memberNo(), command.targetMemberNo())) {
+			friendRepository.register(command.memberNo(), command.targetMemberNo());
+		}
 	}
 }
