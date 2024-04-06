@@ -26,6 +26,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import univ.earthbreaker.namu.core.api.PresentationTest;
 import univ.earthbreaker.namu.core.domain.mission.MemberMissionCertifyService;
 import univ.earthbreaker.namu.external.aws.image.ImageManager;
+import univ.earthbreaker.namu.external.aws.image.ImagePathKeyGenerator;
 import univ.earthbreaker.namu.external.aws.image.ImageUploadCommand;
 
 class MemberMissionCertifyControllerTest extends PresentationTest {
@@ -39,8 +40,9 @@ class MemberMissionCertifyControllerTest extends PresentationTest {
 
 	private final MemberMissionCertifyService memberMissionCertifyService = Mockito.mock(MemberMissionCertifyService.class);
 	private final ImageManager imageManager = Mockito.mock(ImageManager.class);
+	private final ImagePathKeyGenerator imagePathKeyGenerator = Mockito.mock(MissionPostImagePathKeyGenerator.class);
 	private final MemberMissionCertifyController memberMissionCertifyController
-		= new MemberMissionCertifyController(memberMissionCertifyService, imageManager);
+		= new MemberMissionCertifyController(memberMissionCertifyService, imageManager, imagePathKeyGenerator);
 
 	@BeforeEach
 	void setUp() throws Exception {
