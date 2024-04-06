@@ -38,6 +38,14 @@ public class WebConfig implements WebMvcConfigurer {
 			.addPathPatterns("/**")
 			.excludePathPatterns("/")
 			.excludePathPatterns("/health")
+			.excludePathPatterns("/v1/admin/**")
+			.excludePathPatterns(DOCUMENT_PATH)
+			.excludePathPatterns("/v1/auth/login/kakao")
+			.excludePathPatterns("/v1/auth/reissue");
+		registry.addInterceptor(traceLoggingInterceptor)
+			.addPathPatterns("/**")
+			.excludePathPatterns("/")
+			.excludePathPatterns("/health")
 			.excludePathPatterns(DOCUMENT_PATH)
 			.excludePathPatterns("/v1/auth/login/kakao")
 			.excludePathPatterns("/v1/auth/reissue");

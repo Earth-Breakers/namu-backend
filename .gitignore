@@ -42,3 +42,6 @@ logs
 ### .http auth
 http/local/auth
 http/local/http-client.private.env.json
+
+### admin
+src/main/**/admin/api
