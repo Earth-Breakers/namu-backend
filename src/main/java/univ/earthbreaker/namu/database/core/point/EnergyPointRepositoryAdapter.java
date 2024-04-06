@@ -26,4 +26,9 @@ public class EnergyPointRepositoryAdapter implements EnergyPointRepository {
 	public void update(@NotNull PointUpdateDbCommand command) {
 		energyPointJpaRepository.update(command.memberNo(), command.point());
 	}
+
+	@Override
+	public void register(long memberNo) {
+		energyPointJpaRepository.save(EnergyPointJpaEntity.initialize(memberNo));
+	}
 }

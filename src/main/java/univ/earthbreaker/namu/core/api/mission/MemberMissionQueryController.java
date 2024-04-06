@@ -11,7 +11,6 @@ import univ.earthbreaker.namu.core.domain.mission.MemberMissionQueryResult;
 import univ.earthbreaker.namu.core.domain.mission.MemberMissionQueryService;
 
 @RestController
-@AuthMapping
 @RequestMapping("/v1/missions")
 public class MemberMissionQueryController {
 
@@ -21,6 +20,7 @@ public class MemberMissionQueryController {
 		this.memberMissionQueryService = memberMissionQueryService;
 	}
 
+	@AuthMapping
 	@GetMapping
 	public ResponseEntity<MemberMissionResponse> retrieve(@LoginMember Long memberNo) {
 		MemberMissionQueryResult missionQueryResult = memberMissionQueryService.retrieveMemberMissions(memberNo);

@@ -1,0 +1,11 @@
+### 친구 목록 조회
+GET /v1/friends/following
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+### 친구 팔로우하기
+POST /v1/friends/follow/2
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer {{access_token}}

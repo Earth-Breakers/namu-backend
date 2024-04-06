@@ -45,7 +45,7 @@ public class CurrentCharacterRepositoryAdapter implements CurrentCharacterReposi
 			currentCharacterJpaEntity.getCharacterType(),
 			currentCharacterJpaEntity.getLevel(),
 			currentCharacterJpaEntity.getRequiredExp(),
-			currentCharacterJpaEntity.getExp(),
+			currentCharacterJpaEntity.getCurrentExp(),
 			currentCharacterJpaEntity.getMainImagePath(),
 			memberNo
 		);

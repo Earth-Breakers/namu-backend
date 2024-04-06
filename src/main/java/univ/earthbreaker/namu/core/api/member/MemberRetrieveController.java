@@ -11,7 +11,6 @@ import univ.earthbreaker.namu.core.domain.member.Member;
 import univ.earthbreaker.namu.core.domain.member.MemberRetrieveService;
 
 @RestController
-@AuthMapping
 @RequestMapping("/v1/members")
 public class MemberRetrieveController {
 
@@ -21,6 +20,7 @@ public class MemberRetrieveController {
 		this.memberRetrieveService = memberRetrieveService;
 	}
 
+	@AuthMapping
 	@GetMapping("/home")
 	public ResponseEntity<HomeMemberResponse> retrieve(@LoginMember Long memberNo) {
 		Member member = memberRetrieveService.retrieve(memberNo);

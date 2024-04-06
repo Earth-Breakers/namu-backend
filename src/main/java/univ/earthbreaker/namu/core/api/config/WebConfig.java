@@ -11,6 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import univ.earthbreaker.namu.core.api.auth.support.AuthenticationInterceptor;
 import univ.earthbreaker.namu.core.api.auth.support.LoginMemberArgumentResolver;
+import univ.earthbreaker.namu.core.api.support.TraceLoggingInterceptor;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
@@ -18,19 +19,30 @@ public class WebConfig implements WebMvcConfigurer {
 	private static final String DOCUMENT_PATH = "/docs/**";
 
 	private final AuthenticationInterceptor authenticationInterceptor;
+	private final TraceLoggingInterceptor traceLoggingInterceptor;
 	private final LoginMemberArgumentResolver loginMemberArgumentResolver;
 
 	public WebConfig(
 		AuthenticationInterceptor authenticationInterceptor,
+		TraceLoggingInterceptor traceLoggingInterceptor,
 		LoginMemberArgumentResolver loginMemberArgumentResolver
 	) {
 		this.authenticationInterceptor = authenticationInterceptor;
+		this.traceLoggingInterceptor = traceLoggingInterceptor;
 		this.loginMemberArgumentResolver = loginMemberArgumentResolver;
 	}
 
 	@Override
 	public void addInterceptors(@NotNull InterceptorRegistry registry) {
 		registry.addInterceptor(authenticationInterceptor)
+			.addPathPatterns("/**")
+			.excludePathPatterns("/")
+			.excludePathPatterns("/health")
+			.excludePathPatterns("/v1/admin/**")
+			.excludePathPatterns(DOCUMENT_PATH)
+			.excludePathPatterns("/v1/auth/login/kakao")
+			.excludePathPatterns("/v1/auth/reissue");
+		registry.addInterceptor(traceLoggingInterceptor)
 			.addPathPatterns("/**")
 			.excludePathPatterns("/")
 			.excludePathPatterns("/health")

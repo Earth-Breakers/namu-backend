@@ -11,7 +11,6 @@ import univ.earthbreaker.namu.core.domain.point.Energy;
 import univ.earthbreaker.namu.core.domain.point.EnergyPointRetrieveService;
 
 @RestController
-@AuthMapping
 @RequestMapping("/v1/points")
 public class HomePointRetrieveController {
 
@@ -21,6 +20,7 @@ public class HomePointRetrieveController {
 		this.energyPointRetrieveService = energyPointRetrieveService;
 	}
 
+	@AuthMapping
 	@GetMapping("/home")
 	public ResponseEntity<HomePointResponse> retrieve(@LoginMember Long memberNo) {
 		Energy energyPoint = energyPointRetrieveService.retrieve(memberNo);

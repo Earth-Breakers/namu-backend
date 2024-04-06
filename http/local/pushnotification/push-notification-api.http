@@ -1,0 +1,15 @@
+### 모든 회원에게 자랑하기
+POST /v1/push-notification/all
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+### 회원의 친구에게 자랑하기
+POST /v1/push-notification/all
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "content" : "개미친 쌈@뽕한 캐릭터 뽑았다 ㅋㅋ"
+}

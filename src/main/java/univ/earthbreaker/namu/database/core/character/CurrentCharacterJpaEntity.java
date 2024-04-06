@@ -40,7 +40,7 @@ public class CurrentCharacterJpaEntity {
 	private Integer level;
 
 	@Column(nullable = false)
-	private Integer exp;
+	private Integer currentExp;
 
 	@Column(nullable = false)
 	private Integer requiredExp;
@@ -60,7 +60,7 @@ public class CurrentCharacterJpaEntity {
 		CharacterType characterType,
 		Integer groupNumber,
 		Integer level,
-		Integer exp,
+		Integer currentExp,
 		Integer requiredExp,
 		String mainImagePath
 	) {
@@ -69,7 +69,7 @@ public class CurrentCharacterJpaEntity {
 		this.characterType = characterType;
 		this.groupNumber = groupNumber;
 		this.level = level;
-		this.exp = exp;
+		this.currentExp = currentExp;
 		this.requiredExp = requiredExp;
 		this.mainImagePath = mainImagePath;
 	}
@@ -97,7 +97,7 @@ public class CurrentCharacterJpaEntity {
 			characterType,
 			level,
 			requiredExp,
-			exp,
+			currentExp,
 			groupNumber,
 			name,
 			mainImagePath
@@ -135,8 +135,8 @@ public class CurrentCharacterJpaEntity {
 		return requiredExp;
 	}
 
-	Integer getExp() {
-		return exp;
+	Integer getCurrentExp() {
+		return currentExp;
 	}
 
 	String getMainImagePath() {

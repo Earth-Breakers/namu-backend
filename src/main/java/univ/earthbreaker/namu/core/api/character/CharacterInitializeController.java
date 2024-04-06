@@ -10,7 +10,6 @@ import univ.earthbreaker.namu.core.api.auth.support.LoginMember;
 import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacterInitializeService;
 
 @RestController
-@AuthMapping
 @RequestMapping("/v1/characters/initialize")
 public class CharacterInitializeController {
 
@@ -20,6 +19,7 @@ public class CharacterInitializeController {
 		this.currentCharacterInitializeService = currentCharacterInitializeService;
 	}
 
+	@AuthMapping
 	@PostMapping
 	public ResponseEntity<Void> initializeAfterFinalCharacter(@LoginMember Long memberNo) {
 		currentCharacterInitializeService.initialize(memberNo);

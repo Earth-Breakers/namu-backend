@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import univ.earthbreaker.namu.core.api.auth.support.AuthMapping;
 import univ.earthbreaker.namu.core.api.auth.support.LoginMember;
 import univ.earthbreaker.namu.core.domain.pushnotification.PushNotificationConstructService;
 import univ.earthbreaker.namu.core.domain.pushnotification.PushNotificationConstructResult;
@@ -27,6 +28,7 @@ public class PushNotificationController {
 		this.notificationPort = notificationPort;
 	}
 
+	@AuthMapping
 	@PostMapping("/all")
 	public ResponseEntity<Void> pushNotification(@LoginMember Long memberNo) {
 		PushNotificationConstructResult result = pushNotificationConstructService.findAllMemberNotificationToken(memberNo);
@@ -40,6 +42,7 @@ public class PushNotificationController {
 		return ResponseEntity.ok().build();
 	}
 
+	@AuthMapping
 	@PostMapping("/friends")
 	public ResponseEntity<Void> pushNotification(
 		@LoginMember Long memberNo,

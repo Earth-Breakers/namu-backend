@@ -16,27 +16,25 @@ public class AwsS3ImageManager implements ImageManager {
 
 	private final AmazonS3 amazonS3;
 	private final String s3BucketName;
-	private final ImagePathKeyGenerator imagePathKeyGenerator;
 
 	public AwsS3ImageManager(
 		AmazonS3 amazonS3,
-		@Value("${cloud.aws.s3.bucket-name}") String s3BucketName,
-		ImagePathKeyGenerator imagePathKeyGenerator
+		@Value("${cloud.aws.s3.bucket-name}") String s3BucketName
 	) {
 		this.amazonS3 = amazonS3;
 		this.s3BucketName = s3BucketName;
-		this.imagePathKeyGenerator = imagePathKeyGenerator;
 	}
 
 	@Override
 	public @NotNull String upload(@NotNull ImageUploadCommand command) {
 		MultipartFile imageFile = command.imageFile();
+		ImagePathKeyGenerator imagePathKeyGenerator = command.imagePathKeyGenerator();
 
 		ObjectMetadata objectMetadata = new ObjectMetadata();
 		objectMetadata.setContentType(imageFile.getContentType());
 		objectMetadata.setContentLength(imageFile.getSize());
 
-		String imagePathKey = imagePathKeyGenerator.generate(command.memberNo(), imageFile.getOriginalFilename());
+		String imagePathKey = imagePathKeyGenerator.generate(command.memberKey(), imageFile.getOriginalFilename());
 		try {
 			amazonS3.putObject(s3BucketName, imagePathKey, imageFile.getInputStream(), objectMetadata);
 		} catch (AmazonClientException | IOException e) {

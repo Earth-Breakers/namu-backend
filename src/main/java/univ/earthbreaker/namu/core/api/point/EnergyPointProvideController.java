@@ -11,7 +11,6 @@ import univ.earthbreaker.namu.core.api.auth.support.LoginMember;
 import univ.earthbreaker.namu.core.domain.point.EnergyPointProvideService;
 
 @RestController
-@AuthMapping
 @RequestMapping("/v1/points")
 public class EnergyPointProvideController {
 
@@ -21,6 +20,7 @@ public class EnergyPointProvideController {
 		this.energyPointProvideService = energyPointProvideService;
 	}
 
+	@AuthMapping
 	@PostMapping("/use")
 	public ResponseEntity<Void> provideEnergyToCharacter(
 		@LoginMember Long memberNo,

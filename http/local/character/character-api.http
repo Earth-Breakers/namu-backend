@@ -1,0 +1,36 @@
+### 캐릭터 도감 전체 조회
+GET /v1/characters/books/all
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+### 캐릭터 도감 단건 조회
+GET /v1/characters/books/detail/1
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+
+### 캐릭터 최종 성장 시 초기화
+POST /v1/characters/initialize
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+###
+POST /v1/characters/grow/middle
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+###
+POST /v1/characters/grow/end
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+###
+POST /v1/characters/grow/final
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
