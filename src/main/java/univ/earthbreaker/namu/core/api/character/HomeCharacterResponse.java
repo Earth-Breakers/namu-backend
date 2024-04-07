@@ -1,6 +1,6 @@
 package univ.earthbreaker.namu.core.api.character;
 
-import static univ.earthbreaker.namu.core.api.Constant.IMAGE_ACCESS_URL;
+import static univ.earthbreaker.namu.core.domain.common.Constant.IMAGE_ACCESS_URL;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -13,7 +13,7 @@ public record HomeCharacterResponse(
 ) {
 	static @NotNull HomeCharacterResponse from(@NotNull CurrentCharacter currentCharacter) {
 		return new HomeCharacterResponse(
-			System.getProperty(IMAGE_ACCESS_URL) + currentCharacter.getTargetCharacterMainImage(),
+			IMAGE_ACCESS_URL + currentCharacter.getTargetCharacterMainImage(),
 			currentCharacter.getStatusRequiredExp(),
 			currentCharacter.getStatusCurrentExp()
 		);
