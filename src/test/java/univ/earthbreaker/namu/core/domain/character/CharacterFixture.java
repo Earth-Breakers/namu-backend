@@ -23,7 +23,9 @@ public class CharacterFixture {
 	public static final long CHARACTER_NO = 1L;
 	static final int GROUP_NO = 1;
 	public static final String NAME = "characterName";
+	public static final String TEST_IMAGE_ACCESS_URL = "https://namu.test.image.com";
 	public static final String CHARACTER_IMAGE_PATH = "/character-dir/test_image.png";
+	public static final String TEST_CHARACTER_IMAGE_URL = TEST_IMAGE_ACCESS_URL + CHARACTER_IMAGE_PATH;
 	public static final CharacterType CHARACTER_TYPE = BEAUTY;
 
 	public static final int INITIAL_EXP = 0;
@@ -156,9 +158,9 @@ public class CharacterFixture {
 	public static final int ACQUIRED_COUNT = 1;
 
 	public static final CharacterProfileResult ACQUIRED_PROFILE_RESULT
-		= new CharacterProfileResult(CHARACTER_NO, CHARACTER_IMAGE_PATH, true);
+		= new CharacterProfileResult(CHARACTER_NO, TEST_CHARACTER_IMAGE_URL, true);
 	public static final CharacterProfileResult NOT_ACQUIRED_PROFILE_RESULT
-		= new CharacterProfileResult(0, CHARACTER_IMAGE_PATH, false);
+		= new CharacterProfileResult(0, TEST_CHARACTER_IMAGE_URL, false);
 
 	public static final BookSectionResult BEAUTY_SECTION_RESULT
 		= new BookSectionResult(BEAUTY, TOTAL_COUNT_OF_TYPE, ACQUIRED_COUNT, List.of(ACQUIRED_PROFILE_RESULT, NOT_ACQUIRED_PROFILE_RESULT));
