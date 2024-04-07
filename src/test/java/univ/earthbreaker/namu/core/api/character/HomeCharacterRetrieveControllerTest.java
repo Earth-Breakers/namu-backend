@@ -10,7 +10,7 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.response
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static univ.earthbreaker.namu.core.api.Constant.IMAGE_ACCESS_URL;
+import static univ.earthbreaker.namu.core.domain.common.Constant.IMAGE_SYSTEM_PROPERTY;
 import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.BEGIN_CURRENT_CHARACTER;
 import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.BEGIN_REQUIRED_EXP;
 import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.INITIAL_EXP;
@@ -43,7 +43,7 @@ class HomeCharacterRetrieveControllerTest extends PresentationTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		mockMvc = mockControllerWithAuthorization(homeCharacterRetrieveController);
-		System.setProperty(IMAGE_ACCESS_URL, TEST_IMAGE_ACCESS_URL);
+		System.setProperty(IMAGE_SYSTEM_PROPERTY, TEST_IMAGE_ACCESS_URL);
 	}
 
 	@DisplayName("회원이 현재 보유하고 있는 에너지 포인트를 조회한다")
@@ -57,7 +57,7 @@ class HomeCharacterRetrieveControllerTest extends PresentationTest {
 		ResultActions resultActions = whenGetWithAuthorization(HOME_CHARACTER_URI);
 
 		// then
-		String expectImagePath = System.getProperty(IMAGE_ACCESS_URL) + BEGIN_CURRENT_CHARACTER.getTargetCharacterMainImage();
+		String expectImagePath = System.getProperty(IMAGE_SYSTEM_PROPERTY) + BEGIN_CURRENT_CHARACTER.getTargetCharacterMainImage();
 		resultActions
 			.andExpect(status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
