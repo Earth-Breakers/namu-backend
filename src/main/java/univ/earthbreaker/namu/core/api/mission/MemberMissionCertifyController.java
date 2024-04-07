@@ -1,12 +1,12 @@
 package univ.earthbreaker.namu.core.api.mission;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +18,7 @@ import univ.earthbreaker.namu.core.domain.mission.CertifiedMissionPostCommand;
 import univ.earthbreaker.namu.core.domain.mission.MemberMissionCertifyService;
 import univ.earthbreaker.namu.core.domain.mission.MissionCompleteCommand;
 import univ.earthbreaker.namu.external.aws.image.ImageManager;
+import univ.earthbreaker.namu.external.aws.image.ImagePathKeyGenerator;
 import univ.earthbreaker.namu.external.aws.image.ImageUploadCommand;
 
 @RestController
@@ -26,13 +27,16 @@ public class MemberMissionCertifyController {
 
 	private final MemberMissionCertifyService memberMissionCertifyService;
 	private final ImageManager imageManager;
+	private final ImagePathKeyGenerator imagePathKeyGenerator;
 
 	public MemberMissionCertifyController(
 		MemberMissionCertifyService memberMissionCertifyService,
-		ImageManager imageManager
+		ImageManager imageManager,
+		@Qualifier("missionPostImagePathGen") ImagePathKeyGenerator imagePathKeyGenerator
 	) {
 		this.memberMissionCertifyService = memberMissionCertifyService;
 		this.imageManager = imageManager;
+		this.imagePathKeyGenerator = imagePathKeyGenerator;
 	}
 
 	@AuthMapping
@@ -43,7 +47,8 @@ public class MemberMissionCertifyController {
 		@RequestPart(value = "content") String content,
 		@RequestPart(value = "imageFile") MultipartFile missionImageFile
 	) {
-		String imagePathKey = imageManager.upload(new ImageUploadCommand(memberNo, missionImageFile));
+		String imagePathKey = imageManager.upload(
+			ImageUploadCommand.forMember(memberNo, missionImageFile, imagePathKeyGenerator));
 		memberMissionCertifyService.successMission(
 			new MissionCompleteCommand(memberNo, missionNo),
 			new CertifiedMissionPostCommand(memberNo, content, imagePathKey)
