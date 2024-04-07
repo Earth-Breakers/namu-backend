@@ -13,7 +13,7 @@ import static org.springframework.restdocs.request.RequestDocumentation.paramete
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static univ.earthbreaker.namu.core.api.Constant.IMAGE_ACCESS_URL;
+import static univ.earthbreaker.namu.core.domain.common.Constant.IMAGE_SYSTEM_PROPERTY;
 import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.ACQUIRED_COUNT;
 import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.BOOK_RESULT;
 import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.CHARACTER_IMAGE_PATH;
@@ -56,7 +56,7 @@ class CharacterBookReadControllerTest extends PresentationTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		mockMvc = mockControllerWithAuthorization(characterBookReadController);
-		System.setProperty(IMAGE_ACCESS_URL, TEST_IMAGE_ACCESS_URL);
+		System.setProperty(IMAGE_SYSTEM_PROPERTY, TEST_IMAGE_ACCESS_URL);
 	}
 
 	@DisplayName("회원의 캐릭터 도감 전체를 조회한다")
@@ -77,10 +77,10 @@ class CharacterBookReadControllerTest extends PresentationTest {
 			.andExpect(jsonPath("$.sectionResults[0].totalCountOfType").value(TOTAL_COUNT_OF_TYPE))
 			.andExpect(jsonPath("$.sectionResults[0].acquiredCount").value(ACQUIRED_COUNT))
 			.andExpect(jsonPath("$.sectionResults[0].profileResults[0].characterNo").value(CHARACTER_NO))
-			.andExpect(jsonPath("$.sectionResults[0].profileResults[0].thumbnailImagePath").value(CHARACTER_IMAGE_PATH))
+			.andExpect(jsonPath("$.sectionResults[0].profileResults[0].thumbnailImageUrl").value(System.getProperty(IMAGE_SYSTEM_PROPERTY) + CHARACTER_IMAGE_PATH))
 			.andExpect(jsonPath("$.sectionResults[0].profileResults[0].isAcquired").value(true))
 			.andExpect(jsonPath("$.sectionResults[0].profileResults[1].characterNo").value(0))
-			.andExpect(jsonPath("$.sectionResults[0].profileResults[1].thumbnailImagePath").value(CHARACTER_IMAGE_PATH))
+			.andExpect(jsonPath("$.sectionResults[0].profileResults[1].thumbnailImageUrl").value(System.getProperty(IMAGE_SYSTEM_PROPERTY) + CHARACTER_IMAGE_PATH))
 			.andExpect(jsonPath("$.sectionResults[0].profileResults[1].isAcquired").value(false));
 
 		// apidocs
@@ -101,7 +101,7 @@ class CharacterBookReadControllerTest extends PresentationTest {
 						fieldWithPath("sectionResults[].acquiredCount").type(NUMBER).description("획득한 해당 타입 캐릭터 수"),
 						fieldWithPath("sectionResults[].profileResults").type(ARRAY).description("캐릭터 프로필 결과 목록"),
 						fieldWithPath("sectionResults[].profileResults[].characterNo").type(NUMBER).description("캐릭터 번호 (획득하지 못한 캐릭터일 시 0)"),
-						fieldWithPath("sectionResults[].profileResults[].thumbnailImagePath").type(STRING).description("캐릭터 썸네일 이미지 경로"),
+						fieldWithPath("sectionResults[].profileResults[].thumbnailImageUrl").type(STRING).description("캐릭터 썸네일 이미지 경로"),
 						fieldWithPath("sectionResults[].profileResults[].isAcquired").type(BOOLEAN).description("캐릭터 획득 여부")
 					)
 				)

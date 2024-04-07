@@ -17,7 +17,7 @@ public class CharacterSummaryInfo {
 	}
 
 	CharacterProfileResult toProfileResult() {
-		return new CharacterProfileResult(characterNo, thumbnailImagePath, isAcquired);
+		return CharacterProfileResult.of(characterNo, thumbnailImagePath, isAcquired);
 	}
 
 	boolean isAcquired() {
