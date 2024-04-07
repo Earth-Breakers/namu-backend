@@ -1,6 +1,6 @@
 package univ.earthbreaker.namu.core.api.character;
 
-import static univ.earthbreaker.namu.core.api.Constant.IMAGE_ACCESS_URL;
+import static univ.earthbreaker.namu.core.domain.common.Constant.IMAGE_ACCESS_URL;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -27,7 +27,7 @@ public record CharacterDetailResponse(
 			memberCharacter.getGender(),
 			memberCharacter.getName(),
 			memberCharacter.getDescription(),
-			System.getProperty(IMAGE_ACCESS_URL) + memberCharacter.getMainImagePath()
+			IMAGE_ACCESS_URL + memberCharacter.getMainImagePath()
 		);
 	}
 }

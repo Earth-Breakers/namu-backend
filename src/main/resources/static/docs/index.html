@@ -1512,7 +1512,7 @@ Host: namu.api.docs</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 1119
+Content-Length: 1275
 
 {
   "totalAcquiredCount" : 3,
@@ -1522,11 +1522,11 @@ Content-Length: 1119
     "acquiredCount" : 1,
     "profileResults" : [ {
       "characterNo" : 1,
-      "thumbnailImagePath" : "/character-dir/test_image.png",
+      "thumbnailImageUrl" : "https://namu.test.image.com/character-dir/test_image.png",
       "isAcquired" : true
     }, {
       "characterNo" : 0,
-      "thumbnailImagePath" : "/character-dir/test_image.png",
+      "thumbnailImageUrl" : "https://namu.test.image.com/character-dir/test_image.png",
       "isAcquired" : false
     } ]
   }, {
@@ -1535,11 +1535,11 @@ Content-Length: 1119
     "acquiredCount" : 1,
     "profileResults" : [ {
       "characterNo" : 1,
-      "thumbnailImagePath" : "/character-dir/test_image.png",
+      "thumbnailImageUrl" : "https://namu.test.image.com/character-dir/test_image.png",
       "isAcquired" : true
     }, {
       "characterNo" : 0,
-      "thumbnailImagePath" : "/character-dir/test_image.png",
+      "thumbnailImageUrl" : "https://namu.test.image.com/character-dir/test_image.png",
       "isAcquired" : false
     } ]
   }, {
@@ -1548,11 +1548,11 @@ Content-Length: 1119
     "acquiredCount" : 1,
     "profileResults" : [ {
       "characterNo" : 1,
-      "thumbnailImagePath" : "/character-dir/test_image.png",
+      "thumbnailImageUrl" : "https://namu.test.image.com/character-dir/test_image.png",
       "isAcquired" : true
     }, {
       "characterNo" : 0,
-      "thumbnailImagePath" : "/character-dir/test_image.png",
+      "thumbnailImageUrl" : "https://namu.test.image.com/character-dir/test_image.png",
       "isAcquired" : false
     } ]
   } ]
@@ -1612,7 +1612,7 @@ Content-Length: 1119
 <td class="tableblock halign-left valign-top"><p class="tableblock">캐릭터 번호 (획득하지 못한 캐릭터일 시 0)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sectionResults[].profileResults[].thumbnailImagePath</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sectionResults[].profileResults[].thumbnailImageUrl</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">캐릭터 썸네일 이미지 경로</p></td>
 </tr>
