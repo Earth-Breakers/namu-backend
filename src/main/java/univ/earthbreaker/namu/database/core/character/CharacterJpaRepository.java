@@ -17,12 +17,12 @@ public interface CharacterJpaRepository extends JpaRepository<CharacterJpaEntity
 
 	@Query(
 		value = """
-			SELECT c.* FROM character c
-			WHERE c.level = :level
-			    AND c.group_number = :groupNumber
-			    AND c.is_endangered = :isEndangered
-			    AND c.type = :type
+			SELECT nc.* FROM namu_character nc
+			WHERE nc.level = :level
+			    AND nc.group_number = :groupNumber
+			    AND nc.is_endangered = :isEndangered
+			    AND nc.type = :type
 			ORDER BY RAND() LIMIT 1""",
 		nativeQuery = true)
-	@Nullable CharacterJpaEntity findRandomBy(int level, int groupNumber, boolean isEndangered, CharacterType type);
+	@Nullable CharacterJpaEntity findRandomBy(int level, int groupNumber, boolean isEndangered, String type);
 }
