@@ -13,11 +13,11 @@ public class ProvideEnergyPointCommand extends SelfValidating<ProvideEnergyPoint
 	private final @NotNull @NotBlank String energyType;
 
 	public ProvideEnergyPointCommand(Long memberNo, Integer point, String energyType) {
-		this.validateEnergyType(energyType);
-		this.validateSelf("memberNo, point 는 null 이 될 수 없고, energyType 는 null 혹은 공백일 수 없습니다");
 		this.memberNo = memberNo;
 		this.point = point;
 		this.energyType = energyType;
+		this.validateEnergyType(energyType);
+		this.validateSelf("memberNo, point 는 null 이 될 수 없고, energyType 는 null 혹은 공백일 수 없습니다");
 	}
 
 	private void validateEnergyType(String energyType) {
