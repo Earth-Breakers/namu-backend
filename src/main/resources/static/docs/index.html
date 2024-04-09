@@ -1024,9 +1024,10 @@ Host: namu.api.docs</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 118
+Content-Length: 149
 
 {
+  "characterType" : "DEFAULT",
   "imageUrl" : "https://namu.test.image.com/character-dir/test_image.png",
   "requiredExp" : 3,
   "currentExp" : 0
@@ -1050,6 +1051,11 @@ Content-Length: 118
 </tr>
 </thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>characterType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">현재 캐릭터의 타입</p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>imageUrl</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
