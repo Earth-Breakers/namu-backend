@@ -10,6 +10,7 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.response
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static univ.earthbreaker.namu.core.domain.character.CharacterType.*;
 import static univ.earthbreaker.namu.core.domain.common.Constant.IMAGE_SYSTEM_PROPERTY;
 import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.BEGIN_CURRENT_CHARACTER;
 import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.BEGIN_REQUIRED_EXP;
@@ -61,6 +62,7 @@ class HomeCharacterRetrieveControllerTest extends PresentationTest {
 		resultActions
 			.andExpect(status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+			.andExpect(jsonPath("$.characterType").value(DEFAULT.name()))
 			.andExpect(jsonPath("$.imageUrl").value(expectImagePath))
 			.andExpect(jsonPath("$.requiredExp").value(BEGIN_REQUIRED_EXP))
 			.andExpect(jsonPath("$.currentExp").value(INITIAL_EXP));
@@ -76,6 +78,7 @@ class HomeCharacterRetrieveControllerTest extends PresentationTest {
 						headerWithName(HttpHeaders.AUTHORIZATION).description("회원의 access 토큰 값")
 					),
 					responseFields(
+						fieldWithPath("characterType").type(STRING).description("현재 캐릭터의 타입"),
 						fieldWithPath("imageUrl").type(STRING).description("현재 캐릭터 이미지 url"),
 						fieldWithPath("requiredExp").type(NUMBER).description("현재 캐릭터의 요구 경험치"),
 						fieldWithPath("currentExp").type(NUMBER).description("현재 캐릭터의 현재 경험치")
