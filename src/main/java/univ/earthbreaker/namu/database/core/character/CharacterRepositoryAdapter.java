@@ -34,7 +34,7 @@ public class CharacterRepositoryAdapter implements CharacterRepository {
 			randomDbQuery.level(),
 			randomDbQuery.groupNumber(),
 			randomDbQuery.isEndangered(),
-			randomDbQuery.characterType().name()
+			randomDbQuery.characterType()
 		);
 		return getNamuCharacter(characterJpaEntity);
 	}
