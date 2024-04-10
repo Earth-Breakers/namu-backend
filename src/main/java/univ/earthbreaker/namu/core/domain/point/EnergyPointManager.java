@@ -19,6 +19,6 @@ public class EnergyPointManager {
 	public void useEnergyPoint(long memberNo, int pointValue) {
 		Energy energy = energyPointFinder.find(memberNo);
 		Energy useAfterEnergy = energy.use(pointValue);
-		energyPointRepository.update(new PointUpdateDbCommand(memberNo, useAfterEnergy.getPointValue()));
+		energyPointRepository.updateUseAfter(new PointUpdateDbCommand(memberNo, useAfterEnergy.getPointValue()));
 	}
 }
