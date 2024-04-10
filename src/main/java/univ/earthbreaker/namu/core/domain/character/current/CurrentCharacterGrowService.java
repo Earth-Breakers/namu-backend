@@ -24,8 +24,9 @@ public class CurrentCharacterGrowService {
 		currentCharacterGrower.growToMiddle(memberNo);
 	}
 
-	public void growToFinalRandom(long memberNo) {
+	public CurrentCharacter growToFinalRandom(long memberNo) {
 		CurrentCharacter finalCurrentCharacter = currentCharacterGrower.growToFinal(memberNo);
 		eventPublisher.publish(new AddCharacterBookEvent(memberNo, finalCurrentCharacter.getTargetCharacterNo()));
+		return finalCurrentCharacter;
 	}
 }
