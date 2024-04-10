@@ -99,11 +99,13 @@ public class CurrentCharacter {
 		int currentExp,
 		int groupNumber,
 		String name,
-		String mainImagePath
+		String mainImagePath,
+		String backgroundImagePath,
+		String scripts
 	) {
 		return new CurrentCharacter(
 			new Master(memberNo),
-			new TargetCharacter(characterNo, groupNumber, name, mainImagePath),
+			new TargetCharacter(characterNo, groupNumber, name, mainImagePath, backgroundImagePath, scripts),
 			energyType,
 			CharacterStatus.of(level, requiredExp, currentExp)
 		);
@@ -115,11 +117,13 @@ public class CurrentCharacter {
 		int requiredExp,
 		int groupNumber,
 		String name,
-		String mainImagePath
+		String mainImagePath,
+		String backgroundImagePath,
+		String scripts
 	) {
 		return new CurrentCharacter(
 			new Master(memberNo),
-			new TargetCharacter(characterNo, groupNumber, name, mainImagePath),
+			new TargetCharacter(characterNo, groupNumber, name, mainImagePath, backgroundImagePath, scripts),
 			CharacterType.DEFAULT,
 			CharacterStatus.initialize(requiredExp)
 		);
@@ -147,6 +151,14 @@ public class CurrentCharacter {
 
 	public String getTargetCharacterMainImage() {
 		return character.getMainImagePath();
+	}
+
+	public String getTargetCharacterBackgroundImage() {
+		return character.getBackgroundImagePath();
+	}
+
+	public String getTargetCharacterScripts() {
+		return character.getScripts();
 	}
 
 	public int getStatusLevel() {

@@ -599,7 +599,16 @@ Host: namu.api.docs</code></pre>
 <h4 id="_레벨_end_final_http_response"><a class="link" href="#_레벨_end_final_http_response">HTTP response</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 204 No Content</code></pre>
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 263
+
+{
+  "characterNo" : 1,
+  "mainImageUrl" : "https://namu.test.image.com/character-dir/test_image.png",
+  "backgroundImageUrl" : "https://namu.test.image.com/character-dir/test_image-bg.png",
+  "scripts" : "캐릭터 대사1\n캐릭터 대사2\n캐릭터 대사3"
+}</code></pre>
 </div>
 </div>
 </div>

@@ -1,7 +1,5 @@
 package univ.earthbreaker.namu.core.domain.character;
 
-import java.util.Objects;
-
 import org.jetbrains.annotations.NotNull;
 
 public class NamuCharacter {
@@ -17,6 +15,8 @@ public class NamuCharacter {
 	private final String description;
 	private final String thumbnailImagePath;
 	private final String mainImagePath;
+	private final String backgroundImagePath;
+	private final String scripts;
 
 	private NamuCharacter(
 		long no,
@@ -29,7 +29,9 @@ public class NamuCharacter {
 		String name,
 		String description,
 		String thumbnailImagePath,
-		String mainImagePath
+		String mainImagePath,
+		String backgroundImagePath,
+		String scripts
 	) {
 		this.no = no;
 		this.type = type;
@@ -42,6 +44,8 @@ public class NamuCharacter {
 		this.description = description;
 		this.thumbnailImagePath = thumbnailImagePath;
 		this.mainImagePath = mainImagePath;
+		this.backgroundImagePath = backgroundImagePath;
+		this.scripts = scripts;
 	}
 
 	public static @NotNull NamuCharacterBuilder builder() {
@@ -60,6 +64,8 @@ public class NamuCharacter {
 		private String description;
 		private String thumbnailImagePath;
 		private String mainImagePath;
+		private String backgroundImagePath;
+		private String scripts;
 
 		public NamuCharacterBuilder no(long no) {
 			this.no = no;
@@ -116,6 +122,16 @@ public class NamuCharacter {
 			return this;
 		}
 
+		public NamuCharacterBuilder backgroundImagePath(String backgroundImagePath) {
+			this.backgroundImagePath = backgroundImagePath;
+			return this;
+		}
+
+		public NamuCharacterBuilder scripts(String scripts) {
+			this.scripts = scripts;
+			return this;
+		}
+
 		public NamuCharacter build() {
 			return new NamuCharacter(
 				this.no,
@@ -128,7 +144,9 @@ public class NamuCharacter {
 				this.name,
 				this.description,
 				this.thumbnailImagePath,
-				this.mainImagePath
+				this.mainImagePath,
+				this.backgroundImagePath,
+				this.scripts
 			);
 		}
 	}
@@ -173,23 +191,11 @@ public class NamuCharacter {
 		return mainImagePath;
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-		NamuCharacter that = (NamuCharacter)o;
-		return no == that.no && isEndangered == that.isEndangered && groupNumber == that.groupNumber
-			&& level == that.level
-			&& requiredExp == that.requiredExp && type == that.type && gender == that.gender && name.equals(that.name)
-			&& description.equals(that.description) && thumbnailImagePath.equals(that.thumbnailImagePath)
-			&& mainImagePath.equals(that.mainImagePath);
+	public String getBackgroundImagePath() {
+		return backgroundImagePath;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(no, type, gender, isEndangered, groupNumber, level, requiredExp, name, description,
-			thumbnailImagePath, mainImagePath);
+	public String getScripts() {
+		return scripts;
 	}
 }
