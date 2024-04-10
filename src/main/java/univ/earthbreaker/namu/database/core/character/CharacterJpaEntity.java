@@ -52,6 +52,12 @@ public class CharacterJpaEntity {
 	@Column(nullable = false, length = 500)
 	private String mainImagePath;
 
+	@Column(nullable = false, length = 500)
+	private String backgroundImagePath;
+
+	@Column(nullable = false, length = 500)
+	private String scripts;
+
 	protected CharacterJpaEntity() {
 	}
 
@@ -68,6 +74,8 @@ public class CharacterJpaEntity {
 			.description(description)
 			.thumbnailImagePath(thumbnailImagePath)
 			.mainImagePath(mainImagePath)
+			.backgroundImagePath(backgroundImagePath)
+			.scripts(scripts)
 			.build();
 	}
 }

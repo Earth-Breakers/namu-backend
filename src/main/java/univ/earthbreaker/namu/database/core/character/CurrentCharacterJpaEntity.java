@@ -51,6 +51,12 @@ public class CurrentCharacterJpaEntity {
 	@Column(nullable = false, length = 500)
 	private String mainImagePath;
 
+	@Column(nullable = false, length = 500)
+	private String backgroundImagePath;
+
+	@Column(nullable = false, length = 500)
+	private String scripts;
+
 	protected CurrentCharacterJpaEntity() {
 	}
 
@@ -62,7 +68,9 @@ public class CurrentCharacterJpaEntity {
 		Integer level,
 		Integer currentExp,
 		Integer requiredExp,
-		String mainImagePath
+		String mainImagePath,
+		String backgroundImagePath,
+		String scripts
 	) {
 		this.memberNo = memberNo;
 		this.characterNo = characterNo;
@@ -72,6 +80,8 @@ public class CurrentCharacterJpaEntity {
 		this.currentExp = currentExp;
 		this.requiredExp = requiredExp;
 		this.mainImagePath = mainImagePath;
+		this.backgroundImagePath = backgroundImagePath;
+		this.scripts = scripts;
 	}
 
 	static @NotNull CurrentCharacterJpaEntity initialize(
@@ -86,7 +96,9 @@ public class CurrentCharacterJpaEntity {
 			initCharacterProjection.getLevel(),
 			INITIAL_EXP,
 			initCharacterProjection.getRequiredExp(),
-			initCharacterProjection.getMainImagePath()
+			initCharacterProjection.getMainImagePath(),
+			initCharacterProjection.getBackgroundImagePath(),
+			initCharacterProjection.getScripts()
 		);
 	}
 
@@ -100,19 +112,24 @@ public class CurrentCharacterJpaEntity {
 			currentExp,
 			groupNumber,
 			name,
-			mainImagePath
+			mainImagePath,
+			backgroundImagePath,
+			scripts
 		);
 	}
 
 	CurrentCharacter toInitCurrentCharacter() {
-		return CurrentCharacter.initialize(
-			memberNo,
-			characterNo,
-			requiredExp,
-			groupNumber,
-			name,
-			mainImagePath
-		);
+		return CurrentCharacter.
+			initialize(
+				memberNo,
+				characterNo,
+				requiredExp,
+				groupNumber,
+				name,
+				mainImagePath,
+				backgroundImagePath,
+				scripts
+			);
 	}
 
 	Long getMemberNo() {
@@ -141,5 +158,13 @@ public class CurrentCharacterJpaEntity {
 
 	String getMainImagePath() {
 		return mainImagePath;
+	}
+
+	String getBackgroundImagePath() {
+		return backgroundImagePath;
+	}
+
+	String getScripts() {
+		return scripts;
 	}
 }
