@@ -32,6 +32,6 @@ class EnergyPointManagerTest {
 		energyPointManager.useEnergyPoint(MEMBER_NO, USE_POINT_VALUE);
 
 	    // then
-		verify(energyPointRepository).update(Mockito.any(PointUpdateDbCommand.class));
+		verify(energyPointRepository).updateUseAfter(Mockito.any(PointUpdateDbCommand.class));
 	}
 }

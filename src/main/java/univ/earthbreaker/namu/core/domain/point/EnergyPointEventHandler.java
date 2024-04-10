@@ -20,7 +20,7 @@ public class EnergyPointEventHandler {
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void giveRewardPoint(@NotNull AddRewardPointEvent event) {
 		PointUpdateDbCommand command = new PointUpdateDbCommand(event.memberNo(), event.point());
-		energyPointRepository.update(command);
+		energyPointRepository.receivePoint(command);
 	}
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
