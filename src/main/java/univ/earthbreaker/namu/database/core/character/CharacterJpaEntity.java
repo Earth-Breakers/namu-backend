@@ -47,6 +47,9 @@ public class CharacterJpaEntity {
 	private String description;
 
 	@Column(nullable = false, length = 500)
+	private String detailImagePath;
+
+	@Column(nullable = false, length = 500)
 	private String thumbnailImagePath;
 
 	@Column(nullable = false, length = 500)
@@ -72,6 +75,7 @@ public class CharacterJpaEntity {
 			.requiredExp(requiredExp)
 			.name(name)
 			.description(description)
+			.detailImagePath(detailImagePath)
 			.thumbnailImagePath(thumbnailImagePath)
 			.mainImagePath(mainImagePath)
 			.backgroundImagePath(backgroundImagePath)

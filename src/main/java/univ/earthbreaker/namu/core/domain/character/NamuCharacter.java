@@ -13,6 +13,7 @@ public class NamuCharacter {
 	private final int requiredExp;
 	private final String name;
 	private final String description;
+	private final String detailImagePath;
 	private final String thumbnailImagePath;
 	private final String mainImagePath;
 	private final String backgroundImagePath;
@@ -28,6 +29,7 @@ public class NamuCharacter {
 		int requiredExp,
 		String name,
 		String description,
+		String detailImagePath,
 		String thumbnailImagePath,
 		String mainImagePath,
 		String backgroundImagePath,
@@ -42,6 +44,7 @@ public class NamuCharacter {
 		this.requiredExp = requiredExp;
 		this.name = name;
 		this.description = description;
+		this.detailImagePath = detailImagePath;
 		this.thumbnailImagePath = thumbnailImagePath;
 		this.mainImagePath = mainImagePath;
 		this.backgroundImagePath = backgroundImagePath;
@@ -62,6 +65,7 @@ public class NamuCharacter {
 		private int requiredExp;
 		private String name;
 		private String description;
+		private String detailImagePath;
 		private String thumbnailImagePath;
 		private String mainImagePath;
 		private String backgroundImagePath;
@@ -112,6 +116,11 @@ public class NamuCharacter {
 			return this;
 		}
 
+		public NamuCharacterBuilder detailImagePath(String detailImagePath) {
+			this.detailImagePath = detailImagePath;
+			return this;
+		}
+
 		public NamuCharacterBuilder thumbnailImagePath(String thumbnailImagePath) {
 			this.thumbnailImagePath = thumbnailImagePath;
 			return this;
@@ -143,6 +152,7 @@ public class NamuCharacter {
 				this.requiredExp,
 				this.name,
 				this.description,
+				this.detailImagePath,
 				this.thumbnailImagePath,
 				this.mainImagePath,
 				this.backgroundImagePath,
@@ -185,6 +195,10 @@ public class NamuCharacter {
 
 	public int getRequiredExp() {
 		return requiredExp;
+	}
+
+	public String getDetailImagePath() {
+		return detailImagePath;
 	}
 
 	public String getMainImagePath() {
