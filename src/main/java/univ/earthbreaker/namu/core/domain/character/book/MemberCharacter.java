@@ -46,7 +46,7 @@ public class MemberCharacter {
 		return character.getName();
 	}
 
-	public String getMainImagePath() {
-		return character.getMainImagePath();
+	public String getDetailImagePath() {
+		return character.getDetailImagePath();
 	}
 }
