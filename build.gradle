@@ -85,6 +85,15 @@ dependencies {
     // + implementation project(":core:domain")
     // + implementation project(":core:auth")
 
+    // ========== event ==========
+    // compileOnly 'org.springframework:spring-context' // Kafka 또는 RabbitMQ 등 교체 가능
+
+    // ========== batch ==========
+    implementation 'org.springframework.boot:spring-boot-starter-batch'
+    testImplementation 'org.springframework.batch:spring-batch-test'
+    // + implementation project(":database:core")
+    // + implementation project(":support:logging")
+
     // ========== external:oauth ==========
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
@@ -93,9 +102,6 @@ dependencies {
     implementation 'org.testcontainers:localstack'
     testImplementation 'org.testcontainers:junit-jupiter'
     // implementation project(":event")
-
-    // ========== event ==========
-    // compileOnly 'org.springframework:spring-context' // Kafka 또는 RabbitMQ 등 교체 가능
 
     // ========== external:notification ==========
     implementation 'com.google.firebase:firebase-admin:9.2.0'
