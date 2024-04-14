@@ -35,7 +35,7 @@ public class MemberJpaEntity {
 	protected MemberJpaEntity() {
 	}
 
-	public MemberJpaEntity(String nickname, Integer level, MemberStatus status) {
+	private MemberJpaEntity(String nickname, Integer level, MemberStatus status) {
 		this.nickname = nickname;
 		this.level = level;
 		this.status = status;
