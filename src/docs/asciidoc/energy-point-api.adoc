@@ -6,9 +6,11 @@
 :sectlinks:
 
 [[EnergyPoint-API]]
-== 캐릭터에게 에너지 공급
+=== 캐릭터에게 에너지 공급
 
-=== 요청
+'''
+
+==== 요청
 
 operation::energy-point-provide-controller-test/success_provide-energy-to-character[snippets='http-request,request-headers,request-body']
 
@@ -25,13 +27,21 @@ operation::energy-point-provide-controller-test/success_provide-energy-to-charac
 | 정화
 |===
 
-=== 실패
+'''
+
+==== 실패
 
 operation::energy-point-provide-controller-test/fail_provide-energy-to-character_no_point[snippets='http-response']
 operation::energy-point-provide-controller-test/fail_provide-energy-to-character_overflow_point[snippets='http-response']
 operation::energy-point-provide-controller-test/fail_provide-energy-to-character_miss-match[snippets='http-response']
 operation::energy-point-provide-controller-test/fail_provide-energy-to-character_exp-overflow[snippets='http-response']
 
-=== 성공
+'''
+
+==== 성공
 
 operation::energy-point-provide-controller-test/success_provide-energy-to-character[snippets='http-response']
+
+=== 친구에게 에너지 선물
+
+operation::energy-point-gift-controller-test/give-energy-point-to-friend[snippets='http-request,request-headers,request-body,http-response']
