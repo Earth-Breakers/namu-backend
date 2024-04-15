@@ -9,7 +9,7 @@ public interface EnergyPointRepository {
 
 	@NotNull Energy find(long memberNo);
 
-	void updateUseAfter(PointUpdateDbCommand command);
+	void updatePoint(PointUpdateDbCommand command);
 
 	void receivePoint(PointUpdateDbCommand command);
 

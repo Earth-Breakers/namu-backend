@@ -19,6 +19,14 @@ public class EnergyPointManager {
 	public void useEnergyPoint(long memberNo, int pointValue) {
 		Energy energy = energyPointFinder.find(memberNo);
 		Energy useAfterEnergy = energy.use(pointValue);
-		energyPointRepository.updateUseAfter(new PointUpdateDbCommand(memberNo, useAfterEnergy.getPointValue()));
+		energyPointRepository.updatePoint(new PointUpdateDbCommand(memberNo, useAfterEnergy.getPointValue()));
+	}
+
+	@Transactional
+	public void transfer(long memberNo, long targetMemberNo, int pointValue) {
+		Energy myEnergy = energyPointFinder.find(memberNo).use(pointValue);
+		Energy targetEnergy = energyPointFinder.find(targetMemberNo).receive(pointValue);
+		energyPointRepository.updatePoint(new PointUpdateDbCommand(memberNo, myEnergy.getPointValue()));
+		energyPointRepository.updatePoint(new PointUpdateDbCommand(targetMemberNo, targetEnergy.getPointValue()));
 	}
 }
