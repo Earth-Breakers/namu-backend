@@ -33,6 +33,10 @@ include::{docfile}/../energy-point-api.adoc[에너지 포인트,window=blank]
 
 include::{docfile}/../mission-api.adoc[미션 api,window=blank]
 
+= 친구 API
+
+include::{docfile}/../friend-api.adoc[친구 api,window=blank]
+
 = 푸시 알림 전송 API
 
 include::{docfile}/../push-notification-api.adoc[캐릭터 자랑하기,window=blank]

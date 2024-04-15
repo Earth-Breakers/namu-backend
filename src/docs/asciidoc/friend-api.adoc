@@ -16,7 +16,3 @@ operation::friend-list-controller-test/retrieve-friend-list[snippets='http-reque
 
 === 팔로잉하는 친구가 없는 경우
 operation::friend-list-controller-test/retrieve-friend-list_empty[snippets='http-request,request-headers,http-response,response-fields']
-
-== 친구 검색
-
-== 친구 추천
