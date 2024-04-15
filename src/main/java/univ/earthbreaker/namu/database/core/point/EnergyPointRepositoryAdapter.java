@@ -23,8 +23,8 @@ public class EnergyPointRepositoryAdapter implements EnergyPointRepository {
 	}
 
 	@Override
-	public void updateUseAfter(@NotNull PointUpdateDbCommand command) {
-		energyPointJpaRepository.updatePointUsage(command.memberNo(), command.point());
+	public void updatePoint(@NotNull PointUpdateDbCommand command) {
+		energyPointJpaRepository.updatePointBy(command.memberNo(), command.point());
 	}
 
 	@Override
