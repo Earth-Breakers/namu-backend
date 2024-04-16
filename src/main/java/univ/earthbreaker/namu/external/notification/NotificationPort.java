@@ -6,4 +6,8 @@ import org.springframework.stereotype.Component;
 public interface NotificationPort {
 
 	void sendShowOffMessage(PushNotificationSourceCommand sourceCommand);
+
+	void sendAfterFollow(FollowPushNotificationSourceCommand sourceCommand);
+
+	void sendAfterGift(GiftPushNotificationSourceCommand sourceCommand);
 }

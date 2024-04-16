@@ -18,14 +18,19 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.test.web.servlet.ResultActions;
 
 import univ.earthbreaker.namu.core.api.PresentationTest;
+import univ.earthbreaker.namu.core.domain.member.friend.FollowFriendPushNotificationBridge.FollowResult;
 import univ.earthbreaker.namu.core.domain.member.friend.FriendFollowService;
+import univ.earthbreaker.namu.core.domain.member.friend.FriendRelationCommand;
+import univ.earthbreaker.namu.external.notification.NotificationAdapter;
+import univ.earthbreaker.namu.external.notification.NotificationPort;
 
 class FriendFollowControllerTest extends PresentationTest {
 
 	private static final String FOLLOW_URI = "/v1/friends/follow/{targetMemberNo}";
 
 	private final FriendFollowService friendFollowService = Mockito.mock(FriendFollowService.class);
-	private final FriendFollowController friendFollowController = new FriendFollowController(friendFollowService);
+	private final NotificationPort notificationPort = Mockito.mock(NotificationAdapter.class);
+	private final FriendFollowController friendFollowController = new FriendFollowController(friendFollowService, notificationPort);
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -37,6 +42,8 @@ class FriendFollowControllerTest extends PresentationTest {
 	void follow() throws Exception {
 	    // given
 		Long targetMemberNo = 1L;
+		Mockito.when(friendFollowService.follow(Mockito.any(FriendRelationCommand.class)))
+			.thenReturn(new FollowResult("nickname", "targetNickname", "targetTokenValue"));
 
 	    // when
 		ResultActions resultActions = whenPostWithAuthorization(FOLLOW_URI, targetMemberNo);

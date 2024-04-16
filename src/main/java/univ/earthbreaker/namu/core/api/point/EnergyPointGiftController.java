@@ -10,15 +10,20 @@ import org.springframework.web.bind.annotation.RestController;
 import univ.earthbreaker.namu.core.api.auth.support.AuthMapping;
 import univ.earthbreaker.namu.core.api.auth.support.LoginMember;
 import univ.earthbreaker.namu.core.domain.point.EnergyPointGiftService;
+import univ.earthbreaker.namu.core.domain.point.EnergyPointPushNotificationBridge.GiftResult;
+import univ.earthbreaker.namu.external.notification.GiftPushNotificationSourceCommand;
+import univ.earthbreaker.namu.external.notification.NotificationPort;
 
 @RestController
 @RequestMapping("/v1/points")
 public class EnergyPointGiftController {
 
 	private final EnergyPointGiftService energyPointGiftService;
+	private final NotificationPort notificationPort;
 
-	public EnergyPointGiftController(EnergyPointGiftService energyPointGiftService) {
+	public EnergyPointGiftController(EnergyPointGiftService energyPointGiftService, NotificationPort notificationPort) {
 		this.energyPointGiftService = energyPointGiftService;
+		this.notificationPort = notificationPort;
 	}
 
 	@AuthMapping
@@ -28,7 +33,12 @@ public class EnergyPointGiftController {
 		@PathVariable Long targetMemberNo,
 		@RequestBody EnergyGiftRequest request
 	) {
-		energyPointGiftService.giftEnergyPointToFriend(request.toCommand(memberNo, targetMemberNo));
+		GiftResult giftResult
+			= energyPointGiftService.giftEnergyPointToFriend(request.toCommand(memberNo, targetMemberNo));
+		notificationPort.sendAfterGift(new GiftPushNotificationSourceCommand(
+			giftResult.memberNickname(),
+			giftResult.targetTokenValue()
+		));
 		return ResponseEntity.noContent().build();
 	}
 }
