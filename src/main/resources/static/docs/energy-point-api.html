@@ -442,25 +442,20 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
-<ul class="sectlevel1">
-<li><a href="#EnergyPoint-API">캐릭터에게 에너지 공급</a>
 <ul class="sectlevel2">
-<li><a href="#_요청">요청</a></li>
-<li><a href="#_실패">실패</a></li>
-<li><a href="#_성공">성공</a></li>
-</ul>
-</li>
+<li><a href="#EnergyPoint-API">캐릭터에게 에너지 공급</a></li>
+<li><a href="#_친구에게_에너지_선물">친구에게 에너지 선물</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="EnergyPoint-API"><a class="link" href="#EnergyPoint-API">캐릭터에게 에너지 공급</a></h2>
-<div class="sectionbody">
 <div class="sect2">
-<h3 id="_요청"><a class="link" href="#_요청">요청</a></h3>
+<h3 id="EnergyPoint-API"><a class="link" href="#EnergyPoint-API">캐릭터에게 에너지 공급</a></h3>
+<hr>
 <div class="sect3">
-<h4 id="_요청_http_request"><a class="link" href="#_요청_http_request">HTTP request</a></h4>
+<h4 id="_요청"><a class="link" href="#_요청">요청</a></h4>
+<div class="sect4">
+<h5 id="_요청_http_request"><a class="link" href="#_요청_http_request">HTTP request</a></h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /v1/points/use HTTP/1.1
@@ -477,8 +472,8 @@ Host: namu.api.docs
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_요청_request_headers"><a class="link" href="#_요청_request_headers">Request headers</a></h4>
+<div class="sect4">
+<h5 id="_요청_request_headers"><a class="link" href="#_요청_request_headers">Request headers</a></h5>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -498,8 +493,8 @@ Host: namu.api.docs
 </tbody>
 </table>
 </div>
-<div class="sect3">
-<h4 id="_요청_request_body"><a class="link" href="#_요청_request_body">Request body</a></h4>
+<div class="sect4">
+<h5 id="_요청_request_body"><a class="link" href="#_요청_request_body">Request body</a></h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-json hljs" data-lang="json">{
@@ -535,11 +530,12 @@ Host: namu.api.docs
 </tr>
 </tbody>
 </table>
+<hr>
 </div>
-<div class="sect2">
-<h3 id="_실패"><a class="link" href="#_실패">실패</a></h3>
 <div class="sect3">
-<h4 id="_실패_http_response"><a class="link" href="#_실패_http_response">HTTP response</a></h4>
+<h4 id="_실패"><a class="link" href="#_실패">실패</a></h4>
+<div class="sect4">
+<h5 id="_실패_http_response"><a class="link" href="#_실패_http_response">HTTP response</a></h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 400 Bad Request
@@ -552,8 +548,8 @@ Content-Length: 66
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_실패_http_response"><a class="link" href="#_실패_http_response">HTTP response</a></h4>
+<div class="sect4">
+<h5 id="_실패_http_response"><a class="link" href="#_실패_http_response">HTTP response</a></h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 400 Bad Request
@@ -566,8 +562,8 @@ Content-Length: 86
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_실패_http_response"><a class="link" href="#_실패_http_response">HTTP response</a></h4>
+<div class="sect4">
+<h5 id="_실패_http_response"><a class="link" href="#_실패_http_response">HTTP response</a></h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 400 Bad Request
@@ -580,8 +576,8 @@ Content-Length: 79
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_실패_http_response"><a class="link" href="#_실패_http_response">HTTP response</a></h4>
+<div class="sect4">
+<h5 id="_실패_http_response"><a class="link" href="#_실패_http_response">HTTP response</a></h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 400 Bad Request
@@ -594,11 +590,12 @@ Content-Length: 101
 </div>
 </div>
 </div>
+<hr>
 </div>
-<div class="sect2">
-<h3 id="_성공"><a class="link" href="#_성공">성공</a></h3>
 <div class="sect3">
-<h4 id="_성공_http_response"><a class="link" href="#_성공_http_response">HTTP response</a></h4>
+<h4 id="_성공"><a class="link" href="#_성공">성공</a></h4>
+<div class="sect4">
+<h5 id="_성공_http_response"><a class="link" href="#_성공_http_response">HTTP response</a></h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 204 No Content</code></pre>
@@ -607,12 +604,70 @@ Content-Length: 101
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_친구에게_에너지_선물"><a class="link" href="#_친구에게_에너지_선물">친구에게 에너지 선물</a></h3>
+<div class="sect3">
+<h4 id="_친구에게_에너지_선물_http_request"><a class="link" href="#_친구에게_에너지_선물_http_request">HTTP request</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /v1/points/gift/2 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer accessTokenValue
+Accept: application/json
+Content-Length: 23
+Host: namu.api.docs
+
+{
+  "pointValue" : 99
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_친구에게_에너지_선물_request_headers"><a class="link" href="#_친구에게_에너지_선물_request_headers">Request headers</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원의 access 토큰 값</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_친구에게_에너지_선물_request_body"><a class="link" href="#_친구에게_에너지_선물_request_body">Request body</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-json hljs" data-lang="json">{
+  "pointValue" : 99
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_친구에게_에너지_선물_http_response"><a class="link" href="#_친구에게_에너지_선물_http_response">HTTP response</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 204 No Content</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2024-03-30 20:44:10 +0900
+Last updated 2024-04-15 18:55:12 +0900
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
