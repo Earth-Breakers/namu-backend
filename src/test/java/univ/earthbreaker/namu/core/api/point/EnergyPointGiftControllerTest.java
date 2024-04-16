@@ -18,14 +18,20 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.test.web.servlet.ResultActions;
 
 import univ.earthbreaker.namu.core.api.PresentationTest;
+import univ.earthbreaker.namu.core.domain.point.EnergyGiftCommand;
 import univ.earthbreaker.namu.core.domain.point.EnergyPointGiftService;
+import univ.earthbreaker.namu.core.domain.point.EnergyPointPushNotificationBridge.GiftResult;
+import univ.earthbreaker.namu.external.notification.NotificationAdapter;
+import univ.earthbreaker.namu.external.notification.NotificationPort;
 
 class EnergyPointGiftControllerTest extends PresentationTest {
 
 	private static final String GIFT_POINT_URI = "/v1/points/gift/{targetMemberNo}";
 
 	private final EnergyPointGiftService energyPointProvideService = Mockito.mock(EnergyPointGiftService.class);
-	private final EnergyPointGiftController energyPointGiftController = new EnergyPointGiftController(energyPointProvideService);
+	private final NotificationPort notificationPort = Mockito.mock(NotificationAdapter.class);
+	private final EnergyPointGiftController energyPointGiftController
+		= new EnergyPointGiftController(energyPointProvideService, notificationPort);
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -37,6 +43,8 @@ class EnergyPointGiftControllerTest extends PresentationTest {
 	void giveEnergyPointToFriend() throws Exception {
 		// given
 		EnergyGiftRequest request = new EnergyGiftRequest(USE_POINT_VALUE);
+		Mockito.when(energyPointProvideService.giftEnergyPointToFriend(Mockito.any(EnergyGiftCommand.class)))
+			.thenReturn(new GiftResult("nickname", "targetTokenValue"));
 
 		// when
 		ResultActions resultActions = whenPostWithAuthorization(GIFT_POINT_URI, FRIEND_NO, request);
