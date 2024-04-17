@@ -10,14 +10,16 @@ public record PostDetailResponse(
 	long postNo,
 	String title,
 	String content,
-	String imageUrl
+	String imageUrl,
+	long relatedMissionNo
 ) {
 	static @NotNull PostDetailResponse from(@NotNull Post post) {
 		return new PostDetailResponse(
 			post.getNo(),
 			post.getTitle(),
 			post.getContent(),
-			IMAGE_ACCESS_URL + post.getImagePath()
+			IMAGE_ACCESS_URL + post.getImagePath(),
+			post.getMissionNo()
 		);
 	}
 }
