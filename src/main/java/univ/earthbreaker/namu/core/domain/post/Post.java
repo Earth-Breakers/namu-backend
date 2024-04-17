@@ -5,15 +5,15 @@ import org.jetbrains.annotations.NotNull;
 public class Post {
 
 	private final long no;
-	private final long memberNo;
+	private final MemberId memberId;
 	private final String title;
 	private final String content;
 	private final String imagePath;
 	private final MissionId missionId;
 
-	private Post(long no, long memberNo, String title, String content, String imagePath, MissionId missionId) {
+	private Post(long no, MemberId memberId, String title, String content, String imagePath, MissionId missionId) {
 		this.no = no;
-		this.memberNo = memberNo;
+		this.memberId = memberId;
 		this.title = title;
 		this.content = content;
 		this.imagePath = imagePath;
@@ -21,11 +21,18 @@ public class Post {
 	}
 
 	public static @NotNull Post of(
-		long no, long memberNo,
-		String title, String content,
-		String imagePath, long missionNo
+		long no,
+		long memberNo,
+		String nickname,
+		String title,
+		String content,
+		String imagePath,
+		long missionNo
 	) {
-		return new Post(no, memberNo, title, content, imagePath, new MissionId(missionNo));
+		return new Post(no, new MemberId(memberNo, nickname), title, content, imagePath, new MissionId(missionNo));
+	}
+
+	record MemberId(long memberNo, String nickname) {
 	}
 
 	record MissionId(long missionNo) {
@@ -36,7 +43,11 @@ public class Post {
 	}
 
 	public long getMemberNo() {
-		return memberNo;
+		return memberId.memberNo;
+	}
+
+	public String getMemberNickname() {
+		return memberId.nickname;
 	}
 
 	public String getTitle() {

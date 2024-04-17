@@ -21,4 +21,8 @@ public class PostRetrieveService {
 	public Post retrieve(@NotNull PostRetrieveDetailQuery query) {
 		return postFinder.find(query.getMemberNo(), query.getPostNo());
 	}
+
+	public RelatedPostResult retrieveRelated(@NotNull RelatedPostRetrieveQuery query) {
+		return postFinder.findAllRelated(query);
+	}
 }

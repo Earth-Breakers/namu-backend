@@ -14,4 +14,6 @@ public interface PostRepository {
 	@NotNull List<Post> findAll(PostDbQuery query);
 
 	@Nullable Post find(PostDetailDbQuery query);
+
+	@NotNull RelatedPostResult findRelated(RelatedPostDbQuery query);
 }
