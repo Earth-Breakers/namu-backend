@@ -39,5 +39,8 @@ include::{docfile}/../friend-api.adoc[친구 api,window=blank]
 
 = 푸시 알림 전송 API
 
-include::{docfile}/../push-notification-api.adoc[캐릭터 자랑하기,window=blank]
+include::{docfile}/../push-notification-api.adoc[알림 전송 api,window=blank]
 
+= 게시글 API
+
+include::{docfile}/../post-api.adoc[게시글 api,window=blank]
