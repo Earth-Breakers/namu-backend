@@ -26,4 +26,8 @@ public class PostFinder {
 		}
 		throw PostNotFoundException.notFound();
 	}
+
+	public RelatedPostResult findAllRelated(@NotNull RelatedPostRetrieveQuery query) {
+		return postRepository.findRelated(query.toDbQuery());
+	}
 }

@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -20,5 +22,15 @@ public interface PostJpaRepository extends JpaRepository<PostJpaEntity, Long> {
 		long memberNo,
 		LocalDateTime startDate,
 		LocalDateTime endDate
+	);
+
+	@Query("""
+		SELECT p FROM PostJpaEntity p
+		WHERE p.missionNo = :relatedMissionNo
+		    AND NOT p.memberNo = :memberNo""")
+	@NotNull Slice<PostJpaEntity> findAllByMissionNoAndMemberNoNot(
+		long memberNo,
+		long relatedMissionNo,
+		Pageable pageable
 	);
 }
