@@ -2,11 +2,13 @@ package univ.earthbreaker.namu.database.core.post;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Repository;
 
 import univ.earthbreaker.namu.core.domain.post.Post;
@@ -14,6 +16,8 @@ import univ.earthbreaker.namu.core.domain.post.PostCreateDbCommand;
 import univ.earthbreaker.namu.core.domain.post.PostDbQuery;
 import univ.earthbreaker.namu.core.domain.post.PostDetailDbQuery;
 import univ.earthbreaker.namu.core.domain.post.PostRepository;
+import univ.earthbreaker.namu.core.domain.post.RelatedPostDbQuery;
+import univ.earthbreaker.namu.core.domain.post.RelatedPostResult;
 
 @Repository
 public class PostRepositoryAdapter implements PostRepository {
@@ -48,5 +52,17 @@ public class PostRepositoryAdapter implements PostRepository {
 			return postJpaEntity.toPost();
 		}
 		return null;
+	}
+
+	@Override
+	public @NotNull RelatedPostResult findRelated(@NotNull RelatedPostDbQuery query) {
+		PostSortKey postSortKey = new PostSortKey(query.sortKey());
+		Pageable pageable = PageRequest.of(query.page(), query.size(), postSortKey.getSort());
+		Slice<PostJpaEntity> postJpaEntities = postJpaRepository
+			.findAllByMissionNoAndMemberNoNot(query.memberNo(), query.relatedMissionNo(), pageable);
+		List<Post> posts = postJpaEntities.stream()
+			.map(PostJpaEntity::toPost)
+			.toList();
+		return new RelatedPostResult(posts, postJpaEntities.isLast());
 	}
 }

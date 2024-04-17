@@ -24,6 +24,9 @@ public class PostJpaEntity extends BaseTimeJpaEntity {
 	private Long memberNo;
 
 	@Column(nullable = false)
+	private String memberNickname;
+
+	@Column(nullable = false)
 	private String title;
 
 	@Column(nullable = false)
@@ -38,8 +41,16 @@ public class PostJpaEntity extends BaseTimeJpaEntity {
 	protected PostJpaEntity() {
 	}
 
-	public PostJpaEntity(Long memberNo, String title, String content, String imagePath, Long missionNo) {
+	public PostJpaEntity(
+		Long memberNo,
+		String memberNickname,
+		String title,
+		String content,
+		String imagePath,
+		Long missionNo
+	) {
 		this.memberNo = memberNo;
+		this.memberNickname = memberNickname;
 		this.title = title;
 		this.content = content;
 		this.imagePath = imagePath;
@@ -47,12 +58,13 @@ public class PostJpaEntity extends BaseTimeJpaEntity {
 	}
 
 	Post toPost() {
-		return Post.of(no, memberNo, title, content, imagePath, missionNo);
+		return Post.of(no, memberNo, memberNickname, title, content, imagePath, missionNo);
 	}
 
 	static @NotNull PostJpaEntity from(@NotNull PostCreateDbCommand command) {
 		return new PostJpaEntity(
 			command.memberNo(),
+			command.nickname(),
 			command.title(),
 			command.content(),
 			command.imagePathKey(),
