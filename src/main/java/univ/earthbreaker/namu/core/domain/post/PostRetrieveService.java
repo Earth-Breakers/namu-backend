@@ -18,10 +18,6 @@ public class PostRetrieveService {
 		return postFinder.findAll(query.getMemberNo(), query.getDate());
 	}
 
-	public Post retrieve(@NotNull PostRetrieveDetailQuery query) {
-		return postFinder.find(query.getMemberNo(), query.getPostNo());
-	}
-
 	public RelatedPostResult retrieveRelated(@NotNull RelatedPostRetrieveQuery query) {
 		return postFinder.findAllRelated(query);
 	}
