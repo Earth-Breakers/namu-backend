@@ -44,3 +44,7 @@ include::{docfile}/../push-notification-api.adoc[알림 전송 api,window=blank]
 = 게시글 API
 
 include::{docfile}/../post-api.adoc[게시글 api,window=blank]
+
+= 리액션 API
+
+include::{docfile}/../reaction-api.adoc[리액션 api,window=blank]

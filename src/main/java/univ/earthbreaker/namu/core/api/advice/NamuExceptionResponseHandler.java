@@ -8,11 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import io.sentry.Sentry;
 import univ.earthbreaker.namu.core.api.auth.support.AuthenticationException;
 import univ.earthbreaker.namu.core.api.auth.support.InternalAuthServerException;
 import univ.earthbreaker.namu.core.domain.common.BadRequestException;
-import univ.earthbreaker.namu.core.domain.common.ForbiddenException;
+import univ.earthbreaker.namu.core.domain.common.ConflictException;
 import univ.earthbreaker.namu.core.domain.common.InternalServerException;
 import univ.earthbreaker.namu.core.domain.common.NotFoundException;
 import univ.earthbreaker.namu.core.auth.UnAuthorizedException;
@@ -35,9 +34,9 @@ public class NamuExceptionResponseHandler {
 			.body(new NamuExceptionResponse(exception.getMessage()));
 	}
 
-	@ExceptionHandler(ForbiddenException.class)
-	public ResponseEntity<NamuExceptionResponse> forbidden(@NotNull ForbiddenException exception) {
-		return ResponseEntity.status(HttpStatus.FORBIDDEN)
+	@ExceptionHandler(ConflictException.class)
+	public ResponseEntity<NamuExceptionResponse> conflict(@NotNull ConflictException exception) {
+		return ResponseEntity.status(HttpStatus.CONFLICT)
 			.body(new NamuExceptionResponse(exception.getMessage()));
 	}
 
