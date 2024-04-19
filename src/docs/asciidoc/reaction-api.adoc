@@ -1,0 +1,48 @@
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+[[Reaction-API]]
+=== 리액션 요청 종류
+
+|===
+| targetType | 설명
+
+| `POST`
+| 게시글
+
+| `COMMENT`
+| 댓글
+|===
+
+|===
+| reactionType | 설명
+
+| `LIKE`
+| 좋아요
+
+| `DISLIKE`
+| 싫어요
+|===
+
+=== 리액션 등록
+
+==== 요청
+
+operation::reaction-controller-test/do-reaction[snippets='http-request,request-headers,request-body,request-fields']
+
+==== 응답
+
+operation::reaction-controller-test/do-reaction[snippets='http-response']
+
+=== 리액션 취소
+
+==== 요청
+
+operation::reaction-controller-test/do-reaction[snippets='http-request,request-headers,request-body,request-fields']
+
+==== 응답
+
+operation::reaction-controller-test/do-reaction[snippets='http-response']
