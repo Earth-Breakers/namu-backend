@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import univ.earthbreaker.namu.core.domain.post.Post;
 import univ.earthbreaker.namu.core.domain.post.PostCreateDbCommand;
 import univ.earthbreaker.namu.database.core.common.BaseTimeJpaEntity;
 
@@ -21,6 +22,9 @@ public class PostJpaEntity extends BaseTimeJpaEntity {
 
 	@Column(nullable = false)
 	private Long memberNo;
+
+	@Column(nullable = false)
+	private String memberNickname;
 
 	@Column(nullable = false)
 	private String title;
@@ -37,17 +41,30 @@ public class PostJpaEntity extends BaseTimeJpaEntity {
 	protected PostJpaEntity() {
 	}
 
-	public PostJpaEntity(Long memberNo, String title, String content, String imagePath, Long missionNo) {
+	public PostJpaEntity(
+		Long memberNo,
+		String memberNickname,
+		String title,
+		String content,
+		String imagePath,
+		Long missionNo
+	) {
 		this.memberNo = memberNo;
+		this.memberNickname = memberNickname;
 		this.title = title;
 		this.content = content;
 		this.imagePath = imagePath;
 		this.missionNo = missionNo;
 	}
 
+	Post toPost() {
+		return Post.of(no, memberNo, memberNickname, title, content, imagePath, missionNo);
+	}
+
 	static @NotNull PostJpaEntity from(@NotNull PostCreateDbCommand command) {
 		return new PostJpaEntity(
 			command.memberNo(),
+			command.nickname(),
 			command.title(),
 			command.content(),
 			command.imagePathKey(),
