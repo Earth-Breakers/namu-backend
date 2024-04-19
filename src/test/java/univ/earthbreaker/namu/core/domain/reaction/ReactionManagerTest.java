@@ -16,10 +16,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-class ReactionProcessorTest {
+class ReactionManagerTest {
 
 	private @Mock ReactionRepository reactionRepository;
-	private @InjectMocks ReactionProcessor reactionProcessor;
+	private @InjectMocks ReactionManager reactionManager;
 
 	@DisplayName("회원이 리액션을 남기고자 하는 대상에 리액션을 하지 않았다면, 리액션을 등록한다")
 	@Test
@@ -29,7 +29,7 @@ class ReactionProcessorTest {
 			.thenReturn(false);
 
 	    // when
-		reactionProcessor.doReaction(REACTION_COMMAND);
+		reactionManager.doReaction(REACTION_COMMAND);
 
 		// then
 		verify(reactionRepository).reaction(REACTION_COMMAND.toDbCommand());
@@ -43,7 +43,7 @@ class ReactionProcessorTest {
 			.thenReturn(true);
 
 		// when, then
-		assertThatThrownBy(() -> reactionProcessor.doReaction(REACTION_COMMAND))
+		assertThatThrownBy(() -> reactionManager.doReaction(REACTION_COMMAND))
 			.isInstanceOf(ReactionConflictException.class)
 			.hasMessage(ReactionConflictException.conflict(TARGET_NO).getMessage());
 	}
@@ -56,7 +56,7 @@ class ReactionProcessorTest {
 			.thenReturn(true);
 
 		// when
-		reactionProcessor.undoReaction(REACTION_COMMAND);
+		reactionManager.undoReaction(REACTION_COMMAND);
 
 		// then
 		verify(reactionRepository).cancelReaction(REACTION_COMMAND.toDbCommand());
@@ -70,7 +70,7 @@ class ReactionProcessorTest {
 			.thenReturn(false);
 
 		// when
-		reactionProcessor.undoReaction(REACTION_COMMAND);
+		reactionManager.undoReaction(REACTION_COMMAND);
 
 		// then
 		verify(reactionRepository, never()).cancelReaction(REACTION_COMMAND.toDbCommand());

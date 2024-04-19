@@ -3,6 +3,9 @@ package univ.earthbreaker.namu.core.domain.post;
 import java.time.LocalDate;
 import java.util.List;
 
+import univ.earthbreaker.namu.core.domain.post.PostReactionResult.PostReactionStatus;
+import univ.earthbreaker.namu.core.domain.post.PostReactionResult.PostReactionStatus.Info;
+
 public class PostFixture {
 
 	public static final long MEMBER_NO = 1L;
@@ -21,4 +24,8 @@ public class PostFixture {
 
 	public static final RelatedPostResult RELATED_POST_FIRST_PAGE_RESULT = new RelatedPostResult(POSTS, false);
 	public static final RelatedPostResult RELATED_POST_LAST_PAGE_RESULT = new RelatedPostResult(POSTS, true);
+
+	public static final Info POST_REACTION_INFO = new Info("LIKE", 1, List.of(2L));
+	public static final PostReactionStatus POST_REACTION_STATUS = new PostReactionStatus(List.of(POST_REACTION_INFO), false);
+	public static final PostReactionResult POST_REACTION_RESULT = new PostReactionResult(FIRST_POST,POST_REACTION_STATUS);
 }

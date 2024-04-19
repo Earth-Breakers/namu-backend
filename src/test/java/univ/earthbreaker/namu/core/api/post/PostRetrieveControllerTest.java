@@ -7,15 +7,18 @@ import static org.springframework.restdocs.payload.JsonFieldType.ARRAY;
 import static org.springframework.restdocs.payload.JsonFieldType.BOOLEAN;
 import static org.springframework.restdocs.payload.JsonFieldType.NUMBER;
 import static org.springframework.restdocs.payload.JsonFieldType.STRING;
-import static org.springframework.restdocs.payload.PayloadDocumentation.*;
-import static org.springframework.restdocs.request.RequestDocumentation.*;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
+import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
+import static org.springframework.restdocs.request.RequestDocumentation.queryParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static univ.earthbreaker.namu.core.domain.common.Constant.IMAGE_SYSTEM_PROPERTY;
 import static univ.earthbreaker.namu.core.domain.post.PostFixture.FIRST_MISSION_NO;
 import static univ.earthbreaker.namu.core.domain.post.PostFixture.FIRST_POST;
-import static univ.earthbreaker.namu.core.domain.post.PostFixture.FIRST_POST_NO;
 import static univ.earthbreaker.namu.core.domain.post.PostFixture.POSTS;
 import static univ.earthbreaker.namu.core.domain.post.PostFixture.RELATED_POST_FIRST_PAGE_RESULT;
 import static univ.earthbreaker.namu.core.domain.post.PostFixture.SECOND_POST;
@@ -37,14 +40,12 @@ import org.springframework.util.MultiValueMap;
 
 import univ.earthbreaker.namu.core.api.PresentationTest;
 import univ.earthbreaker.namu.core.domain.post.PostRetrieveAllQuery;
-import univ.earthbreaker.namu.core.domain.post.PostRetrieveDetailQuery;
 import univ.earthbreaker.namu.core.domain.post.PostRetrieveService;
 import univ.earthbreaker.namu.core.domain.post.RelatedPostRetrieveQuery;
 
 class PostRetrieveControllerTest extends PresentationTest {
 
 	private static final String RETRIEVE_ALL_URI = "/v1/posts/all";
-	private static final String RETRIEVE_DETAIL_URI = "/v1/posts/detail/{postNo}";
 	private static final String RETRIEVE_RELATED_URI = "/v1/posts/related/{missionNo}";
 
 	private final PostRetrieveService postRetrieveService = Mockito.mock(PostRetrieveService.class);
@@ -97,50 +98,6 @@ class PostRetrieveControllerTest extends PresentationTest {
 						fieldWithPath("[].postNo").type(NUMBER).description("게시글 번호"),
 						fieldWithPath("[].title").type(STRING).description("게시글 제목"),
 						fieldWithPath("[].imageUrl").type(STRING).description("게시글 이미지")
-					)
-				)
-			);
-	}
-
-	@DisplayName("회원 번호와 게시글 번호를 받아, 게시글에 대한 상세 정보를 조회하고 status 200 을 반환한다")
-	@Test
-	void retrieveDetail() throws Exception {
-		// given
-		Mockito.when(postRetrieveService.retrieve(Mockito.any(PostRetrieveDetailQuery.class)))
-			.thenReturn(FIRST_POST);
-
-		// when
-		ResultActions resultActions = whenGetWithAuthorization(RETRIEVE_DETAIL_URI, FIRST_POST_NO);
-
-		// then
-		resultActions
-			.andExpect(status().isOk())
-			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-			.andExpect(jsonPath("$.postNo").value(FIRST_POST.getNo()))
-			.andExpect(jsonPath("$.title").value(FIRST_POST.getTitle()))
-			.andExpect(jsonPath("$.content").value(FIRST_POST.getContent()))
-			.andExpect(jsonPath("$.imageUrl").value(System.getProperty(IMAGE_SYSTEM_PROPERTY) + FIRST_POST.getImagePath()))
-			.andExpect(jsonPath("$.relatedMissionNo").value(FIRST_POST.getMissionNo()));
-
-		// apidocs
-		resultActions
-			.andDo(
-				document(
-					API_DOCUMENT_IDENTIFIER,
-					operationRequestPreprocessor(),
-					operationResponsePreprocessor(),
-					requestHeaders(
-						headerWithName(HttpHeaders.AUTHORIZATION).description("회원의 access 토큰 값")
-					),
-					pathParameters(
-						parameterWithName("postNo").description("조회할 게시글 번호")
-					),
-					responseFields(
-						fieldWithPath("postNo").type(NUMBER).description("게시글 번호"),
-						fieldWithPath("title").type(STRING).description("게시글 제목"),
-						fieldWithPath("content").type(STRING).description("게시글 내용"),
-						fieldWithPath("imageUrl").type(STRING).description("게시글 이미지"),
-						fieldWithPath("relatedMissionNo").type(NUMBER).description("해당 게시물과 연관된 미션 번호")
 					)
 				)
 			);
