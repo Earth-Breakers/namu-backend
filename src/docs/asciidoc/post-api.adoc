@@ -20,11 +20,11 @@ operation::post-retrieve-controller-test/retrieve-all[snippets='http-response,re
 
 === 요청
 
-operation::post-retrieve-controller-test/retrieve-detail[snippets='http-request,path-parameters']
+operation::post-detail-retrieve-controller-test/retrieve-detail[snippets='http-request,path-parameters']
 
 === 응답
 
-operation::post-retrieve-controller-test/retrieve-detail[snippets='http-response,response-fields']
+operation::post-detail-retrieve-controller-test/retrieve-detail[snippets='http-response,response-fields']
 
 
 == 연관 게시글 전체 조회
