@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import univ.earthbreaker.namu.core.api.auth.support.AuthMapping;
 import univ.earthbreaker.namu.core.api.auth.support.LoginMember;
-import univ.earthbreaker.namu.core.domain.post.Post;
-import univ.earthbreaker.namu.core.domain.post.PostRetrieveDetailQuery;
 import univ.earthbreaker.namu.core.domain.post.PostRetrieveService;
 import univ.earthbreaker.namu.core.domain.post.RelatedPostResult;
 import univ.earthbreaker.namu.core.domain.post.RelatedPostRetrieveQuery;
@@ -39,13 +37,6 @@ public class PostRetrieveController {
 			.map(PostFeedResponse::from)
 			.toList();
 		return ResponseEntity.ok(postFeedResponses);
-	}
-
-	@AuthMapping
-	@GetMapping("/detail/{postNo}")
-	public ResponseEntity<PostDetailResponse> retrieveDetail(@LoginMember Long memberNo, @PathVariable Long postNo) {
-		Post post = postRetrieveService.retrieve(new PostRetrieveDetailQuery(memberNo, postNo));
-		return ResponseEntity.ok(PostDetailResponse.from(post));
 	}
 
 	@AuthMapping
