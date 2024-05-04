@@ -1,13 +1,9 @@
 package univ.earthbreaker.namu.core.api;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.springframework.http.HttpMethod.POST;
-
-import java.util.Map;
 
 import org.jetbrains.annotations.NotNull;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
