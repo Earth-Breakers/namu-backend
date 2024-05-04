@@ -11,10 +11,10 @@ Content-Type: multipart/form-data; boundary=boundary
 Authorization: Bearer {{access_token}}
 
 --boundary
-Content-Disposition: form-data; name="imageFile"; filename="인증성공사진.png"
+Content-Disposition: form-data; name="imageFile"; filename="test-image.png"
 Content-Type: image/png
 
-< ./인증성공사진.png
+< ./test-image.png
 
 --boundary
 Content-Disposition: form-data; name="content"
