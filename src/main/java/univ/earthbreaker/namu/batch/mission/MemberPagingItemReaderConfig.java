@@ -36,7 +36,7 @@ public class MemberPagingItemReaderConfig {
 			.pageSize(chunkSize.intValue())
 			.fetchSize(chunkSize.intValue())
 			.queryProvider(pagingQueryProvider())
-			.rowMapper(memberJpaEntityRowMapper())
+			.rowMapper(memberBatchEntityRowMapper())
 			.build();
 	}
 
@@ -55,7 +55,7 @@ public class MemberPagingItemReaderConfig {
 		}
 	}
 
-	private @NotNull RowMapper<MemberBatchEntity> memberJpaEntityRowMapper() {
+	private @NotNull RowMapper<MemberBatchEntity> memberBatchEntityRowMapper() {
 		return (rs, rowNum) -> new MemberBatchEntity(
 			rs.getLong("no"),
 			rs.getString("nickname"),
