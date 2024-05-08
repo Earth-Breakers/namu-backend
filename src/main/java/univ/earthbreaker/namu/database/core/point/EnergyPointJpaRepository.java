@@ -10,6 +10,10 @@ public interface EnergyPointJpaRepository extends JpaRepository<EnergyPointJpaEn
 	@NotNull EnergyPointJpaEntity findByMemberNo(long memberNo);
 
 	@Modifying
+	@Query("UPDATE EnergyPointJpaEntity ep SET ep.point = :point WHERE ep.memberNo = :memberNo")
+	void updatePointBy(long memberNo, int point);
+
+	@Modifying
 	@Query("UPDATE EnergyPointJpaEntity ep SET ep.point = ep.point + :point WHERE ep.memberNo = :memberNo")
-	void update(long memberNo, int point);
+	void updatePointReceive(long memberNo, int point);
 }

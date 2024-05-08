@@ -31,6 +31,7 @@ public class CurrentCharacterGrower {
 	 * 현재 캐릭터 LEVEL 을 END -> FINAL 로 성장하시키는 메서드.
 	 * LEVEL 이 END 인 캐릭터만 허용한다.
 	 * 최종 진화 형태로, 회원이 해당 캐릭터를 획득했음을 의미한다.
+	 *
 	 * @param memberNo 회원 번호
 	 * @return currentCharacter - 최종 진화 시킨 캐릭터
 	 */
@@ -45,13 +46,13 @@ public class CurrentCharacterGrower {
 			endangeredProbabilityPolicy.determineEndangered(),
 			currentCharacter.getCharacterType()
 		);
-		updateCurrentCharacter(currentCharacter, randomNamuCharacter);
-		return currentCharacter;
+		return updateCurrentCharacter(currentCharacter, randomNamuCharacter);
 	}
 
 	/**
 	 * 현재 캐릭터 LEVEL 을 MIDDLE -> END 로 성장시키는 메서드.
 	 * LEVEL 이 MIDDLE 인 캐릭터만 허용한다.
+	 *
 	 * @param memberNo 회원 번호
 	 */
 	@Transactional
@@ -70,6 +71,7 @@ public class CurrentCharacterGrower {
 	/**
 	 * 현재 캐릭터 LEVEL 을 BEGIN -> MIDDLE 로 성장시키는 메서드.
 	 * LEVEL 이 MIDDLE 인 캐릭터만 허용한다.
+	 *
 	 * @param memberNo 회원 번호
 	 */
 	@Transactional
@@ -91,6 +93,7 @@ public class CurrentCharacterGrower {
 	 * 해당 캐릭터 타입에 맞는 랜덤한 LEVEL.MIDDLE 캐릭터로 성장한다.
 	 * 멸종 위기종이 확률 정책에 맞도록 선택된다.
 	 * LEVEL 이 BEGIN 인 캐릭터만 허용한다.
+	 *
 	 * @param memberNo 회원 번호
 	 */
 	@Transactional
@@ -108,11 +111,12 @@ public class CurrentCharacterGrower {
 		updateCurrentCharacter(currentCharacter, randomNamuCharacter);
 	}
 
-	private void updateCurrentCharacter(
+	private CurrentCharacter updateCurrentCharacter(
 		@NotNull CurrentCharacter currentCharacter,
 		NamuCharacter namuCharacter
 	) {
 		CurrentCharacter grownCurrentCharacter = currentCharacter.growToNext(namuCharacter);
 		currentCharacterRepository.update(grownCurrentCharacter);
+		return grownCurrentCharacter;
 	}
 }

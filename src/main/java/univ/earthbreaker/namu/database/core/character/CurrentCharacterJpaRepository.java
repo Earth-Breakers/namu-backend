@@ -13,7 +13,8 @@ public interface CurrentCharacterJpaRepository extends JpaRepository<CurrentChar
 	@Query("""
 		UPDATE CurrentCharacterJpaEntity cc
 		SET cc.characterNo = :characterNo, cc.characterType = :characterType, cc.level = :level,
-		    cc.currentExp = :currentExp, cc.requiredExp = :requiredExp, cc.mainImagePath = :mainImagePath
+		    cc.currentExp = :currentExp, cc.requiredExp = :requiredExp, cc.mainImagePath = :mainImagePath,
+		    cc.backgroundImagePath = :backgroundImagePath, cc.scripts = :scripts
 		WHERE cc.memberNo = :memberNo""")
 	void updateCurrentCharacter(
 		long characterNo,
@@ -22,6 +23,8 @@ public interface CurrentCharacterJpaRepository extends JpaRepository<CurrentChar
 		int requiredExp,
 		int currentExp,
 		String mainImagePath,
+		String backgroundImagePath,
+		String scripts,
 		long memberNo
 	);
 

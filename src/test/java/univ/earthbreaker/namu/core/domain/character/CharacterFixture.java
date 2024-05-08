@@ -25,6 +25,8 @@ public class CharacterFixture {
 	public static final String NAME = "characterName";
 	public static final String TEST_IMAGE_ACCESS_URL = "https://namu.test.image.com";
 	public static final String CHARACTER_IMAGE_PATH = "/character-dir/test_image.png";
+	public static final String BACKGROUND_IMAGE_PATH = "/character-dir/test_image-bg.png";
+	public static final String SCRIPTS = "캐릭터 대사1\n캐릭터 대사2\n캐릭터 대사3";
 	public static final String TEST_CHARACTER_IMAGE_URL = TEST_IMAGE_ACCESS_URL + CHARACTER_IMAGE_PATH;
 	public static final CharacterType CHARACTER_TYPE = BEAUTY;
 
@@ -47,66 +49,52 @@ public class CharacterFixture {
 
 	public static final CurrentCharacter BEGIN_CURRENT_CHARACTER = new CurrentCharacter(
 		new Master(MEMBER_NO),
-		new TargetCharacter(CHARACTER_NO, GROUP_NO, NAME, CHARACTER_IMAGE_PATH),
+		new TargetCharacter(CHARACTER_NO, GROUP_NO, NAME, CHARACTER_IMAGE_PATH, BACKGROUND_IMAGE_PATH, SCRIPTS),
 		DEFAULT,
 		BEGIN_STATUS
 	);
 
 	public static final CurrentCharacter BEGIN_CURRENT_CHARACTER_WITH_MAX_EXP = new CurrentCharacter(
 		new Master(MEMBER_NO),
-		new TargetCharacter(CHARACTER_NO, GROUP_NO, NAME, CHARACTER_IMAGE_PATH),
+		new TargetCharacter(CHARACTER_NO, GROUP_NO, NAME, CHARACTER_IMAGE_PATH, BACKGROUND_IMAGE_PATH, SCRIPTS),
 		CHARACTER_TYPE,
 		CharacterStatus.of(BEGIN_LEVEL_VALUE, BEGIN_REQUIRED_EXP, BEGIN_REQUIRED_EXP)
 	);
 
 	public static final CurrentCharacter MIDDLE_CURRENT_CHARACTER = new CurrentCharacter(
 		new Master(MEMBER_NO),
-		new TargetCharacter(CHARACTER_NO, GROUP_NO, NAME, CHARACTER_IMAGE_PATH),
+		new TargetCharacter(CHARACTER_NO, GROUP_NO, NAME, CHARACTER_IMAGE_PATH, BACKGROUND_IMAGE_PATH, SCRIPTS),
 		CHARACTER_TYPE,
 		MIDDLE_STATUS
 	);
 
 	public static final CurrentCharacter MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP = new CurrentCharacter(
 		new Master(MEMBER_NO),
-		new TargetCharacter(CHARACTER_NO, GROUP_NO, NAME, CHARACTER_IMAGE_PATH),
+		new TargetCharacter(CHARACTER_NO, GROUP_NO, NAME, CHARACTER_IMAGE_PATH, BACKGROUND_IMAGE_PATH, SCRIPTS),
 		CHARACTER_TYPE,
 		CharacterStatus.of(MIDDLE_LEVEL_VALUE, MIDDLE_REQUIRED_EXP, MIDDLE_REQUIRED_EXP)
 	);
 
 	public static final CurrentCharacter END_CURRENT_CHARACTER = new CurrentCharacter(
 		new Master(MEMBER_NO),
-		new TargetCharacter(CHARACTER_NO, GROUP_NO, NAME, CHARACTER_IMAGE_PATH),
+		new TargetCharacter(CHARACTER_NO, GROUP_NO, NAME, CHARACTER_IMAGE_PATH, BACKGROUND_IMAGE_PATH, SCRIPTS),
 		CHARACTER_TYPE,
 		END_STATUS
 	);
 
 	public static final CurrentCharacter END_CURRENT_CHARACTER_WITH_MAX_EXP = new CurrentCharacter(
 		new Master(MEMBER_NO),
-		new TargetCharacter(CHARACTER_NO, GROUP_NO, NAME, CHARACTER_IMAGE_PATH),
+		new TargetCharacter(CHARACTER_NO, GROUP_NO, NAME, CHARACTER_IMAGE_PATH, BACKGROUND_IMAGE_PATH, SCRIPTS),
 		CHARACTER_TYPE,
 		CharacterStatus.of(END_LEVEL_VALUE, END_REQUIRED_EXP, END_REQUIRED_EXP)
 	);
 
 	public static final CurrentCharacter FINAL_CURRENT_CHARACTER = new CurrentCharacter(
 		new Master(MEMBER_NO),
-		new TargetCharacter(CHARACTER_NO, GROUP_NO, NAME, CHARACTER_IMAGE_PATH),
+		new TargetCharacter(CHARACTER_NO, GROUP_NO, NAME, CHARACTER_IMAGE_PATH, BACKGROUND_IMAGE_PATH, SCRIPTS),
 		CHARACTER_TYPE,
 		FINAL_STATUS
 	);
-
-	public static final NamuCharacter BEGIN_NAMU_CHARACTER = NamuCharacter.builder()
-		.no(Long.MIN_VALUE)
-		.type(DEFAULT)
-		.gender(Gender.MALE)
-		.isEndangered(true)
-		.groupNumber(GROUP_NO)
-		.level(Level.BEGIN.getValue())
-		.requiredExp(BEGIN_REQUIRED_EXP)
-		.name("beginName")
-		.description("beginDescription")
-		.thumbnailImagePath(CHARACTER_IMAGE_PATH)
-		.mainImagePath(CHARACTER_IMAGE_PATH)
-		.build();
 
 	public static final NamuCharacter MIDDLE_NAMU_CHARACTER = NamuCharacter.builder()
 		.no(Long.MAX_VALUE / 2)
@@ -120,6 +108,8 @@ public class CharacterFixture {
 		.description("middleDescription")
 		.thumbnailImagePath(CHARACTER_IMAGE_PATH)
 		.mainImagePath(CHARACTER_IMAGE_PATH)
+		.backgroundImagePath(BACKGROUND_IMAGE_PATH)
+		.scripts(SCRIPTS)
 		.build();
 
 	public static final NamuCharacter END_NAMU_CHARACTER = NamuCharacter.builder()
@@ -134,6 +124,8 @@ public class CharacterFixture {
 		.description("endDescription")
 		.thumbnailImagePath(CHARACTER_IMAGE_PATH)
 		.mainImagePath(CHARACTER_IMAGE_PATH)
+		.backgroundImagePath(BACKGROUND_IMAGE_PATH)
+		.scripts(SCRIPTS)
 		.build();
 
 	public static final NamuCharacter FINAL_NAMU_CHARACTER = NamuCharacter.builder()
@@ -148,6 +140,8 @@ public class CharacterFixture {
 		.description("finalDescription")
 		.thumbnailImagePath(CHARACTER_IMAGE_PATH)
 		.mainImagePath(CHARACTER_IMAGE_PATH)
+		.backgroundImagePath(BACKGROUND_IMAGE_PATH)
+		.scripts(SCRIPTS)
 		.build();
 
 	/**

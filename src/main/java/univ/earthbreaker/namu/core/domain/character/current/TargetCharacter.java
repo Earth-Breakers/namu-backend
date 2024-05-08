@@ -12,12 +12,23 @@ public class TargetCharacter {
 	private final int groupNumber;
 	private final String name;
 	private final String mainImagePath;
+	private final String backgroundImagePath;
+	private final String scripts;
 
-	public TargetCharacter(long characterNo, int groupNumber, String name, String mainImagePath) {
+	public TargetCharacter(
+		long characterNo,
+		int groupNumber,
+		String name,
+		String mainImagePath,
+		String backgroundImagePath,
+		String scripts
+	) {
 		this.characterNo = characterNo;
 		this.groupNumber = groupNumber;
 		this.name = name;
 		this.mainImagePath = mainImagePath;
+		this.backgroundImagePath = backgroundImagePath;
+		this.scripts = scripts;
 	}
 
 	static @NotNull TargetCharacter changeTo(@NotNull NamuCharacter namuCharacter) {
@@ -25,7 +36,9 @@ public class TargetCharacter {
 			namuCharacter.getNo(),
 			namuCharacter.getGroupNumber(),
 			namuCharacter.getName(),
-			namuCharacter.getMainImagePath()
+			namuCharacter.getMainImagePath(),
+			namuCharacter.getBackgroundImagePath(),
+			namuCharacter.getScripts()
 		);
 	}
 
@@ -45,6 +58,14 @@ public class TargetCharacter {
 		return mainImagePath;
 	}
 
+	String getBackgroundImagePath() {
+		return backgroundImagePath;
+	}
+
+	String getScripts() {
+		return scripts;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -53,11 +74,12 @@ public class TargetCharacter {
 			return false;
 		TargetCharacter that = (TargetCharacter)o;
 		return characterNo == that.characterNo && groupNumber == that.groupNumber && name.equals(that.name)
-			&& mainImagePath.equals(that.mainImagePath);
+			&& mainImagePath.equals(that.mainImagePath) && backgroundImagePath.equals(that.backgroundImagePath)
+			&& scripts.equals(that.scripts);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(characterNo, groupNumber, name, mainImagePath);
+		return Objects.hash(characterNo, groupNumber, name, mainImagePath, backgroundImagePath, scripts);
 	}
 }

@@ -35,8 +35,7 @@ public class CurrentCharacterGrowController {
 
 	@AuthMapping
 	@PostMapping("/final")
-	public ResponseEntity<Void> growToRandomFinalCharacter(@LoginMember Long memberNo) {
-		currentCharacterGrowService.growToFinalRandom(memberNo);
-		return ResponseEntity.noContent().build();
+	public ResponseEntity<FinalCharacterResponse> growToRandomFinalCharacter(@LoginMember Long memberNo) {
+		return ResponseEntity.ok(FinalCharacterResponse.from(currentCharacterGrowService.growToFinalRandom(memberNo)));
 	}
 }
