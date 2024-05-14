@@ -24,7 +24,7 @@ public class MessageCreator {
 			.toList();
 	}
 
-	private static Message create(String fcmTokenValue, String title, String messageBody) {
+	static Message create(String fcmTokenValue, String title, String messageBody) {
 		return Message.builder()
 			.setToken(fcmTokenValue)
 			.setAndroidConfig(createAndroidConfig(title, messageBody))

@@ -9,4 +9,6 @@ public interface CharacterProjection {
 	CharacterType getType();
 	int getRequiredExp();
 	String getMainImagePath();
+	String getBackgroundImagePath();
+	String getScripts();
 }

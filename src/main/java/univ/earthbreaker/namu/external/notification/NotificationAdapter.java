@@ -30,4 +30,18 @@ public class NotificationAdapter implements NotificationPort {
 		ApiFuture<BatchResponse> notificationFuture = firebaseMessaging.sendEachAsync(messages);
 		fcmNotificationCallbackHandlerRegister.register(notificationFuture, sourceCommand);
 	}
+
+	@Override
+	public void sendAfterFollow(@NotNull FollowPushNotificationSourceCommand sourceCommand) {
+		String title = String.format("%s 님이 %s 님을 팔로우해요", sourceCommand.nickname(), sourceCommand.targetNickname());
+		Message message = MessageCreator.create(sourceCommand.notificationToken(), title, null);
+		firebaseMessaging.sendAsync(message);
+	}
+
+	@Override
+	public void sendAfterGift(@NotNull GiftPushNotificationSourceCommand sourceCommand) {
+		String title = String.format("%s 님이 에너지를 보냈어요", sourceCommand.nickname());
+		Message message = MessageCreator.create(sourceCommand.notificationToken(), title, null);
+		firebaseMessaging.sendAsync(message);
+	}
 }

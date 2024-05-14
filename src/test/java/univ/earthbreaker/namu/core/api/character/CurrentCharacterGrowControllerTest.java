@@ -4,7 +4,13 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.payload.JsonFieldType.*;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.*;
+import static univ.earthbreaker.namu.core.domain.common.Constant.*;
 import static univ.earthbreaker.namu.support.apidocs.ApiDocsUtils.API_DOCUMENT_IDENTIFIER;
 import static univ.earthbreaker.namu.support.apidocs.ApiDocsUtils.operationRequestPreprocessor;
 import static univ.earthbreaker.namu.support.apidocs.ApiDocsUtils.operationResponsePreprocessor;
@@ -16,6 +22,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mockito;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 
 import univ.earthbreaker.namu.core.api.PresentationTest;
@@ -29,6 +36,8 @@ class CurrentCharacterGrowControllerTest extends PresentationTest {
 	private static final String GROW_TO_RANDOM_URI = "/v1/characters/grow/middle";
 	private static final String GROW_TO_FINAL_URI = "/v1/characters/grow/final";
 
+	private static final String TEST_IMAGE_ACCESS_URL = "https://namu.test.image.com";
+
 	private final CurrentCharacterGrowService currentCharacterGrowService
 		= Mockito.mock(CurrentCharacterGrowService.class);
 	private final CurrentCharacterGrowController currentCharacterGrowController
@@ -37,6 +46,7 @@ class CurrentCharacterGrowControllerTest extends PresentationTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		mockMvc = mockControllerWithAuthorization(currentCharacterGrowController);
+		System.setProperty(IMAGE_SYSTEM_PROPERTY, TEST_IMAGE_ACCESS_URL);
 	}
 
 	@DisplayName("레벨이 MIDDLE 인 캐릭터를 다음 캐릭터로 성장시키고, 204 를 반환한다")
@@ -83,14 +93,24 @@ class CurrentCharacterGrowControllerTest extends PresentationTest {
 		);
 	}
 
-	@DisplayName("레벨이 END 인 캐릭터를 랜덤 최종 형태 캐릭터로 성장시키고, 204 를 반환한다")
+	@DisplayName("레벨이 END 인 캐릭터를 랜덤 최종 형태 캐릭터로 성장시키고, 성장한 캐릭터와 200 을 반환한다")
 	@Test
 	void growToRandomFinalCharacter() throws Exception {
+		// given
+		Mockito.when(currentCharacterGrowService.growToFinalRandom(MEMBER_NO))
+			.thenReturn(FINAL_CURRENT_CHARACTER);
+
 		// when
 		ResultActions resultActions = whenPostWithAuthorization(GROW_TO_FINAL_URI);
 
 		// then
-		resultActions.andExpect(status().isNoContent());
+		resultActions
+			.andExpect(status().isOk())
+			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+			.andExpect(jsonPath("$.characterNo").value(CHARACTER_NO))
+			.andExpect(jsonPath("$.mainImageUrl").value(System.getProperty(IMAGE_SYSTEM_PROPERTY) + CHARACTER_IMAGE_PATH))
+			.andExpect(jsonPath("$.backgroundImageUrl").value(System.getProperty(IMAGE_SYSTEM_PROPERTY) + BACKGROUND_IMAGE_PATH))
+			.andExpect(jsonPath("$.scripts").value(SCRIPTS));
 
 		// apidocs
 		resultActions.andDo(
@@ -100,6 +120,12 @@ class CurrentCharacterGrowControllerTest extends PresentationTest {
 				operationResponsePreprocessor(),
 				requestHeaders(
 					headerWithName(HttpHeaders.AUTHORIZATION).description("회원의 access 토큰 값")
+				),
+				responseFields(
+					fieldWithPath("characterNo").type(NUMBER).description("캐릭터 번호"),
+					fieldWithPath("mainImageUrl").type(STRING).description("캐릭터 이미지"),
+					fieldWithPath("backgroundImageUrl").type(STRING).description("캐릭터 배경 이미지"),
+					fieldWithPath("scripts").type(STRING).description("캐릭터 대사")
 				)
 			)
 		);

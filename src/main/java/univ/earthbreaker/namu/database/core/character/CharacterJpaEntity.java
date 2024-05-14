@@ -47,10 +47,19 @@ public class CharacterJpaEntity {
 	private String description;
 
 	@Column(nullable = false, length = 500)
+	private String detailImagePath;
+
+	@Column(nullable = false, length = 500)
 	private String thumbnailImagePath;
 
 	@Column(nullable = false, length = 500)
 	private String mainImagePath;
+
+	@Column(nullable = false, length = 500)
+	private String backgroundImagePath;
+
+	@Column(nullable = false, length = 500)
+	private String scripts;
 
 	protected CharacterJpaEntity() {
 	}
@@ -66,8 +75,11 @@ public class CharacterJpaEntity {
 			.requiredExp(requiredExp)
 			.name(name)
 			.description(description)
+			.detailImagePath(detailImagePath)
 			.thumbnailImagePath(thumbnailImagePath)
 			.mainImagePath(mainImagePath)
+			.backgroundImagePath(backgroundImagePath)
+			.scripts(scripts)
 			.build();
 	}
 }

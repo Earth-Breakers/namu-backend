@@ -28,7 +28,7 @@ class EnergyPointEventHandlerTest {
 		energyPointEventHandler.giveRewardPoint(event);
 
 		// then
-		verify(energyPointRepository).update(new PointUpdateDbCommand(event.memberNo(), event.point()));
+		verify(energyPointRepository).receivePoint(new PointUpdateDbCommand(event.memberNo(), event.point()));
 	}
 
 	@DisplayName("회원 계정 생성 시 초기 에너지 포인트 지급 이벤트를 구독하고, 이벤트를 받아 초기 에너지 포인트를 등록한다")

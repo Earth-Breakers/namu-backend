@@ -15,14 +15,12 @@ public interface CharacterJpaRepository extends JpaRepository<CharacterJpaEntity
 
 	@Nullable CharacterJpaEntity findByLevelAndGroupNumberAndType(int level, int groupNumber, CharacterType type);
 
-	@Query(
-		value = """
-			SELECT c.* FROM character c
-			WHERE c.level = :level
-			    AND c.group_number = :groupNumber
-			    AND c.is_endangered = :isEndangered
-			    AND c.type = :type
-			ORDER BY RAND() LIMIT 1""",
-		nativeQuery = true)
+	@Query("""
+		SELECT c FROM CharacterJpaEntity c
+		WHERE c.level = :level
+		    AND c.groupNumber = :groupNumber
+		    AND c.isEndangered = :isEndangered
+		    AND c.type = :type
+		ORDER BY RAND() LIMIT 1""")
 	@Nullable CharacterJpaEntity findRandomBy(int level, int groupNumber, boolean isEndangered, CharacterType type);
 }

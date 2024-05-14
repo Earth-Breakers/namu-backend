@@ -27,7 +27,7 @@ public record CharacterDetailResponse(
 			memberCharacter.getGender(),
 			memberCharacter.getName(),
 			memberCharacter.getDescription(),
-			IMAGE_ACCESS_URL + memberCharacter.getMainImagePath()
+			IMAGE_ACCESS_URL + memberCharacter.getDetailImagePath()
 		);
 	}
 }
