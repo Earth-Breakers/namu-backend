@@ -13,13 +13,8 @@ public class MemberMissionItemWriterConfig {
 	@StepScope
 	public MemberMissionItemWriter memberMissionItemWriter(
 		MemberMissionBatchRepository memberMissionBatchRepository,
-		ItemWriterStepExecutionListener itemWriterStepExecutionListener
+		MemberMissionReSettingStepExecutionListener memberMissionReSettingStepExecutionListener
 	) {
-		return new MemberMissionItemWriter(memberMissionBatchRepository, itemWriterStepExecutionListener);
-	}
-
-	@Bean
-	public ItemWriterStepExecutionListener itemWriterStepExecutionListener() {
-		return new ItemWriterStepExecutionListener();
+		return new MemberMissionItemWriter(memberMissionBatchRepository, memberMissionReSettingStepExecutionListener);
 	}
 }

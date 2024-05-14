@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobScope;
+import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.job.flow.JobExecutionDecider;
 import org.springframework.batch.core.listener.ExecutionContextPromotionListener;
@@ -78,21 +79,21 @@ public class MemberMissionBatchConfig {
 		@Value("#{jobParameters[chunkSize]}") Integer chunkSize,
 		JdbcPagingItemReader<MemberBatchEntity> memberItemReader,
 		MemberMissionItemWriter memberMissionItemWriter,
-		ItemWriterStepExecutionListener writerStepExecutionListener,
+		MemberMissionReSettingStepExecutionListener memberMissionReSettingStepExecutionListener,
 		PlatformTransactionManager transactionManager
 	) {
 		return new StepBuilder("memberMissionReSettingBatchStep", jobRepository)
 			.<MemberBatchEntity, MemberBatchEntity>chunk(chunkSize, transactionManager)
 			.reader(memberItemReader)
 			.writer(memberMissionItemWriter)
-			.listener(writerStepExecutionListener)
+			.listener(memberMissionReSettingStepExecutionListener)
 			.build();
 	}
 
 	@Bean
 	public ExecutionContextPromotionListener contextPromotionListener() {
 		ExecutionContextPromotionListener promotionListener = new ExecutionContextPromotionListener();
-		promotionListener.setKeys(new String[] {AbstractStepExecutionManager.MISSIONS_PROMOTION_KEY});
+		promotionListener.setKeys(new String[] {AbstractExecutionContextManager.MISSIONS_PROMOTION_KEY});
 		return promotionListener;
 	}
 

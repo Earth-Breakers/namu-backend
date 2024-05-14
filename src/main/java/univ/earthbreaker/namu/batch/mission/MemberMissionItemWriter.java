@@ -11,14 +11,14 @@ import univ.earthbreaker.namu.database.core.mission.MemberMissionBatchRepository
 public class MemberMissionItemWriter implements ItemWriter<MemberBatchEntity> {
 
 	private final MemberMissionBatchRepository memberMissionBatchRepository;
-	private final ItemWriterStepExecutionListener itemWriterStepExecutionListener;
+	private final MemberMissionReSettingStepExecutionListener memberMissionReSettingStepExecutionListener;
 
 	public MemberMissionItemWriter(
 		MemberMissionBatchRepository memberMissionBatchRepository,
-		ItemWriterStepExecutionListener itemWriterStepExecutionListener
+		MemberMissionReSettingStepExecutionListener memberMissionReSettingStepExecutionListener
 	) {
 		this.memberMissionBatchRepository = memberMissionBatchRepository;
-		this.itemWriterStepExecutionListener = itemWriterStepExecutionListener;
+		this.memberMissionReSettingStepExecutionListener = memberMissionReSettingStepExecutionListener;
 	}
 
 	@Override
@@ -39,6 +39,6 @@ public class MemberMissionItemWriter implements ItemWriter<MemberBatchEntity> {
 	}
 
 	private void saveAllMemberMissions(List<Long> memberNos) {
-		memberMissionBatchRepository.saveAllInBatch(memberNos, itemWriterStepExecutionListener.getFixMissions());
+		memberMissionBatchRepository.saveAllInBatch(memberNos, memberMissionReSettingStepExecutionListener.getFixMissions());
 	}
 }

@@ -16,11 +16,12 @@ import univ.earthbreaker.namu.database.core.mission.FixMissionJpaRepository;
 
 @Component
 @StepScope
-public class LoadSpecialMissionTasklet extends AbstractStepExecutionManager<SharedFixMissions> implements Tasklet {
+public class LoadSpecialMissionTasklet extends AbstractExecutionContextManager<SharedFixMissions> implements Tasklet {
 
 	private final FixMissionJpaRepository fixMissionJpaRepository;
 
 	public LoadSpecialMissionTasklet(FixMissionJpaRepository fixMissionJpaRepository) {
+		super();
 		this.fixMissionJpaRepository = fixMissionJpaRepository;
 	}
 
@@ -29,8 +30,6 @@ public class LoadSpecialMissionTasklet extends AbstractStepExecutionManager<Shar
 		@NotNull StepContribution contribution,
 		@NotNull ChunkContext chunkContext
 	) {
-		super.setStepExecution(chunkContext.getStepContext().getStepExecution());
-
 		List<FixMissionJpaEntity> defaultMissions = fixMissionJpaRepository.findDefaultMissionsByRandom();
 		List<FixMissionJpaEntity> todayMissions = fixMissionJpaRepository.findTodayMissionsByRandom();
 		List<FixMissionJpaEntity> specialMissions = fixMissionJpaRepository.findSpecialMissions();
@@ -40,7 +39,8 @@ public class LoadSpecialMissionTasklet extends AbstractStepExecutionManager<Shar
 		fixMissionJpaEntities.addAll(todayMissions);
 		fixMissionJpaEntities.addAll(specialMissions);
 
-		super.putData(MISSIONS_PROMOTION_KEY, SharedFixMissions.from(fixMissionJpaEntities));
+		super.setCurrentStepExecution(chunkContext.getStepContext().getStepExecution());
+		super.putDataToStepExecutionContext(MISSIONS_PROMOTION_KEY, SharedFixMissions.from(fixMissionJpaEntities));
 
 		return RepeatStatus.FINISHED;
 	}
