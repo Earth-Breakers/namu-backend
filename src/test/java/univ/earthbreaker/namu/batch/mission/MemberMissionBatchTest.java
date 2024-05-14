@@ -32,7 +32,8 @@ import univ.earthbreaker.namu.database.core.mission.MemberMissionJpaRepository;
 	TestBatchConfig.class, TestMissionBatchJpaConfig.class,
 	MemberMissionBatchConfig.class, LoadMissionStepDecider.class,
 	LoadNormalMissionTasklet.class, LoadSpecialMissionTasklet.class,
-	MemberPagingItemReaderConfig.class, MemberMissionItemWriterConfig.class})
+	MemberPagingItemReaderConfig.class, MemberMissionItemWriterConfig.class,
+	MemberMissionReSettingStepExecutionListener.class})
 class MemberMissionBatchTest {
 
 	private @Autowired JobLauncherTestUtils jobLauncherTestUtils;
