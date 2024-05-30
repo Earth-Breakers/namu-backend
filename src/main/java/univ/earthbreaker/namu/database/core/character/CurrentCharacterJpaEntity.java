@@ -68,6 +68,7 @@ public class CurrentCharacterJpaEntity {
 		Integer level,
 		Integer currentExp,
 		Integer requiredExp,
+		String name,
 		String mainImagePath,
 		String backgroundImagePath,
 		String scripts
@@ -79,6 +80,7 @@ public class CurrentCharacterJpaEntity {
 		this.level = level;
 		this.currentExp = currentExp;
 		this.requiredExp = requiredExp;
+		this.name = name;
 		this.mainImagePath = mainImagePath;
 		this.backgroundImagePath = backgroundImagePath;
 		this.scripts = scripts;
@@ -96,6 +98,7 @@ public class CurrentCharacterJpaEntity {
 			initCharacterProjection.getLevel(),
 			INITIAL_EXP,
 			initCharacterProjection.getRequiredExp(),
+			initCharacterProjection.getName(),
 			initCharacterProjection.getMainImagePath(),
 			initCharacterProjection.getBackgroundImagePath(),
 			initCharacterProjection.getScripts()
