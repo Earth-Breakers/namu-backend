@@ -8,6 +8,7 @@ public interface CharacterProjection {
 	int getLevel();
 	CharacterType getType();
 	int getRequiredExp();
+	String getName();
 	String getMainImagePath();
 	String getBackgroundImagePath();
 	String getScripts();
