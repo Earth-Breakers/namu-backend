@@ -1,6 +1,6 @@
 package univ.earthbreaker.namu.core.domain.character.book;
 
-import static univ.earthbreaker.namu.core.domain.character.book.CharacterBookEventHandler.AddFinalCharacterDbCommand;
+import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -11,7 +11,7 @@ public interface MemberCharacterRepository {
 
 	@Nullable MemberCharacter findOrNull(long memberNo, long characterNo);
 
-	@NotNull CharacterBook findBook(long memberNo);
+	@NotNull List<MemberCharacter> findByMemberNo(long memberNo);
 
-	void createOrUpdate(AddFinalCharacterDbCommand command);
+	void createOrUpdate(CharacterBookEventHandler.AddFinalCharacterDbCommand command);
 }

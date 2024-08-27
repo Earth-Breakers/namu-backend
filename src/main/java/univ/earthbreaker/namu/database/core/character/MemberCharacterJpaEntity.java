@@ -40,16 +40,21 @@ public class MemberCharacterJpaEntity {
 		return new MemberCharacterJpaEntity(memberNo, characterNo, 1);
 	}
 
-	MemberCharacter toMemberCharacter(@NotNull CharacterJpaEntity characterJpaEntity) {
+	MemberCharacter toMemberCharacter(@NotNull CharacterJpaEntity characterJpaEntity, boolean isAcquired) {
 		return new MemberCharacter(
 			no,
 			memberNo,
 			count,
-			characterJpaEntity.toNamuCharacter()
+			characterJpaEntity.toNamuCharacter(),
+			isAcquired
 		);
 	}
 
 	void plusOneCount() {
 		this.count++;
+	}
+
+	Long getCharacterNo() {
+		return characterNo;
 	}
 }

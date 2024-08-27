@@ -1,16 +1,7 @@
 package univ.earthbreaker.namu.core.domain.character;
 
-import static univ.earthbreaker.namu.core.domain.character.CharacterType.BEAUTY;
-import static univ.earthbreaker.namu.core.domain.character.CharacterType.DEFAULT;
-import static univ.earthbreaker.namu.core.domain.character.CharacterType.PURIFY;
-import static univ.earthbreaker.namu.core.domain.character.CharacterType.VITALITY;
+import static univ.earthbreaker.namu.core.domain.character.CharacterType.*;
 
-import java.util.List;
-
-import univ.earthbreaker.namu.core.domain.character.book.BookResult;
-import univ.earthbreaker.namu.core.domain.character.book.BookSectionResult;
-import univ.earthbreaker.namu.core.domain.character.book.CharacterProfileResult;
-import univ.earthbreaker.namu.core.domain.character.book.MemberCharacter;
 import univ.earthbreaker.namu.core.domain.character.current.CharacterStatus;
 import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacter;
 import univ.earthbreaker.namu.core.domain.character.current.Level;
@@ -144,29 +135,35 @@ public class CharacterFixture {
 		.scripts(SCRIPTS)
 		.build();
 
-	/**
-	 * 캐릭터 도감 FIXTURE
-	 */
-	public static final int TOTAL_ACQUIRED_COUNT = 3;
-	public static final int TOTAL_COUNT_OF_TYPE = 2;
-	public static final int ACQUIRED_COUNT = 1;
+	public static final NamuCharacter END_PURIFY_NAMU_CHARACTER = NamuCharacter.builder()
+		.no(Long.MAX_VALUE)
+		.type(PURIFY)
+		.gender(Gender.MALE)
+		.isEndangered(true)
+		.groupNumber(GROUP_NO)
+		.level(Level.END.getValue())
+		.requiredExp(END_REQUIRED_EXP)
+		.name("endName")
+		.description("endDescription")
+		.thumbnailImagePath(CHARACTER_IMAGE_PATH)
+		.mainImagePath(CHARACTER_IMAGE_PATH)
+		.backgroundImagePath(BACKGROUND_IMAGE_PATH)
+		.scripts(SCRIPTS)
+		.build();
 
-	public static final CharacterProfileResult ACQUIRED_PROFILE_RESULT
-		= new CharacterProfileResult(CHARACTER_NO, TEST_CHARACTER_IMAGE_URL, true);
-	public static final CharacterProfileResult NOT_ACQUIRED_PROFILE_RESULT
-		= new CharacterProfileResult(0, TEST_CHARACTER_IMAGE_URL, false);
-
-	public static final BookSectionResult BEAUTY_SECTION_RESULT
-		= new BookSectionResult(BEAUTY, TOTAL_COUNT_OF_TYPE, ACQUIRED_COUNT, List.of(ACQUIRED_PROFILE_RESULT, NOT_ACQUIRED_PROFILE_RESULT));
-	public static final BookSectionResult PURIFY_SECTION_RESULT
-		= new BookSectionResult(PURIFY, TOTAL_COUNT_OF_TYPE, ACQUIRED_COUNT, List.of(ACQUIRED_PROFILE_RESULT, NOT_ACQUIRED_PROFILE_RESULT));
-	public static final BookSectionResult VITALITY_SECTION_RESULT
-		= new BookSectionResult(VITALITY, TOTAL_COUNT_OF_TYPE, ACQUIRED_COUNT, List.of(ACQUIRED_PROFILE_RESULT, NOT_ACQUIRED_PROFILE_RESULT));
-
-	public static final BookResult BOOK_RESULT = new BookResult(
-		TOTAL_ACQUIRED_COUNT,
-		List.of(BEAUTY_SECTION_RESULT, PURIFY_SECTION_RESULT, VITALITY_SECTION_RESULT)
-	);
-
-	public static final MemberCharacter MEMBER_CHARACTER = new MemberCharacter(1, MEMBER_NO, 5, END_NAMU_CHARACTER);
+	public static final NamuCharacter END_VITALITY_NAMU_CHARACTER = NamuCharacter.builder()
+		.no(Long.MAX_VALUE)
+		.type(VITALITY)
+		.gender(Gender.MALE)
+		.isEndangered(true)
+		.groupNumber(GROUP_NO)
+		.level(Level.END.getValue())
+		.requiredExp(END_REQUIRED_EXP)
+		.name("endName")
+		.description("endDescription")
+		.thumbnailImagePath(CHARACTER_IMAGE_PATH)
+		.mainImagePath(CHARACTER_IMAGE_PATH)
+		.backgroundImagePath(BACKGROUND_IMAGE_PATH)
+		.scripts(SCRIPTS)
+		.build();
 }
