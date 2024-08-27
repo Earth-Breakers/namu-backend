@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.view.character;
+package univ.earthbreaker.namu.core.domain.character.book;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.context.event.EventListener;

@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.view.character;
+package univ.earthbreaker.namu.core.domain.character.book;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class MemberCharacterFinder {
 		throw MemberCharacterNotFoundException.notFound(characterNo);
 	}
 
-	@NotNull List<MemberCharacter> find(long memberNo) {
+	public @NotNull List<MemberCharacter> findAllBy(long memberNo) {
 		return memberCharacterRepository.findByMemberNo(memberNo);
 	}
 }
