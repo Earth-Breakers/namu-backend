@@ -82,4 +82,8 @@ public class CharacterJpaEntity {
 			.scripts(scripts)
 			.build();
 	}
+
+	Long getNo() {
+		return no;
+	}
 }

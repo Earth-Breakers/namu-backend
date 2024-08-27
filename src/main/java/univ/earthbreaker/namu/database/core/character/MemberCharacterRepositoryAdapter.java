@@ -1,28 +1,23 @@
 package univ.earthbreaker.namu.database.core.character;
 
 import static univ.earthbreaker.namu.core.domain.character.book.CharacterBookEventHandler.AddFinalCharacterDbCommand;
-import static univ.earthbreaker.namu.core.domain.character.book.CharacterBookMapper.CharacterSummaryInfoCollectionMapper;
-import static univ.earthbreaker.namu.core.domain.character.book.CharacterBookMapper.CharacterSummaryInfoMapper;
-import static univ.earthbreaker.namu.core.domain.character.book.CharacterBookMapper.CharactersMapper;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Repository;
 
-import univ.earthbreaker.namu.core.domain.character.book.CharacterBook;
-import univ.earthbreaker.namu.core.domain.character.book.CharacterBookMapper;
 import univ.earthbreaker.namu.core.domain.character.book.MemberCharacter;
 import univ.earthbreaker.namu.core.domain.character.book.MemberCharacterRepository;
 
 @Repository
 public class MemberCharacterRepositoryAdapter implements MemberCharacterRepository {
-
-	private static final long DEFAULT_NO_IF_NOT_EXIST = 0L;
-	private static final int ZERO = 0;
 
 	private final MemberCharacterJpaRepository memberCharacterJpaRepository;
 	private final CharacterJpaRepository characterJpaRepository;
@@ -41,49 +36,38 @@ public class MemberCharacterRepositoryAdapter implements MemberCharacterReposito
 			.findByMemberNoAndCharacterNo(memberNo, characterNo);
 		if (memberCharacterJpaEntity != null) {
 			CharacterJpaEntity characterJpaEntity = characterJpaRepository.findByNo(characterNo);
-			return memberCharacterJpaEntity.toMemberCharacter(characterJpaEntity);
+			return memberCharacterJpaEntity.toMemberCharacter(characterJpaEntity, true);
 		}
 		return null;
 	}
 
 	@Override
-	public @NotNull CharacterBook findBook(long memberNo) {
-		List<MemberCharacterBookProjection> characterBookProjections
-			= memberCharacterJpaRepository.findMemberCharacterBookByMemberNo(memberNo);
+	public @NotNull List<MemberCharacter> findByMemberNo(long memberNo) {
+		Map<Long, MemberCharacterJpaEntity> memberCharacterJpaEntityMap
+			= memberCharacterJpaRepository.findByMemberNo(memberNo)
+			.stream()
+			.collect(Collectors.toMap(
+				MemberCharacterJpaEntity::getCharacterNo,
+				Function.identity()
+			));
 
-		MemberCharacterBookProjection projection = characterBookProjections.get(ZERO);
+		if (!memberCharacterJpaEntityMap.isEmpty()) {
+			List<CharacterJpaEntity> characterJpaEntities = characterJpaRepository.findAll();
+			List<Long> acquiredCharacterNos = new ArrayList<>(memberCharacterJpaEntityMap.keySet());
 
-		return new CharacterBookMapper(
-			projection.getMemberNo().orElse(memberNo),
-			getCharactersMapper(characterBookProjections, projection.getTotalCountPerType())
-		).mapping();
-	}
-
-	private @NotNull CharactersMapper getCharactersMapper(
-		@NotNull List<MemberCharacterBookProjection> characterBookProjections,
-		int totalCountPerType
-	) {
-		return new CharactersMapper(
-			characterBookProjections.stream()
-				.collect(Collectors.groupingBy(MemberCharacterBookProjection::getType))
-				.entrySet()
-				.stream()
-				.collect(Collectors.toMap(
-						Map.Entry::getKey,
-						entry -> new CharacterSummaryInfoCollectionMapper(
-							totalCountPerType,
-							entry.getValue().stream()
-								.map(p -> new CharacterSummaryInfoMapper(
-									p.getCharacterNo().orElse(DEFAULT_NO_IF_NOT_EXIST),
-									p.getCount().orElse(ZERO),
-									p.getThumbnailImagePath(),
-									p.getIsAcquired())
-								)
-								.toList()
-						)
-					)
-				)
-		);
+			return characterJpaEntities.stream()
+				.map(characterJpaEntity -> {
+					Long characterNo = characterJpaEntity.getNo();
+					if (acquiredCharacterNos.contains(characterNo)) {
+						return memberCharacterJpaEntityMap.get(characterNo)
+							.toMemberCharacter(characterJpaEntity, true);
+					} else {
+						return MemberCharacter.notAcquired(memberNo, characterJpaEntity.toNamuCharacter());
+					}
+				})
+				.toList();
+		}
+		return Collections.emptyList();
 	}
 
 	@Override

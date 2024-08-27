@@ -10,16 +10,5 @@ public interface MemberCharacterJpaRepository extends JpaRepository<MemberCharac
 
 	@Nullable MemberCharacterJpaEntity findByMemberNoAndCharacterNo(long memberNo, long characterNo);
 
-	@Query("""
-		SELECT
-		    mc.no AS no, mc.memberNo AS memberNo, mc.characterNo AS characterNo, mc.count AS count,
-		    c.type AS type, c.thumbnailImagePath AS thumbnailImagePath,
-		    COUNT(c) OVER (PARTITION BY c.type) AS totalCountPerType,
-		    CASE WHEN mc.no IS NOT NULL THEN TRUE ELSE FALSE END AS isAcquired
-		FROM MemberCharacterJpaEntity mc
-		    RIGHT JOIN CharacterJpaEntity c
-		        ON mc.characterNo = c.no AND mc.memberNo = :memberNo
-		WHERE c.level = 4
-		ORDER BY mc.characterNo""")
-	List<MemberCharacterBookProjection> findMemberCharacterBookByMemberNo(long memberNo);
+	List<MemberCharacterJpaEntity> findByMemberNo(long memberNo);
 }
