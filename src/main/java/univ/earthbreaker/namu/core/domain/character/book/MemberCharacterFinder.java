@@ -1,4 +1,6 @@
-package univ.earthbreaker.namu.core.domain.character.book;
+package univ.earthbreaker.namu.core.view.character;
+
+import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
@@ -18,5 +20,9 @@ public class MemberCharacterFinder {
 			return memberCharacter;
 		}
 		throw MemberCharacterNotFoundException.notFound(characterNo);
+	}
+
+	@NotNull List<MemberCharacter> find(long memberNo) {
+		return memberCharacterRepository.findByMemberNo(memberNo);
 	}
 }

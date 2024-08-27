@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.domain.character.book;
+package univ.earthbreaker.namu.core.view.character;
 
 import univ.earthbreaker.namu.core.domain.character.CharacterType;
 import univ.earthbreaker.namu.core.domain.character.Gender;
@@ -10,12 +10,14 @@ public class MemberCharacter {
 	private final long memberNo;
 	private final int count;
 	private final NamuCharacter character;
+	private final boolean isAcquired;
 
-	public MemberCharacter(long no, long memberNo, int count, NamuCharacter character) {
+	public MemberCharacter(long no, long memberNo, int count, NamuCharacter character, boolean isAcquired) {
 		this.no = no;
 		this.memberNo = memberNo;
 		this.count = count;
 		this.character = character;
+		this.isAcquired = isAcquired;
 	}
 
 	public int getCount() {
