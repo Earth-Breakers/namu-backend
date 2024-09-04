@@ -6,7 +6,6 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -31,12 +30,12 @@ public class MemberMissionCertifyService {
 		MemberMissionFinder memberMissionFinder,
 		MissionCertifyHandler missionCertifyHandler,
 		EventPublisher eventPublisher,
-		PlatformTransactionManager platformTransactionManager
+		TransactionTemplate transactionTemplate
 	) {
 		this.memberMissionFinder = memberMissionFinder;
 		this.missionCertifyHandler = missionCertifyHandler;
 		this.eventPublisher = eventPublisher;
-		this.transactionTemplate = new TransactionTemplate(platformTransactionManager);
+		this.transactionTemplate = transactionTemplate;
 	}
 
 	public void successMission(
