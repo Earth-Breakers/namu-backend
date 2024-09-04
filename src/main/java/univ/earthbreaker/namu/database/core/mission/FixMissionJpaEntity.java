@@ -27,4 +27,37 @@ public class FixMissionJpaEntity extends BaseTimeJpaEntity {
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private MissionType type;
+
+	protected FixMissionJpaEntity() {
+	}
+
+	public FixMissionJpaEntity(Long no, String missionActivity, String missionType) {
+		this(MissionActivity.valueOf(missionActivity), MissionType.valueOf(missionType));
+		this.no = no;
+	}
+
+	private FixMissionJpaEntity(MissionActivity activity, MissionType type) {
+		this.activity = activity;
+		this.type = type;
+	}
+
+	MissionActivity getActivity() {
+		return activity;
+	}
+
+	MissionType getType() {
+		return type;
+	}
+
+	public Long getMissionNo() {
+		return no;
+	}
+
+	public String getMissionActivityName() {
+		return activity.name();
+	}
+
+	public String getMissionTypeName() {
+		return type.name();
+	}
 }
