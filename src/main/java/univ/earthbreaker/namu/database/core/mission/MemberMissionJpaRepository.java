@@ -18,4 +18,8 @@ public interface MemberMissionJpaRepository extends JpaRepository<MemberMissionJ
 	@Modifying
 	@Query("UPDATE MemberMissionJpaEntity mm SET mm.status = :status WHERE mm.missionNo = :missionNo AND mm.memberNo = :memberNo")
 	void updateMemberMission(long memberNo, long missionNo, MissionStatus status);
+
+	@Modifying
+	@Query("DELETE FROM MemberMissionJpaEntity mm WHERE mm.memberNo IN :memberNos")
+	void deleteAllByMemberNos(List<Long> memberNos);
 }

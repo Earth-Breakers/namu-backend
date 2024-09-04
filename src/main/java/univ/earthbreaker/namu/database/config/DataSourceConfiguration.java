@@ -15,7 +15,7 @@ import com.zaxxer.hikari.HikariDataSource;
 @Configuration
 public class DataSourceConfiguration implements SeparatedProfileDataSourceConfigurable<DataSource> {
 
-	private static final String DATA_SOURCE_BEAN = "dataSourceBean";
+	private static final String DATA_SOURCE_BEAN = "dataSource";
 
 	@Override
 	@Primary
