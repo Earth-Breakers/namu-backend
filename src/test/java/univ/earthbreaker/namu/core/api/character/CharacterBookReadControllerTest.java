@@ -13,15 +13,15 @@ import static org.springframework.restdocs.request.RequestDocumentation.paramete
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static univ.earthbreaker.namu.core.domain.common.Constant.IMAGE_SYSTEM_PROPERTY;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.ACQUIRED_COUNT;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.BOOK_RESULT;
+import static univ.earthbreaker.namu.core.api.character.CharacterResponseFixture.ACQUIRED_COUNT;
+import static univ.earthbreaker.namu.core.api.character.CharacterResponseFixture.MEMBER_CHARACTER_1;
+import static univ.earthbreaker.namu.core.api.character.CharacterResponseFixture.MEMBER_CHARACTERS;
+import static univ.earthbreaker.namu.core.api.character.CharacterResponseFixture.TOTAL_ACQUIRED_COUNT;
+import static univ.earthbreaker.namu.core.api.character.CharacterResponseFixture.TOTAL_COUNT_OF_TYPE;
 import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.CHARACTER_IMAGE_PATH;
 import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.CHARACTER_NO;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.MEMBER_CHARACTER;
 import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.MEMBER_NO;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.TOTAL_ACQUIRED_COUNT;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.TOTAL_COUNT_OF_TYPE;
+import static univ.earthbreaker.namu.core.domain.common.Constant.IMAGE_SYSTEM_PROPERTY;
 import static univ.earthbreaker.namu.support.apidocs.ApiDocsUtils.API_DOCUMENT_IDENTIFIER;
 import static univ.earthbreaker.namu.support.apidocs.ApiDocsUtils.operationRequestPreprocessor;
 import static univ.earthbreaker.namu.support.apidocs.ApiDocsUtils.operationResponsePreprocessor;
@@ -37,7 +37,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import univ.earthbreaker.namu.core.api.PresentationTest;
 import univ.earthbreaker.namu.core.domain.character.book.CharacterBookDetailReadService;
-import univ.earthbreaker.namu.core.domain.character.book.CharacterBookReadService;
+import univ.earthbreaker.namu.core.domain.character.book.MemberCharacterFinder;
 
 class CharacterBookReadControllerTest extends PresentationTest {
 
@@ -46,12 +46,11 @@ class CharacterBookReadControllerTest extends PresentationTest {
 
 	private static final String TEST_IMAGE_ACCESS_URL = "https://namu.test.image.com";
 
-	private final CharacterBookReadService characterBookReadService
-		= Mockito.mock(CharacterBookReadService.class);
+	private final MemberCharacterFinder memberCharacterFinder = Mockito.mock(MemberCharacterFinder.class);
 	private final CharacterBookDetailReadService characterBookDetailReadService
 		= Mockito.mock(CharacterBookDetailReadService.class);
 	private final CharacterBookReadController characterBookReadController
-		= new CharacterBookReadController(characterBookReadService, characterBookDetailReadService);
+		= new CharacterBookReadController(memberCharacterFinder, characterBookDetailReadService);
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -63,8 +62,8 @@ class CharacterBookReadControllerTest extends PresentationTest {
 	@Test
 	void readAll() throws Exception {
 	    // given
-		Mockito.when(characterBookReadService.readAll(MEMBER_NO))
-			.thenReturn(BOOK_RESULT);
+		Mockito.when(memberCharacterFinder.findAllBy(MEMBER_NO))
+			.thenReturn(MEMBER_CHARACTERS);
 
 	    // when
 		ResultActions resultActions = whenGetWithAuthorization(ALL_CHARACTER_BOOK_URI);
@@ -74,14 +73,12 @@ class CharacterBookReadControllerTest extends PresentationTest {
 			.andExpect(MockMvcResultMatchers.status().isOk())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 			.andExpect(jsonPath("$.totalAcquiredCount").value(TOTAL_ACQUIRED_COUNT))
-			.andExpect(jsonPath("$.sectionResults[0].totalCountOfType").value(TOTAL_COUNT_OF_TYPE))
-			.andExpect(jsonPath("$.sectionResults[0].acquiredCount").value(ACQUIRED_COUNT))
-			.andExpect(jsonPath("$.sectionResults[0].profileResults[0].characterNo").value(CHARACTER_NO))
-			.andExpect(jsonPath("$.sectionResults[0].profileResults[0].thumbnailImageUrl").value(System.getProperty(IMAGE_SYSTEM_PROPERTY) + CHARACTER_IMAGE_PATH))
-			.andExpect(jsonPath("$.sectionResults[0].profileResults[0].isAcquired").value(true))
-			.andExpect(jsonPath("$.sectionResults[0].profileResults[1].characterNo").value(0))
-			.andExpect(jsonPath("$.sectionResults[0].profileResults[1].thumbnailImageUrl").value(System.getProperty(IMAGE_SYSTEM_PROPERTY) + CHARACTER_IMAGE_PATH))
-			.andExpect(jsonPath("$.sectionResults[0].profileResults[1].isAcquired").value(false));
+			.andExpect(jsonPath("$.sectionResponses[0].totalCountOfType").value(TOTAL_COUNT_OF_TYPE))
+			.andExpect(jsonPath("$.sectionResponses[0].acquiredCount").value(ACQUIRED_COUNT))
+			.andExpect(jsonPath("$.sectionResponses[0].profileResponses[0].thumbnailImageUrl").value(System.getProperty(IMAGE_SYSTEM_PROPERTY) + CHARACTER_IMAGE_PATH))
+			.andExpect(jsonPath("$.sectionResponses[0].profileResponses[0].isAcquired").value(true))
+			.andExpect(jsonPath("$.sectionResponses[0].profileResponses[1].thumbnailImageUrl").value(System.getProperty(IMAGE_SYSTEM_PROPERTY) + CHARACTER_IMAGE_PATH))
+			.andExpect(jsonPath("$.sectionResponses[0].profileResponses[1].isAcquired").value(false));
 
 		// apidocs
 		resultActions
@@ -95,14 +92,14 @@ class CharacterBookReadControllerTest extends PresentationTest {
 					),
 					responseFields(
 						fieldWithPath("totalAcquiredCount").type(NUMBER).description("총 획득한 캐릭터 수"),
-						fieldWithPath("sectionResults").type(ARRAY).description("섹션별 결과 목록"),
-						fieldWithPath("sectionResults[].type").type(STRING).description("캐릭터 타입"),
-						fieldWithPath("sectionResults[].totalCountOfType").type(NUMBER).description("해당 타입의 총 캐릭터 수"),
-						fieldWithPath("sectionResults[].acquiredCount").type(NUMBER).description("획득한 해당 타입 캐릭터 수"),
-						fieldWithPath("sectionResults[].profileResults").type(ARRAY).description("캐릭터 프로필 결과 목록"),
-						fieldWithPath("sectionResults[].profileResults[].characterNo").type(NUMBER).description("캐릭터 번호 (획득하지 못한 캐릭터일 시 0)"),
-						fieldWithPath("sectionResults[].profileResults[].thumbnailImageUrl").type(STRING).description("캐릭터 썸네일 이미지 경로"),
-						fieldWithPath("sectionResults[].profileResults[].isAcquired").type(BOOLEAN).description("캐릭터 획득 여부")
+						fieldWithPath("sectionResponses").type(ARRAY).description("섹션별 결과 목록"),
+						fieldWithPath("sectionResponses[].type").type(STRING).description("캐릭터 타입"),
+						fieldWithPath("sectionResponses[].totalCountOfType").type(NUMBER).description("해당 타입의 총 캐릭터 수"),
+						fieldWithPath("sectionResponses[].acquiredCount").type(NUMBER).description("획득한 해당 타입 캐릭터 수"),
+						fieldWithPath("sectionResponses[].profileResponses").type(ARRAY).description("캐릭터 프로필 결과 목록"),
+						fieldWithPath("sectionResponses[].profileResponses[].characterNo").type(NUMBER).description("캐릭터 번호 (획득하지 못한 캐릭터일 시 0)"),
+						fieldWithPath("sectionResponses[].profileResponses[].thumbnailImageUrl").type(STRING).description("캐릭터 썸네일 이미지 경로"),
+						fieldWithPath("sectionResponses[].profileResponses[].isAcquired").type(BOOLEAN).description("캐릭터 획득 여부")
 					)
 				)
 			);
@@ -113,8 +110,8 @@ class CharacterBookReadControllerTest extends PresentationTest {
 	void readDetail() throws Exception {
 	    // given
 		Mockito.when(characterBookDetailReadService.retrieveDetail(MEMBER_NO, CHARACTER_NO))
-			.thenReturn(MEMBER_CHARACTER);
-		CharacterDetailResponse expect = CharacterDetailResponse.from(MEMBER_CHARACTER);
+			.thenReturn(MEMBER_CHARACTER_1);
+		CharacterDetailResponse expect = CharacterDetailResponse.from(MEMBER_CHARACTER_1);
 
 		// when
 		ResultActions resultActions = whenGetWithAuthorization(DETAIL_CHARACTER_BOOK_URI, CHARACTER_NO);

@@ -749,49 +749,54 @@ Host: namu.api.docs</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 1275
+Content-Length: 1503
 
 {
   "totalAcquiredCount" : 3,
-  "sectionResults" : [ {
+  "sectionResponses" : [ {
     "type" : "BEAUTY",
     "totalCountOfType" : 2,
     "acquiredCount" : 1,
-    "profileResults" : [ {
-      "characterNo" : 1,
+    "profileResponses" : [ {
+      "characterNo" : 9223372036854775807,
       "thumbnailImageUrl" : "https://namu.test.image.com/character-dir/test_image.png",
       "isAcquired" : true
     }, {
-      "characterNo" : 0,
-      "thumbnailImageUrl" : "https://namu.test.image.com/character-dir/test_image.png",
-      "isAcquired" : false
-    } ]
-  }, {
-    "type" : "PURIFY",
-    "totalCountOfType" : 2,
-    "acquiredCount" : 1,
-    "profileResults" : [ {
-      "characterNo" : 1,
-      "thumbnailImageUrl" : "https://namu.test.image.com/character-dir/test_image.png",
-      "isAcquired" : true
-    }, {
-      "characterNo" : 0,
+      "characterNo" : 9223372036854775807,
       "thumbnailImageUrl" : "https://namu.test.image.com/character-dir/test_image.png",
       "isAcquired" : false
     } ]
   }, {
     "type" : "VITALITY",
     "totalCountOfType" : 2,
-    "acquiredCount" : 1,
-    "profileResults" : [ {
-      "characterNo" : 1,
+    "acquiredCount" : 2,
+    "profileResponses" : [ {
+      "characterNo" : 9223372036854775807,
       "thumbnailImageUrl" : "https://namu.test.image.com/character-dir/test_image.png",
       "isAcquired" : true
     }, {
-      "characterNo" : 0,
+      "characterNo" : 9223372036854775807,
+      "thumbnailImageUrl" : "https://namu.test.image.com/character-dir/test_image.png",
+      "isAcquired" : true
+    } ]
+  }, {
+    "type" : "PURIFY",
+    "totalCountOfType" : 2,
+    "acquiredCount" : 1,
+    "profileResponses" : [ {
+      "characterNo" : 9223372036854775807,
+      "thumbnailImageUrl" : "https://namu.test.image.com/character-dir/test_image.png",
+      "isAcquired" : true
+    }, {
+      "characterNo" : 9223372036854775807,
       "thumbnailImageUrl" : "https://namu.test.image.com/character-dir/test_image.png",
       "isAcquired" : false
     } ]
+  }, {
+    "type" : "DEFAULT",
+    "totalCountOfType" : 0,
+    "acquiredCount" : 0,
+    "profileResponses" : [ ]
   } ]
 }</code></pre>
 </div>
@@ -819,42 +824,42 @@ Content-Length: 1275
 <td class="tableblock halign-left valign-top"><p class="tableblock">총 획득한 캐릭터 수</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sectionResults</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sectionResponses</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">섹션별 결과 목록</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sectionResults[].type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sectionResponses[].type</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">캐릭터 타입</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sectionResults[].totalCountOfType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sectionResponses[].totalCountOfType</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">해당 타입의 총 캐릭터 수</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sectionResults[].acquiredCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sectionResponses[].acquiredCount</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">획득한 해당 타입 캐릭터 수</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sectionResults[].profileResults</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sectionResponses[].profileResponses</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">캐릭터 프로필 결과 목록</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sectionResults[].profileResults[].characterNo</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sectionResponses[].profileResponses[].characterNo</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">캐릭터 번호 (획득하지 못한 캐릭터일 시 0)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sectionResults[].profileResults[].thumbnailImageUrl</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sectionResponses[].profileResponses[].thumbnailImageUrl</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">캐릭터 썸네일 이미지 경로</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sectionResults[].profileResults[].isAcquired</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sectionResponses[].profileResponses[].isAcquired</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">캐릭터 획득 여부</p></td>
 </tr>
@@ -928,7 +933,7 @@ Content-Length: 231
 
 {
   "characterNo" : 9223372036854775807,
-  "count" : 5,
+  "count" : 1,
   "isEndangered" : true,
   "type" : "BEAUTY",
   "gender" : "MALE",
