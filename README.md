@@ -22,4 +22,5 @@
 - [도메인 예외 발생 위치에 대한 고민](https://chanwoo.vercel.app/graduation-5)
 - [애그리거트 루트 하위 객체에서의 일급 컬렉션 사용에 대하여](https://chanwoo.vercel.app/graduation-7)
 - [이벤트를 활용해 외부 네트워크 작업과 DB 트랜잭션 분리하기](https://chanwoo.vercel.app/graduation-8)
-- [Spring Batch 에서 Step 간 데이터 공유하기 (feat.ExecutionContextPromotionListener)](https://chanwoo.vercel.app/graduation-10)
+- [Spring Batch 에서 Step 간 데이터 공유하기 2 ](https://chanwoo.vercel.app/graduation-11)
+- [@TransactionalEventListener(AFTER_ROLLBACK) 사용 시 트랜잭션 리소스가 반납되지 않아 발생한 문제와 해결](https://chanwoo.vercel.app/graduation-12)
