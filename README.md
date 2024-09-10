@@ -2,6 +2,10 @@
 
 ## 프로젝트 환경 설정
 
+### 서버 구조
+<img width="821" alt="스크린샷 2024-09-10 오후 12 19 03" src="https://github.com/user-attachments/assets/429ebdf8-22ab-46f9-ad0c-9052d1e85eff">
+
+
 ### 아키텍처
 
 - [졸업 프로젝트 서버 아키텍처 (feat.DDD)](https://chanwoo.vercel.app/graduation-1)
