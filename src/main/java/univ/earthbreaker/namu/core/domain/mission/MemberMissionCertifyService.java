@@ -1,10 +1,6 @@
 package univ.earthbreaker.namu.core.domain.mission;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
@@ -17,9 +13,6 @@ import univ.earthbreaker.namu.event.post.PostCreateEvent;
 
 @Service
 public class MemberMissionCertifyService {
-
-	private static final Logger LOGGER = LoggerFactory.getLogger(MemberMissionCertifyService.class);
-	private static final AtomicBoolean IS_ROLLBACK = new AtomicBoolean(false);
 
 	private final MemberMissionFinder memberMissionFinder;
 	private final MissionCertifyHandler missionCertifyHandler;
@@ -42,29 +35,24 @@ public class MemberMissionCertifyService {
 		@NotNull MissionCompleteCommand missionCommand,
 		@NotNull CertifiedMissionPostCommand postCommand
 	) {
-		transactionTemplate.execute(new TransactionCallbackWithoutResult() {
-			@Override
-			protected void doInTransactionWithoutResult(@NotNull TransactionStatus status) {
-				try {
+		try {
+			transactionTemplate.execute(new TransactionCallbackWithoutResult() {
+				@Override
+				protected void doInTransactionWithoutResult(@NotNull TransactionStatus status) {
 					MemberMission memberMission = memberMissionFinder.find(
 						missionCommand.getMemberNo(), missionCommand.getMissionNo());
 					MemberMission successMission = missionCertifyHandler.success(memberMission);
 					publishRewardEventForSuccessMission(successMission);
 					publishCreatePostEventForSuccessMission(postCommand, successMission);
-				} catch (Exception e) {
-					LOGGER.info("예외 발생으로 인한 트랜잭션 롤백 및 이미지 삭제 : {}", e.getMessage());
-					status.setRollbackOnly();
-					IS_ROLLBACK.set(status.isRollbackOnly());
 				}
-			}
-		});
-		publishDeleteUploadImageEventWhenTransactionRollback(postCommand.getImagePathKey());
+			});
+		} catch (Exception e) {
+			publishDeleteUploadImageEventWhenTransactionRollback(postCommand.getImagePathKey());
+		}
 	}
 
 	private void publishDeleteUploadImageEventWhenTransactionRollback(@NotNull String imagePathKey) {
-		if (IS_ROLLBACK.get()) {
-			eventPublisher.publish(new DeleteUploadedImageEvent(imagePathKey));
-		}
+		eventPublisher.publish(new DeleteUploadedImageEvent(imagePathKey));
 	}
 
 	private void publishRewardEventForSuccessMission(@NotNull MemberMission successMission) {
@@ -86,7 +74,8 @@ public class MemberMissionCertifyService {
 	}
 
 	public void failureMission(@NotNull MissionCompleteCommand missionCommand) {
-		MemberMission memberMission = memberMissionFinder.find(missionCommand.getMemberNo(), missionCommand.getMissionNo());
+		MemberMission memberMission = memberMissionFinder.find(missionCommand.getMemberNo(),
+			missionCommand.getMissionNo());
 		missionCertifyHandler.failure(memberMission);
 	}
 }
