@@ -31,7 +31,7 @@ public class MemberMissionCertifyController {
 
 	public MemberMissionCertifyController(
 		MemberMissionCertifyService memberMissionCertifyService,
-		ImageManager imageManager,
+		@Qualifier("awsS3ImageManager") ImageManager imageManager,
 		@Qualifier("missionPostImagePathGen") ImagePathKeyGenerator imagePathKeyGenerator
 	) {
 		this.memberMissionCertifyService = memberMissionCertifyService;
