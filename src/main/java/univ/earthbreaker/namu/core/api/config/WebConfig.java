@@ -41,7 +41,8 @@ public class WebConfig implements WebMvcConfigurer {
 			.excludePathPatterns("/v1/admin/**")
 			.excludePathPatterns(DOCUMENT_PATH)
 			.excludePathPatterns("/v1/auth/login/kakao")
-			.excludePathPatterns("/v1/auth/reissue");
+			.excludePathPatterns("/v1/auth/reissue")
+			.excludePathPatterns("/external/**");
 		registry.addInterceptor(traceLoggingInterceptor)
 			.addPathPatterns("/**")
 			.excludePathPatterns("/")
