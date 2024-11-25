@@ -11,44 +11,66 @@ import org.springframework.stereotype.Component;
 @Component
 public class RandomLatencyImageManager {
 
+	private static final ExternalImageStorage STORAGE = new ExternalImageStorage();
+	private static final Random RANDOM = new Random();
+
 	private static final int MIN_DELAY_MS = 100; // 최소 지연 시간
 	private static final int MAX_DELAY_MS = 10_000; // 최대 지연 시간
-
-	private final Random random = new Random();
+	private static final double EXCEPTION_PROBABILITY = 0.1; // 예외 발생 확률 (10%)
 
 	/**
-	 * 동기적으로 이미지를 업로드하는 메서드.
-	 * @param s1
-	 * @param s2
+	 * 동기적으로 이미지를 업로드
+	 * @param imageKey 이미지 키
+	 * @param imageData 이미지 파일 데이터
 	 * @return 업로드 결과 메시지
-	 * @throws InterruptedException 지연 시 예외 발생 가능
 	 */
-	public String uploadImage(String s1, String s2) {
-		// 랜덤한 지연 시간 생성 (100ms ~ 10000ms)
-		int delay = random.nextInt(MAX_DELAY_MS - MIN_DELAY_MS + 1) + MIN_DELAY_MS;
+	public String uploadImage(String imageKey, String imageData) {
+		int delay = getDelay();
+		delaySimulation(delay);
+		invokeException();
 
-		// 지연 시뮬레이션
-		try {
-			Thread.sleep(delay);
-		} catch (InterruptedException e) {
-			throw new RuntimeException(e);
-		}
-
-		// 업로드 처리 결과 반환
-		return "Image uploaded successfully after " + delay + "ms";
+		String uploadedImageKey = STORAGE.upload(imageKey, imageData);
+		return uploadedImageKey + " image uploaded successfully after " + delay + "ms";
 	}
 
-	public String deleteImage(String imagePathKey) {
-		// 랜덤한 지연 시간 생성 (100ms ~ 10000ms)
-		int delay = random.nextInt(MAX_DELAY_MS - MIN_DELAY_MS + 1) + MIN_DELAY_MS;
+	/**
+	 * @param imageKey 이미지 키
+	 * @return 삭제 결과 메시지
+	 */
+	public String deleteImage(String imageKey) {
+		int delay = getDelay();
+		delaySimulation(delay);
+		invokeException();
 
-		// 지연 시뮬레이션
+		STORAGE.delete(imageKey);
+		return "Image deleted successfully after " + delay + "ms";
+	}
+
+	/**
+	 * @return 랜덤한 지연 시간 (100ms ~ 10000ms)
+	 */
+	private int getDelay() {
+		return RANDOM.nextInt(MAX_DELAY_MS - MIN_DELAY_MS + 1) + MIN_DELAY_MS;
+	}
+
+	/**
+	 * 지연 시뮬레이션
+	 * @param delay 지연시간
+	 */
+	private void delaySimulation(int delay) {
 		try {
 			Thread.sleep(delay);
 		} catch (InterruptedException e) {
-			throw new RuntimeException(e);
+			throw new ExternalImageServerException(e.getMessage());
 		}
+	}
 
-		return "Image deleted successfully after " + delay + "ms";
+	/**
+	 * 10% 확률로 실패 발생시키기
+	 */
+	private void invokeException() {
+		if (RANDOM.nextDouble() < EXCEPTION_PROBABILITY) {
+			throw new ExternalImageServerException("Simulated exception during image upload");
+		}
 	}
 }
