@@ -1,6 +1,6 @@
 package univ.earthbreaker.namu.external.server;
 
-import org.springframework.http.HttpStatusCode;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,29 +16,15 @@ public class ExternalImageApiServer {
 		this.randomLatencyImageManager = randomLatencyImageManager;
 	}
 
-	@PostMapping("/upload/success")
+	@PostMapping("/upload")
 	public ResponseEntity<ExternalImageResponse> uploadSuccess() {
 		String result = randomLatencyImageManager.uploadImage("", "");
-		return new ResponseEntity<>(
-			new ExternalImageResponse(200, result),
-			HttpStatusCode.valueOf(200)
-		);
+		return ResponseEntity.ok(new ExternalImageResponse(HttpStatus.OK.value(), result));
 	}
 
-	@PostMapping("/upload/fail")
-	public ResponseEntity<ExternalImageResponse> uploadFail() {
-		return new ResponseEntity<>(
-			new ExternalImageResponse(400, "image upload fail"),
-			HttpStatusCode.valueOf(400)
-		);
-	}
-
-	@PostMapping("/delete/success")
+	@PostMapping("/delete")
 	public ResponseEntity<ExternalImageResponse> deleteSuccess() {
 		String result = randomLatencyImageManager.deleteImage("");
-		return new ResponseEntity<>(
-			new ExternalImageResponse(200, result),
-			HttpStatusCode.valueOf(200)
-		);
+		return ResponseEntity.ok(new ExternalImageResponse(HttpStatus.OK.value(), result));
 	}
 }
