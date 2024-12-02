@@ -3,7 +3,7 @@ package univ.earthbreaker.namu.external.image;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import feign.Response;
+import univ.earthbreaker.namu.external.server.ExternalImageResponse;
 
 @FeignClient(
 	name = "imageApiCaller",
@@ -11,9 +11,9 @@ import feign.Response;
 	configuration = ImageFeignConfiguration.class)
 public interface ImageApiCaller {
 
-	@PostMapping(value = "/upload/success")
-	Response uploadImage();
+	@PostMapping(value = "/upload")
+	ExternalImageResponse uploadImage();
 
-	@PostMapping(value = "/delete/success")
-	Response deleteImage();
+	@PostMapping(value = "/delete")
+	ExternalImageResponse deleteImage();
 }
