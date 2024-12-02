@@ -9,7 +9,7 @@ public class ExternalImageStorage {
 
 	public String upload(String imageKey, String imageData) {
 		if (storage.get(imageKey) != null) { // 중복 검사
-			throw new ExternalImageServerException("이미 저장된 이미지입니다");
+			throw new ExternalBadRequestException("이미 저장된 이미지입니다");
 		}
 		storage.put(imageKey, imageData);
 		return imageKey;
@@ -17,13 +17,13 @@ public class ExternalImageStorage {
 
 	public void delete(String imageKey) {
 		if (storage.remove(imageKey) == null) {
-			throw new ExternalImageServerException("Image with Key " + imageKey + " not found.");
+			throw new ExternalBadRequestException("Image with Key " + imageKey + " not found.");
 		}
 	}
 
 	public String download(String imageKey) {
 		if (imageKey == null) {
-			throw new ExternalImageServerException("Image ID must not be null.");
+			throw new ExternalBadRequestException("Image ID must not be null.");
 		}
 
 		String imageData = storage.get(imageKey);
