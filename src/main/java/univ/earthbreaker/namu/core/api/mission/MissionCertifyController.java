@@ -1,5 +1,8 @@
 package univ.earthbreaker.namu.core.api.mission;
 
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
+
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,7 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import univ.earthbreaker.namu.core.api.auth.support.AuthMapping;
 import univ.earthbreaker.namu.core.api.auth.support.LoginMember;
+import univ.earthbreaker.namu.core.domain.mission.CertifiedMissionPostCommand;
 import univ.earthbreaker.namu.core.domain.mission.MemberMissionCertifyService;
+import univ.earthbreaker.namu.core.domain.mission.MissionCompleteCommand;
 import univ.earthbreaker.namu.external.aws.image.ImageManager;
 import univ.earthbreaker.namu.external.aws.image.ImagePathKeyGenerator;
 import univ.earthbreaker.namu.external.aws.image.ImageUploadCommand;
@@ -25,15 +30,18 @@ public class MissionCertifyController {
 	private final ImageManager imageManager;
 	private final ImagePathKeyGenerator imagePathKeyGenerator;
 	private final MemberMissionCertifyService missionCertifyService;
+	private final Executor executor;
 
 	public MissionCertifyController(
 		@Qualifier("externalImageManager") ImageManager imageManager,
 		@Qualifier("missionPostImagePathGen") ImagePathKeyGenerator imagePathKeyGenerator,
-		MemberMissionCertifyService missionCertifyService
+		MemberMissionCertifyService missionCertifyService,
+		Executor threadPoolExecutor
 	) {
 		this.imageManager = imageManager;
 		this.imagePathKeyGenerator = imagePathKeyGenerator;
 		this.missionCertifyService = missionCertifyService;
+		this.executor = threadPoolExecutor;
 	}
 
 	@AuthMapping
@@ -44,7 +52,19 @@ public class MissionCertifyController {
 		@RequestPart(value = "content") String content,
 		@RequestPart(value = "imageFile") MultipartFile missionImageFile
 	) {
-		String result = imageManager.upload(ImageUploadCommand.forMember(memberNo, missionImageFile, imagePathKeyGenerator));
-		return ResponseEntity.status(HttpStatus.CREATED).body(result);
+		CompletableFuture.supplyAsync(
+				() -> imageManager.upload(ImageUploadCommand.forMember(memberNo, missionImageFile, imagePathKeyGenerator)),
+				executor
+			)
+			.exceptionally(ex -> null)
+			.thenAccept(result -> {
+				if (result != null) {
+					missionCertifyService.successMission(
+						new MissionCompleteCommand(memberNo, missionNo),
+						new CertifiedMissionPostCommand(memberNo, content, result)
+					);
+				}
+			});
+		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 }
