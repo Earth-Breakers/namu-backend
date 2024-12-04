@@ -17,7 +17,7 @@ import univ.earthbreaker.namu.core.domain.common.NotFoundException;
 import univ.earthbreaker.namu.core.auth.UnAuthorizedException;
 import univ.earthbreaker.namu.external.oauth.OAuthClientException;
 
-@RestControllerAdvice
+@RestControllerAdvice(basePackages = "univ.earthbreaker.namu.core.api")
 public class NamuExceptionResponseHandler {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(NamuExceptionResponseHandler.class);

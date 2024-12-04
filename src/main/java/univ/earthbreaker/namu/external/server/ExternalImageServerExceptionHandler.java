@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@RestControllerAdvice
+@RestControllerAdvice(basePackages = "univ.earthbreaker.namu.external.server")
 public class ExternalImageServerExceptionHandler {
 
 	@ExceptionHandler(ExternalBadRequestException.class)
