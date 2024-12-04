@@ -22,7 +22,7 @@ import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import univ.earthbreaker.namu.event.EventPublisher;
-import univ.earthbreaker.namu.event.image.DeleteUploadedImageEvent;
+import univ.earthbreaker.namu.event.image.DeleteExternalUploadedImageEvent;
 import univ.earthbreaker.namu.event.point.AddRewardPointEvent;
 import univ.earthbreaker.namu.event.post.PostCreateEvent;
 
@@ -104,7 +104,7 @@ class MemberMissionCertifyServiceTest {
 		);
 
 	    // then
-		verify(eventPublisher).publish(new DeleteUploadedImageEvent(MISSION_POST_IMAGE_PATH_KEY));
+		verify(eventPublisher).publish(new DeleteExternalUploadedImageEvent(MISSION_POST_IMAGE_PATH_KEY));
 	}
 
 	@DisplayName("회원의 인증 성공한 미션을 찾아와 '미션 실패'상태로 변경한다")
