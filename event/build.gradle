@@ -1,0 +1,4 @@
+dependencies {
+    compileOnly 'org.springframework:spring-context'
+    // Kafka 또는 RabbitMQ 등 교체 가능
+}

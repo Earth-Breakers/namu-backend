@@ -1,0 +1,14 @@
+token:
+  jwt:
+    secret: jB1lm0giiuv7GMHtDVIHMfCYFKWz6gEKfX1eevXxBU4
+    access-valid-duration: 4320000000
+    refresh-valid-duration: 4320000000
+
+---
+spring.config.activate.on-profile: local
+
+token:
+  jwt:
+    secret: testTokenJwtSecretTestTokenJwtSecretTestTokenJwtSecretTestTokenJwtSecret
+    access-valid-duration: 604800000
+    refresh-valid-duration: 604800000

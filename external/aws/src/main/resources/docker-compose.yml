@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  localstack:
+    image: localstack/localstack:0.12.6 # 혹시나 자동 버전업으로 인한 오류를 막기위해 tag 명시
+    container_name: localstack
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=s3
+      - DEBUG=1
+      - DATA_DIR=/tmp/localstack/data
+      - AWS_ACCESS_KEY_ID=access-key
+      - AWS_SECRET_ACCESS_KEY=secret-key
+      - AWS_REGION=us-east-1
+    volumes:
+      - "${TMPDIR:-/tmp/localstack}:/tmp/localstack" # localstack 이 생성하는 파일을 직접 편집하고 싶을 때
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - ./data:/opt/data

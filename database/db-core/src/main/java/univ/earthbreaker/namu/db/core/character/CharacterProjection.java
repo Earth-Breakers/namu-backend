@@ -1,0 +1,15 @@
+package univ.earthbreaker.namu.db.core.character;
+
+import univ.earthbreaker.namu.core.domain.character.CharacterType;
+
+public interface CharacterProjection {
+	long getNo();
+	int getGroupNumber();
+	int getLevel();
+	CharacterType getType();
+	int getRequiredExp();
+	String getName();
+	String getMainImagePath();
+	String getBackgroundImagePath();
+	String getScripts();
+}

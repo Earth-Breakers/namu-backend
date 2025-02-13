@@ -1,0 +1,36 @@
+Configuration:
+  name: NamuLocalLogger
+  status: debug
+
+  Appenders:
+    Console:
+      name: NamuConsoleAppender
+      target: SYSTEM_OUT
+      PatternLayout:
+        pattern: "%style{%d}{cyan} %highlight{%-5level} [%style{%t}{bright,blue}] %style{%C}{bright,yellow}: [%X{memberId}] - %msg%n%throwable"
+
+  Loggers:
+    Root:
+      level: info
+      AppenderRef:
+        ref: NamuConsoleAppender
+    AsyncLogger:
+      - name: NamuAsyncLogger
+        level: debug
+        additivity: false
+        includeLocation: false
+        AppenderRef:
+          ref: NamuConsoleAppender
+    Logger:
+      - name: "org.hibernate.orm.jdbc.bind"
+        level: TRACE
+        additivity: false
+        AppenderRef:
+          - ref: NamuConsoleAppender
+          - ref: NamuRollingFileAppender
+      - name: "org.hibernate.SQL"
+        level: DEBUG
+        additivity: false
+        AppenderRef:
+          - ref: NamuConsoleAppender
+          - ref: NamuRollingFileAppender
