@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.server.external;
+package univ.earthbreaker.namu.server.external.exception;
 
 public class ExternalBadRequestException extends RuntimeException {
 

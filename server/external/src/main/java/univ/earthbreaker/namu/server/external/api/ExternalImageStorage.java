@@ -1,7 +1,10 @@
-package univ.earthbreaker.namu.server.external;
+package univ.earthbreaker.namu.server.external.api;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import univ.earthbreaker.namu.server.external.exception.ExternalBadRequestException;
+import univ.earthbreaker.namu.server.external.exception.ExternalImageServerException;
 
 public class ExternalImageStorage {
 

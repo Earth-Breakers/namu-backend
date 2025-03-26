@@ -1,8 +1,10 @@
-package univ.earthbreaker.namu.server.external;
+package univ.earthbreaker.namu.server.external.api;
 
 import java.util.Random;
 
 import org.springframework.stereotype.Component;
+
+import univ.earthbreaker.namu.server.external.exception.ExternalImageServerException;
 
 /**
  * 응답 지연시간이 100ms 에서 10000ms 로 랜덤한,
