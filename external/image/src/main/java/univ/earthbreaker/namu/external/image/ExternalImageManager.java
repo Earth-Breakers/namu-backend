@@ -2,10 +2,6 @@ package univ.earthbreaker.namu.external.image;
 
 import org.springframework.stereotype.Component;
 
-import univ.earthbreaker.namu.external.aws.image.ImageManager;
-import univ.earthbreaker.namu.external.aws.image.ImageUploadCommand;
-import univ.earthbreaker.namu.external.server.ExternalImageResponse;
-
 @Component
 public class ExternalImageManager implements ImageManager {
 
@@ -17,7 +13,7 @@ public class ExternalImageManager implements ImageManager {
 
 	@Override
 	public String upload(ImageUploadCommand command) {
-		ExternalImageResponse response = imageApiCaller.uploadImage();
+		ExternalImageResult response = imageApiCaller.uploadImage();
 		return response.message();
 	}
 
