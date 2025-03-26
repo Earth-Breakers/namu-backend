@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.external.server;
+package univ.earthbreaker.namu.server.external;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
