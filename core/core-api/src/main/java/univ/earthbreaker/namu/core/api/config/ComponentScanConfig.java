@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ComponentScan(basePackages = {
-	"univ.earthbreaker.namu.external.aws",
+	// "univ.earthbreaker.namu.external.aws",
 	"univ.earthbreaker.namu.external.image",
 	"univ.earthbreaker.namu.external.oauth",
 	"univ.earthbreaker.namu.external.notification"

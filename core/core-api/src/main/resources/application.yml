@@ -4,7 +4,8 @@ spring.profiles.active: local
 spring:
   config:
     import:
-      - external-aws.yml
+      - core-auth.yml
+#      - external-aws.yml
       - external-oauth.yml
       - external-notification.yml
       - db-core.yml
@@ -15,9 +16,9 @@ spring:
       max-file-size: 10MB
       max-request-size: 10MB
 
-  image:
-    post-dir: complete-mission-post
-    character-dir: default-character
+image:
+  post-dir: complete-mission-post
+  character-dir: default-character
 
 server:
   tomcat:
@@ -25,6 +26,7 @@ server:
     threads:
       max: 600
       min-spare: 100
+  port: 8083
 
 ---
 spring.config.activate.on-profile: local

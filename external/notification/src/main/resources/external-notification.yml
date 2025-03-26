@@ -1,4 +1,4 @@
 firebase:
   fcm:
     config:
-      path: namu-backend-config/external/firebase/namu-firebase-adminsdk.json
+      path: /firebase/namu-firebase-adminsdk.json

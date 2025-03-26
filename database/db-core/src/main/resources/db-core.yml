@@ -21,6 +21,16 @@ spring:
     console:
       enabled: true
 
+database:
+  datasource:
+    core:
+      driver-class-name: org.h2.Driver
+      jdbc-url: jdbc:h2:mem:core;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+      username: sa
+      pool-name: core-db-pool
+      data-source-properties:
+        rewriteBatchedStatements: true
+
 ---
 spring.config.activate.on-profile: local-dev
 

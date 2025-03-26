@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core;
+package univ.earthbreaker.namu;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
