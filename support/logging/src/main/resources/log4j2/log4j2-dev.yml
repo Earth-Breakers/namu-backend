@@ -1,0 +1,30 @@
+Configuration:
+  name: NamuDevLogger
+  status: info
+
+  Appenders:
+    Console:
+      name: NamuConsoleAppender
+      target: SYSTEM_OUT
+      PatternLayout:
+        pattern: "%style{%d}{cyan} %highlight{%-5level} [%style{%t}{bright,blue}] %style{%C}{bright,yellow}: [%X{traceId}] - %msg%n%throwable"
+    Sentry:
+      name: SentryAppender
+      dsn: "https://bc619ab5ea8c4d745dc2bd4d56cbb05d@o4506773350973440.ingest.us.sentry.io/4506773410807808"
+      contextTags: "traceId"
+      minimumEventLevel: "WARN"
+      minimumBreadcrumbLevel: "INFO"
+
+  Loggers:
+    Root:
+      level: info
+      AppenderRef:
+        - ref: NamuConsoleAppender
+        - ref: SentryAppender
+    AsyncLogger:
+      - name: NamuAsyncLogger
+        level: debug
+        additivity: false
+        includeLocation: false
+        AppenderRef:
+          - ref: NamuConsoleAppender

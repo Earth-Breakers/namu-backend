@@ -1,0 +1,64 @@
+package univ.earthbreaker.namu.core.api.config;
+
+import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import univ.earthbreaker.namu.core.support.AuthenticationInterceptor;
+import univ.earthbreaker.namu.core.support.LoginMemberArgumentResolver;
+import univ.earthbreaker.namu.core.support.TraceLoggingInterceptor;
+
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+
+	private static final String DOCUMENT_PATH = "/docs/**";
+
+	private final AuthenticationInterceptor authenticationInterceptor;
+	private final TraceLoggingInterceptor traceLoggingInterceptor;
+	private final LoginMemberArgumentResolver loginMemberArgumentResolver;
+
+	public WebConfig(
+		AuthenticationInterceptor authenticationInterceptor,
+		TraceLoggingInterceptor traceLoggingInterceptor,
+		LoginMemberArgumentResolver loginMemberArgumentResolver
+	) {
+		this.authenticationInterceptor = authenticationInterceptor;
+		this.traceLoggingInterceptor = traceLoggingInterceptor;
+		this.loginMemberArgumentResolver = loginMemberArgumentResolver;
+	}
+
+	@Override
+	public void addInterceptors(@NotNull InterceptorRegistry registry) {
+		registry.addInterceptor(authenticationInterceptor)
+			.addPathPatterns("/**")
+			.excludePathPatterns("/")
+			.excludePathPatterns("/health")
+			.excludePathPatterns("/v1/admin/**")
+			.excludePathPatterns(DOCUMENT_PATH)
+			.excludePathPatterns("/v1/auth/login/kakao")
+			.excludePathPatterns("/v1/auth/reissue")
+			.excludePathPatterns("/external/**");
+		registry.addInterceptor(traceLoggingInterceptor)
+			.addPathPatterns("/**")
+			.excludePathPatterns("/")
+			.excludePathPatterns("/health")
+			.excludePathPatterns(DOCUMENT_PATH)
+			.excludePathPatterns("/v1/auth/login/kakao")
+			.excludePathPatterns("/v1/auth/reissue");
+	}
+
+	@Override
+	public void addArgumentResolvers(@NotNull List<HandlerMethodArgumentResolver> resolvers) {
+		resolvers.add(loginMemberArgumentResolver);
+	}
+
+	@Override
+	public void addResourceHandlers(@NotNull ResourceHandlerRegistry registry) {
+		registry.addResourceHandler(DOCUMENT_PATH).addResourceLocations("classpath:/static/docs/");
+	}
+}

@@ -1,1 +1,28 @@
+pluginManagement {
+    plugins {
+        id 'java'
+        id 'org.springframework.boot' version "${springBootVersion}"
+        id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
+        id 'org.asciidoctor.jvm.convert' version "${asciidoctorJvmConvert}"
+    }
+}
+
 rootProject.name = 'namu'
+
+include 'core:core-api'
+include 'core:core-auth'
+include 'core:core-domain'
+include 'database:db-core'
+include 'batch:batch-core'
+
+include 'event'
+
+include 'support:logging'
+include 'external:oauth'
+include 'external:aws'
+include 'external:notification'
+include 'external:image'
+
+include 'server:external'
+
+include 'tests:api-docs'

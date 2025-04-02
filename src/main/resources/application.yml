@@ -1,3 +1,0 @@
-spring:
-  config:
-    import: classpath:/namu-backend-config/application.yml

@@ -1,0 +1,43 @@
+spring.application.name: external-mock-server
+spring.profiles.active: local
+
+spring:
+  config:
+    import:
+
+  web.resources.add-mappings: false
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+  image:
+    post-dir: complete-mission-post
+    character-dir: default-character
+
+server:
+  tomcat:
+    max-connections: 20000
+    threads:
+      max: 600
+      min-spare: 100
+  port: 8082
+
+---
+spring.config.activate.on-profile: local
+
+
+---
+spring.config.activate.on-profile: local-dev
+
+
+---
+spring.config.activate.on-profile: dev
+
+
+---
+spring.config.activate.on-profile: staging
+
+
+---
+spring.config.activate.on-profile: live
