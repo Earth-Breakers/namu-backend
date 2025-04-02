@@ -18,7 +18,15 @@ public class RandomLatencyImageManager {
 
 	private static final int MIN_DELAY_MS = 100; // 최소 지연 시간
 	private static final int MAX_DELAY_MS = 10_000; // 최대 지연 시간
-	private static final double EXCEPTION_PROBABILITY = 0.1; // 예외 발생 확률 (10%)
+	private static final double EXCEPTION_PROBABILITY = 0.001; // 예외 발생 확률 (0.1%)
+
+	/**
+	 * @param imageKey 이미지 키
+	 * @return 업로드된 이미지 데이터
+	 */
+	public String getImage(String imageKey) {
+		return STORAGE.download(imageKey);
+	}
 
 	/**
 	 * 동기적으로 이미지를 업로드
@@ -68,7 +76,7 @@ public class RandomLatencyImageManager {
 	}
 
 	/**
-	 * 10% 확률로 실패 발생시키기
+	 * 0.1% 확률로 실패 발생시키기
 	 */
 	private void invokeException() {
 		if (RANDOM.nextDouble() < EXCEPTION_PROBABILITY) {

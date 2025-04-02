@@ -15,14 +15,14 @@ public class ExternalImageServerExceptionHandler {
 	public ResponseEntity<ExternalImageResponse> handle400Exception(ExternalBadRequestException exception) {
 		return ResponseEntity
 			.status(HttpStatus.BAD_REQUEST)
-			.body(new ExternalImageResponse(HttpStatus.BAD_REQUEST.value(), exception.getMessage()));
+			.body(new ExternalImageResponse(HttpStatus.BAD_REQUEST.value(), exception.getMessage(), null));
 	}
 
 	@ExceptionHandler(ExternalImageServerException.class)
 	public ResponseEntity<ExternalImageResponse> handle500Exception(ExternalImageServerException exception) {
 		return ResponseEntity
 			.status(HttpStatus.INTERNAL_SERVER_ERROR)
-			.body(new ExternalImageResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), exception.getMessage()));
+			.body(new ExternalImageResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), exception.getMessage(), null));
 	}
 }
 
