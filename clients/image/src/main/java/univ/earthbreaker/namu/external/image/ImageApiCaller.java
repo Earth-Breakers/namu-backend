@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 	name = "imageApiCaller",
 	url = "http://localhost:8082/external/image",
 	configuration = ImageFeignConfiguration.class)
-public interface ImageApiCaller {
+interface ImageApiCaller {
 
 	@PostMapping(value = "/upload")
 	ExternalImageResult uploadImage();

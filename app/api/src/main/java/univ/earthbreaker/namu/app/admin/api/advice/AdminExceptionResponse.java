@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.admin.api.advice;
+package univ.earthbreaker.namu.app.admin.api.advice;
 
 public record AdminExceptionResponse(int code, String message) {
 }

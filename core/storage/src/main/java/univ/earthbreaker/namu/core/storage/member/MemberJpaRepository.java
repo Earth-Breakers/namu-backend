@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.db.core.member;
+package univ.earthbreaker.namu.core.storage.member;
 
 import java.util.List;
 

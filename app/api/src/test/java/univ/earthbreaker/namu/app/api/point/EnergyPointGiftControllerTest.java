@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.api.point;
+package univ.earthbreaker.namu.app.api.point;
 
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
@@ -17,12 +17,12 @@ import org.mockito.Mockito;
 import org.springframework.http.HttpHeaders;
 import org.springframework.test.web.servlet.ResultActions;
 
-import univ.earthbreaker.namu.core.api.PresentationTest;
+import univ.earthbreaker.namu.app.api.PresentationTest;
 import univ.earthbreaker.namu.core.domain.point.EnergyGiftCommand;
 import univ.earthbreaker.namu.core.domain.point.EnergyPointGiftService;
 import univ.earthbreaker.namu.core.domain.point.EnergyPointPushNotificationBridge.GiftResult;
-import univ.earthbreaker.namu.external.notification.NotificationAdapter;
-import univ.earthbreaker.namu.external.notification.NotificationPort;
+import univ.earthbreaker.namu.services.notification.NotificationAdapter;
+import univ.earthbreaker.namu.services.notification.NotificationPort;
 
 class EnergyPointGiftControllerTest extends PresentationTest {
 

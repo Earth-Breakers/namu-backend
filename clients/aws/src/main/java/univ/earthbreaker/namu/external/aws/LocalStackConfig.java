@@ -14,7 +14,7 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 
 @Configuration
 @Profile({"local", "local-dev"})
-public class LocalStackConfig {
+class LocalStackConfig {
 
 	private static final String AWS_REGION = Regions.US_EAST_1.getName();
 	private static final String LOCAL_STACK_ACCESS_KEY = "access-key";

@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.api.reaction;
+package univ.earthbreaker.namu.app.api.reaction;
 
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
@@ -22,7 +22,7 @@ import org.mockito.Mockito;
 import org.springframework.http.HttpHeaders;
 import org.springframework.test.web.servlet.ResultActions;
 
-import univ.earthbreaker.namu.core.api.PresentationTest;
+import univ.earthbreaker.namu.app.api.PresentationTest;
 import univ.earthbreaker.namu.core.domain.reaction.ReactionService;
 
 class ReactionControllerTest extends PresentationTest {

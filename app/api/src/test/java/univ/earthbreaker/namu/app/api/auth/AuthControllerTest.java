@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.api.auth;
+package univ.earthbreaker.namu.app.api.auth;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
@@ -8,13 +8,13 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWit
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static univ.earthbreaker.namu.core.api.auth.AuthApiFixture.ACCESS_TOKEN;
-import static univ.earthbreaker.namu.core.api.auth.AuthApiFixture.ALREADY_MEMBER_LOGIN_RESULT;
-import static univ.earthbreaker.namu.core.api.auth.AuthApiFixture.LOGIN_REQUEST;
-import static univ.earthbreaker.namu.core.api.auth.AuthApiFixture.NEW_MEMBER_LOGIN_RESULT;
-import static univ.earthbreaker.namu.core.api.auth.AuthApiFixture.O_AUTH_RESULT;
-import static univ.earthbreaker.namu.core.api.auth.AuthApiFixture.REFRESH_TOKEN;
-import static univ.earthbreaker.namu.core.api.auth.AuthApiFixture.SOCIAL_TOKEN;
+import static univ.earthbreaker.namu.app.api.auth.AuthApiFixture.ACCESS_TOKEN;
+import static univ.earthbreaker.namu.app.api.auth.AuthApiFixture.ALREADY_MEMBER_LOGIN_RESULT;
+import static univ.earthbreaker.namu.app.api.auth.AuthApiFixture.LOGIN_REQUEST;
+import static univ.earthbreaker.namu.app.api.auth.AuthApiFixture.NEW_MEMBER_LOGIN_RESULT;
+import static univ.earthbreaker.namu.app.api.auth.AuthApiFixture.O_AUTH_RESULT;
+import static univ.earthbreaker.namu.app.api.auth.AuthApiFixture.REFRESH_TOKEN;
+import static univ.earthbreaker.namu.app.api.auth.AuthApiFixture.SOCIAL_TOKEN;
 import static univ.earthbreaker.namu.support.apidocs.ApiDocsUtils.API_DOCUMENT_IDENTIFIER;
 import static univ.earthbreaker.namu.support.apidocs.ApiDocsUtils.operationRequestPreprocessor;
 import static univ.earthbreaker.namu.support.apidocs.ApiDocsUtils.operationResponsePreprocessor;
@@ -27,10 +27,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.ResultActions;
 
-import univ.earthbreaker.namu.core.api.PresentationTest;
+import univ.earthbreaker.namu.app.api.PresentationTest;
 import univ.earthbreaker.namu.core.domain.account.AccountService;
 import univ.earthbreaker.namu.core.domain.account.LoginCommand;
-import univ.earthbreaker.namu.core.support.HttpHeaderUtils;
+import univ.earthbreaker.namu.app.support.HttpHeaderUtils;
 import univ.earthbreaker.namu.external.oauth.OAuthClientApi;
 import univ.earthbreaker.namu.external.oauth.OAuthClientException;
 

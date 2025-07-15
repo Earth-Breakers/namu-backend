@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import univ.earthbreaker.namu.event.image.DeleteExternalUploadedImageEvent;
 
 @Component
-public class ExternalImageEventHandler {
+class ExternalImageEventHandler {
 
 	private final ExternalImageManager imageManager;
 

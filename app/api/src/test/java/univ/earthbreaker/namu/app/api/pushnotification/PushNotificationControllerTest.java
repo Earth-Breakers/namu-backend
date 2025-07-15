@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.api.pushnotification;
+package univ.earthbreaker.namu.app.api.pushnotification;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
@@ -21,11 +21,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.ResultActions;
 
-import univ.earthbreaker.namu.core.api.PresentationTest;
+import univ.earthbreaker.namu.app.api.PresentationTest;
 import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacterNotFoundException;
 import univ.earthbreaker.namu.core.domain.member.MemberNotFoundException;
 import univ.earthbreaker.namu.core.domain.pushnotification.PushNotificationConstructService;
-import univ.earthbreaker.namu.external.notification.NotificationPort;
+import univ.earthbreaker.namu.services.notification.NotificationPort;
 
 class PushNotificationControllerTest extends PresentationTest {
 

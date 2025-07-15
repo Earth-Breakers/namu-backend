@@ -1,6 +1,7 @@
-package univ.earthbreaker.namu.core.api.character;
+package univ.earthbreaker.namu.app.api.character;
 
-import static univ.earthbreaker.namu.core.api.character.CharacterBookResponse.*;
+import static univ.earthbreaker.namu.app.api.character.CharacterBookResponse.BookSectionResponse;
+import static univ.earthbreaker.namu.app.api.character.CharacterBookResponse.ProfileResponse;
 import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.*;
 import static univ.earthbreaker.namu.core.domain.character.CharacterType.BEAUTY;
 import static univ.earthbreaker.namu.core.domain.character.CharacterType.PURIFY;

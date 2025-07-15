@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public record KakaoMemberInfoResponse(String id, KakaoAccount kakaoAccount) {
+record KakaoMemberInfoResponse(String id, KakaoAccount kakaoAccount) {
 
 	@NotNull OAuthMemberInfoResult toResult() {
 		return new OAuthMemberInfoResult(id, kakaoAccount().profileNickname());

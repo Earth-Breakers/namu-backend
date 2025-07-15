@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.db.core.config;
+package univ.earthbreaker.namu.core.storage.config;
 
 import org.springframework.context.annotation.Profile;
 

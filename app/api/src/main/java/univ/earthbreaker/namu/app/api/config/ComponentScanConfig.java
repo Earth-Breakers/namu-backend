@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.api.config;
+package univ.earthbreaker.namu.app.api.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

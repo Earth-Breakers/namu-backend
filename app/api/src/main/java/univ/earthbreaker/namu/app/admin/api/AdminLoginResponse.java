@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.admin.api;
+package univ.earthbreaker.namu.app.admin.api;
 
 public record AdminLoginResponse(String accessToken) {
 }

@@ -1,7 +1,7 @@
-package univ.earthbreaker.namu.core.api.auth;
+package univ.earthbreaker.namu.app.api.auth;
 
-import static univ.earthbreaker.namu.core.support.HttpHeaderUtils.REFRESH_TOKEN;
-import static univ.earthbreaker.namu.core.support.HttpHeaderUtils.withBearerToken;
+import static univ.earthbreaker.namu.app.support.HttpHeaderUtils.REFRESH_TOKEN;
+import static univ.earthbreaker.namu.app.support.HttpHeaderUtils.withBearerToken;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;

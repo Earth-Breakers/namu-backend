@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import feign.Response;
 import feign.codec.ErrorDecoder;
 
-public class KakaoFeignExceptionDecoder implements ErrorDecoder {
+class KakaoFeignExceptionDecoder implements ErrorDecoder {
 
 	private static final int KAKAO_UNAUTHORIZED = 401;
 

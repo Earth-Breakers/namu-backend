@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.external.notification;
+package univ.earthbreaker.namu.services.notification;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;

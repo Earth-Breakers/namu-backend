@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.api.auth;
+package univ.earthbreaker.namu.app.api.auth;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpHeaders;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import univ.earthbreaker.namu.core.domain.account.AccountService;
 import univ.earthbreaker.namu.core.domain.account.LoginResult;
-import univ.earthbreaker.namu.core.support.HttpHeaderUtils;
+import univ.earthbreaker.namu.app.support.HttpHeaderUtils;
 import univ.earthbreaker.namu.external.oauth.OAuthClientApi;
 import univ.earthbreaker.namu.external.oauth.OAuthMemberInfoResult;
 

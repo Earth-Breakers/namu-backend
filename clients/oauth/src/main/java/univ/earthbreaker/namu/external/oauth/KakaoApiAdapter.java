@@ -3,7 +3,7 @@ package univ.earthbreaker.namu.external.oauth;
 import org.springframework.stereotype.Component;
 
 @Component
-public class KakaoApiAdapter implements OAuthClientApi {
+class KakaoApiAdapter implements OAuthClientApi {
 
 	private final KakaoApiCaller kakaoApiCaller;
 

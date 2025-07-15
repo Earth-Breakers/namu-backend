@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.api.character;
+package univ.earthbreaker.namu.app.api.character;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
@@ -16,7 +16,7 @@ import org.mockito.Mockito;
 import org.springframework.http.HttpHeaders;
 import org.springframework.test.web.servlet.ResultActions;
 
-import univ.earthbreaker.namu.core.api.PresentationTest;
+import univ.earthbreaker.namu.app.api.PresentationTest;
 import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacterInitializeService;
 
 class CharacterInitializeControllerTest extends PresentationTest {

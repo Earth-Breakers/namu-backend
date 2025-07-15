@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.api.character;
+package univ.earthbreaker.namu.app.api.character;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacterGrowService;
-import univ.earthbreaker.namu.core.support.AuthMapping;
-import univ.earthbreaker.namu.core.support.LoginMember;
+import univ.earthbreaker.namu.app.support.AuthMapping;
+import univ.earthbreaker.namu.app.support.LoginMember;
 
 @RestController
 @RequestMapping("/v1/characters/grow")

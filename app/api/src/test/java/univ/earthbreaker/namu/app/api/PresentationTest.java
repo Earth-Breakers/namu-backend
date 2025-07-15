@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.api;
+package univ.earthbreaker.namu.app.api;
 
 import static org.mockito.ArgumentMatchers.any;
 
@@ -25,9 +25,9 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import univ.earthbreaker.namu.core.api.advice.NamuExceptionResponseHandler;
-import univ.earthbreaker.namu.core.api.auth.AuthApiFixture;
-import univ.earthbreaker.namu.core.support.HttpHeaderUtils;
+import univ.earthbreaker.namu.app.api.advice.NamuExceptionResponseHandler;
+import univ.earthbreaker.namu.app.api.auth.AuthApiFixture;
+import univ.earthbreaker.namu.app.support.HttpHeaderUtils;
 import univ.earthbreaker.namu.support.apidocs.ApiDocsAbstract;
 
 public abstract class PresentationTest extends ApiDocsAbstract {

@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.db.core.common;
+package univ.earthbreaker.namu.core.storage.common;
 
 import java.time.LocalDateTime;
 

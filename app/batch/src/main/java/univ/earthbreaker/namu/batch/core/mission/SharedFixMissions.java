@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
 
-import univ.earthbreaker.namu.db.core.mission.FixMissionJpaEntity;
+import univ.earthbreaker.namu.core.storage.mission.FixMissionJpaEntity;
 
 public record SharedFixMissions(
 	List<FixMissionBatchEntity> values

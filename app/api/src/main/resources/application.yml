@@ -4,11 +4,11 @@ spring.profiles.active: local
 spring:
   config:
     import:
-      - core-auth.yml
-#      - external-aws.yml
-      - external-oauth.yml
-      - external-notification.yml
-      - db-core.yml
+      - auth.yml
+#      - clients-aws.yml
+      - clients-oauth.yml
+      - notification.yml
+      - storage-core.yml
       - logging.yml
   web.resources.add-mappings: false
   servlet:

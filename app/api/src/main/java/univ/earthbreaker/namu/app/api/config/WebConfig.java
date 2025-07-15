@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.api.config;
+package univ.earthbreaker.namu.app.api.config;
 
 import java.util.List;
 
@@ -9,9 +9,9 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import univ.earthbreaker.namu.core.support.AuthenticationInterceptor;
-import univ.earthbreaker.namu.core.support.LoginMemberArgumentResolver;
-import univ.earthbreaker.namu.core.support.TraceLoggingInterceptor;
+import univ.earthbreaker.namu.app.support.AuthenticationInterceptor;
+import univ.earthbreaker.namu.app.support.LoginMemberArgumentResolver;
+import univ.earthbreaker.namu.app.support.TraceLoggingInterceptor;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {

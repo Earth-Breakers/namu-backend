@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.external.notification;
+package univ.earthbreaker.namu.services.notification;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.Mockito.any;
@@ -6,7 +6,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static univ.earthbreaker.namu.external.notification.FCMNotificationFixture.FAILURE_FCM_TOKENS;
+import static univ.earthbreaker.namu.services.notification.FCMNotificationFixture.FAILURE_FCM_TOKENS;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;

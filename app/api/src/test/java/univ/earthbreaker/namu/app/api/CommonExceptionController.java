@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.api;
+package univ.earthbreaker.namu.app.api;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.api.advice;
+package univ.earthbreaker.namu.app.api.advice;
 
 public record NamuExceptionResponse(String message) {
 }

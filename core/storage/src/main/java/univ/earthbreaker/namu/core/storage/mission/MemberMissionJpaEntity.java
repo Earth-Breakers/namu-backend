@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.db.core.mission;
+package univ.earthbreaker.namu.core.storage.mission;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,7 +12,7 @@ import univ.earthbreaker.namu.core.domain.mission.MemberMission;
 import univ.earthbreaker.namu.core.domain.mission.MissionActivity;
 import univ.earthbreaker.namu.core.domain.mission.MissionStatus;
 import univ.earthbreaker.namu.core.domain.mission.MissionType;
-import univ.earthbreaker.namu.db.core.common.BaseTimeJpaEntity;
+import univ.earthbreaker.namu.core.storage.common.BaseTimeJpaEntity;
 
 @Entity
 @Table(name = "member_mission")

@@ -12,7 +12,7 @@ import feign.codec.ErrorDecoder;
 
 @EnableFeignClients
 @Configuration
-public class ImageFeignConfiguration {
+class ImageFeignConfiguration {
 
 	private static final long CONNECTION_TIMEOUT = 3_000;
 	private static final long READ_TIMEOUT = 10_000;

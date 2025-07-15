@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.external.notification;
+package univ.earthbreaker.namu.services.notification;
 
 import java.util.ArrayList;
 import java.util.Collections;

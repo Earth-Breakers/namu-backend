@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.api.post;
+package univ.earthbreaker.namu.app.api.post;
 
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
@@ -38,7 +38,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
-import univ.earthbreaker.namu.core.api.PresentationTest;
+import univ.earthbreaker.namu.app.api.PresentationTest;
 import univ.earthbreaker.namu.core.domain.post.PostRetrieveAllQuery;
 import univ.earthbreaker.namu.core.domain.post.PostRetrieveService;
 import univ.earthbreaker.namu.core.domain.post.RelatedPostRetrieveQuery;

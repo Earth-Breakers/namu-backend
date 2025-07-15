@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.api.character;
+package univ.earthbreaker.namu.app.api.character;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,8 +13,8 @@ import univ.earthbreaker.namu.core.domain.character.CharacterType;
 import univ.earthbreaker.namu.core.domain.character.book.CharacterBookDetailReadService;
 import univ.earthbreaker.namu.core.domain.character.book.MemberCharacter;
 import univ.earthbreaker.namu.core.domain.character.book.MemberCharacterFinder;
-import univ.earthbreaker.namu.core.support.AuthMapping;
-import univ.earthbreaker.namu.core.support.LoginMember;
+import univ.earthbreaker.namu.app.support.AuthMapping;
+import univ.earthbreaker.namu.app.support.LoginMember;
 
 @RestController
 @RequestMapping("/v1/characters/books")

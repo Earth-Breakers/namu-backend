@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.api.reaction;
+package univ.earthbreaker.namu.app.api.reaction;
 
 import org.jetbrains.annotations.NotNull;
 

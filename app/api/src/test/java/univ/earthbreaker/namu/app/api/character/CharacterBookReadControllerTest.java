@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.api.character;
+package univ.earthbreaker.namu.app.api.character;
 
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
@@ -13,11 +13,11 @@ import static org.springframework.restdocs.request.RequestDocumentation.paramete
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static univ.earthbreaker.namu.core.api.character.CharacterResponseFixture.ACQUIRED_COUNT;
-import static univ.earthbreaker.namu.core.api.character.CharacterResponseFixture.MEMBER_CHARACTER_1;
-import static univ.earthbreaker.namu.core.api.character.CharacterResponseFixture.MEMBER_CHARACTERS;
-import static univ.earthbreaker.namu.core.api.character.CharacterResponseFixture.TOTAL_ACQUIRED_COUNT;
-import static univ.earthbreaker.namu.core.api.character.CharacterResponseFixture.TOTAL_COUNT_OF_TYPE;
+import static univ.earthbreaker.namu.app.api.character.CharacterResponseFixture.ACQUIRED_COUNT;
+import static univ.earthbreaker.namu.app.api.character.CharacterResponseFixture.MEMBER_CHARACTER_1;
+import static univ.earthbreaker.namu.app.api.character.CharacterResponseFixture.MEMBER_CHARACTERS;
+import static univ.earthbreaker.namu.app.api.character.CharacterResponseFixture.TOTAL_ACQUIRED_COUNT;
+import static univ.earthbreaker.namu.app.api.character.CharacterResponseFixture.TOTAL_COUNT_OF_TYPE;
 import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.CHARACTER_IMAGE_PATH;
 import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.CHARACTER_NO;
 import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.MEMBER_NO;
@@ -35,7 +35,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import univ.earthbreaker.namu.core.api.PresentationTest;
+import univ.earthbreaker.namu.app.api.PresentationTest;
 import univ.earthbreaker.namu.core.domain.character.book.CharacterBookDetailReadService;
 import univ.earthbreaker.namu.core.domain.character.book.MemberCharacterFinder;
 

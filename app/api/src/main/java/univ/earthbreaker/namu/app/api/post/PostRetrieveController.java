@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.api.post;
+package univ.earthbreaker.namu.app.api.post;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import univ.earthbreaker.namu.core.support.AuthMapping;
-import univ.earthbreaker.namu.core.support.LoginMember;
+import univ.earthbreaker.namu.app.support.AuthMapping;
+import univ.earthbreaker.namu.app.support.LoginMember;
 import univ.earthbreaker.namu.core.domain.post.PostRetrieveService;
 import univ.earthbreaker.namu.core.domain.post.RelatedPostResult;
 import univ.earthbreaker.namu.core.domain.post.RelatedPostRetrieveQuery;

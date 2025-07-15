@@ -1,4 +1,4 @@
-// package univ.earthbreaker.namu.core.admin.api;
+// package univ.earthbreaker.namu.app.admin.api;
 //
 // import java.io.IOException;
 // import java.util.List;

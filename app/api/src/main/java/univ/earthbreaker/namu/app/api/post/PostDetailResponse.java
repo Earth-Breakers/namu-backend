@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.api.post;
+package univ.earthbreaker.namu.app.api.post;
 
 import static univ.earthbreaker.namu.core.domain.common.Constant.IMAGE_ACCESS_URL;
 

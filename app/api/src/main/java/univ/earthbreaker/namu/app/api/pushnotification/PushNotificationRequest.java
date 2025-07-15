@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.api.pushnotification;
+package univ.earthbreaker.namu.app.api.pushnotification;
 
 public record PushNotificationRequest(
 	String content

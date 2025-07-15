@@ -1,12 +1,12 @@
-package univ.earthbreaker.namu.core.api.point;
+package univ.earthbreaker.namu.app.api.point;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import univ.earthbreaker.namu.core.support.AuthMapping;
-import univ.earthbreaker.namu.core.support.LoginMember;
+import univ.earthbreaker.namu.app.support.AuthMapping;
+import univ.earthbreaker.namu.app.support.LoginMember;
 import univ.earthbreaker.namu.core.domain.point.Energy;
 import univ.earthbreaker.namu.core.domain.point.EnergyPointRetrieveService;
 

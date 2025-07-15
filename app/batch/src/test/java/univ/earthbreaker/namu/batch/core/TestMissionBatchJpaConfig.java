@@ -9,11 +9,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
-import univ.earthbreaker.namu.db.core.member.MemberJpaEntity;
-import univ.earthbreaker.namu.db.core.mission.FixMissionJpaEntity;
-import univ.earthbreaker.namu.db.core.mission.FixMissionJpaRepository;
-import univ.earthbreaker.namu.db.core.mission.MemberMissionJpaEntity;
-import univ.earthbreaker.namu.db.core.mission.MemberMissionJpaRepository;
+import univ.earthbreaker.namu.core.storage.member.MemberJpaEntity;
+import univ.earthbreaker.namu.core.storage.mission.FixMissionJpaEntity;
+import univ.earthbreaker.namu.core.storage.mission.FixMissionJpaRepository;
+import univ.earthbreaker.namu.core.storage.mission.MemberMissionJpaEntity;
+import univ.earthbreaker.namu.core.storage.mission.MemberMissionJpaRepository;
 
 @TestConfiguration
 @EnableJpaRepositories(basePackageClasses = {FixMissionJpaRepository.class, MemberMissionJpaRepository.class})

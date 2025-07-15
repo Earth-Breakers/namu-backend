@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.api.mission;
+package univ.earthbreaker.namu.app.api.mission;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import univ.earthbreaker.namu.core.support.AuthMapping;
-import univ.earthbreaker.namu.core.support.LoginMember;
+import univ.earthbreaker.namu.app.support.AuthMapping;
+import univ.earthbreaker.namu.app.support.LoginMember;
 import univ.earthbreaker.namu.core.domain.mission.CertifiedMissionPostCommand;
 import univ.earthbreaker.namu.core.domain.mission.MemberMissionCertifyService;
 import univ.earthbreaker.namu.core.domain.mission.MissionCompleteCommand;

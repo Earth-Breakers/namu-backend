@@ -2,7 +2,7 @@ package univ.earthbreaker.namu.external.aws.image;
 
 import org.jetbrains.annotations.NotNull;
 
-public class ImageProcessException extends RuntimeException {
+class ImageProcessException extends RuntimeException {
 
 	private ImageProcessException(String message) {
 		super(message);

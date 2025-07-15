@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.db.core.pushnotification;
+package univ.earthbreaker.namu.core.storage.pushnotification;
 
 import java.util.List;
 

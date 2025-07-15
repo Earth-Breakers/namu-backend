@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.api.reaction;
+package univ.earthbreaker.namu.app.api.reaction;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import univ.earthbreaker.namu.core.domain.reaction.ReactionService;
-import univ.earthbreaker.namu.core.support.AuthMapping;
-import univ.earthbreaker.namu.core.support.LoginMember;
+import univ.earthbreaker.namu.app.support.AuthMapping;
+import univ.earthbreaker.namu.app.support.LoginMember;
 
 @RestController
 @RequestMapping("/v1/reactions")

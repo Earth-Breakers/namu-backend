@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.api.character;
+package univ.earthbreaker.namu.app.api.character;
 
 import univ.earthbreaker.namu.core.domain.character.CharacterType;
 

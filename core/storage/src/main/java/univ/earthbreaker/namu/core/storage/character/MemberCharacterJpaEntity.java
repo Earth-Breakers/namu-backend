@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.db.core.character;
+package univ.earthbreaker.namu.core.storage.character;
 
 import org.jetbrains.annotations.NotNull;
 

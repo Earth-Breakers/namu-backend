@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.api.auth;
+package univ.earthbreaker.namu.app.api.auth;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
@@ -7,7 +7,7 @@ import static org.springframework.restdocs.headers.HeaderDocumentation.responseH
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static univ.earthbreaker.namu.core.api.auth.AuthApiFixture.ACCESS_TOKEN;
+import static univ.earthbreaker.namu.app.api.auth.AuthApiFixture.ACCESS_TOKEN;
 import static univ.earthbreaker.namu.support.apidocs.ApiDocsUtils.API_DOCUMENT_IDENTIFIER;
 import static univ.earthbreaker.namu.support.apidocs.ApiDocsUtils.operationRequestPreprocessor;
 import static univ.earthbreaker.namu.support.apidocs.ApiDocsUtils.operationResponsePreprocessor;
@@ -19,8 +19,8 @@ import org.mockito.Mockito;
 import org.springframework.http.HttpHeaders;
 import org.springframework.test.web.servlet.ResultActions;
 
-import univ.earthbreaker.namu.core.api.PresentationTest;
-import univ.earthbreaker.namu.core.support.HttpHeaderUtils;
+import univ.earthbreaker.namu.app.api.PresentationTest;
+import univ.earthbreaker.namu.app.support.HttpHeaderUtils;
 import univ.earthbreaker.namu.core.auth.TokenReissueService;
 import univ.earthbreaker.namu.core.auth.TokenResult;
 import univ.earthbreaker.namu.core.auth.UnAuthorizedException;

@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.api;
+package univ.earthbreaker.namu.app.api;
 
 import java.io.IOException;
 import java.time.LocalDate;

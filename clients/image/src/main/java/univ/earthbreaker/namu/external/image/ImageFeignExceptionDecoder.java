@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import feign.Response;
 import feign.codec.ErrorDecoder;
 
-public class ImageFeignExceptionDecoder implements ErrorDecoder {
+class ImageFeignExceptionDecoder implements ErrorDecoder {
 
 	@Override
 	public Exception decode(String methodKey, Response response) {

@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.api.advice;
+package univ.earthbreaker.namu.app.api.advice;
 
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
@@ -13,8 +13,8 @@ import univ.earthbreaker.namu.core.domain.common.ConflictException;
 import univ.earthbreaker.namu.core.domain.common.InternalServerException;
 import univ.earthbreaker.namu.core.domain.common.NotFoundException;
 import univ.earthbreaker.namu.core.auth.UnAuthorizedException;
-import univ.earthbreaker.namu.core.support.AuthenticationException;
-import univ.earthbreaker.namu.core.support.InternalAuthServerException;
+import univ.earthbreaker.namu.app.support.AuthenticationException;
+import univ.earthbreaker.namu.app.support.InternalAuthServerException;
 import univ.earthbreaker.namu.external.oauth.OAuthClientException;
 
 @RestControllerAdvice

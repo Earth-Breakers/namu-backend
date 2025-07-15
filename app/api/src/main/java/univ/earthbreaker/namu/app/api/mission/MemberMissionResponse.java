@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.api.mission;
+package univ.earthbreaker.namu.app.api.mission;
 
 import java.util.List;
 

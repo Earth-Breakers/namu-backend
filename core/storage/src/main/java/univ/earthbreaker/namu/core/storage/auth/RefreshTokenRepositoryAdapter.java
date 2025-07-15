@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.db.core.auth;
+package univ.earthbreaker.namu.core.storage.auth;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

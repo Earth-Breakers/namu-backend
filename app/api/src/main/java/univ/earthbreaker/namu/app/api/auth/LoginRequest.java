@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.api.auth;
+package univ.earthbreaker.namu.app.api.auth;
 
 import univ.earthbreaker.namu.core.domain.account.LoginCommand;
 

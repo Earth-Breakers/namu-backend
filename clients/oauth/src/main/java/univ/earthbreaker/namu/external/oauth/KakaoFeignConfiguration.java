@@ -9,7 +9,7 @@ import feign.codec.ErrorDecoder;
 
 @EnableFeignClients
 @Configuration
-public class KakaoFeignConfiguration {
+class KakaoFeignConfiguration {
 
 	@Bean
 	Retryer retryer() {

@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.api.point;
+package univ.earthbreaker.namu.app.api.point;
 
 import org.jetbrains.annotations.NotNull;
 

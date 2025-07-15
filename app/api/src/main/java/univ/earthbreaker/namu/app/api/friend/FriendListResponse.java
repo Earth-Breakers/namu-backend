@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.api.friend;
+package univ.earthbreaker.namu.app.api.friend;
 
 import java.util.List;
 

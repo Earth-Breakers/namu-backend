@@ -24,9 +24,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import univ.earthbreaker.namu.batch.core.TestBatchConfig;
 import univ.earthbreaker.namu.batch.core.TestMissionBatchJpaConfig;
-import univ.earthbreaker.namu.db.core.mission.FixMissionJpaEntity;
-import univ.earthbreaker.namu.db.core.mission.FixMissionJpaRepository;
-import univ.earthbreaker.namu.db.core.mission.MemberMissionJpaRepository;
+import univ.earthbreaker.namu.core.storage.mission.FixMissionJpaEntity;
+import univ.earthbreaker.namu.core.storage.mission.FixMissionJpaRepository;
+import univ.earthbreaker.namu.core.storage.mission.MemberMissionJpaRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBatchTest

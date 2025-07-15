@@ -9,19 +9,17 @@ pluginManagement {
 
 rootProject.name = 'namu'
 
-include 'core:core-api'
-include 'core:core-auth'
-include 'core:core-domain'
-include 'database:db-core'
-include 'batch:batch-core'
+include 'app:api', 'app:batch'
+
+include 'core:domain', 'core:storage'
+
+include 'services:auth', 'services:notification'
+
+include 'clients:oauth', 'clients:aws', 'clients:image'
 
 include 'event'
 
 include 'support:logging'
-include 'external:oauth'
-include 'external:aws'
-include 'external:notification'
-include 'external:image'
 
 include 'server:external'
 

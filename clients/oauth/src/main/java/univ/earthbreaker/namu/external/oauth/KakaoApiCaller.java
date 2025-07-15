@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 	name = "${feign.client.oauth.kakao.name}",
 	url = "${feign.client.oauth.kakao.url}",
 	configuration = KakaoFeignConfiguration.class)
-public interface KakaoApiCaller {
+interface KakaoApiCaller {
 
 	String FORM_URLENCODED_UTF8 = MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=utf-8";
 

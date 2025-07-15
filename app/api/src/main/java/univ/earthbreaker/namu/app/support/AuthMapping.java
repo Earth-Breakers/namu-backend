@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.support;
+package univ.earthbreaker.namu.app.support;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
