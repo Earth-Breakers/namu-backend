@@ -1,7 +1,6 @@
 package univ.earthbreaker.namu.core.domain.point;
 
 import org.jetbrains.annotations.NotNull;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
@@ -18,7 +17,7 @@ public class EnergyPointEventHandler {
 		this.energyPointRepository = energyPointRepository;
 	}
 
-	@EventListener
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void giveRewardPoint(@NotNull AddRewardPointEvent event) {
 		PointUpdateDbCommand command = new PointUpdateDbCommand(event.memberNo(), event.point());
 		energyPointRepository.receivePoint(command);
