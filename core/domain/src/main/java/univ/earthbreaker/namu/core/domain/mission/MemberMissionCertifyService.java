@@ -2,12 +2,9 @@ package univ.earthbreaker.namu.core.domain.mission;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.TransactionCallbackWithoutResult;
-import org.springframework.transaction.support.TransactionTemplate;
 
+import univ.earthbreaker.namu.core.support.TransactionHandler;
 import univ.earthbreaker.namu.event.EventPublisher;
-import univ.earthbreaker.namu.event.image.DeleteExternalUploadedImageEvent;
 import univ.earthbreaker.namu.event.point.AddRewardPointEvent;
 import univ.earthbreaker.namu.event.post.PostCreateEvent;
 
@@ -17,42 +14,31 @@ public class MemberMissionCertifyService {
 	private final MemberMissionFinder memberMissionFinder;
 	private final MissionCertifyHandler missionCertifyHandler;
 	private final EventPublisher eventPublisher;
-	private final TransactionTemplate transactionTemplate;
+	private final TransactionHandler transactionHandler;
 
 	public MemberMissionCertifyService(
 		MemberMissionFinder memberMissionFinder,
 		MissionCertifyHandler missionCertifyHandler,
 		EventPublisher eventPublisher,
-		TransactionTemplate transactionTemplate
+		TransactionHandler transactionHandler
 	) {
 		this.memberMissionFinder = memberMissionFinder;
 		this.missionCertifyHandler = missionCertifyHandler;
 		this.eventPublisher = eventPublisher;
-		this.transactionTemplate = transactionTemplate;
+		this.transactionHandler = transactionHandler;
 	}
 
 	public void successMission(
-		@NotNull MissionCompleteCommand missionCommand,
-		@NotNull CertifiedMissionPostCommand postCommand
+		@NotNull MissionCompleteCommand mc,
+		@NotNull CertifiedMissionPostCommand pc
 	) {
-		try {
-			transactionTemplate.execute(new TransactionCallbackWithoutResult() {
-				@Override
-				protected void doInTransactionWithoutResult(@NotNull TransactionStatus status) {
-					MemberMission memberMission = memberMissionFinder.find(
-						missionCommand.getMemberNo(), missionCommand.getMissionNo());
-					MemberMission successMission = missionCertifyHandler.success(memberMission);
-					publishRewardEventForSuccessMission(successMission);
-					publishCreatePostEventForSuccessMission(postCommand, successMission);
-				}
-			});
-		} catch (Exception e) {
-			publishDeleteUploadImageEventWhenTransactionRollback(postCommand.getImagePathKey());
-		}
-	}
-
-	private void publishDeleteUploadImageEventWhenTransactionRollback(@NotNull String imagePathKey) {
-		eventPublisher.publish(new DeleteExternalUploadedImageEvent(imagePathKey));
+		transactionHandler.execute(() -> {
+			MemberMission memberMission = memberMissionFinder.find(mc.getMemberNo(), mc.getMissionNo());
+			MemberMission successMission = missionCertifyHandler.success(memberMission);
+			publishRewardEventForSuccessMission(successMission); // 리워드 포인트 지급 이벤트 발행
+			publishCreatePostEventForSuccessMission(pc, successMission); // 게시글 생성 이벤트 발행
+			return null;
+		});
 	}
 
 	private void publishRewardEventForSuccessMission(@NotNull MemberMission successMission) {
