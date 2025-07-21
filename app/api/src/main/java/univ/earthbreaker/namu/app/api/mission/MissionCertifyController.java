@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import univ.earthbreaker.namu.app.support.AuthMapping;
 import univ.earthbreaker.namu.app.support.LoginMember;
+import univ.earthbreaker.namu.clients.sse.SseAlerter;
 import univ.earthbreaker.namu.core.domain.mission.CertifiedMissionPostCommand;
 import univ.earthbreaker.namu.core.domain.mission.MemberMissionCertifyService;
 import univ.earthbreaker.namu.core.domain.mission.MissionCompleteCommand;
@@ -29,15 +30,18 @@ public class MissionCertifyController {
 	private final ImageManager imageManager;
 	private final MemberMissionCertifyService missionCertifyService;
 	private final Executor executor;
+	private final SseAlerter sseAlerter;
 
 	public MissionCertifyController(
 		@Qualifier("externalImageManager") ImageManager imageManager,
 		MemberMissionCertifyService missionCertifyService,
-		Executor threadPoolExecutor
+		Executor threadPoolExecutor,
+		SseAlerter sseAlerter
 	) {
 		this.imageManager = imageManager;
 		this.missionCertifyService = missionCertifyService;
 		this.executor = threadPoolExecutor;
+		this.sseAlerter = sseAlerter;
 	}
 
 	@AuthMapping
@@ -48,18 +52,28 @@ public class MissionCertifyController {
 		@RequestPart(value = "content") String content,
 		@RequestPart(value = "imageFile") MultipartFile missionImageFile
 	) {
-		CompletableFuture.supplyAsync(
-				() -> imageManager.upload(new ImageUploadCommand()),
-				executor
-			)
-			.exceptionally(ex -> null)
-			.thenAccept(result -> {
-				if (result != null) {
-					missionCertifyService.successMission(
-						new MissionCompleteCommand(memberNo, missionNo),
-						new CertifiedMissionPostCommand(memberNo, content, result)
-					);
+		CompletableFuture
+			.supplyAsync(() -> {
+				String imageUrl = imageManager.retrieve(missionImageFile);
+				if (imageUrl != null) {
+					return imageUrl;
+				} else {
+					return imageManager.upload(new ImageUploadCommand());
 				}
+			}, executor)
+			.thenAccept(imageUrl -> {
+				if (imageUrl == null) {
+					throw MissionServerException.missingImageUrl();
+				}
+				missionCertifyService.successMission(
+					new MissionCompleteCommand(memberNo, missionNo),
+					new CertifiedMissionPostCommand(memberNo, content, imageUrl)
+				);
+				sseAlerter.alert(memberNo, "MISSION_API_SUCCESS", null);
+			})
+			.exceptionally(ex -> {
+				sseAlerter.alert(memberNo, "MISSION_API_FAILED", ex.getMessage());
+				return null;
 			});
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
