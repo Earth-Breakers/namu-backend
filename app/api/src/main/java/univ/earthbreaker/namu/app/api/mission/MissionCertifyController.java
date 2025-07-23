@@ -75,6 +75,6 @@ public class MissionCertifyController {
 				sseAlerter.alert(memberNo, "MISSION_API_FAILED", ex.getMessage());
 				return null;
 			});
-		return ResponseEntity.status(HttpStatus.CREATED).build();
+		return ResponseEntity.status(HttpStatus.ACCEPTED).build();
 	}
 }
