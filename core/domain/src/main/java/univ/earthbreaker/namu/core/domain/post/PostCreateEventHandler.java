@@ -1,8 +1,9 @@
 package univ.earthbreaker.namu.core.domain.post;
 
 import org.jetbrains.annotations.NotNull;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.event.TransactionPhase;
+import org.springframework.transaction.event.TransactionalEventListener;
 
 import univ.earthbreaker.namu.event.post.PostCreateEvent;
 
@@ -17,7 +18,7 @@ public class PostCreateEventHandler {
 		this.postRepository = postRepository;
 	}
 
-	@EventListener
+	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
 	public void createPost(@NotNull PostCreateEvent event) {
 		PostMemberBridge.PostMemberDto postMemberInfo = postMemberBridge.findMemberInfo(event.memberNo());
 		PostCreateDbCommand createCommand = new PostCreateDbCommand(
