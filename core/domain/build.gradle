@@ -1,6 +1,7 @@
 dependencies {
     compileOnly("org.springframework:spring-context")
     compileOnly("org.springframework:spring-tx")
+    compileOnly('org.springframework.retry:spring-retry')
 
     implementation project(":event")
     implementation 'org.springframework.boot:spring-boot-starter-validation'
