@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.support;
+package univ.earthbreaker.namu.core.support.tx;
 
 @FunctionalInterface
 public interface TransactionAction<T> {
