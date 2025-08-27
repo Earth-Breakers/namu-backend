@@ -1,0 +1,21 @@
+spring.application.name: kafka-consumer-app
+spring.profiles.active: local
+
+spring:
+  config:
+    import: classpath:kafka-topic.yml
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: mission-retry-consumer
+      enable-auto-commit: true
+      auto-commit-interval: 5000
+      auto-offset-reset: latest
+      max-poll-records: 10
+      heartbeat-interval: 3000
+
+---
+spring.config.activate.on-profile: local
+
+---
+spring.config.activate.on-profile: dev
