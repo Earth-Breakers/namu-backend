@@ -9,7 +9,7 @@ pluginManagement {
 
 rootProject.name = 'namu'
 
-include 'app:api', 'app:batch'
+include 'app:api', 'app:batch', 'app:kafka'
 
 include 'core:domain', 'core:storage'
 
