@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,17 +28,23 @@ import univ.earthbreaker.namu.external.image.ImageUploadCommand;
 public class MissionCertifyController {
 
 	private final ImageManager imageManager;
+	private final PointManager pointManager;
 	private final MemberMissionCertifyService missionCertifyService;
 	private final Executor executor;
+	private final KafkaTemplate<String, RetryMessage> kafkaTemplate;
 
 	public MissionCertifyController(
 		@Qualifier("externalImageManager") ImageManager imageManager,
+		PointManager pointManager,
 		MemberMissionCertifyService missionCertifyService,
-		Executor threadPoolExecutor
+		Executor threadPoolExecutor,
+		KafkaTemplate<String, RetryMessage> kafkaTemplate
 	) {
 		this.imageManager = imageManager;
+		this.pointManager = pointManager;
 		this.missionCertifyService = missionCertifyService;
 		this.executor = threadPoolExecutor;
+		this.kafkaTemplate = kafkaTemplate;
 	}
 
 	@AuthMapping
@@ -48,19 +55,38 @@ public class MissionCertifyController {
 		@RequestPart(value = "content") String content,
 		@RequestPart(value = "imageFile") MultipartFile missionImageFile
 	) {
-		CompletableFuture.supplyAsync(
-				() -> imageManager.upload(new ImageUploadCommand()),
-				executor
-			)
-			.exceptionally(ex -> null)
-			.thenAccept(result -> {
-				if (result != null) {
-					missionCertifyService.successMission(
-						new MissionCompleteCommand(memberNo, missionNo),
-						new CertifiedMissionPostCommand(memberNo, content, result)
-					);
-				}
-			});
+		String imagePathKey = uploadImage(missionImageFile);
+		if (imagePathKey == null) {
+			return ResponseEntity.accepted().build();
+		}
+		Long point = getReward();
+		if (point == null) {
+			return ResponseEntity.accepted().build();
+		}
+		missionCertifyService.successMission(
+			new MissionCompleteCommand(memberNo, missionNo),
+			new CertifiedMissionPostCommand(memberNo, content, imagePathKey, point)
+		);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
+	}
+
+	private String uploadImage(MultipartFile missionImageFile) {
+		try {
+			return imageManager.upload(new ImageUploadCommand(missionImageFile));
+		} catch (Exception e) {
+			RetryMessage retryMessage = RetryMessage.of(memberNo, missionNo, content, RetryStep.IMAGE_UPLOAD);
+			kafkaTemplate.send("earthbreaker.namu.mission-retry", retryMessage.getKey(), retryMessage);
+			return null;
+		}
+	}
+
+	private Long getReward() {
+		try {
+			return pointManager.reward();
+		} catch (Exception e) {
+			RetryMessage retryMessage = RetryMessage.of(memberNo, missionNo, content, RetryStep.POINT_ISSUE);
+			kafkaTemplate.send("earthbreaker.namu.mission-retry", retryMessage.getKey(), retryMessage);
+			return null;
+		}
 	}
 }
