@@ -55,20 +55,18 @@ public class MissionCertifyController {
 		@RequestPart(value = "content") String content,
 		@RequestPart(value = "imageFile") MultipartFile missionImageFile
 	) {
-		CompletableFuture.runAsync(() -> {
-			String imagePathKey = uploadImage(missionImageFile);
-			if (imagePathKey == null) {
-				return;
-			}
-			Long point = getReward();
-			if (point == null) {
-				return;
-			}
-			missionCertifyService.successMission(
-				new MissionCompleteCommand(memberNo, missionNo),
-				new CertifiedMissionPostCommand(memberNo, content, imagePathKey, point)
-			);
-		}, executor);
+		String imagePathKey = uploadImage(missionImageFile);
+		if (imagePathKey == null) {
+			return ResponseEntity.accepted().build();
+		}
+		Long point = getReward();
+		if (point == null) {
+			return ResponseEntity.accepted().build();
+		}
+		missionCertifyService.successMission(
+			new MissionCompleteCommand(memberNo, missionNo),
+			new CertifiedMissionPostCommand(memberNo, content, imagePathKey, point)
+		);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
