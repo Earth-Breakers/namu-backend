@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,12 +38,46 @@ public class KafkaProducerConfig {
 	}
 
 	@Bean
-	public KafkaAdmin.NewTopics topics() {
+	public KafkaAdmin.NewTopics topics(
+		@Value("${kafka.topics.mission-retry.name}") String retryTopicName,
+		@Value("${kafka.topics.mission-retry.partitions}") int retryPartitions,
+		@Value("${kafka.topics.mission-retry.replicas}") int retryReplicas
+	) {
 		return new KafkaAdmin.NewTopics(
-			TopicBuilder.name("earthbreaker.namu.mission-retry")
-				.partitions(10)
-				.replicas(3)
+			TopicBuilder.name(retryTopicName)
+				.partitions(retryPartitions)
+				.replicas(retryReplicas)
 				.build()
 		);
 	}
+
+	public record RetryMessage(
+		long memberNo,
+		long missionNo,
+		String imagePathKey,
+		String postContents,
+		RetryStep retryStep,
+		int attempt
+	) {
+		public static RetryMessage create(
+			long memberNo,
+			long missionNo,
+			String imagePathKey,
+			String postContents,
+			RetryStep retryStep
+		) {
+			return new RetryMessage(memberNo, missionNo, imagePathKey, postContents, retryStep, 1);
+		}
+
+		public String getKey() {
+			return memberNo + ":" + missionNo + ":" + imagePathKey;
+		}
+	}
+
+	public enum RetryStep {
+		IMAGE_UPLOAD,
+		POINT_ISSUE,
+		;
+	}
+
 }
