@@ -1,9 +1,10 @@
 package univ.earthbreaker.namu.app.api.mission;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
+import static univ.earthbreaker.namu.app.api.config.KafkaProducerConfig.RetryMessage;
+import static univ.earthbreaker.namu.app.api.config.KafkaProducerConfig.RetryStep;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,21 +31,21 @@ public class MissionCertifyController {
 	private final ImageManager imageManager;
 	private final PointManager pointManager;
 	private final MemberMissionCertifyService missionCertifyService;
-	private final Executor executor;
 	private final KafkaTemplate<String, RetryMessage> kafkaTemplate;
+	private final String missionRetryTopic;
 
 	public MissionCertifyController(
 		@Qualifier("externalImageManager") ImageManager imageManager,
 		PointManager pointManager,
 		MemberMissionCertifyService missionCertifyService,
-		Executor threadPoolExecutor,
-		KafkaTemplate<String, RetryMessage> kafkaTemplate
+		KafkaTemplate<String, RetryMessage> kafkaTemplate,
+		@Value("${kafka.topics.mission-retry.name}") String missionRetryTopic
 	) {
 		this.imageManager = imageManager;
 		this.pointManager = pointManager;
 		this.missionCertifyService = missionCertifyService;
-		this.executor = threadPoolExecutor;
 		this.kafkaTemplate = kafkaTemplate;
+		this.missionRetryTopic = missionRetryTopic;
 	}
 
 	@AuthMapping
@@ -59,7 +60,7 @@ public class MissionCertifyController {
 		if (imagePathKey == null) {
 			return ResponseEntity.accepted().build();
 		}
-		Long point = getReward();
+		Long point = getReward(memberNo, missionNo, imagePathKey, content);
 		if (point == null) {
 			return ResponseEntity.accepted().build();
 		}
@@ -70,22 +71,22 @@ public class MissionCertifyController {
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
-	private String uploadImage(MultipartFile missionImageFile) {
+	private String uploadImage(Long memberNo, Long missionNo, String content, MultipartFile missionImageFile) {
 		try {
 			return imageManager.upload(new ImageUploadCommand(missionImageFile));
 		} catch (Exception e) {
-			RetryMessage retryMessage = RetryMessage.of(memberNo, missionNo, content, RetryStep.IMAGE_UPLOAD);
-			kafkaTemplate.send("earthbreaker.namu.mission-retry", retryMessage.getKey(), retryMessage);
+			RetryMessage retryMessage = RetryMessage.create(memberNo, missionNo, null, content, RetryStep.IMAGE_UPLOAD);
+			kafkaTemplate.send(missionRetryTopic, retryMessage.getKey(), retryMessage);
 			return null;
 		}
 	}
 
-	private Long getReward() {
+	private Long getReward(Long memberNo, Long missionNo, String imagePathKey, String content) {
 		try {
 			return pointManager.reward();
 		} catch (Exception e) {
-			RetryMessage retryMessage = RetryMessage.of(memberNo, missionNo, content, RetryStep.POINT_ISSUE);
-			kafkaTemplate.send("earthbreaker.namu.mission-retry", retryMessage.getKey(), retryMessage);
+			RetryMessage retryMessage = RetryMessage.create(memberNo, missionNo, imagePathKey, content, RetryStep.POINT_ISSUE);
+			kafkaTemplate.send(missionRetryTopic, retryMessage.getKey(), retryMessage);
 			return null;
 		}
 	}
