@@ -8,11 +8,18 @@ spring:
     bootstrap-servers: localhost:9092
     consumer:
       group-id: mission-retry-consumer
-      enable-auto-commit: true
-      auto-commit-interval: 5000
-      auto-offset-reset: latest
-      max-poll-records: 10
-      heartbeat-interval: 3000
+      properties:
+        session.timeout.ms: 10000
+        heartbeat.interval.ms: 3000
+        request.timeout.ms: 3000
+
+        max.poll.interval.ms: 300000
+        max.poll.records: 10
+
+        enable.auto.commit: true
+        auto.commit.interval: 1000
+
+        auto.offset.reset: latest
 
 ---
 spring.config.activate.on-profile: local
