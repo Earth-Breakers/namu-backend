@@ -22,6 +22,7 @@ import univ.earthbreaker.namu.core.domain.mission.CertifiedMissionPostCommand;
 import univ.earthbreaker.namu.core.domain.mission.MemberMissionCertifyService;
 import univ.earthbreaker.namu.core.domain.mission.MissionCompleteCommand;
 import univ.earthbreaker.namu.external.image.ImageManager;
+import univ.earthbreaker.namu.clients.point.PointManager;
 import univ.earthbreaker.namu.external.image.ImageUploadCommand;
 
 @RestController
@@ -56,7 +57,7 @@ public class MissionCertifyController {
 		@RequestPart(value = "content") String content,
 		@RequestPart(value = "imageFile") MultipartFile missionImageFile
 	) {
-		String imagePathKey = uploadImage(missionImageFile);
+		String imagePathKey = uploadImage(memberNo, missionNo, content, missionImageFile);
 		if (imagePathKey == null) {
 			return ResponseEntity.accepted().build();
 		}
@@ -73,7 +74,7 @@ public class MissionCertifyController {
 
 	private String uploadImage(Long memberNo, Long missionNo, String content, MultipartFile missionImageFile) {
 		try {
-			return imageManager.upload(new ImageUploadCommand(missionImageFile));
+			return imageManager.upload(new ImageUploadCommand());
 		} catch (Exception e) {
 			RetryMessage retryMessage = RetryMessage.create(memberNo, missionNo, null, content, RetryStep.IMAGE_UPLOAD);
 			kafkaTemplate.send(missionRetryTopic, retryMessage.getKey(), retryMessage);
@@ -83,7 +84,7 @@ public class MissionCertifyController {
 
 	private Long getReward(Long memberNo, Long missionNo, String imagePathKey, String content) {
 		try {
-			return pointManager.reward();
+			return pointManager.issue();
 		} catch (Exception e) {
 			RetryMessage retryMessage = RetryMessage.create(memberNo, missionNo, imagePathKey, content, RetryStep.POINT_ISSUE);
 			kafkaTemplate.send(missionRetryTopic, retryMessage.getKey(), retryMessage);
