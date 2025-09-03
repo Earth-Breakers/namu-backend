@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
+import univ.earthbreaker.namu.clients.point.PointManager;
 import univ.earthbreaker.namu.core.domain.mission.CertifiedMissionPostCommand;
 import univ.earthbreaker.namu.core.domain.mission.MemberMissionCertifyService;
 import univ.earthbreaker.namu.core.domain.mission.MissionCompleteCommand;
@@ -73,7 +74,7 @@ public class ImageUploadRetryService implements MissionRetryer {
 
 	private Long handlePointRetry(String key, RetryMessage message) {
 		try {
-			return pointManager.reward();
+			return pointManager.issue();
 		} catch (Exception e) {
 			retry(key, message.toNext(RetryStep.POINT_ISSUE), e);
 			return null;
