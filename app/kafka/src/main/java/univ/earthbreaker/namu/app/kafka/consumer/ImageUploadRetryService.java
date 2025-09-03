@@ -2,6 +2,7 @@ package univ.earthbreaker.namu.app.kafka.consumer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -20,17 +21,20 @@ public class ImageUploadRetryService implements MissionRetryer {
 	private final PointManager pointManager;
 	private final MemberMissionCertifyService memberMissionCertifyService;
 	private final KafkaTemplate<String, RetryMessage> kafkaTemplate;
+	private final String missionRetryTopic;
 
 	public ImageUploadRetryService(
 		ImageManager imageManager,
 		PointManager pointManager,
 		MemberMissionCertifyService memberMissionCertifyService,
-		KafkaTemplate<String, RetryMessage> kafkaTemplate
+		KafkaTemplate<String, RetryMessage> kafkaTemplate,
+		@Value("${kafka.topics.mission-retry.name}") String missionRetryTopic
 	) {
 		this.imageManager = imageManager;
 		this.pointManager = pointManager;
 		this.memberMissionCertifyService = memberMissionCertifyService;
 		this.kafkaTemplate = kafkaTemplate;
+		this.missionRetryTopic = missionRetryTopic;
 	}
 
 	@Override
@@ -78,7 +82,7 @@ public class ImageUploadRetryService implements MissionRetryer {
 
 	private void retry(String key, RetryMessage message, Exception e) {
 		if (RetryMessage.MAX_RETRY_ATTEMPTS >= message.attempt()) {
-			kafkaTemplate.send("earthbreaker.namu.mission-retry", key, message);
+			kafkaTemplate.send(missionRetryTopic, key, message);
 		} else {
 			log.error("Retry failed for key: {}, record message : {}, exception : {}", key, message, e);
 		}

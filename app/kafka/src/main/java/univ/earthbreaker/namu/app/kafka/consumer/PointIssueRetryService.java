@@ -2,6 +2,7 @@ package univ.earthbreaker.namu.app.kafka.consumer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -17,15 +18,18 @@ public class PointIssueRetryService implements MissionRetryer {
 	private final MemberMissionCertifyService memberMissionCertifyService;
 	private final PointManager pointManager;
 	private final KafkaTemplate<String, RetryMessage> kafkaTemplate;
+	private final String missionRetryTopic;
 
 	public PointIssueRetryService(
 		MemberMissionCertifyService memberMissionCertifyService,
 		PointManager pointManager,
-		KafkaTemplate<String, RetryMessage> kafkaTemplate
+		KafkaTemplate<String, RetryMessage> kafkaTemplate,
+		@Value("${kafka.topics.mission-retry.name}") String missionRetryTopic
 	) {
 		this.memberMissionCertifyService = memberMissionCertifyService;
 		this.pointManager = pointManager;
 		this.kafkaTemplate = kafkaTemplate;
+		this.missionRetryTopic = missionRetryTopic;
 	}
 
 	@Override
@@ -57,7 +61,7 @@ public class PointIssueRetryService implements MissionRetryer {
 
 	private void retry(String key, RetryMessage message, Exception e) {
 		if (RetryMessage.MAX_RETRY_ATTEMPTS >= message.attempt()) {
-			kafkaTemplate.send("earthbreaker.namu.mission-retry", key, message);
+			kafkaTemplate.send(missionRetryTopic, key, message);
 		} else {
 			log.error("Retry failed for key: {}, record message : {}, exception : {}", key, message, e);
 		}

@@ -13,7 +13,7 @@ public class MissionRetryConsumer {
 		this.missionRetryerFactory = missionRetryerFactory;
 	}
 
-	@KafkaListener(topics = {"earthbreaker.namu.mission-retry"}, groupId = "${spring.kafka.consumer.group-id}")
+	@KafkaListener(topics = {"${kafka.topics.mission-retry.name}"}, groupId = "${spring.kafka.consumer.group-id}")
 	public void handleRetry(ConsumerRecord<String, RetryMessage> recordEvent) {
 		RetryMessage message = recordEvent.value();
 		MissionRetryer missionRetryer = missionRetryerFactory.get(message.retryStep());
