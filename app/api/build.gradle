@@ -9,10 +9,22 @@ dependencies {
     implementation project(":services:notification")
 
     implementation project(":clients:oauth")
-//    implementation project(":clients:aws")
     implementation project(":clients:image")
+    implementation project(":clients:point")
 
     implementation project(":support:logging")
 
     testImplementation project(":tests:api-docs")
 }
+
+tasks.register('copyResourcesConfig', Copy) {
+    from project(':services:auth').file('src/main/resources')
+    from project(':core:storage').file('src/main/resources')
+    from project(':support:logging').file('src/main/resources')
+
+    into file("$projectDir/build/resources/main")
+
+    include '*.yml'
+}
+
+processResources.dependsOn('copyResourcesConfig')
