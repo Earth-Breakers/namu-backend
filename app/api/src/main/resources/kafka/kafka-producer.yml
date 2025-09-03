@@ -1,0 +1,33 @@
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringDeserializer
+      properties:
+        acks: all
+        enable.idempotence: true
+        retries: 2147483647
+        max.in.flight.requests.per.connection: 1
+
+kafka:
+  topics:
+    mission-retry:
+      name: earthbreaker.namu.mission-retry
+      replicas: 3
+      partitions: 12
+
+---
+spring.config.activate.on-profile: local
+
+---
+spring.config.activate.on-profile: local-dev
+
+---
+spring.config.activate.on-profile: dev
+
+---
+spring.config.activate.on-profile: staging
+
+---
+spring.config.activate.on-profile: live

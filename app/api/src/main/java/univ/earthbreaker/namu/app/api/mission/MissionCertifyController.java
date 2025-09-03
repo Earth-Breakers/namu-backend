@@ -1,12 +1,14 @@
 package univ.earthbreaker.namu.app.api.mission;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
+import static univ.earthbreaker.namu.app.api.config.KafkaProducerConfig.RetryMessage;
+import static univ.earthbreaker.namu.app.api.config.KafkaProducerConfig.RetryStep;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,17 +29,23 @@ import univ.earthbreaker.namu.external.image.ImageUploadCommand;
 public class MissionCertifyController {
 
 	private final ImageManager imageManager;
+	private final PointManager pointManager;
 	private final MemberMissionCertifyService missionCertifyService;
-	private final Executor executor;
+	private final KafkaTemplate<String, RetryMessage> kafkaTemplate;
+	private final String missionRetryTopic;
 
 	public MissionCertifyController(
 		@Qualifier("externalImageManager") ImageManager imageManager,
+		PointManager pointManager,
 		MemberMissionCertifyService missionCertifyService,
-		Executor threadPoolExecutor
+		KafkaTemplate<String, RetryMessage> kafkaTemplate,
+		@Value("${kafka.topics.mission-retry.name}") String missionRetryTopic
 	) {
 		this.imageManager = imageManager;
+		this.pointManager = pointManager;
 		this.missionCertifyService = missionCertifyService;
-		this.executor = threadPoolExecutor;
+		this.kafkaTemplate = kafkaTemplate;
+		this.missionRetryTopic = missionRetryTopic;
 	}
 
 	@AuthMapping
@@ -48,19 +56,38 @@ public class MissionCertifyController {
 		@RequestPart(value = "content") String content,
 		@RequestPart(value = "imageFile") MultipartFile missionImageFile
 	) {
-		CompletableFuture.supplyAsync(
-				() -> imageManager.upload(new ImageUploadCommand()),
-				executor
-			)
-			.exceptionally(ex -> null)
-			.thenAccept(result -> {
-				if (result != null) {
-					missionCertifyService.successMission(
-						new MissionCompleteCommand(memberNo, missionNo),
-						new CertifiedMissionPostCommand(memberNo, content, result)
-					);
-				}
-			});
+		String imagePathKey = uploadImage(missionImageFile);
+		if (imagePathKey == null) {
+			return ResponseEntity.accepted().build();
+		}
+		Long point = getReward(memberNo, missionNo, imagePathKey, content);
+		if (point == null) {
+			return ResponseEntity.accepted().build();
+		}
+		missionCertifyService.successMission(
+			new MissionCompleteCommand(memberNo, missionNo),
+			new CertifiedMissionPostCommand(memberNo, content, imagePathKey, point)
+		);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
+	}
+
+	private String uploadImage(Long memberNo, Long missionNo, String content, MultipartFile missionImageFile) {
+		try {
+			return imageManager.upload(new ImageUploadCommand(missionImageFile));
+		} catch (Exception e) {
+			RetryMessage retryMessage = RetryMessage.create(memberNo, missionNo, null, content, RetryStep.IMAGE_UPLOAD);
+			kafkaTemplate.send(missionRetryTopic, retryMessage.getKey(), retryMessage);
+			return null;
+		}
+	}
+
+	private Long getReward(Long memberNo, Long missionNo, String imagePathKey, String content) {
+		try {
+			return pointManager.reward();
+		} catch (Exception e) {
+			RetryMessage retryMessage = RetryMessage.create(memberNo, missionNo, imagePathKey, content, RetryStep.POINT_ISSUE);
+			kafkaTemplate.send(missionRetryTopic, retryMessage.getKey(), retryMessage);
+			return null;
+		}
 	}
 }
