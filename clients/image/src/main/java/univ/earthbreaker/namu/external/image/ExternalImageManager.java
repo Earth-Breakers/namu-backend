@@ -18,6 +18,12 @@ public class ExternalImageManager implements ImageManager {
 	}
 
 	@Override
+	public String retrieve(String imagePathKey) {
+		ExternalImageResult response = imageApiCaller.getImage();
+		return response.data().toString();
+	}
+
+	@Override
 	public void delete(String imagePathKey) {
 		imageApiCaller.deleteImage();
 	}

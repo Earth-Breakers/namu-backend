@@ -4,5 +4,7 @@ public interface ImageManager {
 
 	String upload(ImageUploadCommand command);
 
+	String retrieve(String imagePathKey);
+
 	void delete(String imagePathKey);
 }
