@@ -3,7 +3,10 @@ spring.profiles.active: local
 
 spring:
   config:
-    import: classpath:kafka-topic.yml
+    import:
+      - classpath:kafka-topic.yml
+      - storage-core.yml
+      - logging.yml
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
@@ -20,6 +23,9 @@ spring:
         auto.commit.interval: 1000
 
         auto.offset.reset: latest
+
+server:
+  port: 8085
 
 ---
 spring.config.activate.on-profile: local
