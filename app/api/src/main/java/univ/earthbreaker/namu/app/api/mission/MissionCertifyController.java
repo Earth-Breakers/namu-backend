@@ -91,4 +91,10 @@ public class MissionCertifyController {
 			return null;
 		}
 	}
+
+	@GetMapping("/certification/status/{requestId}")
+	public ResponseEntity<MissionCertificationStatusResponse> pollCertifyProcess(@PathVariable String requestId) {
+		MissionCertifyStatus status = missionCertifyTrackingService.retrieve(requestId);
+		return ResponseEntity.ok(MissionCertificationStatusResponse.from(status));
+	}
 }
