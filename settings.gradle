@@ -15,12 +15,12 @@ include 'core:domain', 'core:storage'
 
 include 'services:auth', 'services:notification'
 
-include 'clients:oauth', 'clients:aws', 'clients:image'
+include 'clients:oauth', 'clients:aws', 'clients:image', 'clients:sse'
 
 include 'event'
 
 include 'support:logging'
 
-include 'server:external'
+include 'server:external', 'server:internal'
 
 include 'tests:api-docs'

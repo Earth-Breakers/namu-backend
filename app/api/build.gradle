@@ -10,6 +10,7 @@ dependencies {
     implementation project(":clients:oauth")
 //    implementation project(":clients:aws")
     implementation project(":clients:image")
+    implementation project(":clients:sse")
 
     implementation project(":support:logging")
 
