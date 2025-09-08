@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import univ.earthbreaker.namu.clients.point.PointManager;
 import univ.earthbreaker.namu.core.domain.mission.CertifiedMissionPostCommand;
 import univ.earthbreaker.namu.core.domain.mission.MemberMissionCertifyService;
+import univ.earthbreaker.namu.core.domain.mission.MissionCertifyProcess;
+import univ.earthbreaker.namu.core.domain.mission.MissionCertifyTrackingService;
 import univ.earthbreaker.namu.core.domain.mission.MissionCompleteCommand;
 
 @Service
@@ -17,17 +19,20 @@ public class PointIssueRetryService implements MissionRetryer {
 	private static final Logger log = LoggerFactory.getLogger(PointIssueRetryService.class);
 
 	private final MemberMissionCertifyService memberMissionCertifyService;
+	private final MissionCertifyTrackingService missionCertifyTrackingService;
 	private final PointManager pointManager;
 	private final KafkaTemplate<String, RetryMessage> kafkaTemplate;
 	private final String missionRetryTopic;
 
 	public PointIssueRetryService(
 		MemberMissionCertifyService memberMissionCertifyService,
+		MissionCertifyTrackingService missionCertifyTrackingService,
 		PointManager pointManager,
 		KafkaTemplate<String, RetryMessage> kafkaTemplate,
 		@Value("${kafka.topics.mission-retry.name}") String missionRetryTopic
 	) {
 		this.memberMissionCertifyService = memberMissionCertifyService;
+		this.missionCertifyTrackingService = missionCertifyTrackingService;
 		this.pointManager = pointManager;
 		this.kafkaTemplate = kafkaTemplate;
 		this.missionRetryTopic = missionRetryTopic;
@@ -49,6 +54,7 @@ public class PointIssueRetryService implements MissionRetryer {
 			new MissionCompleteCommand(message.memberNo(), message.missionNo()),
 			new CertifiedMissionPostCommand(message.memberNo(), message.postContents(), message.imagePathKey(), point)
 		);
+		missionCertifyTrackingService.update(key, MissionCertifyProcess.COMPLETED);
 	}
 
 	private Long handlePointRetry(String key, RetryMessage message) {
@@ -64,6 +70,7 @@ public class PointIssueRetryService implements MissionRetryer {
 		if (RetryMessage.MAX_RETRY_ATTEMPTS >= message.attempt()) {
 			kafkaTemplate.send(missionRetryTopic, key, message);
 		} else {
+			missionCertifyTrackingService.update(key, MissionCertifyProcess.FAILED);
 			log.error("Retry failed for key: {}, record message : {}, exception : {}", key, message, e);
 		}
 	}

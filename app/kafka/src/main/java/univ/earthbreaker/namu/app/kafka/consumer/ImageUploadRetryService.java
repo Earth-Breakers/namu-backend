@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import univ.earthbreaker.namu.clients.point.PointManager;
 import univ.earthbreaker.namu.core.domain.mission.CertifiedMissionPostCommand;
 import univ.earthbreaker.namu.core.domain.mission.MemberMissionCertifyService;
+import univ.earthbreaker.namu.core.domain.mission.MissionCertifyProcess;
+import univ.earthbreaker.namu.core.domain.mission.MissionCertifyTrackingService;
 import univ.earthbreaker.namu.core.domain.mission.MissionCompleteCommand;
 import univ.earthbreaker.namu.external.image.ImageManager;
 import univ.earthbreaker.namu.external.image.ImageUploadCommand;
@@ -21,6 +23,7 @@ public class ImageUploadRetryService implements MissionRetryer {
 	private final ImageManager imageManager;
 	private final PointManager pointManager;
 	private final MemberMissionCertifyService memberMissionCertifyService;
+	private final MissionCertifyTrackingService missionCertifyTrackingService;
 	private final KafkaTemplate<String, RetryMessage> kafkaTemplate;
 	private final String missionRetryTopic;
 
@@ -28,12 +31,14 @@ public class ImageUploadRetryService implements MissionRetryer {
 		ImageManager imageManager,
 		PointManager pointManager,
 		MemberMissionCertifyService memberMissionCertifyService,
+		MissionCertifyTrackingService missionCertifyTrackingService,
 		KafkaTemplate<String, RetryMessage> kafkaTemplate,
 		@Value("${kafka.topics.mission-retry.name}") String missionRetryTopic
 	) {
 		this.imageManager = imageManager;
 		this.pointManager = pointManager;
 		this.memberMissionCertifyService = memberMissionCertifyService;
+		this.missionCertifyTrackingService = missionCertifyTrackingService;
 		this.kafkaTemplate = kafkaTemplate;
 		this.missionRetryTopic = missionRetryTopic;
 	}
@@ -58,6 +63,7 @@ public class ImageUploadRetryService implements MissionRetryer {
 			new MissionCompleteCommand(message.memberNo(), message.missionNo()),
 			new CertifiedMissionPostCommand(message.memberNo(), message.postContents(), message.imagePathKey(), point)
 		);
+		missionCertifyTrackingService.update(key, MissionCertifyProcess.COMPLETED);
 	}
 
 	private boolean handleImageUploadRetry(String key, RetryMessage message) {
@@ -85,6 +91,7 @@ public class ImageUploadRetryService implements MissionRetryer {
 		if (RetryMessage.MAX_RETRY_ATTEMPTS >= message.attempt()) {
 			kafkaTemplate.send(missionRetryTopic, key, message);
 		} else {
+			missionCertifyTrackingService.update(key, MissionCertifyProcess.FAILED);
 			log.error("Retry failed for key: {}, record message : {}, exception : {}", key, message, e);
 		}
 	}
