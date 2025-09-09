@@ -52,6 +52,7 @@ public class KafkaProducerConfig {
 	}
 
 	public record RetryMessage(
+		String requestId,
 		long memberNo,
 		long missionNo,
 		String imagePathKey,
@@ -60,17 +61,18 @@ public class KafkaProducerConfig {
 		int attempt
 	) {
 		public static RetryMessage create(
+			String requestId,
 			long memberNo,
 			long missionNo,
 			String imagePathKey,
 			String postContents,
 			RetryStep retryStep
 		) {
-			return new RetryMessage(memberNo, missionNo, imagePathKey, postContents, retryStep, 1);
+			return new RetryMessage(requestId, memberNo, missionNo, imagePathKey, postContents, retryStep, 1);
 		}
 
 		public String getKey() {
-			return memberNo + ":" + missionNo + ":" + imagePathKey;
+			return requestId;
 		}
 	}
 

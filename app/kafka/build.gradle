@@ -3,7 +3,20 @@ dependencies {
     implementation 'org.springframework.kafka:spring-kafka'
 
     implementation project(":clients:image")
+    implementation project(":clients:point")
     implementation project(':core:domain')
+    implementation project(':core:storage')
 
     implementation project(":support:logging")
 }
+
+tasks.register('copyResourcesConfig', Copy) {
+    from project(':core:storage').file('src/main/resources')
+    from project(':support:logging').file('src/main/resources')
+
+    into file("$projectDir/build/resources/main")
+
+    include '*.yml'
+}
+
+processResources.dependsOn('copyResourcesConfig')
