@@ -1,5 +1,4 @@
 dependencies {
-    compileOnly project(":event")
     compileOnly("org.springframework:spring-context")
 
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'

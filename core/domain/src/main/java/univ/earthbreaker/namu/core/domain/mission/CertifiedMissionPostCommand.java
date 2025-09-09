@@ -9,12 +9,14 @@ public class CertifiedMissionPostCommand extends SelfValidating<CertifiedMission
 	private final @NotNull Long memberNo;
 	private final @NotNull @NotBlank String content;
 	private final @NotBlank String imagePathKey;
+	private final @NotNull Long point;
 
-	public CertifiedMissionPostCommand(Long memberNo, String content, String imagePathKey) {
+	public CertifiedMissionPostCommand(Long memberNo, String content, String imagePathKey, Long point) {
 		this.memberNo = memberNo;
 		this.content = content;
 		this.imagePathKey = imagePathKey;
-		this.validateSelf("memberNo 가 null 이거나, content, imagePathKey 가 null 또는 공백일 수 없습니다");
+		this.point = point;
+		this.validateSelf("memberNo 가 null 이거나, content, imagePathKey, point 가 null 또는 공백일 수 없습니다");
 	}
 
 	public Long getMemberNo() {
@@ -27,5 +29,9 @@ public class CertifiedMissionPostCommand extends SelfValidating<CertifiedMission
 
 	public String getImagePathKey() {
 		return imagePathKey;
+	}
+
+	public Long getPoint() {
+		return point;
 	}
 }

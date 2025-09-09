@@ -1,14 +1,14 @@
-package univ.earthbreaker.namu.server.external.api;
+package univ.earthbreaker.namu.server.external.api.image;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import univ.earthbreaker.namu.server.external.exception.ExternalBadRequestException;
 import univ.earthbreaker.namu.server.external.exception.ExternalImageServerException;
 
 public class ExternalImageStorage {
 
-	private final Map<String, String> storage = new HashMap<>();
+	private final Map<String, String> storage = new ConcurrentHashMap<>();
 
 	public String upload(String imageKey, String imageData) {
 		if (storage.get(imageKey) != null) { // 중복 검사

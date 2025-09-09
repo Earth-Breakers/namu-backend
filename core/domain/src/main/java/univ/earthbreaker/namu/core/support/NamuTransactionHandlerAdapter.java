@@ -5,11 +5,11 @@ import org.springframework.transaction.TransactionException;
 import org.springframework.transaction.support.TransactionTemplate;
 
 @Component
-class TransactionHandlerAdapter implements TransactionHandler {
+class NamuTransactionHandlerAdapter implements TransactionHandler {
 
 	private final TransactionTemplate transactionTemplate;
 
-	public TransactionHandlerAdapter(TransactionTemplate transactionTemplate) {
+	public NamuTransactionHandlerAdapter(TransactionTemplate transactionTemplate) {
 		this.transactionTemplate = transactionTemplate;
 	}
 
