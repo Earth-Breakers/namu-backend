@@ -34,7 +34,7 @@ public class RandomLatencyImageManager {
 	 * @param imageData 이미지 파일 데이터
 	 * @return 업로드 결과 메시지
 	 */
-	public String uploadImage(String imageKey, String imageData) {
+	public String uploadImage(String imageKey, String imageData) throws ExternalImageServerException {
 		int delay = getDelay();
 		delaySimulation(delay);
 		invokeException();
@@ -47,7 +47,7 @@ public class RandomLatencyImageManager {
 	 * @param imageKey 이미지 키
 	 * @return 삭제 결과 메시지
 	 */
-	public String deleteImage(String imageKey) {
+	public String deleteImage(String imageKey) throws ExternalImageServerException {
 		int delay = getDelay();
 		delaySimulation(delay);
 		invokeException();
