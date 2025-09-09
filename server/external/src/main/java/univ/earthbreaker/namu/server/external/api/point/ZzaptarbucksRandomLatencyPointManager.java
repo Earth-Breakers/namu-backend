@@ -1,14 +1,16 @@
-package univ.earthbreaker.namu.clients.point;
+package univ.earthbreaker.namu.server.external.api.point;
 
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.stereotype.Component;
 
-@Component
-public class ZzaptarbucksRandomLatencyPointManager implements PointManager {
+import univ.earthbreaker.namu.server.external.exception.ExternalPointServerException;
 
-	private static final AtomicLong POINT = new AtomicLong(10_000_000) ;
+@Component
+public class ZzaptarbucksRandomLatencyPointManager {
+
+	private static final AtomicLong POINT = new AtomicLong(100_000_000) ;
 	private static final Random RANDOM = new Random();
 
 	private static final long FIXED_REWARD_POINT = 10;
@@ -17,24 +19,23 @@ public class ZzaptarbucksRandomLatencyPointManager implements PointManager {
 	private static final double EXCEPTION_PROBABILITY = 0.01; // 예외 발생 확률 (1%)
 
 	/**
-	 * 총 1천만 포인트에 대해서, 사용자 별로 10포인트 씩 제공
-	 * @throws IllegalStateException : 준비되니 1천만 포인트가 모두 사라진 경우 예외 발생
+	 * 총 1억 포인트에 대해서, 사용자 별로 10포인트 씩 제공
+	 * @throws IllegalStateException : 준비된 1억 포인트가 모두 사라진 경우 예외 발생
 	 * @return 10포인트
 	 */
-	@Override
 	public Long issue() {
 		int delay = getDelay();
 		delaySimulation(delay);
 		invokeException();
 
-		long current = POINT.get();
-		long next = current - FIXED_REWARD_POINT;
+		POINT.updateAndGet(current -> {
+			long next = current - FIXED_REWARD_POINT;
+			if (next < 0) {
+				throw new IllegalStateException("The point has been reached");
+			}
+			return next;
+		});
 
-		if (next < 0) {
-			throw new IllegalStateException("The point has been reached");
-		}
-
-		POINT.compareAndSet(current, next);
 		return FIXED_REWARD_POINT; // 지급한 포인트만 반환
 	}
 
@@ -53,7 +54,7 @@ public class ZzaptarbucksRandomLatencyPointManager implements PointManager {
 		try {
 			Thread.sleep(delay);
 		} catch (InterruptedException e) {
-			throw new PointServerException(e.getMessage());
+			throw new ExternalPointServerException(e.getMessage());
 		}
 	}
 
@@ -62,7 +63,7 @@ public class ZzaptarbucksRandomLatencyPointManager implements PointManager {
 	 */
 	private void invokeException() {
 		if (RANDOM.nextDouble() < EXCEPTION_PROBABILITY) {
-			throw new PointServerException("Read Timeout Exception");
+			throw new ExternalPointServerException("Read Timeout Exception");
 		}
 	}
 }

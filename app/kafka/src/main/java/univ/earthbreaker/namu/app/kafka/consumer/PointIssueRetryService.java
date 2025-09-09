@@ -59,7 +59,7 @@ public class PointIssueRetryService implements MissionRetryer {
 
 	private Long handlePointRetry(String key, RetryMessage message) {
 		try {
-			return pointManager.issue();
+			return pointManager.issuePoint();
 		} catch (Exception e) {
 			retry(key, message.toNext(RetryStep.POINT_ISSUE), e);
 			return null;

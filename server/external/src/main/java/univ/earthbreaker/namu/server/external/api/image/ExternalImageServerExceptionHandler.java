@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.server.external.api;
+package univ.earthbreaker.namu.server.external.api.image;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import univ.earthbreaker.namu.server.external.exception.ExternalBadRequestException;
 import univ.earthbreaker.namu.server.external.exception.ExternalImageServerException;
 
-@RestControllerAdvice(basePackages = "univ.earthbreaker.namu.external.server")
+@RestControllerAdvice(basePackages = "univ.earthbreaker.namu.server.external")
 public class ExternalImageServerExceptionHandler {
 
 	@ExceptionHandler(ExternalBadRequestException.class)
