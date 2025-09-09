@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.server.external.api;
+package univ.earthbreaker.namu.server.external.api.image;
 
 import java.util.HashMap;
 import java.util.Map;
