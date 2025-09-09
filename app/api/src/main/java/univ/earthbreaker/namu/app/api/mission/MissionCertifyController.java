@@ -93,11 +93,17 @@ public class MissionCertifyController {
 		String content,
 		MultipartFile missionImageFile
 	) {
+		String imagePathKey = "generate-unique";
 		try {
-			return imageManager.upload(new ImageUploadCommand());
+			return imageManager.upload(new ImageUploadCommand(
+				imagePathKey,
+				missionImageFile.getContentType(),
+				missionImageFile.getResource().contentLength(),
+				missionImageFile.getInputStream()
+			));
 		} catch (Exception e) {
 			RetryMessage retryMessage
-				= RetryMessage.create(requestId, memberNo, missionNo, null, content, RetryStep.IMAGE_UPLOAD);
+				= RetryMessage.create(requestId, memberNo, missionNo, imagePathKey, content, RetryStep.IMAGE_UPLOAD);
 			kafkaTemplate.send(missionRetryTopic, retryMessage.getKey(), retryMessage);
 			return null;
 		}
@@ -105,7 +111,7 @@ public class MissionCertifyController {
 
 	private Long getReward(String requestId, Long memberNo, Long missionNo, String imagePathKey, String content) {
 		try {
-			return pointManager.issue();
+			return pointManager.issuePoint(memberNo, missionNo);
 		} catch (Exception e) {
 			RetryMessage retryMessage
 				= RetryMessage.create(requestId, memberNo, missionNo, imagePathKey, content, RetryStep.POINT_ISSUE);

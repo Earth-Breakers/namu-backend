@@ -80,7 +80,7 @@ public class ImageUploadRetryService implements MissionRetryer {
 
 	private Long handlePointRetry(String key, RetryMessage message) {
 		try {
-			return pointManager.issue();
+			return pointManager.issuePoint(message.memberNo(), message.missionNo());
 		} catch (Exception e) {
 			retry(key, message.toNext(RetryStep.POINT_ISSUE), e);
 			return null;
