@@ -1,6 +1,6 @@
-package univ.earthbreaker.namu.external.image;
+package univ.earthbreaker.namu.infra.client.image;
 
-class ImageServerBadRequestException extends RuntimeException {
+public class ImageServerBadRequestException extends RuntimeException {
 
 	public ImageServerBadRequestException(String message) {
 		super(message);

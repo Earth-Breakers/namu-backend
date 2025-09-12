@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.external.oauth;
+package univ.earthbreaker.namu.infra.client.oauth;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.HttpHeaders;

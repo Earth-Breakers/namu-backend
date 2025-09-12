@@ -1,10 +1,9 @@
-package univ.earthbreaker.namu.infra;
+package univ.earthbreaker.namu.infra.client.point;
 
 import org.springframework.http.HttpStatus;
 
 import feign.Response;
 import feign.codec.ErrorDecoder;
-import univ.earthbreaker.namu.infra.client.point.PointServerServerException;
 
 class PointFeignExceptionDecoder implements ErrorDecoder {
 

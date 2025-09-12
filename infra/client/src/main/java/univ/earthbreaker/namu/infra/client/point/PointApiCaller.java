@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.clients.point;
+package univ.earthbreaker.namu.infra.client.point;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;

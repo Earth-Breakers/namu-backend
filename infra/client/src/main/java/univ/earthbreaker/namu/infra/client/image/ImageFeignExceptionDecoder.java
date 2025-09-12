@@ -1,11 +1,9 @@
-package univ.earthbreaker.namu.infra;
+package univ.earthbreaker.namu.infra.client.image;
 
 import org.springframework.http.HttpStatus;
 
 import feign.Response;
 import feign.codec.ErrorDecoder;
-import univ.earthbreaker.namu.infra.client.image.ImageServerBadRequestException;
-import univ.earthbreaker.namu.infra.client.image.ImageServerServerException;
 
 class ImageFeignExceptionDecoder implements ErrorDecoder {
 

@@ -1,10 +1,9 @@
-package univ.earthbreaker.namu.infra;
+package univ.earthbreaker.namu.infra.client.oauth;
 
 import org.jetbrains.annotations.NotNull;
 
 import feign.Response;
 import feign.codec.ErrorDecoder;
-import univ.earthbreaker.namu.infra.client.oauth.OAuthClientException;
 
 class KakaoFeignExceptionDecoder implements ErrorDecoder {
 

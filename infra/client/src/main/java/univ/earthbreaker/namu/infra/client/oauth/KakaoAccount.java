@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.external.oauth;
+package univ.earthbreaker.namu.infra.client.oauth;
 
 record KakaoAccount(Profile profile) {
 	String profileNickname() {

@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.infra;
+package univ.earthbreaker.namu.infra.client.oauth;
 
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.external.oauth;
+package univ.earthbreaker.namu.infra.client.oauth;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;

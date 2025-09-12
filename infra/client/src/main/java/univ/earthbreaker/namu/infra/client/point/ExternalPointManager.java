@@ -1,9 +1,10 @@
-package univ.earthbreaker.namu.clients.point;
+package univ.earthbreaker.namu.infra.client.point;
 
 import java.time.Instant;
 
 import org.springframework.stereotype.Component;
 
+import univ.earthbreaker.namu.core.domain.mission.infra.PointManager;
 import univ.earthbreaker.namu.server.external.api.point.PointIssueRequest;
 
 @Component
@@ -16,7 +17,7 @@ public class ExternalPointManager implements PointManager {
 	}
 
 	@Override
-	public Long issuePoint(long memberNo, long missionNo) {
+	public Long issue(long memberNo, long missionNo) {
 		PointIssueRequest request = new PointIssueRequest(memberNo, missionNo, Instant.now().toEpochMilli());
 		try {
 			ExternalPointResult result = pointApiCaller.issuePoint(null, request);

@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.infra;
+package univ.earthbreaker.namu.infra.client.point;
 
 import java.util.concurrent.TimeUnit;
 

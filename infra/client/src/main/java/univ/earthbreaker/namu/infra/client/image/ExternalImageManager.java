@@ -1,7 +1,12 @@
-package univ.earthbreaker.namu.external.image;
+package univ.earthbreaker.namu.infra.client.image;
+
+import java.io.InputStream;
 
 import org.springframework.stereotype.Component;
 
+import univ.earthbreaker.namu.core.domain.mission.infra.ImageManager;
+import univ.earthbreaker.namu.core.domain.mission.infra.ImageUploadCommand;
+import univ.earthbreaker.namu.core.domain.mission.service.ImageProcessException;
 import univ.earthbreaker.namu.server.external.api.image.ImageRequest;
 import univ.earthbreaker.namu.server.external.api.image.ImageUploadRequest;
 import univ.earthbreaker.namu.server.external.api.image.ObjectMetaData;
@@ -19,18 +24,17 @@ public class ExternalImageManager implements ImageManager {
 	}
 
 	@Override
-	public String upload(ImageUploadCommand command) {
+	public void upload(ImageUploadCommand command) throws ImageProcessException {
 		ObjectMetaData objectMetadata = new ObjectMetaData();
-		objectMetadata.setContentType(command.contentType());
-		objectMetadata.setContentLength(command.contentLength());
+		objectMetadata.setContentType("command.contentType()");
+		objectMetadata.setContentLength(0); // command.contentLength()
 
 		String imagePathKey = command.imagePathKey();
 		try {
-			imageApiCaller.uploadImage(new ImageUploadRequest(BUCKET_NAME, imagePathKey, command.inputStream(), objectMetadata));
+			imageApiCaller.uploadImage(new ImageUploadRequest(BUCKET_NAME, imagePathKey, /*command.inputStream()*/ InputStream.nullInputStream(), objectMetadata));
 		} catch (ExternalImageServerException e) {
-			throw ImageServerServerException.uploadFail(e.getMessage(), imagePathKey);
+			throw ImageProcessException.uploadFail(e.getMessage(), imagePathKey);
 		}
-		return imagePathKey;
 	}
 
 	@Override
@@ -38,11 +42,5 @@ public class ExternalImageManager implements ImageManager {
 		ImageRequest request = new ImageRequest(BUCKET_NAME, imagePathKey);
 		ExternalImageResult response = imageApiCaller.getImage(request);
 		return response.data().toString();
-	}
-
-	@Override
-	public void delete(String imagePathKey) {
-		ImageRequest request = new ImageRequest(BUCKET_NAME, imagePathKey);
-		imageApiCaller.deleteImage(request);
 	}
 }

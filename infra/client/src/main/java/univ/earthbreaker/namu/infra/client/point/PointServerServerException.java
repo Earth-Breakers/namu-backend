@@ -1,6 +1,6 @@
-package univ.earthbreaker.namu.clients.point;
+package univ.earthbreaker.namu.infra.client.point;
 
-class PointServerServerException extends RuntimeException {
+public class PointServerServerException extends RuntimeException {
 
 	public PointServerServerException(String message) {
 		super(message);

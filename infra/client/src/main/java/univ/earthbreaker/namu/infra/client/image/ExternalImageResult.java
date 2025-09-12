@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.external.image;
+package univ.earthbreaker.namu.infra.client.image;
 
 public record ExternalImageResult(int code, String message, Object data) {
 }

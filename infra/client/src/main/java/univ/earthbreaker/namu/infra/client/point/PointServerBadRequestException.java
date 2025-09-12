@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.clients.point;
+package univ.earthbreaker.namu.infra.client.point;
 
 class PointServerBadRequestException extends RuntimeException {
 
