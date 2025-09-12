@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu;
+package univ.earthbreaker.namu.infra;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +15,8 @@ import org.springframework.kafka.core.KafkaAdmin;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
+
+import univ.earthbreaker.namu.core.domain.mission.infra.RetryMessage;
 
 @EnableKafka
 @Configuration
@@ -50,36 +52,4 @@ public class KafkaProducerConfig {
 				.build()
 		);
 	}
-
-	public record RetryMessage(
-		String requestId,
-		long memberNo,
-		long missionNo,
-		String imagePathKey,
-		String postContents,
-		RetryStep retryStep,
-		int attempt
-	) {
-		public static RetryMessage create(
-			String requestId,
-			long memberNo,
-			long missionNo,
-			String imagePathKey,
-			String postContents,
-			RetryStep retryStep
-		) {
-			return new RetryMessage(requestId, memberNo, missionNo, imagePathKey, postContents, retryStep, 1);
-		}
-
-		public String getKey() {
-			return requestId;
-		}
-	}
-
-	public enum RetryStep {
-		IMAGE_UPLOAD,
-		POINT_ISSUE,
-		;
-	}
-
 }
