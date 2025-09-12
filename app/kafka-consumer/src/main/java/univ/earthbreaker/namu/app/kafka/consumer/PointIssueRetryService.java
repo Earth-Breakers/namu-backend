@@ -2,16 +2,15 @@ package univ.earthbreaker.namu.app.kafka.consumer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
-import univ.earthbreaker.namu.clients.point.PointManager;
-import univ.earthbreaker.namu.core.domain.mission.CertifiedMissionPostCommand;
-import univ.earthbreaker.namu.core.domain.mission.MemberMissionCertifyService;
 import univ.earthbreaker.namu.core.domain.mission.MissionCertifyProcess;
-import univ.earthbreaker.namu.core.domain.mission.MissionCertifyTrackingService;
-import univ.earthbreaker.namu.core.domain.mission.MissionCompleteCommand;
+import univ.earthbreaker.namu.core.domain.mission.service.CertifiedMissionPostCommand;
+import univ.earthbreaker.namu.core.domain.mission.service.MemberMissionCertifyService;
+import univ.earthbreaker.namu.core.domain.mission.service.MissionCertifyTrackingService;
+import univ.earthbreaker.namu.core.domain.mission.service.MissionCompleteCommand;
+import univ.earthbreaker.namu.core.domain.mission.service.MissionPointIssueService;
+import univ.earthbreaker.namu.core.domain.mission.service.PointIssueResult;
 
 @Service
 public class PointIssueRetryService implements MissionRetryer {
@@ -20,22 +19,16 @@ public class PointIssueRetryService implements MissionRetryer {
 
 	private final MemberMissionCertifyService memberMissionCertifyService;
 	private final MissionCertifyTrackingService missionCertifyTrackingService;
-	private final PointManager pointManager;
-	private final KafkaTemplate<String, RetryMessage> kafkaTemplate;
-	private final String missionRetryTopic;
+	private final MissionPointIssueService pointIssueService;
 
 	public PointIssueRetryService(
 		MemberMissionCertifyService memberMissionCertifyService,
 		MissionCertifyTrackingService missionCertifyTrackingService,
-		PointManager pointManager,
-		KafkaTemplate<String, RetryMessage> kafkaTemplate,
-		@Value("${kafka.topics.mission-retry.name}") String missionRetryTopic
+		MissionPointIssueService pointIssueService
 	) {
 		this.memberMissionCertifyService = memberMissionCertifyService;
 		this.missionCertifyTrackingService = missionCertifyTrackingService;
-		this.pointManager = pointManager;
-		this.kafkaTemplate = kafkaTemplate;
-		this.missionRetryTopic = missionRetryTopic;
+		this.pointIssueService = pointIssueService;
 	}
 
 	@Override
@@ -45,33 +38,15 @@ public class PointIssueRetryService implements MissionRetryer {
 
 	@Override
 	public void process(String key, RetryMessage message) {
-		Long point = handlePointRetry(key, message);
-		if (point == null) { // 포인트 발급 실패 시 메서드 종료
+		PointIssueResult pointResult = pointIssueService.process(message.memberNo(), message.missionNo());
+		if (!pointResult.isSuccess()) {  // 포인트 발급 실패 시 메서드 종료
 			log.info("Point for upload failed for key: {}, record message : {}", key, message);
 			return;
 		}
 		memberMissionCertifyService.successMission(
 			new MissionCompleteCommand(message.memberNo(), message.missionNo()),
-			new CertifiedMissionPostCommand(message.memberNo(), message.postContents(), message.imagePathKey(), point)
+			new CertifiedMissionPostCommand(message.memberNo(), message.postContents(), message.imagePathKey(), pointResult.point())
 		);
 		missionCertifyTrackingService.update(key, MissionCertifyProcess.COMPLETED);
-	}
-
-	private Long handlePointRetry(String key, RetryMessage message) {
-		try {
-			return pointManager.issuePoint();
-		} catch (Exception e) {
-			retry(key, message.toNext(RetryStep.POINT_ISSUE), e);
-			return null;
-		}
-	}
-
-	private void retry(String key, RetryMessage message, Exception e) {
-		if (RetryMessage.MAX_RETRY_ATTEMPTS >= message.attempt()) {
-			kafkaTemplate.send(missionRetryTopic, key, message);
-		} else {
-			missionCertifyTrackingService.update(key, MissionCertifyProcess.FAILED);
-			log.error("Retry failed for key: {}, record message : {}, exception : {}", key, message, e);
-		}
 	}
 }

@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import univ.earthbreaker.namu.core.domain.account.AccountService;
 import univ.earthbreaker.namu.core.domain.account.LoginResult;
 import univ.earthbreaker.namu.app.support.HttpHeaderUtils;
-import univ.earthbreaker.namu.external.oauth.OAuthClientApi;
-import univ.earthbreaker.namu.external.oauth.OAuthMemberInfoResult;
+import univ.earthbreaker.namu.infra.client.oauth.OAuthClientApi;
+import univ.earthbreaker.namu.infra.client.oauth.OAuthMemberInfoResult;
 
 @RestController
 @RequestMapping("/v1/auth")

@@ -12,10 +12,10 @@ import univ.earthbreaker.namu.core.domain.common.BadRequestException;
 import univ.earthbreaker.namu.core.domain.common.ConflictException;
 import univ.earthbreaker.namu.core.domain.common.InternalServerException;
 import univ.earthbreaker.namu.core.domain.common.NotFoundException;
-import univ.earthbreaker.namu.core.auth.UnAuthorizedException;
+import univ.earthbreaker.namu.core.domain.auth.UnAuthorizedException;
 import univ.earthbreaker.namu.app.support.AuthenticationException;
 import univ.earthbreaker.namu.app.support.InternalAuthServerException;
-import univ.earthbreaker.namu.external.oauth.OAuthClientException;
+import univ.earthbreaker.namu.infra.client.oauth.OAuthClientException;
 
 @RestControllerAdvice
 public class NamuExceptionResponseHandler {

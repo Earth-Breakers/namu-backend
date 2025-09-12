@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import univ.earthbreaker.namu.core.auth.TokenReissueService;
-import univ.earthbreaker.namu.core.auth.TokenResult;
+import univ.earthbreaker.namu.core.domain.auth.TokenReissueService;
+import univ.earthbreaker.namu.core.domain.auth.TokenResult;
 
 @RestController
 @RequestMapping("/v1/auth")

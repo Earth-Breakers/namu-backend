@@ -11,8 +11,8 @@ import univ.earthbreaker.namu.app.support.AuthMapping;
 import univ.earthbreaker.namu.app.support.LoginMember;
 import univ.earthbreaker.namu.core.domain.point.EnergyPointGiftService;
 import univ.earthbreaker.namu.core.domain.point.EnergyPointPushNotificationBridge.GiftResult;
-import univ.earthbreaker.namu.services.notification.GiftPushNotificationSourceCommand;
-import univ.earthbreaker.namu.services.notification.NotificationPort;
+import univ.earthbreaker.namu.infra.notification.GiftPushNotificationSourceCommand;
+import univ.earthbreaker.namu.infra.notification.NotificationPort;
 
 @RestController
 @RequestMapping("/v1/points")

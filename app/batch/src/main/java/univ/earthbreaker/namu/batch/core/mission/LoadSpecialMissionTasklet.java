@@ -11,8 +11,8 @@ import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.stereotype.Component;
 
-import univ.earthbreaker.namu.core.storage.mission.FixMissionBatchRepository;
-import univ.earthbreaker.namu.core.storage.mission.FixMissionJpaEntity;
+import univ.earthbreaker.namu.infra.storage.mission.FixMissionBatchRepository;
+import univ.earthbreaker.namu.infra.storage.mission.FixMissionJpaEntity;
 
 @Component
 @StepScope

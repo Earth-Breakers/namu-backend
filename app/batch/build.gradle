@@ -1,5 +1,5 @@
 dependencies {
-    implementation project(":core:storage")
+    implementation project(":infra:storage")
     implementation project(":support:logging")
 
     implementation 'org.springframework.boot:spring-boot-starter-batch'

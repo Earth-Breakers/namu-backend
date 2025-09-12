@@ -1,16 +1,13 @@
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.kafka:spring-kafka'
     implementation project(":app:batch")
 
     implementation project(":core:domain")
 
-    implementation project(":services:auth")
-    implementation project(":services:notification")
-
-    implementation project(":clients:oauth")
-    implementation project(":clients:image")
-    implementation project(":clients:point")
+    implementation project(":infra:storage")
+    implementation project(":infra:client")
+    implementation project(":infra:kafka")
+    implementation project(":infra:notification")
 
     implementation project(":support:logging")
 

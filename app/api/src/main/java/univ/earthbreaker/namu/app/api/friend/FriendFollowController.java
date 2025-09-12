@@ -11,8 +11,8 @@ import univ.earthbreaker.namu.app.support.LoginMember;
 import univ.earthbreaker.namu.core.domain.member.friend.FollowFriendPushNotificationBridge.FollowResult;
 import univ.earthbreaker.namu.core.domain.member.friend.FriendFollowService;
 import univ.earthbreaker.namu.core.domain.member.friend.FriendRelationCommand;
-import univ.earthbreaker.namu.services.notification.FollowPushNotificationSourceCommand;
-import univ.earthbreaker.namu.services.notification.NotificationPort;
+import univ.earthbreaker.namu.infra.notification.FollowPushNotificationSourceCommand;
+import univ.earthbreaker.namu.infra.notification.NotificationPort;
 
 @RestController
 @RequestMapping("/v1/friends")

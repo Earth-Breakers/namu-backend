@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import univ.earthbreaker.namu.core.domain.pushnotification.PushNotificationConstructResult;
-import univ.earthbreaker.namu.core.domain.pushnotification.PushNotificationConstructService;
 import univ.earthbreaker.namu.app.support.AuthMapping;
 import univ.earthbreaker.namu.app.support.LoginMember;
-import univ.earthbreaker.namu.services.notification.NotificationPort;
-import univ.earthbreaker.namu.services.notification.PushNotificationSourceCommand;
+import univ.earthbreaker.namu.core.domain.pushnotification.PushNotificationConstructResult;
+import univ.earthbreaker.namu.core.domain.pushnotification.PushNotificationConstructService;
+import univ.earthbreaker.namu.infra.notification.NotificationPort;
+import univ.earthbreaker.namu.infra.notification.PushNotificationSourceCommand;
 
 @RestController
 @RequestMapping("/v1/push-notification")
