@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.services.notification;
+package univ.earthbreaker.namu.infra.notification;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;

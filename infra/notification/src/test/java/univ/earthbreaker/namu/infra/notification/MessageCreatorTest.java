@@ -1,7 +1,7 @@
-package univ.earthbreaker.namu.services.notification;
+package univ.earthbreaker.namu.infra.notification;
 
 import static org.assertj.core.api.Assertions.*;
-import static univ.earthbreaker.namu.services.notification.FCMNotificationFixture.*;
+import static univ.earthbreaker.namu.infra.notification.FCMNotificationFixture.*;
 
 import java.util.List;
 

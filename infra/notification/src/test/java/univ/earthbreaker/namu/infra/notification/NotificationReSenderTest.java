@@ -1,8 +1,8 @@
-package univ.earthbreaker.namu.services.notification;
+package univ.earthbreaker.namu.infra.notification;
 
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
-import static univ.earthbreaker.namu.services.notification.FCMNotificationFixture.*;
+import static univ.earthbreaker.namu.infra.notification.FCMNotificationFixture.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

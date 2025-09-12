@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.services.notification;
+package univ.earthbreaker.namu.infra.notification;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.services.notification;
+package univ.earthbreaker.namu.infra.notification;
 
 import org.springframework.stereotype.Component;
 
