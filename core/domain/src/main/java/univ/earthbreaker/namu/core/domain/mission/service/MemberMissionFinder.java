@@ -1,9 +1,11 @@
-package univ.earthbreaker.namu.core.domain.mission;
+package univ.earthbreaker.namu.core.domain.mission.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import univ.earthbreaker.namu.core.domain.mission.MemberMission;
+import univ.earthbreaker.namu.core.domain.mission.MemberMissions;
 import univ.earthbreaker.namu.core.domain.mission.infra.MemberMissionRepository;
 
 @Component

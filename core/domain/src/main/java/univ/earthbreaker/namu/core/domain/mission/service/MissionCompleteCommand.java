@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.domain.mission;
+package univ.earthbreaker.namu.core.domain.mission.service;
 
 import jakarta.validation.constraints.NotNull;
 import univ.earthbreaker.namu.core.domain.common.SelfValidating;

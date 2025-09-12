@@ -22,11 +22,11 @@ public class MemberMission {
 		return new MemberMission(no, memberNo, activity, type, MissionStatus.IN_PROGRESS);
 	}
 
-	MemberMission failure() {
+	public MemberMission failure() {
 		return new MemberMission(no, memberNo, activity, type, MissionStatus.FAILURE);
 	}
 
-	MemberMission success() {
+	public MemberMission success() {
 		return new MemberMission(no, memberNo, activity, type, MissionStatus.SUCCESS);
 	}
 
@@ -58,7 +58,7 @@ public class MemberMission {
 		return status;
 	}
 
-	int getRewardPoint() {
+	public int getRewardPoint() {
 		return type.getPoint();
 	}
 

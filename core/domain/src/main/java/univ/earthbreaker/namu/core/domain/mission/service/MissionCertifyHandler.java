@@ -1,10 +1,11 @@
-package univ.earthbreaker.namu.core.domain.mission;
+package univ.earthbreaker.namu.core.domain.mission.service;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import univ.earthbreaker.namu.core.domain.mission.MemberMission;
 import univ.earthbreaker.namu.core.domain.mission.infra.MemberMissionRepository;
 
 @Component

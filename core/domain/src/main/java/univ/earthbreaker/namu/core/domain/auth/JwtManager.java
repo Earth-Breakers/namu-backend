@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.service.auth;
+package univ.earthbreaker.namu.core.domain.auth;
 
 import java.security.Key;
 import java.time.LocalDateTime;

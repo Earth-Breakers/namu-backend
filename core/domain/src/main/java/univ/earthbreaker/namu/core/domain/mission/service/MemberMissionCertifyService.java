@@ -1,8 +1,9 @@
-package univ.earthbreaker.namu.core.domain.mission;
+package univ.earthbreaker.namu.core.domain.mission.service;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
+import univ.earthbreaker.namu.core.domain.mission.MemberMission;
 import univ.earthbreaker.namu.core.support.tx.TransactionHandler;
 import univ.earthbreaker.namu.core.support.retry.RetryHandler;
 import univ.earthbreaker.namu.event.EventPublisher;
@@ -11,12 +12,6 @@ import univ.earthbreaker.namu.event.post.PostCreateEvent;
 
 @Service
 public class MemberMissionCertifyService {
-
-	private final ImageManager imageManager;
-	private final PointManager pointManager;
-	private final KafkaTemplate<String, RetryMessage> kafkaTemplate;
-	private final MissionCertifyTrackingService missionCertifyTrackingService;
-	private final String missionRetryTopic;
 
 	private final MemberMissionFinder memberMissionFinder;
 	private final MissionCertifyHandler missionCertifyHandler;
@@ -42,17 +37,6 @@ public class MemberMissionCertifyService {
 		@NotNull MissionCompleteCommand mc,
 		@NotNull CertifiedMissionPostCommand pc
 	) {
-		missionCertifyTrackingService.register(requestId, memberNo, missionNo);
-
-		String imagePathKey = uploadImage(requestId, memberNo, missionNo, content, missionImageFile);
-		if (imagePathKey == null) {
-			return ResponseEntity.accepted().body(requestId);
-		}
-		Long point = getReward(requestId, memberNo, missionNo, imagePathKey, content);
-		if (point == null) {
-			return ResponseEntity.accepted().body(requestId);
-		}
-
 		retryHandler.execute(() -> // 실패 발생 시 재시도
 			transactionHandler.execute(() -> {
 				MemberMission memberMission = memberMissionFinder.find(mc.getMemberNo(), mc.getMissionNo());

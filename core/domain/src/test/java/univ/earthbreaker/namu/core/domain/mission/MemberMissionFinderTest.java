@@ -12,6 +12,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import univ.earthbreaker.namu.core.domain.mission.infra.MemberMissionRepository;
+import univ.earthbreaker.namu.core.domain.mission.service.MemberMissionFinder;
+
 @ExtendWith(MockitoExtension.class)
 class MemberMissionFinderTest {
 

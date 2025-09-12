@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import univ.earthbreaker.namu.core.domain.mission.service.FixedAndSpecialMissionRetrieveStrategy;
+import univ.earthbreaker.namu.core.domain.mission.service.MemberMissionQueryResult;
+
 class FixedAndSpecialMissionRetrieveStrategyTest {
 
 	private final FixedAndSpecialMissionRetrieveStrategy fixedAndSpecialMissionRetrieveStrategy

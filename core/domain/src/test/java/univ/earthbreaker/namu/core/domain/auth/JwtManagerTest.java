@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.service.auth;
+package univ.earthbreaker.namu.core.domain.auth;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatNoException;
@@ -16,9 +16,6 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import univ.earthbreaker.namu.core.domain.auth.JwtManager;
-import univ.earthbreaker.namu.core.domain.auth.RefreshToken;
-import univ.earthbreaker.namu.core.domain.auth.UnAuthorizedException;
 
 class JwtManagerTest {
 

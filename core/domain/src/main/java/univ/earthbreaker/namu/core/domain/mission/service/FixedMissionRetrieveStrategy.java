@@ -1,8 +1,10 @@
-package univ.earthbreaker.namu.core.domain.mission;
+package univ.earthbreaker.namu.core.domain.mission.service;
 
 import java.util.Collections;
 
 import org.jetbrains.annotations.NotNull;
+
+import univ.earthbreaker.namu.core.domain.mission.MemberMissions;
 
 public class FixedMissionRetrieveStrategy implements MissionRetrieveStrategy {
 

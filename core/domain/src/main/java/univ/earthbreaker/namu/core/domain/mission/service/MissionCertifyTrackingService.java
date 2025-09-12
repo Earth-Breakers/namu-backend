@@ -1,7 +1,9 @@
-package univ.earthbreaker.namu.core.domain.mission;
+package univ.earthbreaker.namu.core.domain.mission.service;
 
 import org.springframework.stereotype.Service;
 
+import univ.earthbreaker.namu.core.domain.mission.MissionCertifyProcess;
+import univ.earthbreaker.namu.core.domain.mission.MissionCertifyStatus;
 import univ.earthbreaker.namu.core.support.tx.TransactionHandler;
 
 @Service

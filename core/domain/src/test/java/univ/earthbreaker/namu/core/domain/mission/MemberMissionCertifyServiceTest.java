@@ -21,6 +21,11 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
 
+import univ.earthbreaker.namu.core.domain.mission.service.CertifiedMissionPostCommand;
+import univ.earthbreaker.namu.core.domain.mission.service.MemberMissionCertifyService;
+import univ.earthbreaker.namu.core.domain.mission.service.MemberMissionFinder;
+import univ.earthbreaker.namu.core.domain.mission.service.MissionCertifyHandler;
+import univ.earthbreaker.namu.core.domain.mission.service.MissionCompleteCommand;
 import univ.earthbreaker.namu.event.EventPublisher;
 import univ.earthbreaker.namu.event.image.DeleteExternalUploadedImageEvent;
 import univ.earthbreaker.namu.event.point.AddRewardPointEvent;

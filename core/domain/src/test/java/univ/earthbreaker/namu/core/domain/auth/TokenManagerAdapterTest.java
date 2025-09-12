@@ -1,10 +1,10 @@
-package univ.earthbreaker.namu.core.service.auth;
+package univ.earthbreaker.namu.core.domain.auth;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static univ.earthbreaker.namu.core.service.auth.RefreshTokenFixture.NEVER_EXPIRED_REFRESH_TOKEN;
+import static univ.earthbreaker.namu.core.domain.auth.RefreshTokenFixture.NEVER_EXPIRED_REFRESH_TOKEN;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,10 +12,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import univ.earthbreaker.namu.core.domain.auth.JwtManager;
-import univ.earthbreaker.namu.core.domain.auth.RefreshTokenRepository;
-import univ.earthbreaker.namu.core.domain.auth.TokenManagerAdapter;
 
 @ExtendWith(MockitoExtension.class)
 class TokenManagerAdapterTest {

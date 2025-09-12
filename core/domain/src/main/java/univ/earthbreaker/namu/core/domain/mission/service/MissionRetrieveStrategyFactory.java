@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.domain.mission;
+package univ.earthbreaker.namu.core.domain.mission.service;
 
 import java.time.Clock;
 import java.time.LocalDate;

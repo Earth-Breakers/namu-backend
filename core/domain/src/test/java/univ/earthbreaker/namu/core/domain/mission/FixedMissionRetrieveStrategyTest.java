@@ -7,6 +7,9 @@ import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.MEMBER_M
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import univ.earthbreaker.namu.core.domain.mission.service.FixedMissionRetrieveStrategy;
+import univ.earthbreaker.namu.core.domain.mission.service.MemberMissionQueryResult;
+
 class FixedMissionRetrieveStrategyTest {
 
 	private final FixedMissionRetrieveStrategy fixedMissionRetrieveStrategy = new FixedMissionRetrieveStrategy();

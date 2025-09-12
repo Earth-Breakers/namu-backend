@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.service.auth;
+package univ.earthbreaker.namu.core.domain.auth;
 
 public record TokenResult(String accessToken) {
 }

@@ -1,18 +1,15 @@
-package univ.earthbreaker.namu.core.service.auth;
+package univ.earthbreaker.namu.core.domain.auth;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatNoException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static univ.earthbreaker.namu.core.service.auth.RefreshTokenFixture.ALWAYS_EXPIRED_REFRESH_TOKEN;
-import static univ.earthbreaker.namu.core.service.auth.RefreshTokenFixture.NEVER_EXPIRED_REFRESH_TOKEN;
-import static univ.earthbreaker.namu.core.service.auth.RefreshTokenFixture.REFRESH_TOKEN_VALUE;
+import static univ.earthbreaker.namu.core.domain.auth.RefreshTokenFixture.ALWAYS_EXPIRED_REFRESH_TOKEN;
+import static univ.earthbreaker.namu.core.domain.auth.RefreshTokenFixture.NEVER_EXPIRED_REFRESH_TOKEN;
+import static univ.earthbreaker.namu.core.domain.auth.RefreshTokenFixture.REFRESH_TOKEN_VALUE;
 
 import java.time.Clock;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import univ.earthbreaker.namu.core.domain.auth.RefreshTokenValidator;
-import univ.earthbreaker.namu.core.domain.auth.UnAuthorizedException;
 
 class RefreshTokenValidatorTest {
 

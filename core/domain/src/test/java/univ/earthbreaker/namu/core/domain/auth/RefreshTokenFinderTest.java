@@ -1,13 +1,13 @@
-package univ.earthbreaker.namu.core.service.auth;
+package univ.earthbreaker.namu.core.domain.auth;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.Mockito.when;
-import static univ.earthbreaker.namu.core.service.auth.RefreshTokenFixture.MEMBER_NO;
-import static univ.earthbreaker.namu.core.service.auth.RefreshTokenFixture.NEVER_EXPIRED_REFRESH_TOKEN;
-import static univ.earthbreaker.namu.core.service.auth.RefreshTokenFixture.NEVER_EXPIRES;
-import static univ.earthbreaker.namu.core.service.auth.RefreshTokenFixture.REFRESH_TOKEN_VALUE;
+import static univ.earthbreaker.namu.core.domain.auth.RefreshTokenFixture.MEMBER_NO;
+import static univ.earthbreaker.namu.core.domain.auth.RefreshTokenFixture.NEVER_EXPIRED_REFRESH_TOKEN;
+import static univ.earthbreaker.namu.core.domain.auth.RefreshTokenFixture.NEVER_EXPIRES;
+import static univ.earthbreaker.namu.core.domain.auth.RefreshTokenFixture.REFRESH_TOKEN_VALUE;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,11 +15,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import univ.earthbreaker.namu.core.domain.auth.RefreshToken;
-import univ.earthbreaker.namu.core.domain.auth.RefreshTokenFinder;
-import univ.earthbreaker.namu.core.domain.auth.RefreshTokenRepository;
-import univ.earthbreaker.namu.core.domain.auth.UnAuthorizedException;
 
 @ExtendWith(MockitoExtension.class)
 class RefreshTokenFinderTest {
