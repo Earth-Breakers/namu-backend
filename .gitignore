@@ -47,6 +47,4 @@ http/local/http-client.private.env.json
 src/main/**/admin/api
 
 ### firebase admin
-services/notification/src/main/resources/firebase
-
-infra/
+infra/notification/src/main/resources/firebase
