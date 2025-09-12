@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.external.aws.image;
+package univ.earthbreaker.namu.infra.client.aws;
 
 import java.io.InputStream;
 
