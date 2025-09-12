@@ -1,4 +1,0 @@
-firebase:
-  fcm:
-    config:
-      path: /firebase/namu-firebase-adminsdk.json
