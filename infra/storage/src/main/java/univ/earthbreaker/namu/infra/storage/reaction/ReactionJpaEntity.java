@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.storage.reaction;
+package univ.earthbreaker.namu.infra.storage.reaction;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
 import univ.earthbreaker.namu.core.domain.reaction.Reaction;
 import univ.earthbreaker.namu.core.domain.reaction.ReactionType;
 import univ.earthbreaker.namu.core.domain.reaction.TargetType;
-import univ.earthbreaker.namu.core.storage.common.BaseTimeJpaEntity;
+import univ.earthbreaker.namu.infra.storage.common.BaseTimeJpaEntity;
 
 @Entity
 @Table(name = "reaction")

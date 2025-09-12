@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.storage.auth;
+package univ.earthbreaker.namu.infra.storage.auth;
 
 import java.time.LocalDateTime;
 
@@ -8,7 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import univ.earthbreaker.namu.core.auth.RefreshToken;
+import univ.earthbreaker.namu.core.domain.auth.RefreshToken;
 
 @Entity
 @Table(name = "refresh_token")

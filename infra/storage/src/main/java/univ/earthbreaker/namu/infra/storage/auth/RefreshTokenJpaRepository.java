@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.storage.auth;
+package univ.earthbreaker.namu.infra.storage.auth;
 
 import java.time.LocalDateTime;
 

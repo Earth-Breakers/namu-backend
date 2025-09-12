@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.storage.post;
+package univ.earthbreaker.namu.infra.storage.post;
 
 import org.springframework.data.domain.Sort;
 

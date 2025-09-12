@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.storage.mission;
+package univ.earthbreaker.namu.infra.storage.mission;
 
 import java.sql.Types;
 import java.time.LocalDateTime;

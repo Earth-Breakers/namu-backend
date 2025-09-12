@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.storage.character;
+package univ.earthbreaker.namu.infra.storage.character;
 
 import java.util.Optional;
 

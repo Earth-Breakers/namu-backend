@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.storage.account;
+package univ.earthbreaker.namu.infra.storage.account;
 
 import org.jetbrains.annotations.Nullable;
 import org.springframework.data.jpa.repository.JpaRepository;

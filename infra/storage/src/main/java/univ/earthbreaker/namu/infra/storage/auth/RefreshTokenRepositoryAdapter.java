@@ -1,11 +1,11 @@
-package univ.earthbreaker.namu.core.storage.auth;
+package univ.earthbreaker.namu.infra.storage.auth;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Repository;
 
-import univ.earthbreaker.namu.core.auth.RefreshToken;
-import univ.earthbreaker.namu.core.auth.RefreshTokenRepository;
+import univ.earthbreaker.namu.core.domain.auth.RefreshToken;
+import univ.earthbreaker.namu.core.domain.auth.RefreshTokenRepository;
 
 @Repository
 public class RefreshTokenRepositoryAdapter implements RefreshTokenRepository {

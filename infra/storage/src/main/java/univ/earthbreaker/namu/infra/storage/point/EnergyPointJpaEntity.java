@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.storage.point;
+package univ.earthbreaker.namu.infra.storage.point;
 
 import org.jetbrains.annotations.NotNull;
 

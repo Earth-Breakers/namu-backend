@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.storage.reaction;
+package univ.earthbreaker.namu.infra.storage.reaction;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.storage.post;
+package univ.earthbreaker.namu.infra.storage.post;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import univ.earthbreaker.namu.core.domain.post.Post;
 import univ.earthbreaker.namu.core.domain.post.PostCreateDbCommand;
-import univ.earthbreaker.namu.core.storage.common.BaseTimeJpaEntity;
+import univ.earthbreaker.namu.infra.storage.common.BaseTimeJpaEntity;
 
 @Entity
 @Table(name = "post")

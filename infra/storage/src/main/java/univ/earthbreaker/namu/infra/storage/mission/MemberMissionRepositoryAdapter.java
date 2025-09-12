@@ -1,11 +1,11 @@
-package univ.earthbreaker.namu.core.storage.mission;
+package univ.earthbreaker.namu.infra.storage.mission;
 
 import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Repository;
 
-import univ.earthbreaker.namu.core.domain.mission.MemberMissionRepository;
+import univ.earthbreaker.namu.core.domain.mission.infra.MemberMissionRepository;
 import univ.earthbreaker.namu.core.domain.mission.MemberMission;
 
 @Repository

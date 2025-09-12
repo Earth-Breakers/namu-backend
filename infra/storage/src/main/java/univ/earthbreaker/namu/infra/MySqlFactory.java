@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.storage.config;
+package univ.earthbreaker.namu.infra;
 
 class MySqlFactory {
 }
