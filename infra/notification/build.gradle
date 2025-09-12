@@ -1,0 +1,4 @@
+dependencies {
+    compileOnly("org.springframework:spring-context")
+    implementation 'com.google.firebase:firebase-admin:9.2.0'
+}
