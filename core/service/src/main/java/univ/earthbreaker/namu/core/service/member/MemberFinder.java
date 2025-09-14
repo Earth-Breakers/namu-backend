@@ -1,8 +1,10 @@
-package univ.earthbreaker.namu.core.domain.member;
+package univ.earthbreaker.namu.core.service.member;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
+import univ.earthbreaker.namu.core.domain.member.Member;
+import univ.earthbreaker.namu.core.domain.member.MemberNotFoundException;
 import univ.earthbreaker.namu.core.domain.member.infra.MemberRepository;
 
 @Component

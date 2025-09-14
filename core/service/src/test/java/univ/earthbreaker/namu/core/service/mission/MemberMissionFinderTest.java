@@ -1,9 +1,7 @@
-package univ.earthbreaker.namu.core.domain.mission;
+package univ.earthbreaker.namu.core.service.mission;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
-import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.MEMBER_NO;
-import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.MISSIONS;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,8 +10,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import univ.earthbreaker.namu.core.domain.mission.MemberMissions;
 import univ.earthbreaker.namu.core.domain.mission.infra.MemberMissionRepository;
-import univ.earthbreaker.namu.core.domain.mission.service.MemberMissionFinder;
 
 @ExtendWith(MockitoExtension.class)
 class MemberMissionFinderTest {
@@ -25,11 +23,11 @@ class MemberMissionFinderTest {
 	@Test
 	void findAll() {
 	    // given
-		when(memberMissionRepository.findAll(MEMBER_NO))
-			.thenReturn(MISSIONS);
+		when(memberMissionRepository.findAll(MissionFixture.MEMBER_NO))
+			.thenReturn(MissionFixture.MISSIONS);
 
 	    // when
-		MemberMissions actual = memberMissionFinder.findAll(MEMBER_NO);
+		MemberMissions actual = memberMissionFinder.findAll(MissionFixture.MEMBER_NO);
 
 		// then
 		assertThat(actual).isNotNull();

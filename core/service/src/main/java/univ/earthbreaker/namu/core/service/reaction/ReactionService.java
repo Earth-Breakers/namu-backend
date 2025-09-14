@@ -1,6 +1,8 @@
-package univ.earthbreaker.namu.core.domain.reaction;
+package univ.earthbreaker.namu.core.service.reaction;
 
 import org.springframework.stereotype.Service;
+
+import univ.earthbreaker.namu.core.domain.reaction.ReactionCommand;
 
 @Service
 public class ReactionService {

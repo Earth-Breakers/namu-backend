@@ -1,7 +1,10 @@
-package univ.earthbreaker.namu.core.domain.character.current;
+package univ.earthbreaker.namu.core.service.character.current;
 
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
+
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacter;
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacterNotFoundException;
+import univ.earthbreaker.namu.core.domain.character.current.infra.CurrentCharacterRepository;
 
 @Component
 public class CurrentCharacterFinder {
@@ -12,7 +15,7 @@ public class CurrentCharacterFinder {
 		this.currentCharacterRepository = currentCharacterRepository;
 	}
 
-	public @NotNull CurrentCharacter find(long memberNo) {
+	public CurrentCharacter find(long memberNo) {
 		CurrentCharacter currentCharacter = currentCharacterRepository.findOrNull(memberNo);
 		if (currentCharacter != null) {
 			return currentCharacter;

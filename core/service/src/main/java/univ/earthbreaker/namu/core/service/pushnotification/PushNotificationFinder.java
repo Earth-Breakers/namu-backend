@@ -1,9 +1,14 @@
-package univ.earthbreaker.namu.core.domain.pushnotification;
+package univ.earthbreaker.namu.core.service.pushnotification;
 
 import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
+
+import univ.earthbreaker.namu.core.domain.pushnotification.PushNotification;
+import univ.earthbreaker.namu.core.domain.pushnotification.PushNotificationNotFoundException;
+import univ.earthbreaker.namu.core.domain.pushnotification.infra.FriendsQuery;
+import univ.earthbreaker.namu.core.domain.pushnotification.infra.PushNotificationRepository;
 
 @Component
 public class PushNotificationFinder {
@@ -14,7 +19,7 @@ public class PushNotificationFinder {
 		this.pushNotificationRepository = pushNotificationRepository;
 	}
 
-	@NotNull PushNotification find(long memberNo) {
+	PushNotification find(long memberNo) {
 		PushNotification pushNotification = pushNotificationRepository.findOrNull(memberNo);
 		if (pushNotification == null) {
 			throw PushNotificationNotFoundException.notFount();
@@ -22,14 +27,14 @@ public class PushNotificationFinder {
 		return pushNotification;
 	}
 
-	@NotNull List<PushNotification> findAllEnable() {
+	List<PushNotification> findAllEnable() {
 		return pushNotificationRepository.findAll()
 			.stream()
 			.filter(PushNotification::isEnable)
 			.toList();
 	}
 
-	@NotNull List<PushNotification> findFriendsEnable(FriendsQuery friends) {
+	List<PushNotification> findFriendsEnable(FriendsQuery friends) {
 		return pushNotificationRepository.findAll(friends)
 			.stream()
 			.filter(PushNotification::isEnable)

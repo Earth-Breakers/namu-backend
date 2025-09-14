@@ -1,9 +1,10 @@
-package univ.earthbreaker.namu.core.domain.pushnotification;
+package univ.earthbreaker.namu.core.service.pushnotification;
 
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
+
+import univ.earthbreaker.namu.core.domain.pushnotification.MemberQuery;
 
 @Component
 public interface MemberBridge {
-	@NotNull MemberQuery findMember(long memberNo);
+	MemberQuery findMember(long memberNo);
 }

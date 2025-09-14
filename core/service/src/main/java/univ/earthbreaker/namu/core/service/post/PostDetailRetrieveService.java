@@ -1,10 +1,12 @@
-package univ.earthbreaker.namu.core.domain.post;
+package univ.earthbreaker.namu.core.service.post;
 
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
-import univ.earthbreaker.namu.core.domain.reaction.ReactionBridge;
-import univ.earthbreaker.namu.core.domain.reaction.ReactionBridge.ReactionStatus;
+import univ.earthbreaker.namu.core.domain.post.Post;
+import univ.earthbreaker.namu.core.domain.post.PostReactionResult;
+import univ.earthbreaker.namu.core.domain.post.PostRetrieveDetailQuery;
+import univ.earthbreaker.namu.core.domain.reaction.infra.ReactionBridge;
+import univ.earthbreaker.namu.core.domain.reaction.infra.ReactionBridge.ReactionStatus;
 
 @Service
 public class PostDetailRetrieveService {
@@ -17,7 +19,7 @@ public class PostDetailRetrieveService {
 		this.postReactionBridge = postReactionBridge;
 	}
 
-	public PostReactionResult retrieveDetail(@NotNull PostRetrieveDetailQuery query) {
+	public PostReactionResult retrieveDetail(PostRetrieveDetailQuery query) {
 		Post post = postFinder.find(query.getMemberNo(), query.getPostNo());
 		ReactionStatus reactionStatus = postReactionBridge.find(post.getMemberNo(), post.getNo(), "POST");
 		return PostReactionResult.of(post, reactionStatus);

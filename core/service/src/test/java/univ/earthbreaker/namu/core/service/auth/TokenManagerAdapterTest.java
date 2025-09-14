@@ -1,10 +1,8 @@
-package univ.earthbreaker.namu.core.domain.auth;
+package univ.earthbreaker.namu.core.service.auth;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static univ.earthbreaker.namu.core.domain.auth.RefreshTokenFixture.NEVER_EXPIRED_REFRESH_TOKEN;
+import static org.assertj.core.api.AssertionsForClassTypes.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -45,15 +43,15 @@ class TokenManagerAdapterTest {
 	void createRefreshToken() {
 		// given
 		when(jwtManager.createRefreshToken(MEMBER_NO))
-			.thenReturn(NEVER_EXPIRED_REFRESH_TOKEN);
+			.thenReturn(RefreshTokenFixture.NEVER_EXPIRED_REFRESH_TOKEN);
 
 		// when
 		String refreshToken = tokenManagerAdapter.createRefreshToken(MEMBER_NO);
 
 		// then
 		assertAll(
-			() -> assertThat(refreshToken).isEqualTo(NEVER_EXPIRED_REFRESH_TOKEN.getValue()),
-			() -> verify(refreshTokenRepository).register(NEVER_EXPIRED_REFRESH_TOKEN)
+			() -> assertThat(refreshToken).isEqualTo(RefreshTokenFixture.NEVER_EXPIRED_REFRESH_TOKEN.getValue()),
+			() -> verify(refreshTokenRepository).register(RefreshTokenFixture.NEVER_EXPIRED_REFRESH_TOKEN)
 		);
 	}
 
@@ -62,15 +60,15 @@ class TokenManagerAdapterTest {
 	void updateRefreshToken() {
 		// given
 		when(jwtManager.createRefreshToken(MEMBER_NO))
-			.thenReturn(NEVER_EXPIRED_REFRESH_TOKEN);
+			.thenReturn(RefreshTokenFixture.NEVER_EXPIRED_REFRESH_TOKEN);
 
 		// when
 		String updatedRefreshToken = tokenManagerAdapter.updateRefreshToken(MEMBER_NO);
 
 		// then
 		assertAll(
-			() -> assertThat(updatedRefreshToken).isEqualTo(NEVER_EXPIRED_REFRESH_TOKEN.getValue()),
-			() -> verify(refreshTokenRepository).update(NEVER_EXPIRED_REFRESH_TOKEN, MEMBER_NO)
+			() -> assertThat(updatedRefreshToken).isEqualTo(RefreshTokenFixture.NEVER_EXPIRED_REFRESH_TOKEN.getValue()),
+			() -> verify(refreshTokenRepository).update(RefreshTokenFixture.NEVER_EXPIRED_REFRESH_TOKEN, MEMBER_NO)
 		);
 	}
 }

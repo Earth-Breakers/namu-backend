@@ -1,12 +1,9 @@
-package univ.earthbreaker.namu.core.domain.pushnotification;
+package univ.earthbreaker.namu.core.service.pushnotification;
 
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static univ.earthbreaker.namu.core.domain.pushnotification.PushNotificationFixture.MEMBER_NO;
-import static univ.earthbreaker.namu.core.domain.pushnotification.PushNotificationFixture.PUSH_NOTIFICATION;
-import static univ.earthbreaker.namu.core.domain.pushnotification.PushNotificationFixture.PUSH_TOKEN;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import univ.earthbreaker.namu.core.domain.pushnotification.PushNotification;
 import univ.earthbreaker.namu.core.domain.pushnotification.infra.PushNotificationRepository;
 
 @ExtendWith(MockitoExtension.class)
@@ -29,21 +27,22 @@ class AccountPushNotificationManagerAdapterTest {
 	@Test
 	void register() {
 	    // when
-		accountPushNotificationManagerAdapter.register(MEMBER_NO, PUSH_TOKEN);
+		accountPushNotificationManagerAdapter.register(
+			PushNotificationFixture.MEMBER_NO, PushNotificationFixture.PUSH_TOKEN);
 
 	    // then
-		verify(pushNotificationRegister).register(MEMBER_NO, PUSH_TOKEN);
+		verify(pushNotificationRegister).register(PushNotificationFixture.MEMBER_NO, PushNotificationFixture.PUSH_TOKEN);
 	}
 
 	@DisplayName("회원 번호와 푸시 알림 토큰값을 받아 토큰값이 변경되었는지 확인하고, 변경되었다면 푸시 알림 토큰값을 변경한다")
 	@Test
 	void run_updateIfTokenModified() {
 	    // given
-		when(pushNotificationFinder.find(MEMBER_NO))
-			.thenReturn(PUSH_NOTIFICATION);
+		when(pushNotificationFinder.find(PushNotificationFixture.MEMBER_NO))
+			.thenReturn(PushNotificationFixture.PUSH_NOTIFICATION);
 
 	    // when
-		accountPushNotificationManagerAdapter.updateIfTokenModified(MEMBER_NO, "anotherToken");
+		accountPushNotificationManagerAdapter.updateIfTokenModified(PushNotificationFixture.MEMBER_NO, "anotherToken");
 
 	    // then
 		verify(pushNotificationRepository).modify(any(PushNotification.class));
@@ -53,11 +52,11 @@ class AccountPushNotificationManagerAdapterTest {
 	@Test
 	void do_not_run_updateIfTokenModified() {
 		// given
-		when(pushNotificationFinder.find(MEMBER_NO))
-			.thenReturn(PUSH_NOTIFICATION);
+		when(pushNotificationFinder.find(PushNotificationFixture.MEMBER_NO))
+			.thenReturn(PushNotificationFixture.PUSH_NOTIFICATION);
 
 		// when
-		accountPushNotificationManagerAdapter.updateIfTokenModified(MEMBER_NO, PUSH_TOKEN);
+		accountPushNotificationManagerAdapter.updateIfTokenModified(PushNotificationFixture.MEMBER_NO, PushNotificationFixture.PUSH_TOKEN);
 
 		// then
 		verify(pushNotificationRepository, never()).modify(any(PushNotification.class));

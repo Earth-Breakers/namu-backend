@@ -1,7 +1,8 @@
-package univ.earthbreaker.namu.core.domain.mission.service;
+package univ.earthbreaker.namu.core.service.mission;
 
 import org.springframework.stereotype.Service;
 
+import univ.earthbreaker.namu.core.domain.mission.MemberMissionQueryResult;
 import univ.earthbreaker.namu.core.domain.mission.MemberMissions;
 
 @Service

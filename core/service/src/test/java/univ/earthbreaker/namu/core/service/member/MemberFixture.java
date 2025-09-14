@@ -1,10 +1,11 @@
-package univ.earthbreaker.namu.core.domain.member;
+package univ.earthbreaker.namu.core.service.member;
 
 import static univ.earthbreaker.namu.core.domain.member.MemberStatus.ACTIVE;
 
 import java.util.Collections;
 import java.util.List;
 
+import univ.earthbreaker.namu.core.domain.member.Member;
 import univ.earthbreaker.namu.core.domain.member.friend.Following;
 import univ.earthbreaker.namu.core.domain.member.friend.Friend;
 

@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.domain.post;
+package univ.earthbreaker.namu.core.service.post;
 
 public interface PostMemberBridge {
 

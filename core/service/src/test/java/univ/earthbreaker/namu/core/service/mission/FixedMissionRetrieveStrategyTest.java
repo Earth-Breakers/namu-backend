@@ -1,14 +1,12 @@
-package univ.earthbreaker.namu.core.domain.mission;
+package univ.earthbreaker.namu.core.service.mission;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
-import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.MEMBER_MISSIONS;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import univ.earthbreaker.namu.core.domain.mission.service.FixedMissionRetrieveStrategy;
-import univ.earthbreaker.namu.core.domain.mission.service.MemberMissionQueryResult;
+import univ.earthbreaker.namu.core.domain.mission.MemberMissionQueryResult;
 
 class FixedMissionRetrieveStrategyTest {
 
@@ -18,7 +16,7 @@ class FixedMissionRetrieveStrategyTest {
 	@Test
 	void retrieve() {
 		// when
-		MemberMissionQueryResult actual = fixedMissionRetrieveStrategy.retrieve(MEMBER_MISSIONS);
+		MemberMissionQueryResult actual = fixedMissionRetrieveStrategy.retrieve(MissionFixture.MEMBER_MISSIONS);
 
 		// then
 		assertAll(

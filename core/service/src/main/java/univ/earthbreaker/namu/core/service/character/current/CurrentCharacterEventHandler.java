@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.domain.character.current;
+package univ.earthbreaker.namu.core.service.character.current;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
@@ -6,6 +6,8 @@ import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 import univ.earthbreaker.namu.core.domain.character.CharacterType;
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacter;
+import univ.earthbreaker.namu.core.domain.character.current.infra.CurrentCharacterRepository;
 import univ.earthbreaker.namu.event.character.AddEnergyPointEvent;
 import univ.earthbreaker.namu.event.character.InitCurrentCharacterEvent;
 

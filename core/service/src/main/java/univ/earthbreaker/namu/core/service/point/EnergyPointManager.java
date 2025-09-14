@@ -1,8 +1,12 @@
-package univ.earthbreaker.namu.core.domain.point;
+package univ.earthbreaker.namu.core.service.point;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import univ.earthbreaker.namu.core.domain.point.Energy;
+import univ.earthbreaker.namu.core.domain.point.infra.PointUpdateDbCommand;
+import univ.earthbreaker.namu.core.domain.point.infra.EnergyPointRepository;
 
 @Component
 public class EnergyPointManager {

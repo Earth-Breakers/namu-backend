@@ -1,7 +1,4 @@
-package univ.earthbreaker.namu.core.domain.pushnotification;
-
-import static univ.earthbreaker.namu.core.domain.pushnotification.PushNotificationFixture.MEMBER_NO;
-import static univ.earthbreaker.namu.core.domain.pushnotification.PushNotificationFixture.PUSH_TOKEN;
+package univ.earthbreaker.namu.core.service.pushnotification;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,9 +20,10 @@ class PushNotificationRegisterTest {
 	@Test
 	void register() {
 		// when
-		pushNotificationRegister.register(MEMBER_NO, PUSH_TOKEN);
+		pushNotificationRegister.register(PushNotificationFixture.MEMBER_NO, PushNotificationFixture.PUSH_TOKEN);
 
 		// then
-		Mockito.verify(pushNotificationRepository).register(MEMBER_NO, PUSH_TOKEN);
+		Mockito.verify(pushNotificationRepository).register(
+			PushNotificationFixture.MEMBER_NO, PushNotificationFixture.PUSH_TOKEN);
 	}
 }

@@ -1,9 +1,11 @@
-package univ.earthbreaker.namu.core.domain.mission.service;
+package univ.earthbreaker.namu.core.service.mission;
 
 import org.springframework.stereotype.Component;
 
+import univ.earthbreaker.namu.core.domain.mission.ImageUploadResult;
 import univ.earthbreaker.namu.core.domain.mission.infra.ImageManager;
 import univ.earthbreaker.namu.core.domain.mission.infra.ImageUploadCommand;
+import univ.earthbreaker.namu.core.domain.mission.infra.ImageProcessException;
 
 @Component
 public class MissionImageUploadService {

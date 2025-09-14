@@ -1,10 +1,12 @@
-package univ.earthbreaker.namu.core.domain.character.current;
+package univ.earthbreaker.namu.core.service.character.current;
 
-import static org.assertj.core.api.AssertionsForClassTypes.*;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.*;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,8 +16,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import univ.earthbreaker.namu.core.domain.character.CharacterType;
-import univ.earthbreaker.namu.core.domain.character.NamuCharacterFinder;
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacter;
 import univ.earthbreaker.namu.core.domain.character.current.infra.CurrentCharacterRepository;
+import univ.earthbreaker.namu.core.service.character.CharacterFixture;
+import univ.earthbreaker.namu.core.service.character.NamuCharacterFinder;
 
 @ExtendWith(MockitoExtension.class)
 class CurrentCharacterGrowerTest {
@@ -32,13 +36,13 @@ class CurrentCharacterGrowerTest {
 	@Test
 	void growToMiddle() {
 		// given
-		when(currentCharacterFinder.find(MEMBER_NO))
-			.thenReturn(BEGIN_CURRENT_CHARACTER_WITH_MAX_EXP);
+		when(currentCharacterFinder.find(CharacterFixture.MEMBER_NO))
+			.thenReturn(CharacterFixture.BEGIN_CURRENT_CHARACTER_WITH_MAX_EXP);
 		when(namuCharacterFinder.findNext(anyInt(), anyInt(), any(CharacterType.class)))
-			.thenReturn(MIDDLE_NAMU_CHARACTER);
+			.thenReturn(CharacterFixture.MIDDLE_NAMU_CHARACTER);
 
 		// when
-		currentCharacterGrower.growToMiddle(MEMBER_NO);
+		currentCharacterGrower.growToMiddle(CharacterFixture.MEMBER_NO);
 
 		// then
 		verify(currentCharacterRepository).update(any(CurrentCharacter.class));
@@ -50,13 +54,13 @@ class CurrentCharacterGrowerTest {
 	@Test
 	void growToEnd() {
 		// given
-		when(currentCharacterFinder.find(MEMBER_NO))
-			.thenReturn(MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP);
+		when(currentCharacterFinder.find(CharacterFixture.MEMBER_NO))
+			.thenReturn(CharacterFixture.MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP);
 		when(namuCharacterFinder.findNext(anyInt(), anyInt(), any(CharacterType.class)))
-			.thenReturn(END_NAMU_CHARACTER);
+			.thenReturn(CharacterFixture.END_NAMU_CHARACTER);
 
 		// when
-		currentCharacterGrower.growToEnd(MEMBER_NO);
+		currentCharacterGrower.growToEnd(CharacterFixture.MEMBER_NO);
 
 		// then
 		verify(currentCharacterRepository).update(any(CurrentCharacter.class));
@@ -68,13 +72,13 @@ class CurrentCharacterGrowerTest {
 	@Test
 	void growToFinal() {
 		// given
-		when(currentCharacterFinder.find(MEMBER_NO))
-			.thenReturn(END_CURRENT_CHARACTER_WITH_MAX_EXP);
+		when(currentCharacterFinder.find(CharacterFixture.MEMBER_NO))
+			.thenReturn(CharacterFixture.END_CURRENT_CHARACTER_WITH_MAX_EXP);
 		when(namuCharacterFinder.findRandom(anyInt(), anyInt(), anyBoolean(), any(CharacterType.class)))
-			.thenReturn(FINAL_NAMU_CHARACTER);
+			.thenReturn(CharacterFixture.FINAL_NAMU_CHARACTER);
 
 		// when
-		CurrentCharacter actual = currentCharacterGrower.growToFinal(MEMBER_NO);
+		CurrentCharacter actual = currentCharacterGrower.growToFinal(CharacterFixture.MEMBER_NO);
 
 		// then
 		assertAll(
@@ -91,13 +95,13 @@ class CurrentCharacterGrowerTest {
 	@Test
 	void growToRandom() {
 		// given
-		when(currentCharacterFinder.find(MEMBER_NO))
-			.thenReturn(BEGIN_CURRENT_CHARACTER_WITH_MAX_EXP);
+		when(currentCharacterFinder.find(CharacterFixture.MEMBER_NO))
+			.thenReturn(CharacterFixture.BEGIN_CURRENT_CHARACTER_WITH_MAX_EXP);
 		when(namuCharacterFinder.findRandom(anyInt(), anyInt(), anyBoolean(), any(CharacterType.class)))
-			.thenReturn(MIDDLE_NAMU_CHARACTER);
+			.thenReturn(CharacterFixture.MIDDLE_NAMU_CHARACTER);
 
 		// when
-		currentCharacterGrower.growToRandom(MEMBER_NO);
+		currentCharacterGrower.growToRandom(CharacterFixture.MEMBER_NO);
 
 		// then
 		assertAll(

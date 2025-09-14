@@ -1,9 +1,9 @@
-package univ.earthbreaker.namu.core.domain.member;
+package univ.earthbreaker.namu.core.service.member;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.when;
-import static univ.earthbreaker.namu.core.domain.member.MemberFixture.MEMBER;
-import static univ.earthbreaker.namu.core.domain.member.MemberFixture.MEMBER_NO;
+import static univ.earthbreaker.namu.core.service.member.MemberFixture.MEMBER;
+import static univ.earthbreaker.namu.core.service.member.MemberFixture.MEMBER_NO;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

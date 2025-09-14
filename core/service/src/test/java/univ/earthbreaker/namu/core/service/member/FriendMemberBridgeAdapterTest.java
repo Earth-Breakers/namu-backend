@@ -1,10 +1,10 @@
-package univ.earthbreaker.namu.core.domain.member;
+package univ.earthbreaker.namu.core.service.member;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.mockito.Mockito.when;
-import static univ.earthbreaker.namu.core.domain.member.MemberFixture.FOLLOWING_MEMBER_NO;
-import static univ.earthbreaker.namu.core.domain.member.MemberFixture.MEMBER;
+import static univ.earthbreaker.namu.core.service.member.MemberFixture.FOLLOWING_MEMBER_NO;
+import static univ.earthbreaker.namu.core.service.member.MemberFixture.MEMBER;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import univ.earthbreaker.namu.core.domain.member.MemberNotFoundException;
 import univ.earthbreaker.namu.core.domain.member.infra.MemberRepository;
 
 @ExtendWith(MockitoExtension.class)

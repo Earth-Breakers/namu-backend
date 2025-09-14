@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.domain.auth;
+package univ.earthbreaker.namu.core.service.auth;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatNoException;
@@ -7,7 +7,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import java.security.Key;
 import java.util.Date;
 
-import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +15,8 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import univ.earthbreaker.namu.core.domain.auth.RefreshToken;
+import univ.earthbreaker.namu.core.domain.auth.UnAuthorizedException;
 
 class JwtManagerTest {
 
@@ -44,7 +45,7 @@ class JwtManagerTest {
 			.build()
 			.parseClaimsJws(accessToken)
 			.getBody();
-		AssertionsForClassTypes.assertThat(claims.get(CLAIM_NAME, Long.class)).isEqualTo(MEMBER_NO);
+		assertThat(claims.get(CLAIM_NAME, Long.class)).isEqualTo(MEMBER_NO);
 	}
 
 	@DisplayName("memberNo 를 받아 refreshToken 을 생성하면 정해진 만료시간을 갖는 refreshToken 을 반환한다")
@@ -62,7 +63,7 @@ class JwtManagerTest {
 			.build()
 			.parseClaimsJws(refreshToken.getValue())
 			.getBody();
-		AssertionsForClassTypes.assertThat(claims.getExpiration()).isBeforeOrEqualTo(refreshExpiresIn);
+		assertThat(claims.getExpiration()).isBeforeOrEqualTo(refreshExpiresIn);
 	}
 
 	@DisplayName("accessToken 에서 payload 를 가져올 수 있다")

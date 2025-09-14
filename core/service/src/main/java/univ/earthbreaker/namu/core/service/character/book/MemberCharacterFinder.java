@@ -1,9 +1,13 @@
-package univ.earthbreaker.namu.core.domain.character.book;
+package univ.earthbreaker.namu.core.service.character.book;
 
 import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
+
+import univ.earthbreaker.namu.core.domain.character.book.MemberCharacter;
+import univ.earthbreaker.namu.core.domain.character.book.MemberCharacterNotFoundException;
+import univ.earthbreaker.namu.core.domain.character.book.infra.MemberCharacterRepository;
 
 @Component
 public class MemberCharacterFinder {

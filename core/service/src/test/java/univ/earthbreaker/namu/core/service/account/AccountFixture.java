@@ -1,4 +1,9 @@
-package univ.earthbreaker.namu.core.domain.account;
+package univ.earthbreaker.namu.core.service.account;
+
+import univ.earthbreaker.namu.core.domain.account.Account;
+import univ.earthbreaker.namu.core.domain.account.LoginCommand;
+import univ.earthbreaker.namu.core.domain.account.LoginResult;
+import univ.earthbreaker.namu.core.domain.account.SocialType;
 
 public class AccountFixture {
 

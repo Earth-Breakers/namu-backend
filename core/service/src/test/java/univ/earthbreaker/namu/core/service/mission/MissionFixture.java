@@ -1,0 +1,50 @@
+package univ.earthbreaker.namu.core.service.mission;
+
+import static univ.earthbreaker.namu.core.domain.mission.MissionStatus.READY;
+import static univ.earthbreaker.namu.core.domain.mission.MissionType.DEFAULT;
+import static univ.earthbreaker.namu.core.domain.mission.MissionType.SPECIAL;
+import static univ.earthbreaker.namu.core.domain.mission.MissionType.TODAY;
+import static univ.earthbreaker.namu.core.service.mission.MissionRetrieveStrategyFactory.SpecialMissionDate;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import univ.earthbreaker.namu.core.domain.mission.MemberMission;
+import univ.earthbreaker.namu.core.domain.mission.MemberMissionQueryResult;
+import univ.earthbreaker.namu.core.domain.mission.MemberMissions;
+import univ.earthbreaker.namu.core.domain.mission.MissionActivity;
+
+public class MissionFixture {
+
+	public static final long MEMBER_NO = 1;
+
+	public static final long TODAY_MISSION_NO = 1;
+	public static final long DEFAULT_MISSION_NO = 2;
+	public static final long SPECIAL_MISSION_NO = 3;
+
+	public static final MissionActivity TODAY_MISSION_ACTIVITY_TITLE = MissionActivity.VISIT_VEGAN_CAFE;
+	public static final MissionActivity DEFAULT_MISSION_ACTIVITY_TITLE = MissionActivity.RECYCLE;
+	public static final MissionActivity SPECIAL_MISSION_ACTIVITY_TITLE = MissionActivity.BEACH_COMBING;
+
+	public static final MemberMission TODAY_MISSION_READY = new MemberMission(TODAY_MISSION_NO, MEMBER_NO, TODAY_MISSION_ACTIVITY_TITLE, TODAY, READY);
+	public static final MemberMission DEFAULT_MISSION_READY = new MemberMission(DEFAULT_MISSION_NO, MEMBER_NO, DEFAULT_MISSION_ACTIVITY_TITLE, DEFAULT, READY);
+	public static final MemberMission SPECIAL_MISSION_READY = new MemberMission(SPECIAL_MISSION_NO, MEMBER_NO, SPECIAL_MISSION_ACTIVITY_TITLE, SPECIAL, READY);
+
+	public static final List<MemberMission> MISSIONS = List.of(TODAY_MISSION_READY, DEFAULT_MISSION_READY, SPECIAL_MISSION_READY);
+	public static final MemberMissions MEMBER_MISSIONS = new MemberMissions(MISSIONS);
+
+	public static final LocalDate TREE_PLANTING_DAY = SpecialMissionDate.TREE_PLANTING_DAY.getDate();
+	public static final LocalDate BEACH_COMBING_DAY=  SpecialMissionDate.BEACH_COMBING_DAY.getDate();
+	public static final LocalDate NORMAL_DAY= LocalDate.of(3333, 1, 2);
+
+	public static final MemberMissionQueryResult NORMAL_DAY_RESULT = new MemberMissionQueryResult(
+		List.of(TODAY_MISSION_READY),
+		List.of(DEFAULT_MISSION_READY),
+		List.of(SPECIAL_MISSION_READY)
+	);
+	public static final MemberMissionQueryResult SPECIAL_DAY_RESULT = new MemberMissionQueryResult(
+		List.of(TODAY_MISSION_READY),
+		List.of(DEFAULT_MISSION_READY),
+		List.of()
+	);
+}

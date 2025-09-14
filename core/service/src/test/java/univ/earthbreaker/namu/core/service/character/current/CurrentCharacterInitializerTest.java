@@ -1,7 +1,6 @@
-package univ.earthbreaker.namu.core.domain.character.current;
+package univ.earthbreaker.namu.core.service.character.current;
 
-import static org.mockito.Mockito.*;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.*;
+import static org.mockito.Mockito.verify;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,7 +9,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacter;
 import univ.earthbreaker.namu.core.domain.character.current.infra.CurrentCharacterRepository;
+import univ.earthbreaker.namu.core.service.character.CharacterFixture;
 
 @ExtendWith(MockitoExtension.class)
 class CurrentCharacterInitializerTest {
@@ -22,7 +23,7 @@ class CurrentCharacterInitializerTest {
 	@Test
 	void initialize() {
 		// given
-		CurrentCharacter finalCurrentCharacter = FINAL_CURRENT_CHARACTER;
+		CurrentCharacter finalCurrentCharacter = CharacterFixture.FINAL_CURRENT_CHARACTER;
 
 		// when
 		currentCharacterInitializer.initialize(finalCurrentCharacter);

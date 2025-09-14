@@ -1,9 +1,6 @@
-package univ.earthbreaker.namu.core.domain.point;
+package univ.earthbreaker.namu.core.service.point;
 
 import static org.mockito.Mockito.verify;
-import static univ.earthbreaker.namu.core.domain.point.EnergyPointFixture.ENERGY_TYPE;
-import static univ.earthbreaker.namu.core.domain.point.EnergyPointFixture.MEMBER_NO;
-import static univ.earthbreaker.namu.core.domain.point.EnergyPointFixture.USE_POINT_VALUE;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import univ.earthbreaker.namu.core.domain.point.ProvideEnergyPointCommand;
 import univ.earthbreaker.namu.event.EventPublisher;
 import univ.earthbreaker.namu.event.character.AddEnergyPointEvent;
 
@@ -26,13 +24,13 @@ class EnergyPointProvideServiceTest {
 	@Test
 	void provideEnergyToCharacter() {
 		// given
-		ProvideEnergyPointCommand command = new ProvideEnergyPointCommand(MEMBER_NO, USE_POINT_VALUE, ENERGY_TYPE);
+		ProvideEnergyPointCommand command = new ProvideEnergyPointCommand(EnergyPointFixture.MEMBER_NO, EnergyPointFixture.USE_POINT_VALUE, EnergyPointFixture.ENERGY_TYPE);
 
 		// when
 		energyPointProvideService.provideEnergyToCharacter(command);
 
 		// then
-		verify(energyPointManager).useEnergyPoint(MEMBER_NO, USE_POINT_VALUE);
+		verify(energyPointManager).useEnergyPoint(EnergyPointFixture.MEMBER_NO, EnergyPointFixture.USE_POINT_VALUE);
 		verify(eventPublisher).publish(new AddEnergyPointEvent(
 			command.getMemberNo(),
 			command.getPoint(),

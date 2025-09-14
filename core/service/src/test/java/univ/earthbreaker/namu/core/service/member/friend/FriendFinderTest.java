@@ -1,9 +1,6 @@
-package univ.earthbreaker.namu.core.domain.member.friend;
+package univ.earthbreaker.namu.core.service.member.friend;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static univ.earthbreaker.namu.core.domain.member.MemberFixture.FRIEND_EXIST;
-import static univ.earthbreaker.namu.core.domain.member.MemberFixture.FRIEND_NOT_EXIST;
-import static univ.earthbreaker.namu.core.domain.member.MemberFixture.MEMBER_NO;
 
 import java.util.stream.Stream;
 
@@ -17,7 +14,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import univ.earthbreaker.namu.core.domain.member.friend.Friend;
 import univ.earthbreaker.namu.core.domain.member.friend.infra.FriendRepository;
+import univ.earthbreaker.namu.core.service.member.MemberFixture;
 
 @ExtendWith(MockitoExtension.class)
 class FriendFinderTest {
@@ -30,11 +29,11 @@ class FriendFinderTest {
 	@MethodSource("provideFriend")
 	void find(Friend expect) {
 		// given
-		Mockito.when(friendRepository.findAll(MEMBER_NO))
+		Mockito.when(friendRepository.findAll(MemberFixture.MEMBER_NO))
 			.thenReturn(expect);
 
 		// when
-		Friend actual = friendFinder.findAll(MEMBER_NO);
+		Friend actual = friendFinder.findAll(MemberFixture.MEMBER_NO);
 
 		// then
 		assertThat(actual).isNotNull();
@@ -43,8 +42,8 @@ class FriendFinderTest {
 
 	private static Stream<Arguments> provideFriend() {
 		return Stream.of(
-			Arguments.of(FRIEND_EXIST),
-			Arguments.of(FRIEND_NOT_EXIST)
+			Arguments.of(MemberFixture.FRIEND_EXIST),
+			Arguments.of(MemberFixture.FRIEND_NOT_EXIST)
 		);
 	}
 }

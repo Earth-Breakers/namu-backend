@@ -1,11 +1,12 @@
-package univ.earthbreaker.namu.core.domain.auth;
+package univ.earthbreaker.namu.core.service.auth;
 
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import univ.earthbreaker.namu.core.domain.account.TokenManager;
+import univ.earthbreaker.namu.core.domain.auth.RefreshToken;
+import univ.earthbreaker.namu.core.domain.auth.infra.RefreshTokenRepository;
+import univ.earthbreaker.namu.core.service.account.TokenManager;
 
 @Component
 public class TokenManagerAdapter implements TokenManager {
@@ -19,12 +20,12 @@ public class TokenManagerAdapter implements TokenManager {
 	}
 
 	@Override
-	public @NotNull String createAccessToken(Object payload) {
+	public String createAccessToken(Object payload) {
 		return jwtManager.createAccessToken(payload);
 	}
 
 	@Override
-	public @NotNull String createRefreshToken(Long memberNo) {
+	public String createRefreshToken(Long memberNo) {
 		RefreshToken refreshToken = jwtManager.createRefreshToken(memberNo);
 		refreshTokenRepository.register(refreshToken);
 		return refreshToken.getValue();
@@ -32,7 +33,7 @@ public class TokenManagerAdapter implements TokenManager {
 
 	@Override
 	@Transactional(propagation = Propagation.MANDATORY)
-	public @NotNull String updateRefreshToken(Long memberNo) {
+	public String updateRefreshToken(Long memberNo) {
 		RefreshToken refreshToken = jwtManager.createRefreshToken(memberNo);
 		refreshTokenRepository.update(refreshToken, memberNo);
 		return refreshToken.getValue();

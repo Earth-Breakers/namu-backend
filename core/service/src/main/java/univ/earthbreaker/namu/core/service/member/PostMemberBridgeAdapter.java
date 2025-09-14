@@ -1,8 +1,9 @@
-package univ.earthbreaker.namu.core.domain.member;
+package univ.earthbreaker.namu.core.service.member;
 
 import org.springframework.stereotype.Component;
 
-import univ.earthbreaker.namu.core.domain.post.PostMemberBridge;
+import univ.earthbreaker.namu.core.domain.member.Member;
+import univ.earthbreaker.namu.core.service.post.PostMemberBridge;
 
 @Component
 public class PostMemberBridgeAdapter implements PostMemberBridge {

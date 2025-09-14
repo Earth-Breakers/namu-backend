@@ -1,6 +1,9 @@
-package univ.earthbreaker.namu.core.domain.auth;
+package univ.earthbreaker.namu.core.service.auth;
 
 import org.springframework.stereotype.Service;
+
+import univ.earthbreaker.namu.core.domain.auth.RefreshToken;
+import univ.earthbreaker.namu.core.domain.auth.TokenResult;
 
 @Service
 public class TokenReissueService {

@@ -1,8 +1,7 @@
-package univ.earthbreaker.namu.core.domain.character.current;
+package univ.earthbreaker.namu.core.service.character.current;
 
-import static org.assertj.core.api.AssertionsForClassTypes.*;
-import static org.mockito.Mockito.*;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import univ.earthbreaker.namu.core.domain.pushnotification.CharacterQuery;
+import univ.earthbreaker.namu.core.service.character.CharacterFixture;
 
 @ExtendWith(MockitoExtension.class)
 class CurrentCharacterBridgeAdapterTest {
@@ -23,14 +23,14 @@ class CurrentCharacterBridgeAdapterTest {
 	@Test
 	void findCurrentCharacter() {
 	    // given
-		when(currentCharacterFinder.find(MEMBER_NO))
-			.thenReturn(END_CURRENT_CHARACTER);
+		when(currentCharacterFinder.find(CharacterFixture.MEMBER_NO))
+			.thenReturn(CharacterFixture.END_CURRENT_CHARACTER);
 
 	    // when
-		CharacterQuery actual = currentCharacterBridgeAdapter.findCurrentCharacter(MEMBER_NO);
+		CharacterQuery actual = currentCharacterBridgeAdapter.findCurrentCharacter(CharacterFixture.MEMBER_NO);
 
 		// then
 		assertThat(actual).isNotNull();
-		assertThat(actual.name()).isEqualTo(END_CURRENT_CHARACTER.getCharacterName());
+		assertThat(actual.name()).isEqualTo(CharacterFixture.END_CURRENT_CHARACTER.getCharacterName());
 	}
 }

@@ -1,11 +1,10 @@
-package univ.earthbreaker.namu.core.domain.pushnotification;
+package univ.earthbreaker.namu.core.service.pushnotification;
 
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
 import univ.earthbreaker.namu.core.domain.pushnotification.infra.FriendsQuery;
 
 @Component
 public interface FriendBridge {
-	@NotNull FriendsQuery findFriends(long memberNo);
+	FriendsQuery findFriends(long memberNo);
 }

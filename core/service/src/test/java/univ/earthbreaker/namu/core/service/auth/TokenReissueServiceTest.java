@@ -1,18 +1,18 @@
-package univ.earthbreaker.namu.core.domain.auth;
+package univ.earthbreaker.namu.core.service.auth;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static univ.earthbreaker.namu.core.domain.auth.RefreshTokenFixture.NEVER_EXPIRED_REFRESH_TOKEN;
-import static univ.earthbreaker.namu.core.domain.auth.RefreshTokenFixture.REFRESH_TOKEN_VALUE;
 
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import univ.earthbreaker.namu.core.domain.auth.TokenResult;
 
 @ExtendWith(MockitoExtension.class)
 class TokenReissueServiceTest {
@@ -29,18 +29,18 @@ class TokenReissueServiceTest {
 	@Test
 	void reissue() {
 		// given
-		when(refreshTokenFinder.find(REFRESH_TOKEN_VALUE))
-			.thenReturn(NEVER_EXPIRED_REFRESH_TOKEN);
+		when(refreshTokenFinder.find(RefreshTokenFixture.REFRESH_TOKEN_VALUE))
+			.thenReturn(RefreshTokenFixture.NEVER_EXPIRED_REFRESH_TOKEN);
 		when(jwtManager.createAccessToken(PAYLOAD))
 			.thenReturn(ACCESS_TOKEN);
 
 		// when
-		TokenResult tokenResult = tokenReissueService.reissue(REFRESH_TOKEN_VALUE);
+		TokenResult tokenResult = tokenReissueService.reissue(RefreshTokenFixture.REFRESH_TOKEN_VALUE);
 
 		// then
 		assertAll(
-			() -> assertThat(tokenResult.accessToken()).isEqualTo(ACCESS_TOKEN),
-			() -> verify(refreshTokenValidator).validate(NEVER_EXPIRED_REFRESH_TOKEN)
+			() -> AssertionsForClassTypes.assertThat(tokenResult.accessToken()).isEqualTo(ACCESS_TOKEN),
+			() -> verify(refreshTokenValidator).validate(RefreshTokenFixture.NEVER_EXPIRED_REFRESH_TOKEN)
 		);
 	}
 }

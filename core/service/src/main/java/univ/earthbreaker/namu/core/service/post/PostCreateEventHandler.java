@@ -1,10 +1,12 @@
-package univ.earthbreaker.namu.core.domain.post;
+package univ.earthbreaker.namu.core.service.post;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
+import univ.earthbreaker.namu.core.domain.post.infra.PostCreateDbCommand;
+import univ.earthbreaker.namu.core.domain.post.infra.PostRepository;
 import univ.earthbreaker.namu.event.post.PostCreateEvent;
 
 @Component

@@ -1,8 +1,10 @@
-package univ.earthbreaker.namu.core.domain.mission.service;
+package univ.earthbreaker.namu.core.service.mission;
 
 import org.springframework.stereotype.Component;
 
+import univ.earthbreaker.namu.core.domain.mission.PointIssueResult;
 import univ.earthbreaker.namu.core.domain.mission.infra.PointManager;
+import univ.earthbreaker.namu.core.domain.mission.infra.PointIssueProcessException;
 
 @Component
 public class MissionPointIssueService {

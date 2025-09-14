@@ -1,6 +1,8 @@
-package univ.earthbreaker.namu.core.domain.character.book;
+package univ.earthbreaker.namu.core.service.character.book;
 
 import org.springframework.stereotype.Service;
+
+import univ.earthbreaker.namu.core.domain.character.book.MemberCharacter;
 
 @Service
 public class CharacterBookDetailReadService {

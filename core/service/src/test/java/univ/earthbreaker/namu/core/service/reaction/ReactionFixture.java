@@ -1,4 +1,6 @@
-package univ.earthbreaker.namu.core.domain.reaction;
+package univ.earthbreaker.namu.core.service.reaction;
+
+import univ.earthbreaker.namu.core.domain.reaction.ReactionCommand;
 
 public class ReactionFixture {
 

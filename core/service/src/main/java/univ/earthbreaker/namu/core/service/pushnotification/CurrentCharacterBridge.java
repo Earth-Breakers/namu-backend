@@ -1,9 +1,10 @@
-package univ.earthbreaker.namu.core.domain.pushnotification;
+package univ.earthbreaker.namu.core.service.pushnotification;
 
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
+
+import univ.earthbreaker.namu.core.domain.pushnotification.CharacterQuery;
 
 @Component
 public interface CurrentCharacterBridge {
-	@NotNull CharacterQuery findCurrentCharacter(long memberNo);
+	CharacterQuery findCurrentCharacter(long memberNo);
 }

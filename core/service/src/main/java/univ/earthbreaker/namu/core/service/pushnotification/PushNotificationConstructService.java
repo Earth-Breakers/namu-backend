@@ -1,6 +1,12 @@
-package univ.earthbreaker.namu.core.domain.pushnotification;
+package univ.earthbreaker.namu.core.service.pushnotification;
+
+import static univ.earthbreaker.namu.core.domain.pushnotification.infra.ShowOffNotificationPort.PushNotificationSourceCommand;
 
 import org.springframework.stereotype.Service;
+
+import univ.earthbreaker.namu.core.domain.pushnotification.PushNotificationConstructResult;
+import univ.earthbreaker.namu.core.domain.pushnotification.infra.FriendsQuery;
+import univ.earthbreaker.namu.core.domain.pushnotification.infra.ShowOffNotificationPort;
 
 @Service
 public class PushNotificationConstructService {
@@ -9,33 +15,50 @@ public class PushNotificationConstructService {
 	private final FriendBridge friendBridge;
 	private final MemberBridge memberBridge;
 	private final CurrentCharacterBridge currentCharacterBridge;
+	private final ShowOffNotificationPort notificationPort;
 
 	public PushNotificationConstructService(
 		PushNotificationFinder pushNotificationFinder,
 		FriendBridge friendBridge,
 		MemberBridge memberBridge,
-		CurrentCharacterBridge currentCharacterBridge
+		CurrentCharacterBridge currentCharacterBridge,
+		ShowOffNotificationPort notificationPort
 	) {
 		this.pushNotificationFinder = pushNotificationFinder;
 		this.friendBridge = friendBridge;
 		this.memberBridge = memberBridge;
 		this.currentCharacterBridge = currentCharacterBridge;
+		this.notificationPort = notificationPort;
 	}
 
-	public PushNotificationConstructResult findAllMemberNotificationToken(long memberNo) {
-		return PushNotificationConstructResult.of(
+	public void findAllMemberNotificationToken(long memberNo) {
+		PushNotificationConstructResult result = PushNotificationConstructResult.of(
 			memberBridge.findMember(memberNo),
 			currentCharacterBridge.findCurrentCharacter(memberNo),
 			pushNotificationFinder.findAllEnable()
 		);
+		notificationPort.sendShowOffMessage(
+			new PushNotificationSourceCommand(
+				result.nickname(),
+				result.characterName(),
+				null,
+				result.notificationTokens())
+		);
 	}
 
-	public PushNotificationConstructResult findFriendsNotificationToken(long memberNo) {
+	public void findFriendsNotificationToken(long memberNo, String content) {
 		FriendsQuery friends = friendBridge.findFriends(memberNo);
-		return PushNotificationConstructResult.of(
+		PushNotificationConstructResult result = PushNotificationConstructResult.of(
 			memberBridge.findMember(memberNo),
 			currentCharacterBridge.findCurrentCharacter(memberNo),
 			pushNotificationFinder.findFriendsEnable(friends)
 		);
+		notificationPort.sendShowOffMessage(
+			new PushNotificationSourceCommand(
+				result.nickname(),
+				result.characterName(),
+				content,
+				result.notificationTokens()
+			));
 	}
 }

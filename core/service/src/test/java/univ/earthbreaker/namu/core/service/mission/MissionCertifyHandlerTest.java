@@ -1,8 +1,7 @@
-package univ.earthbreaker.namu.core.domain.mission;
+package univ.earthbreaker.namu.core.service.mission;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
-import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.DEFAULT_MISSION_READY;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,8 +10,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import univ.earthbreaker.namu.core.domain.mission.MemberMission;
 import univ.earthbreaker.namu.core.domain.mission.infra.MemberMissionRepository;
-import univ.earthbreaker.namu.core.domain.mission.service.MissionCertifyHandler;
 
 @ExtendWith(MockitoExtension.class)
 class MissionCertifyHandlerTest {
@@ -24,10 +23,10 @@ class MissionCertifyHandlerTest {
 	@Test
 	void success() {
 	    // given
-		MemberMission expect = DEFAULT_MISSION_READY.success();
+		MemberMission expect = MissionFixture.DEFAULT_MISSION_READY.success();
 
 		// when
-		MemberMission actual = missionCertifyHandler.success(DEFAULT_MISSION_READY);
+		MemberMission actual = missionCertifyHandler.success(MissionFixture.DEFAULT_MISSION_READY);
 
 		// then
 		assertThat(actual).isNotNull().isEqualTo(expect);
@@ -38,10 +37,10 @@ class MissionCertifyHandlerTest {
 	@Test
 	void failure() {
 		// given
-		MemberMission expectFailureMission = DEFAULT_MISSION_READY.failure();
+		MemberMission expectFailureMission = MissionFixture.DEFAULT_MISSION_READY.failure();
 
 		// when
-		missionCertifyHandler.failure(DEFAULT_MISSION_READY);
+		missionCertifyHandler.failure(MissionFixture.DEFAULT_MISSION_READY);
 
 		// then
 		verify(memberMissionRepository).update(expectFailureMission);

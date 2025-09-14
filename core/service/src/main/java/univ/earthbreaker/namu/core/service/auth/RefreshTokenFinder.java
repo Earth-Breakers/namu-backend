@@ -1,7 +1,10 @@
-package univ.earthbreaker.namu.core.domain.auth;
+package univ.earthbreaker.namu.core.service.auth;
 
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
+
+import univ.earthbreaker.namu.core.domain.auth.RefreshToken;
+import univ.earthbreaker.namu.core.domain.auth.UnAuthorizedException;
+import univ.earthbreaker.namu.core.domain.auth.infra.RefreshTokenRepository;
 
 @Component
 public class RefreshTokenFinder {
@@ -12,7 +15,7 @@ public class RefreshTokenFinder {
 		this.refreshTokenRepository = refreshTokenRepository;
 	}
 
-	@NotNull RefreshToken find(String refreshTokenValue) {
+	RefreshToken find(String refreshTokenValue) {
 		RefreshToken refreshToken = refreshTokenRepository.findOrNull(refreshTokenValue);
 		if (refreshToken == null) {
 			throw UnAuthorizedException.notFound(refreshTokenValue);

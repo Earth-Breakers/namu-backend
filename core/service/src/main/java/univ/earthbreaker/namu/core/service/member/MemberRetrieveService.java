@@ -1,6 +1,8 @@
-package univ.earthbreaker.namu.core.domain.member;
+package univ.earthbreaker.namu.core.service.member;
 
 import org.springframework.stereotype.Service;
+
+import univ.earthbreaker.namu.core.domain.member.Member;
 
 @Service
 public class MemberRetrieveService {

@@ -1,8 +1,10 @@
-package univ.earthbreaker.namu.core.domain.pushnotification;
+package univ.earthbreaker.namu.core.service.pushnotification;
 
 import org.springframework.stereotype.Component;
 
-import univ.earthbreaker.namu.core.domain.account.AccountPushNotificationManager;
+import univ.earthbreaker.namu.core.service.account.AccountPushNotificationManager;
+import univ.earthbreaker.namu.core.domain.pushnotification.PushNotification;
+import univ.earthbreaker.namu.core.domain.pushnotification.infra.PushNotificationRepository;
 
 @Component
 public class AccountPushNotificationManagerAdapter implements AccountPushNotificationManager {

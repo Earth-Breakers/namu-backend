@@ -1,10 +1,10 @@
-package univ.earthbreaker.namu.core.domain.member.friend;
+package univ.earthbreaker.namu.core.service.member.friend;
 
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
+import univ.earthbreaker.namu.core.domain.member.friend.Friend;
+import univ.earthbreaker.namu.core.service.pushnotification.FriendBridge;
 import univ.earthbreaker.namu.core.domain.pushnotification.infra.FriendsQuery;
-import univ.earthbreaker.namu.core.domain.pushnotification.FriendBridge;
 
 @Component
 public class FriendBridgeAdapter implements FriendBridge {
@@ -16,7 +16,7 @@ public class FriendBridgeAdapter implements FriendBridge {
 	}
 
 	@Override
-	public @NotNull FriendsQuery findFriends(long memberNo) {
+	public FriendsQuery findFriends(long memberNo) {
 		Friend friends = friendFinder.findAll(memberNo);
 		return new FriendsQuery(friends.getFollowingMemberNos());
 	}

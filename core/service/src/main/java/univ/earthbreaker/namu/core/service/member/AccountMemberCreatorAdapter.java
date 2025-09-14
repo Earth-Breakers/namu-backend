@@ -1,8 +1,8 @@
-package univ.earthbreaker.namu.core.domain.member;
+package univ.earthbreaker.namu.core.service.member;
 
 import org.springframework.stereotype.Component;
 
-import univ.earthbreaker.namu.core.domain.account.AccountMemberCreator;
+import univ.earthbreaker.namu.core.service.account.AccountMemberCreator;
 import univ.earthbreaker.namu.core.domain.member.infra.MemberRepository;
 
 @Component

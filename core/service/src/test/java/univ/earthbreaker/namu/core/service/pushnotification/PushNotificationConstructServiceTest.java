@@ -1,14 +1,10 @@
-package univ.earthbreaker.namu.core.domain.pushnotification;
+package univ.earthbreaker.namu.core.service.pushnotification;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.Mockito.when;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.NAME;
-import static univ.earthbreaker.namu.core.domain.member.MemberFixture.MEMBER_NICKNAME;
-import static univ.earthbreaker.namu.core.domain.member.MemberFixture.MEMBER_NO;
-import static univ.earthbreaker.namu.core.domain.pushnotification.PushNotificationFixture.TARGET_MEMBER_NO_1;
-import static univ.earthbreaker.namu.core.domain.pushnotification.PushNotificationFixture.TARGET_MEMBER_NO_2;
-import static univ.earthbreaker.namu.core.domain.pushnotification.PushNotificationFixture.TARGET_PUSH_NOTIFICATION_ENABLE;
+import static univ.earthbreaker.namu.core.service.member.MemberFixture.MEMBER_NICKNAME;
+import static univ.earthbreaker.namu.core.service.pushnotification.PushNotificationFixture.MEMBER_NO;
 
 import java.util.List;
 
@@ -19,7 +15,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import univ.earthbreaker.namu.core.domain.pushnotification.CharacterQuery;
+import univ.earthbreaker.namu.core.domain.pushnotification.MemberQuery;
+import univ.earthbreaker.namu.core.domain.pushnotification.PushNotificationConstructResult;
 import univ.earthbreaker.namu.core.domain.pushnotification.infra.FriendsQuery;
+import univ.earthbreaker.namu.core.service.character.CharacterFixture;
 
 @ExtendWith(MockitoExtension.class)
 class PushNotificationConstructServiceTest {
@@ -37,9 +37,9 @@ class PushNotificationConstructServiceTest {
 		when(memberBridge.findMember(MEMBER_NO))
 			.thenReturn(new MemberQuery(MEMBER_NICKNAME));
 		when(currentCharacterBridge.findCurrentCharacter(MEMBER_NO))
-			.thenReturn(new CharacterQuery(NAME));
+			.thenReturn(new CharacterQuery(CharacterFixture.NAME));
 		when(pushNotificationFinder.findAllEnable())
-			.thenReturn(List.of(TARGET_PUSH_NOTIFICATION_ENABLE));
+			.thenReturn(List.of(PushNotificationFixture.TARGET_PUSH_NOTIFICATION_ENABLE));
 
 		// when
 		PushNotificationConstructResult result = pushNotificationConstructService.findAllMemberNotificationToken(MEMBER_NO);
@@ -48,10 +48,11 @@ class PushNotificationConstructServiceTest {
 		assertAll(
 			() -> assertThat(result).isNotNull(),
 			() -> assertThat(result.nickname()).isEqualTo(MEMBER_NICKNAME),
-			() -> assertThat(result.characterName()).isEqualTo(NAME),
+			() -> assertThat(result.characterName()).isEqualTo(CharacterFixture.NAME),
 			() -> assertThat(result.notificationTokens()).isNotNull(),
 			() -> assertThat(result.notificationTokens()).asList().hasSize(1),
-			() -> assertThat(result.notificationTokens()).asList().contains(TARGET_PUSH_NOTIFICATION_ENABLE.getToken())
+			() -> assertThat(result.notificationTokens()).asList().contains(
+				PushNotificationFixture.TARGET_PUSH_NOTIFICATION_ENABLE.getToken())
 		);
 	}
 
@@ -59,27 +60,28 @@ class PushNotificationConstructServiceTest {
 	@Test
 	void findFriendsNotificationToken() {
 		// given
-		FriendsQuery friends = new FriendsQuery(List.of(TARGET_MEMBER_NO_1, TARGET_MEMBER_NO_2));
+		FriendsQuery friends = new FriendsQuery(List.of(PushNotificationFixture.TARGET_MEMBER_NO_1, PushNotificationFixture.TARGET_MEMBER_NO_2));
 		when(friendBridge.findFriends(MEMBER_NO))
 			.thenReturn(friends);
 		when(memberBridge.findMember(MEMBER_NO))
 			.thenReturn(new MemberQuery(MEMBER_NICKNAME));
 		when(currentCharacterBridge.findCurrentCharacter(MEMBER_NO))
-			.thenReturn(new CharacterQuery(NAME));
+			.thenReturn(new CharacterQuery(CharacterFixture.NAME));
 		when(pushNotificationFinder.findFriendsEnable(friends))
-			.thenReturn(List.of(TARGET_PUSH_NOTIFICATION_ENABLE));
+			.thenReturn(List.of(PushNotificationFixture.TARGET_PUSH_NOTIFICATION_ENABLE));
 
 		// when
-		PushNotificationConstructResult result = pushNotificationConstructService.findFriendsNotificationToken(MEMBER_NO);
+		PushNotificationConstructResult result = pushNotificationConstructService.findFriendsNotificationToken(MEMBER_NO, "");
 
 		// then
 		assertAll(
 			() -> assertThat(result).isNotNull(),
 			() -> assertThat(result.nickname()).isEqualTo(MEMBER_NICKNAME),
-			() -> assertThat(result.characterName()).isEqualTo(NAME),
+			() -> assertThat(result.characterName()).isEqualTo(CharacterFixture.NAME),
 			() -> assertThat(result.notificationTokens()).isNotNull(),
 			() -> assertThat(result.notificationTokens()).asList().hasSize(1),
-			() -> assertThat(result.notificationTokens()).asList().contains(TARGET_PUSH_NOTIFICATION_ENABLE.getToken())
+			() -> assertThat(result.notificationTokens()).asList().contains(
+				PushNotificationFixture.TARGET_PUSH_NOTIFICATION_ENABLE.getToken())
 		);
 	}
 }

@@ -1,7 +1,8 @@
-package univ.earthbreaker.namu.core.domain.character.current;
+package univ.earthbreaker.namu.core.service.character.current;
 
-import static org.mockito.Mockito.*;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.*;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacter;
 import univ.earthbreaker.namu.core.domain.character.current.infra.CurrentCharacterRepository;
+import univ.earthbreaker.namu.core.service.character.CharacterFixture;
 import univ.earthbreaker.namu.event.character.AddEnergyPointEvent;
 import univ.earthbreaker.namu.event.character.InitCurrentCharacterEvent;
 
@@ -25,9 +28,10 @@ class CurrentCharacterEventHandlerTest {
 	@Test
 	void giveEnergyToCurrentCharacter() {
 	    // given
-		when(currentCharacterFinder.find(MEMBER_NO))
-			.thenReturn(BEGIN_CURRENT_CHARACTER);
-		AddEnergyPointEvent event = new AddEnergyPointEvent(MEMBER_NO, BEGIN_REQUIRED_EXP, CHARACTER_TYPE.name());
+		when(currentCharacterFinder.find(CharacterFixture.MEMBER_NO))
+			.thenReturn(CharacterFixture.BEGIN_CURRENT_CHARACTER);
+		AddEnergyPointEvent event = new AddEnergyPointEvent(
+			CharacterFixture.MEMBER_NO, CharacterFixture.BEGIN_REQUIRED_EXP, CharacterFixture.CHARACTER_TYPE.name());
 
 		// when
 		currentCharacterEventHandler.giveEnergyToCurrentCharacter(event);

@@ -1,10 +1,10 @@
-package univ.earthbreaker.namu.core.domain.account;
+package univ.earthbreaker.namu.core.service.account;
 
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
-import static univ.earthbreaker.namu.core.domain.account.AccountFixture.*;
+import static univ.earthbreaker.namu.core.service.account.AccountFixture.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import univ.earthbreaker.namu.core.domain.account.LoginResult;
 import univ.earthbreaker.namu.core.domain.account.infra.AccountRepository;
 
 @ExtendWith(MockitoExtension.class)

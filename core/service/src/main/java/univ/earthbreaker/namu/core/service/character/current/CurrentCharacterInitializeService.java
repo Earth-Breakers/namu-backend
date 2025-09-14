@@ -1,6 +1,8 @@
-package univ.earthbreaker.namu.core.domain.character.current;
+package univ.earthbreaker.namu.core.service.character.current;
 
 import org.springframework.stereotype.Service;
+
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacter;
 
 @Service
 public class CurrentCharacterInitializeService {

@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.domain.account;
+package univ.earthbreaker.namu.core.service.account;
 
 import org.springframework.stereotype.Component;
 

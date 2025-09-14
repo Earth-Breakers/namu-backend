@@ -1,9 +1,6 @@
-package univ.earthbreaker.namu.core.domain.mission;
+package univ.earthbreaker.namu.core.service.mission;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.BEACH_COMBING_DAY;
-import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.NORMAL_DAY;
-import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.TREE_PLANTING_DAY;
 
 import java.time.Clock;
 import java.time.LocalDate;
@@ -17,11 +14,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-
-import univ.earthbreaker.namu.core.domain.mission.service.FixedAndSpecialMissionRetrieveStrategy;
-import univ.earthbreaker.namu.core.domain.mission.service.FixedMissionRetrieveStrategy;
-import univ.earthbreaker.namu.core.domain.mission.service.MissionRetrieveStrategy;
-import univ.earthbreaker.namu.core.domain.mission.service.MissionRetrieveStrategyFactory;
 
 class MissionRetrieveStrategyFactoryTest {
 
@@ -49,9 +41,9 @@ class MissionRetrieveStrategyFactoryTest {
 
 	private static Stream<Arguments> provideDayAndExpectClassType() {
 		return Stream.of(
-			Arguments.of(TREE_PLANTING_DAY, FixedAndSpecialMissionRetrieveStrategy.class),
-			Arguments.of(BEACH_COMBING_DAY, FixedAndSpecialMissionRetrieveStrategy.class),
-			Arguments.of(NORMAL_DAY, FixedMissionRetrieveStrategy.class)
+			Arguments.of(MissionFixture.TREE_PLANTING_DAY, FixedAndSpecialMissionRetrieveStrategy.class),
+			Arguments.of(MissionFixture.BEACH_COMBING_DAY, FixedAndSpecialMissionRetrieveStrategy.class),
+			Arguments.of(MissionFixture.NORMAL_DAY, FixedMissionRetrieveStrategy.class)
 		);
 	}
 }

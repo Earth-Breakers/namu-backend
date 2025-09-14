@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.domain.reaction;
+package univ.earthbreaker.namu.core.service.reaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,10 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
+import univ.earthbreaker.namu.core.domain.reaction.ReactionType;
+import univ.earthbreaker.namu.core.domain.reaction.Reactions;
+import univ.earthbreaker.namu.core.domain.reaction.TargetType;
+import univ.earthbreaker.namu.core.domain.reaction.infra.ReactionBridge;
 import univ.earthbreaker.namu.core.domain.reaction.infra.ReactionDbQuery;
 import univ.earthbreaker.namu.core.domain.reaction.infra.ReactionRepository;
 

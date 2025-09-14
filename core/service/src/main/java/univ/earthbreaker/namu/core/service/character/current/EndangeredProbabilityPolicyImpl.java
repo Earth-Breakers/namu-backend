@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.domain.character.current;
+package univ.earthbreaker.namu.core.service.character.current;
 
 import java.util.Random;
 

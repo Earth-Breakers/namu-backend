@@ -1,12 +1,10 @@
-package univ.earthbreaker.namu.core.domain.account;
-
-import org.jetbrains.annotations.NotNull;
+package univ.earthbreaker.namu.core.service.account;
 
 public interface TokenManager {
 
-	@NotNull String createAccessToken(Object payload);
+	String createAccessToken(Object payload);
 
-	@NotNull String createRefreshToken(Long memberNo);
+	String createRefreshToken(Long memberNo);
 
-	@NotNull String updateRefreshToken(Long memberNo);
+	String updateRefreshToken(Long memberNo);
 }

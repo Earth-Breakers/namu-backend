@@ -1,10 +1,11 @@
-package univ.earthbreaker.namu.core.domain.point;
+package univ.earthbreaker.namu.core.service.point;
 
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
+import univ.earthbreaker.namu.core.domain.point.infra.PointUpdateDbCommand;
+import univ.earthbreaker.namu.core.domain.point.infra.EnergyPointRepository;
 import univ.earthbreaker.namu.event.point.AddRewardPointEvent;
 import univ.earthbreaker.namu.event.point.InitEnergyPointEvent;
 
@@ -18,13 +19,13 @@ public class EnergyPointEventHandler {
 	}
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
-	public void giveRewardPoint(@NotNull AddRewardPointEvent event) {
+	public void giveRewardPoint(AddRewardPointEvent event) {
 		PointUpdateDbCommand command = new PointUpdateDbCommand(event.memberNo(), event.point());
 		energyPointRepository.receivePoint(command);
 	}
 
 	@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
-	public void registerInitEnergyPoint(@NotNull InitEnergyPointEvent event) {
+	public void registerInitEnergyPoint(InitEnergyPointEvent event) {
 		energyPointRepository.register(event.memberNo());
 	}
 }

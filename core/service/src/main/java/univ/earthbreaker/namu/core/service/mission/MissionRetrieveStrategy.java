@@ -1,9 +1,8 @@
-package univ.earthbreaker.namu.core.domain.mission.service;
+package univ.earthbreaker.namu.core.service.mission;
 
-import org.jetbrains.annotations.NotNull;
-
+import univ.earthbreaker.namu.core.domain.mission.MemberMissionQueryResult;
 import univ.earthbreaker.namu.core.domain.mission.MemberMissions;
 
 public interface MissionRetrieveStrategy {
-	@NotNull MemberMissionQueryResult retrieve(@NotNull MemberMissions memberMission);
+	MemberMissionQueryResult retrieve(MemberMissions memberMission);
 }

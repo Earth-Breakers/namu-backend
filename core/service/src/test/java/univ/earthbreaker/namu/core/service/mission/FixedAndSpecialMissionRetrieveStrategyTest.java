@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.domain.mission;
+package univ.earthbreaker.namu.core.service.mission;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import univ.earthbreaker.namu.core.domain.mission.service.FixedAndSpecialMissionRetrieveStrategy;
-import univ.earthbreaker.namu.core.domain.mission.service.MemberMissionQueryResult;
+import univ.earthbreaker.namu.core.domain.mission.MemberMissionQueryResult;
+import univ.earthbreaker.namu.core.domain.mission.MemberMissions;
 
 class FixedAndSpecialMissionRetrieveStrategyTest {
 

@@ -1,6 +1,8 @@
-package univ.earthbreaker.namu.core.domain.member.friend;
+package univ.earthbreaker.namu.core.service.member.friend;
 
 import org.springframework.stereotype.Service;
+
+import univ.earthbreaker.namu.core.domain.member.friend.Friend;
 
 @Service
 public class FriendFinderService {

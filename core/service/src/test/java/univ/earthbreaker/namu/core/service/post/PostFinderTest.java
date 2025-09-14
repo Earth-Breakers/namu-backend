@@ -1,16 +1,9 @@
-package univ.earthbreaker.namu.core.domain.post;
+package univ.earthbreaker.namu.core.service.post;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
-import static univ.earthbreaker.namu.core.domain.post.PostFixture.FIRST_MISSION_NO;
-import static univ.earthbreaker.namu.core.domain.post.PostFixture.FIRST_POST;
-import static univ.earthbreaker.namu.core.domain.post.PostFixture.FIRST_POST_NO;
-import static univ.earthbreaker.namu.core.domain.post.PostFixture.MEMBER_NO;
-import static univ.earthbreaker.namu.core.domain.post.PostFixture.RELATED_POST_FIRST_PAGE_RESULT;
-import static univ.earthbreaker.namu.core.domain.post.PostFixture.SEARCH_DATE;
-import static univ.earthbreaker.namu.core.domain.post.PostFixture.SECOND_POST;
 
 import java.util.List;
 
@@ -21,6 +14,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import univ.earthbreaker.namu.core.domain.post.Post;
+import univ.earthbreaker.namu.core.domain.post.PostNotFoundException;
+import univ.earthbreaker.namu.core.domain.post.RelatedPostResult;
+import univ.earthbreaker.namu.core.domain.post.RelatedPostRetrieveQuery;
 import univ.earthbreaker.namu.core.domain.post.infra.PostDbQuery;
 import univ.earthbreaker.namu.core.domain.post.infra.PostDetailDbQuery;
 import univ.earthbreaker.namu.core.domain.post.infra.PostRepository;
@@ -37,10 +34,10 @@ class PostFinderTest {
 	void findAll() {
 	    // given
 		when(postRepository.findAll(any(PostDbQuery.class)))
-			.thenReturn(List.of(FIRST_POST, SECOND_POST));
+			.thenReturn(List.of(PostFixture.FIRST_POST, PostFixture.SECOND_POST));
 
 	    // when
-		List<Post> actual = postFinder.findAll(MEMBER_NO, SEARCH_DATE);
+		List<Post> actual = postFinder.findAll(PostFixture.MEMBER_NO, PostFixture.SEARCH_DATE);
 
 		// then
 		assertThat(actual).isNotNull().hasSize(2);
@@ -51,13 +48,13 @@ class PostFinderTest {
 	void success_find() {
 		// given
 		when(postRepository.find(any(PostDetailDbQuery.class)))
-			.thenReturn(FIRST_POST);
+			.thenReturn(PostFixture.FIRST_POST);
 
 		// when
-		Post actual = postFinder.find(MEMBER_NO, FIRST_POST_NO);
+		Post actual = postFinder.find(PostFixture.MEMBER_NO, PostFixture.FIRST_POST_NO);
 
 		// then
-		assertThat(actual).isNotNull().isEqualTo(FIRST_POST);
+		assertThat(actual).isNotNull().isEqualTo(PostFixture.FIRST_POST);
 	}
 
 	@DisplayName("조회하려는 게시글이 없으면 예외를 발생시킨다")
@@ -68,7 +65,7 @@ class PostFinderTest {
 			.thenReturn(null);
 
 		// when, then
-		assertThatThrownBy(() -> postFinder.find(MEMBER_NO, FIRST_POST_NO))
+		assertThatThrownBy(() -> postFinder.find(PostFixture.MEMBER_NO, PostFixture.FIRST_POST_NO))
 			.isInstanceOf(PostNotFoundException.class)
 			.hasMessage(PostNotFoundException.notFound().getMessage());
 	}
@@ -78,13 +75,13 @@ class PostFinderTest {
 	void findAllRelated() {
 	    // given
 		when(postRepository.findRelated(any(RelatedPostDbQuery.class)))
-			.thenReturn(RELATED_POST_FIRST_PAGE_RESULT);
+			.thenReturn(PostFixture.RELATED_POST_FIRST_PAGE_RESULT);
 
 	    // when
 		RelatedPostResult actual = postFinder
-			.findAllRelated(RelatedPostRetrieveQuery.of(MEMBER_NO, FIRST_MISSION_NO, 1, 5, null));
+			.findAllRelated(RelatedPostRetrieveQuery.of(PostFixture.MEMBER_NO, PostFixture.FIRST_MISSION_NO, 1, 5, null));
 
 		// then
-		assertThat(actual).isNotNull().isEqualTo(RELATED_POST_FIRST_PAGE_RESULT);
+		assertThat(actual).isNotNull().isEqualTo(PostFixture.RELATED_POST_FIRST_PAGE_RESULT);
 	}
 }

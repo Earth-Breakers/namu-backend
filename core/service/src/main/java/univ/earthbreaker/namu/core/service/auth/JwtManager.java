@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.domain.auth;
+package univ.earthbreaker.namu.core.service.auth;
 
 import java.security.Key;
 import java.time.LocalDateTime;
@@ -18,6 +18,8 @@ import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SecurityException;
+import univ.earthbreaker.namu.core.domain.auth.RefreshToken;
+import univ.earthbreaker.namu.core.domain.auth.UnAuthorizedException;
 
 @Component
 public class JwtManager {

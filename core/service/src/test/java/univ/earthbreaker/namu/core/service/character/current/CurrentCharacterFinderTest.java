@@ -1,9 +1,9 @@
-package univ.earthbreaker.namu.core.domain.character.current;
+package univ.earthbreaker.namu.core.service.character.current;
 
-import static org.assertj.core.api.AssertionsForClassTypes.*;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacter;
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacterNotFoundException;
 import univ.earthbreaker.namu.core.domain.character.current.infra.CurrentCharacterRepository;
+import univ.earthbreaker.namu.core.service.character.CharacterFixture;
 
 @ExtendWith(MockitoExtension.class)
 class CurrentCharacterFinderTest {
@@ -27,7 +30,7 @@ class CurrentCharacterFinderTest {
 	void success_find() {
 	    // given
 		when(currentCharacterRepository.findOrNull(MEMBER_NO))
-			.thenReturn(BEGIN_CURRENT_CHARACTER);
+			.thenReturn(CharacterFixture.BEGIN_CURRENT_CHARACTER);
 
 	    // when
 		CurrentCharacter currentCharacter = currentCharacterFinder.find(MEMBER_NO);
@@ -35,13 +38,15 @@ class CurrentCharacterFinderTest {
 		// then
 		assertAll(
 			() -> assertThat(currentCharacter.getMasterNo()).isEqualTo(MEMBER_NO),
-			() -> assertThat(currentCharacter.getTargetCharacterNo()).isEqualTo(BEGIN_CURRENT_CHARACTER.getTargetCharacterNo()),
-			() -> assertThat(currentCharacter.getCharacterType()).isEqualTo(BEGIN_CURRENT_CHARACTER.getCharacterType()),
-			() -> assertThat(currentCharacter.getCharacterGroupNumber()).isEqualTo(BEGIN_CURRENT_CHARACTER.getCharacterGroupNumber()),
-			() -> assertThat(currentCharacter.getTargetCharacterMainImage()).isEqualTo(BEGIN_CURRENT_CHARACTER.getTargetCharacterMainImage()),
-			() -> assertThat(currentCharacter.getStatusLevel()).isEqualTo(BEGIN_CURRENT_CHARACTER.getStatusLevel()),
-			() -> assertThat(currentCharacter.getStatusRequiredExp()).isEqualTo(BEGIN_CURRENT_CHARACTER.getStatusRequiredExp()),
-			() -> assertThat(currentCharacter.getStatusCurrentExp()).isEqualTo(BEGIN_CURRENT_CHARACTER.getStatusCurrentExp())
+			() -> assertThat(currentCharacter.getTargetCharacterNo()).isEqualTo(CharacterFixture.BEGIN_CURRENT_CHARACTER.getTargetCharacterNo()),
+			() -> assertThat(currentCharacter.getCharacterType()).isEqualTo(CharacterFixture.BEGIN_CURRENT_CHARACTER.getCharacterType()),
+			() -> assertThat(currentCharacter.getCharacterGroupNumber()).isEqualTo(
+				CharacterFixture.BEGIN_CURRENT_CHARACTER.getCharacterGroupNumber()),
+			() -> assertThat(currentCharacter.getTargetCharacterMainImage()).isEqualTo(
+				CharacterFixture.BEGIN_CURRENT_CHARACTER.getTargetCharacterMainImage()),
+			() -> assertThat(currentCharacter.getStatusLevel()).isEqualTo(CharacterFixture.BEGIN_CURRENT_CHARACTER.getStatusLevel()),
+			() -> assertThat(currentCharacter.getStatusRequiredExp()).isEqualTo(CharacterFixture.BEGIN_CURRENT_CHARACTER.getStatusRequiredExp()),
+			() -> assertThat(currentCharacter.getStatusCurrentExp()).isEqualTo(CharacterFixture.BEGIN_CURRENT_CHARACTER.getStatusCurrentExp())
 		);
 	}
 

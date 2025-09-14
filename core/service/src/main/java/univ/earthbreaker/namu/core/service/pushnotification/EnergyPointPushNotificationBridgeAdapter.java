@@ -1,8 +1,10 @@
-package univ.earthbreaker.namu.core.domain.pushnotification;
+package univ.earthbreaker.namu.core.service.pushnotification;
 
 import org.springframework.stereotype.Component;
 
-import univ.earthbreaker.namu.core.domain.point.EnergyPointPushNotificationBridge;
+import univ.earthbreaker.namu.core.service.point.EnergyPointPushNotificationBridge;
+import univ.earthbreaker.namu.core.domain.pushnotification.MemberQuery;
+import univ.earthbreaker.namu.core.domain.pushnotification.PushNotification;
 
 @Component
 public class EnergyPointPushNotificationBridgeAdapter implements EnergyPointPushNotificationBridge {

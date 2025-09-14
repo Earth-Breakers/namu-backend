@@ -1,8 +1,11 @@
-package univ.earthbreaker.namu.core.domain.reaction;
+package univ.earthbreaker.namu.core.service.reaction;
 
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import univ.earthbreaker.namu.core.domain.reaction.ReactionCommand;
+import univ.earthbreaker.namu.core.domain.reaction.ReactionConflictException;
+import univ.earthbreaker.namu.core.domain.reaction.infra.ReactionRepository;
 
 @Component
 public class ReactionManager {
@@ -14,7 +17,7 @@ public class ReactionManager {
 	}
 
 	@Transactional
-	public void doReaction(@NotNull ReactionCommand reactionCommand) {
+	public void doReaction(ReactionCommand reactionCommand) {
 		if (reactionRepository.alreadyReaction(reactionCommand.toDbQuery())) {
 			throw ReactionConflictException.conflict(reactionCommand.getTargetNo());
 		}
@@ -22,7 +25,7 @@ public class ReactionManager {
 	}
 
 	@Transactional
-	public void undoReaction(@NotNull ReactionCommand reactionCommand) {
+	public void undoReaction(ReactionCommand reactionCommand) {
 		if (!reactionRepository.alreadyReaction(reactionCommand.toDbQuery())) {
 			return;
 		}

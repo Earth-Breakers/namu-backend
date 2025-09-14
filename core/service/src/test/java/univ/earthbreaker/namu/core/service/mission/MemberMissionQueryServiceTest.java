@@ -1,10 +1,8 @@
-package univ.earthbreaker.namu.core.domain.mission;
+package univ.earthbreaker.namu.core.service.mission;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.Mockito.when;
-import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.MEMBER_MISSIONS;
-import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.MEMBER_NO;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,11 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import univ.earthbreaker.namu.core.domain.mission.service.FixedAndSpecialMissionRetrieveStrategy;
-import univ.earthbreaker.namu.core.domain.mission.service.MemberMissionFinder;
-import univ.earthbreaker.namu.core.domain.mission.service.MemberMissionQueryResult;
-import univ.earthbreaker.namu.core.domain.mission.service.MemberMissionQueryService;
-import univ.earthbreaker.namu.core.domain.mission.service.MissionRetrieveStrategyFactory;
+import univ.earthbreaker.namu.core.domain.mission.MemberMissionQueryResult;
 
 @ExtendWith(MockitoExtension.class)
 class MemberMissionQueryServiceTest {
@@ -30,13 +24,13 @@ class MemberMissionQueryServiceTest {
 	@Test
 	void retrieveMemberMissions() {
 	    // given
-		when(memberMissionFinder.findAll(MEMBER_NO))
-			.thenReturn(MEMBER_MISSIONS);
+		when(memberMissionFinder.findAll(MissionFixture.MEMBER_NO))
+			.thenReturn(MissionFixture.MEMBER_MISSIONS);
 		when(missionRetrieveStrategyFactory.get())
 			.thenReturn(new FixedAndSpecialMissionRetrieveStrategy());
 
 	    // when
-		MemberMissionQueryResult result = memberMissionQueryService.retrieveMemberMissions(MEMBER_NO);
+		MemberMissionQueryResult result = memberMissionQueryService.retrieveMemberMissions(MissionFixture.MEMBER_NO);
 
 		// then
 		assertAll(

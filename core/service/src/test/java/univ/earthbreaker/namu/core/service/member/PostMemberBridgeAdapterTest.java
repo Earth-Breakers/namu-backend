@@ -1,9 +1,9 @@
-package univ.earthbreaker.namu.core.domain.member;
+package univ.earthbreaker.namu.core.service.member;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
-import static univ.earthbreaker.namu.core.domain.member.MemberFixture.MEMBER;
-import static univ.earthbreaker.namu.core.domain.member.MemberFixture.MEMBER_NO;
+import static univ.earthbreaker.namu.core.service.member.MemberFixture.MEMBER;
+import static univ.earthbreaker.namu.core.service.member.MemberFixture.MEMBER_NO;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,7 +13,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import univ.earthbreaker.namu.core.domain.post.PostMemberBridge;
+import univ.earthbreaker.namu.core.service.post.PostMemberBridge;
 
 @ExtendWith(MockitoExtension.class)
 class PostMemberBridgeAdapterTest {

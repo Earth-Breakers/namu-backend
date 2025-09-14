@@ -1,15 +1,9 @@
-package univ.earthbreaker.namu.core.domain.pushnotification;
+package univ.earthbreaker.namu.core.service.pushnotification;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.Mockito.when;
-import static univ.earthbreaker.namu.core.domain.pushnotification.PushNotificationFixture.MEMBER_NO;
-import static univ.earthbreaker.namu.core.domain.pushnotification.PushNotificationFixture.PUSH_NOTIFICATION;
-import static univ.earthbreaker.namu.core.domain.pushnotification.PushNotificationFixture.TARGET_MEMBER_NO_1;
-import static univ.earthbreaker.namu.core.domain.pushnotification.PushNotificationFixture.TARGET_MEMBER_NO_2;
-import static univ.earthbreaker.namu.core.domain.pushnotification.PushNotificationFixture.TARGET_PUSH_NOTIFICATION_ENABLE;
-import static univ.earthbreaker.namu.core.domain.pushnotification.PushNotificationFixture.TARGET_PUSH_NOTIFICATION_UNABLE;
 
 import java.util.List;
 
@@ -20,6 +14,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import univ.earthbreaker.namu.core.domain.pushnotification.PushNotification;
+import univ.earthbreaker.namu.core.domain.pushnotification.PushNotificationNotFoundException;
 import univ.earthbreaker.namu.core.domain.pushnotification.infra.FriendsQuery;
 import univ.earthbreaker.namu.core.domain.pushnotification.infra.PushNotificationRepository;
 
@@ -33,26 +29,26 @@ class PushNotificationFinderTest {
 	@Test
 	void success_find() {
 		// given
-		when(pushNotificationRepository.findOrNull(MEMBER_NO))
-			.thenReturn(PUSH_NOTIFICATION);
+		when(pushNotificationRepository.findOrNull(PushNotificationFixture.MEMBER_NO))
+			.thenReturn(PushNotificationFixture.PUSH_NOTIFICATION);
 
 		// when
-		PushNotification actual = pushNotificationFinder.find(MEMBER_NO);
+		PushNotification actual = pushNotificationFinder.find(PushNotificationFixture.MEMBER_NO);
 
 		// then
 		assertThat(actual).isNotNull();
-		assertThat(actual).isEqualTo(PUSH_NOTIFICATION);
+		assertThat(actual).isEqualTo(PushNotificationFixture.PUSH_NOTIFICATION);
 	}
 
 	@DisplayName("회원 번호를 받아 해당 회원의 푸시 알림 정보를 찾고, 존재하지 않으면 예외를 발생시킨다")
 	@Test
 	void fail_find() {
 		// given
-		when(pushNotificationRepository.findOrNull(MEMBER_NO))
+		when(pushNotificationRepository.findOrNull(PushNotificationFixture.MEMBER_NO))
 			.thenReturn(null);
 
 		// when, then
-		assertThatThrownBy(() -> pushNotificationFinder.find(MEMBER_NO))
+		assertThatThrownBy(() -> pushNotificationFinder.find(PushNotificationFixture.MEMBER_NO))
 			.isInstanceOf(PushNotificationNotFoundException.class)
 			.hasMessage(PushNotificationNotFoundException.notFount().getMessage());
 	}
@@ -63,8 +59,8 @@ class PushNotificationFinderTest {
 		// given
 		when(pushNotificationRepository.findAll())
 			.thenReturn(List.of(
-				TARGET_PUSH_NOTIFICATION_ENABLE,
-				TARGET_PUSH_NOTIFICATION_UNABLE
+				PushNotificationFixture.TARGET_PUSH_NOTIFICATION_ENABLE,
+				PushNotificationFixture.TARGET_PUSH_NOTIFICATION_UNABLE
 			));
 
 		// when
@@ -74,8 +70,8 @@ class PushNotificationFinderTest {
 		assertAll(
 			() -> assertThat(actual).isNotNull(),
 			() -> assertThat(actual).asList().hasSize(1),
-			() -> assertThat(actual).asList().contains(TARGET_PUSH_NOTIFICATION_ENABLE),
-			() -> assertThat(actual).asList().doesNotContain(TARGET_PUSH_NOTIFICATION_UNABLE)
+			() -> assertThat(actual).asList().contains(PushNotificationFixture.TARGET_PUSH_NOTIFICATION_ENABLE),
+			() -> assertThat(actual).asList().doesNotContain(PushNotificationFixture.TARGET_PUSH_NOTIFICATION_UNABLE)
 		);
 	}
 
@@ -83,11 +79,12 @@ class PushNotificationFinderTest {
 	@Test
 	void findFriendsEnable() {
 		// given
-		FriendsQuery friends = new FriendsQuery(List.of(MEMBER_NO, TARGET_MEMBER_NO_1, TARGET_MEMBER_NO_2));
+		FriendsQuery friends = new FriendsQuery(List.of(
+			PushNotificationFixture.MEMBER_NO, PushNotificationFixture.TARGET_MEMBER_NO_1, PushNotificationFixture.TARGET_MEMBER_NO_2));
 		when(pushNotificationRepository.findAll(friends))
 			.thenReturn(List.of(
-				TARGET_PUSH_NOTIFICATION_ENABLE,
-				TARGET_PUSH_NOTIFICATION_UNABLE
+				PushNotificationFixture.TARGET_PUSH_NOTIFICATION_ENABLE,
+				PushNotificationFixture.TARGET_PUSH_NOTIFICATION_UNABLE
 			));
 
 		// when
@@ -97,8 +94,8 @@ class PushNotificationFinderTest {
 		assertAll(
 			() -> assertThat(actual).isNotNull(),
 			() -> assertThat(actual).asList().hasSize(1),
-			() -> assertThat(actual).asList().contains(TARGET_PUSH_NOTIFICATION_ENABLE),
-			() -> assertThat(actual).asList().doesNotContain(TARGET_PUSH_NOTIFICATION_UNABLE)
+			() -> assertThat(actual).asList().contains(PushNotificationFixture.TARGET_PUSH_NOTIFICATION_ENABLE),
+			() -> assertThat(actual).asList().doesNotContain(PushNotificationFixture.TARGET_PUSH_NOTIFICATION_UNABLE)
 		);
 	}
 }

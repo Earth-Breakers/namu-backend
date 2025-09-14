@@ -1,6 +1,8 @@
-package univ.earthbreaker.namu.core.domain.auth;
+package univ.earthbreaker.namu.core.service.auth;
 
 import java.time.LocalDateTime;
+
+import univ.earthbreaker.namu.core.domain.auth.RefreshToken;
 
 public class RefreshTokenFixture {
 

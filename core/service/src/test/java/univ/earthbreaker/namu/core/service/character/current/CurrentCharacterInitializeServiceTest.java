@@ -1,7 +1,7 @@
-package univ.earthbreaker.namu.core.domain.character.current;
+package univ.earthbreaker.namu.core.service.character.current;
 
-import static org.mockito.Mockito.*;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,6 +9,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import univ.earthbreaker.namu.core.service.character.CharacterFixture;
 
 @ExtendWith(MockitoExtension.class)
 class CurrentCharacterInitializeServiceTest {
@@ -21,13 +23,13 @@ class CurrentCharacterInitializeServiceTest {
 	@Test
 	void initialize() {
 	    // given
-		when(currentCharacterFinder.find(MEMBER_NO))
-			.thenReturn(FINAL_CURRENT_CHARACTER);
+		when(currentCharacterFinder.find(CharacterFixture.MEMBER_NO))
+			.thenReturn(CharacterFixture.FINAL_CURRENT_CHARACTER);
 
 	    // when
-		currentCharacterInitializeService.initialize(MEMBER_NO);
+		currentCharacterInitializeService.initialize(CharacterFixture.MEMBER_NO);
 
 	    // then
-		verify(currentCharacterInitializer).initialize(FINAL_CURRENT_CHARACTER);
+		verify(currentCharacterInitializer).initialize(CharacterFixture.FINAL_CURRENT_CHARACTER);
 	}
 }

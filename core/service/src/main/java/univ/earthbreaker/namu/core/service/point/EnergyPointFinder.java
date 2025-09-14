@@ -1,6 +1,9 @@
-package univ.earthbreaker.namu.core.domain.point;
+package univ.earthbreaker.namu.core.service.point;
 
 import org.springframework.stereotype.Component;
+
+import univ.earthbreaker.namu.core.domain.point.Energy;
+import univ.earthbreaker.namu.core.domain.point.infra.EnergyPointRepository;
 
 @Component
 public class EnergyPointFinder {

@@ -1,9 +1,6 @@
-package univ.earthbreaker.namu.core.domain.post;
+package univ.earthbreaker.namu.core.service.post;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static univ.earthbreaker.namu.core.domain.post.PostFixture.MEMBER_NICKNAME;
-import static univ.earthbreaker.namu.core.domain.post.PostFixture.MEMBER_NO;
+import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -27,8 +24,8 @@ class PostCreateEventHandlerTest {
 	@Test
 	void giveRewardPoint() {
 		// given
-		PostMemberBridge.PostMemberDto postMemberInfo = new PostMemberBridge.PostMemberDto(MEMBER_NO, MEMBER_NICKNAME);
-		when(postMemberBridge.findMemberInfo(MEMBER_NO))
+		PostMemberBridge.PostMemberDto postMemberInfo = new PostMemberBridge.PostMemberDto(PostFixture.MEMBER_NO, PostFixture.MEMBER_NICKNAME);
+		when(postMemberBridge.findMemberInfo(PostFixture.MEMBER_NO))
 			.thenReturn(postMemberInfo);
 		PostCreateEvent event = new PostCreateEvent(1L, "title", "content", "imagePathKey", 1L);
 

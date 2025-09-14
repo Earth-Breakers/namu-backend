@@ -1,8 +1,8 @@
-package univ.earthbreaker.namu.core.domain.member.friend;
+package univ.earthbreaker.namu.core.service.member.friend;
 
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
+import univ.earthbreaker.namu.core.domain.member.friend.FriendRelationCommand;
 import univ.earthbreaker.namu.core.domain.member.friend.infra.FriendRepository;
 
 @Component
@@ -14,7 +14,7 @@ public class FriendRegister {
 		this.friendRepository = friendRepository;
 	}
 
-	void register(@NotNull FriendRelationCommand command) {
+	public void register(FriendRelationCommand command) {
 		if (!friendRepository.existsBy(command.memberNo(), command.targetMemberNo())) {
 			friendRepository.register(command.memberNo(), command.targetMemberNo());
 		}

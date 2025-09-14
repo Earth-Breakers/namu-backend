@@ -1,13 +1,8 @@
-package univ.earthbreaker.namu.core.domain.point;
+package univ.earthbreaker.namu.core.service.point;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static univ.earthbreaker.namu.core.domain.point.EnergyPointFixture.ENERGY;
-import static univ.earthbreaker.namu.core.domain.point.EnergyPointFixture.FRIEND_ENERGY;
-import static univ.earthbreaker.namu.core.domain.point.EnergyPointFixture.FRIEND_NO;
-import static univ.earthbreaker.namu.core.domain.point.EnergyPointFixture.MEMBER_NO;
-import static univ.earthbreaker.namu.core.domain.point.EnergyPointFixture.USE_POINT_VALUE;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,11 +26,11 @@ class EnergyPointManagerTest {
 	@Test
 	void useEnergyPoint() {
 	    // given
-		when(energyPointFinder.find(MEMBER_NO))
-			.thenReturn(ENERGY);
+		when(energyPointFinder.find(EnergyPointFixture.MEMBER_NO))
+			.thenReturn(EnergyPointFixture.ENERGY);
 
 	    // when
-		energyPointManager.useEnergyPoint(MEMBER_NO, USE_POINT_VALUE);
+		energyPointManager.useEnergyPoint(EnergyPointFixture.MEMBER_NO, EnergyPointFixture.USE_POINT_VALUE);
 
 	    // then
 		verify(energyPointRepository).updatePoint(Mockito.any(PointUpdateDbCommand.class));
@@ -45,13 +40,14 @@ class EnergyPointManagerTest {
 	@Test
 	void transfer() {
 	    // given
-		when(energyPointFinder.find(MEMBER_NO))
-			.thenReturn(ENERGY);
-		when(energyPointFinder.find(FRIEND_NO))
-			.thenReturn(FRIEND_ENERGY);
+		when(energyPointFinder.find(EnergyPointFixture.MEMBER_NO))
+			.thenReturn(EnergyPointFixture.ENERGY);
+		when(energyPointFinder.find(EnergyPointFixture.FRIEND_NO))
+			.thenReturn(EnergyPointFixture.FRIEND_ENERGY);
 
 	    // when
-		energyPointManager.transfer(MEMBER_NO, FRIEND_NO, USE_POINT_VALUE);
+		energyPointManager.transfer(
+			EnergyPointFixture.MEMBER_NO, EnergyPointFixture.FRIEND_NO, EnergyPointFixture.USE_POINT_VALUE);
 
 	    // then
 		verify(energyPointRepository, times(2)).updatePoint(Mockito.any(PointUpdateDbCommand.class));

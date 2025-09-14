@@ -1,10 +1,13 @@
-package univ.earthbreaker.namu.core.domain.auth;
+package univ.earthbreaker.namu.core.service.auth;
 
 import java.time.Clock;
 import java.time.LocalDateTime;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
+
+import univ.earthbreaker.namu.core.domain.auth.RefreshToken;
+import univ.earthbreaker.namu.core.domain.auth.UnAuthorizedException;
 
 @Component
 public class RefreshTokenValidator {

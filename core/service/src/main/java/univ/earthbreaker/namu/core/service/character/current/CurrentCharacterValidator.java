@@ -1,6 +1,8 @@
-package univ.earthbreaker.namu.core.domain.character.current;
+package univ.earthbreaker.namu.core.service.character.current;
 
 import org.jetbrains.annotations.NotNull;
+
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacter;
 
 public class CurrentCharacterValidator {
 

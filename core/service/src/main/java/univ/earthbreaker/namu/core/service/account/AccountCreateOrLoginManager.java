@@ -1,9 +1,13 @@
-package univ.earthbreaker.namu.core.domain.account;
+package univ.earthbreaker.namu.core.service.account;
 
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import univ.earthbreaker.namu.core.domain.account.Account;
+import univ.earthbreaker.namu.core.domain.account.LoginCommand;
+import univ.earthbreaker.namu.core.domain.account.LoginResult;
+import univ.earthbreaker.namu.core.domain.account.infra.AccountRepository;
 
 @Component
 public class AccountCreateOrLoginManager {
@@ -26,7 +30,7 @@ public class AccountCreateOrLoginManager {
 	}
 
 	@Transactional(propagation = Propagation.MANDATORY)
-	public LoginResult loginOrJoin(@NotNull LoginCommand command) {
+	public LoginResult loginOrJoin(LoginCommand command) {
 		Account account = accountRepository.findOrNull(command.getSocialId());
 		if (account == null) {
 			return join(command);
@@ -35,7 +39,7 @@ public class AccountCreateOrLoginManager {
 		}
 	}
 
-	private @NotNull LoginResult join(@NotNull LoginCommand command) {
+	private LoginResult join(LoginCommand command) {
 		Long memberNo = accountMemberCreator.create(command.getSocialNickname());
 		accountRepository.create(command.toKakaoCommand(memberNo));
 		accountPushNotificationManager.register(memberNo, command.getNotificationToken());
@@ -46,7 +50,7 @@ public class AccountCreateOrLoginManager {
 		return new LoginResult(memberNo, accessTokenValue, refreshTokenValue, true);
 	}
 
-	private @NotNull LoginResult login(String pushNotificationToken, Long memberNo) {
+	private LoginResult login(String pushNotificationToken, Long memberNo) {
 		accountPushNotificationManager.updateIfTokenModified(memberNo, pushNotificationToken);
 		String accessTokenValue = tokenManager.createAccessToken(memberNo);
 		String updatedRefreshTokenValue = tokenManager.updateRefreshToken(memberNo);

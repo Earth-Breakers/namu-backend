@@ -1,11 +1,12 @@
-package univ.earthbreaker.namu.core.domain.mission.service;
+package univ.earthbreaker.namu.core.service.mission;
 
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
+import univ.earthbreaker.namu.core.domain.mission.CertifiedMissionPostCommand;
 import univ.earthbreaker.namu.core.domain.mission.MemberMission;
-import univ.earthbreaker.namu.core.support.tx.TransactionHandler;
+import univ.earthbreaker.namu.core.domain.mission.MissionCompleteCommand;
 import univ.earthbreaker.namu.core.support.retry.RetryHandler;
+import univ.earthbreaker.namu.core.support.tx.TransactionHandler;
 import univ.earthbreaker.namu.event.EventPublisher;
 import univ.earthbreaker.namu.event.point.AddRewardPointEvent;
 import univ.earthbreaker.namu.event.post.PostCreateEvent;
@@ -34,12 +35,12 @@ public class MemberMissionCertifyService {
 	}
 
 	public void successMission(
-		@NotNull MissionCompleteCommand mc,
-		@NotNull CertifiedMissionPostCommand pc
+		MissionCompleteCommand mc,
+		CertifiedMissionPostCommand pc
 	) {
 		retryHandler.execute(() -> // 실패 발생 시 재시도
 			transactionHandler.execute(() -> {
-				MemberMission memberMission = memberMissionFinder.find(mc.getMemberNo(), mc.getMissionNo());
+				MemberMission memberMission = memberMissionFinder.find(mc.memberNo(), mc.missionNo());
 				MemberMission successMission = missionCertifyHandler.success(memberMission);
 				publishRewardEventForSuccessMission(successMission); // 리워드 포인트 지급 이벤트 발행
 				publishCreatePostEventForSuccessMission(pc, successMission); // 게시글 생성 이벤트 발행
@@ -48,27 +49,26 @@ public class MemberMissionCertifyService {
 		);
 	}
 
-	private void publishRewardEventForSuccessMission(@NotNull MemberMission successMission) {
+	private void publishRewardEventForSuccessMission(MemberMission successMission) {
 		eventPublisher.publish(new AddRewardPointEvent(successMission.getMemberNo(), successMission.getRewardPoint()));
 	}
 
 	private void publishCreatePostEventForSuccessMission(
-		@NotNull CertifiedMissionPostCommand postCommand,
-		@NotNull MemberMission successMission
+		CertifiedMissionPostCommand postCommand,
+		MemberMission successMission
 	) {
 		eventPublisher.publish(
 			new PostCreateEvent(
-				postCommand.getMemberNo(),
+				postCommand.memberNo(),
 				successMission.getActivity(),
-				postCommand.getContent(),
-				postCommand.getImagePathKey(),
+				postCommand.content(),
+				postCommand.imagePathKey(),
 				successMission.getNo())
 		);
 	}
 
-	public void failureMission(@NotNull MissionCompleteCommand missionCommand) {
-		MemberMission memberMission = memberMissionFinder.find(missionCommand.getMemberNo(),
-			missionCommand.getMissionNo());
+	public void failureMission(MissionCompleteCommand missionCommand) {
+		MemberMission memberMission = memberMissionFinder.find(missionCommand.memberNo(), missionCommand.missionNo());
 		missionCertifyHandler.failure(memberMission);
 	}
 }

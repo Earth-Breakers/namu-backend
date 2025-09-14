@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.domain.mission.service;
+package univ.earthbreaker.namu.core.service.mission;
 
 import java.util.List;
 

@@ -1,14 +1,7 @@
-package univ.earthbreaker.namu.core.domain.character.current;
+package univ.earthbreaker.namu.core.service.character.current;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatNoException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.BEGIN_CURRENT_CHARACTER;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.BEGIN_CURRENT_CHARACTER_WITH_MAX_EXP;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.END_CURRENT_CHARACTER;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.END_CURRENT_CHARACTER_WITH_MAX_EXP;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.FINAL_CURRENT_CHARACTER;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.MIDDLE_CURRENT_CHARACTER;
-import static univ.earthbreaker.namu.core.domain.character.CharacterFixture.MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP;
 
 import java.util.stream.Stream;
 
@@ -18,6 +11,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacter;
+import univ.earthbreaker.namu.core.service.character.CharacterFixture;
+
 class CurrentCharacterValidatorTest {
 
 	@DisplayName("현재 캐릭터의 상태가 레벨업이 가능하다면 아무런 예외도 발생하지 않는다")
@@ -26,9 +22,9 @@ class CurrentCharacterValidatorTest {
 		// when, then
 		assertThatNoException()
 			.isThrownBy(() -> {
-				CurrentCharacterValidator.validateCanLevelUp(BEGIN_CURRENT_CHARACTER_WITH_MAX_EXP);
-				CurrentCharacterValidator.validateCanLevelUp(MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP);
-				CurrentCharacterValidator.validateCanLevelUp(END_CURRENT_CHARACTER_WITH_MAX_EXP);
+				CurrentCharacterValidator.validateCanLevelUp(CharacterFixture.BEGIN_CURRENT_CHARACTER_WITH_MAX_EXP);
+				CurrentCharacterValidator.validateCanLevelUp(CharacterFixture.MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP);
+				CurrentCharacterValidator.validateCanLevelUp(CharacterFixture.END_CURRENT_CHARACTER_WITH_MAX_EXP);
 			});
 	}
 
@@ -48,8 +44,8 @@ class CurrentCharacterValidatorTest {
 		// when, then
 		assertThatNoException()
 			.isThrownBy(() -> {
-				CurrentCharacterValidator.validateLevelIsBegin(BEGIN_CURRENT_CHARACTER);
-				CurrentCharacterValidator.validateLevelIsBegin(BEGIN_CURRENT_CHARACTER_WITH_MAX_EXP);
+				CurrentCharacterValidator.validateLevelIsBegin(CharacterFixture.BEGIN_CURRENT_CHARACTER);
+				CurrentCharacterValidator.validateLevelIsBegin(CharacterFixture.BEGIN_CURRENT_CHARACTER_WITH_MAX_EXP);
 			});
 	}
 
@@ -69,8 +65,8 @@ class CurrentCharacterValidatorTest {
 		// when, then
 		assertThatNoException()
 			.isThrownBy(() -> {
-				CurrentCharacterValidator.validateLevelIsMiddle(MIDDLE_CURRENT_CHARACTER);
-				CurrentCharacterValidator.validateLevelIsMiddle(MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP);
+				CurrentCharacterValidator.validateLevelIsMiddle(CharacterFixture.MIDDLE_CURRENT_CHARACTER);
+				CurrentCharacterValidator.validateLevelIsMiddle(CharacterFixture.MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP);
 			});
 	}
 
@@ -90,8 +86,8 @@ class CurrentCharacterValidatorTest {
 		// when, then
 		assertThatNoException()
 			.isThrownBy(() -> {
-				CurrentCharacterValidator.validateLevelIsEnd(END_CURRENT_CHARACTER);
-				CurrentCharacterValidator.validateLevelIsEnd(END_CURRENT_CHARACTER_WITH_MAX_EXP);
+				CurrentCharacterValidator.validateLevelIsEnd(CharacterFixture.END_CURRENT_CHARACTER);
+				CurrentCharacterValidator.validateLevelIsEnd(CharacterFixture.END_CURRENT_CHARACTER_WITH_MAX_EXP);
 			});
 	}
 
@@ -110,7 +106,7 @@ class CurrentCharacterValidatorTest {
 	void success_validateLevelIsFinal() {
 		// when, then
 		assertThatNoException()
-			.isThrownBy(() -> CurrentCharacterValidator.validateLevelIsFinal(FINAL_CURRENT_CHARACTER));
+			.isThrownBy(() -> CurrentCharacterValidator.validateLevelIsFinal(CharacterFixture.FINAL_CURRENT_CHARACTER));
 	}
 
 	@DisplayName("현재 캐릭터의 레벨이 FINAL 이 아니면 예외를 발생시킨다")
@@ -125,49 +121,49 @@ class CurrentCharacterValidatorTest {
 
 	private static Stream<Arguments> provideCannotLevelUpCurrentCharacter() {
 		return Stream.of(
-			Arguments.of(BEGIN_CURRENT_CHARACTER),
-			Arguments.of(MIDDLE_CURRENT_CHARACTER),
-			Arguments.of(END_CURRENT_CHARACTER),
-			Arguments.of(FINAL_CURRENT_CHARACTER)
+			Arguments.of(CharacterFixture.BEGIN_CURRENT_CHARACTER),
+			Arguments.of(CharacterFixture.MIDDLE_CURRENT_CHARACTER),
+			Arguments.of(CharacterFixture.END_CURRENT_CHARACTER),
+			Arguments.of(CharacterFixture.FINAL_CURRENT_CHARACTER)
 		);
 	}
 
 	private static Stream<Arguments> provideNotBeginCurrentCharacter() {
 		return Stream.of(
-			Arguments.of(MIDDLE_CURRENT_CHARACTER),
-			Arguments.of(MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP),
-			Arguments.of(END_CURRENT_CHARACTER),
-			Arguments.of(END_CURRENT_CHARACTER_WITH_MAX_EXP),
-			Arguments.of(FINAL_CURRENT_CHARACTER)
+			Arguments.of(CharacterFixture.MIDDLE_CURRENT_CHARACTER),
+			Arguments.of(CharacterFixture.MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP),
+			Arguments.of(CharacterFixture.END_CURRENT_CHARACTER),
+			Arguments.of(CharacterFixture.END_CURRENT_CHARACTER_WITH_MAX_EXP),
+			Arguments.of(CharacterFixture.FINAL_CURRENT_CHARACTER)
 		);
 	}
 
 	private static Stream<Arguments> provideNotMiddleCurrentCharacter() {
 		return Stream.of(
-			Arguments.of(BEGIN_CURRENT_CHARACTER),
-			Arguments.of(BEGIN_CURRENT_CHARACTER_WITH_MAX_EXP),
-			Arguments.of(END_CURRENT_CHARACTER),
-			Arguments.of(END_CURRENT_CHARACTER_WITH_MAX_EXP),
-			Arguments.of(FINAL_CURRENT_CHARACTER)
+			Arguments.of(CharacterFixture.BEGIN_CURRENT_CHARACTER),
+			Arguments.of(CharacterFixture.BEGIN_CURRENT_CHARACTER_WITH_MAX_EXP),
+			Arguments.of(CharacterFixture.END_CURRENT_CHARACTER),
+			Arguments.of(CharacterFixture.END_CURRENT_CHARACTER_WITH_MAX_EXP),
+			Arguments.of(CharacterFixture.FINAL_CURRENT_CHARACTER)
 		);
 	}
 
 	private static Stream<Arguments> provideNotEndCurrentCharacter() {
 		return Stream.of(
-			Arguments.of(BEGIN_CURRENT_CHARACTER),
-			Arguments.of(BEGIN_CURRENT_CHARACTER_WITH_MAX_EXP),
-			Arguments.of(MIDDLE_CURRENT_CHARACTER),
-			Arguments.of(MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP),
-			Arguments.of(FINAL_CURRENT_CHARACTER)
+			Arguments.of(CharacterFixture.BEGIN_CURRENT_CHARACTER),
+			Arguments.of(CharacterFixture.BEGIN_CURRENT_CHARACTER_WITH_MAX_EXP),
+			Arguments.of(CharacterFixture.MIDDLE_CURRENT_CHARACTER),
+			Arguments.of(CharacterFixture.MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP),
+			Arguments.of(CharacterFixture.FINAL_CURRENT_CHARACTER)
 		);
 	}
 
 	private static Stream<Arguments> provideNotFinalCurrentCharacter() {
 		return Stream.of(
-			Arguments.of(BEGIN_CURRENT_CHARACTER),
-			Arguments.of(BEGIN_CURRENT_CHARACTER_WITH_MAX_EXP),
-			Arguments.of(MIDDLE_CURRENT_CHARACTER),
-			Arguments.of(MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP)
+			Arguments.of(CharacterFixture.BEGIN_CURRENT_CHARACTER),
+			Arguments.of(CharacterFixture.BEGIN_CURRENT_CHARACTER_WITH_MAX_EXP),
+			Arguments.of(CharacterFixture.MIDDLE_CURRENT_CHARACTER),
+			Arguments.of(CharacterFixture.MIDDLE_CURRENT_CHARACTER_WITH_MAX_EXP)
 		);
 	}
 }

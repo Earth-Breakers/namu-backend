@@ -1,15 +1,7 @@
-package univ.earthbreaker.namu.core.domain.mission;
+package univ.earthbreaker.namu.core.service.mission;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.DEFAULT_MISSION_NO;
-import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.DEFAULT_MISSION_READY;
-import static univ.earthbreaker.namu.core.domain.mission.MissionFixture.MEMBER_NO;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,11 +13,9 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import univ.earthbreaker.namu.core.domain.mission.service.CertifiedMissionPostCommand;
-import univ.earthbreaker.namu.core.domain.mission.service.MemberMissionCertifyService;
-import univ.earthbreaker.namu.core.domain.mission.service.MemberMissionFinder;
-import univ.earthbreaker.namu.core.domain.mission.service.MissionCertifyHandler;
-import univ.earthbreaker.namu.core.domain.mission.service.MissionCompleteCommand;
+import univ.earthbreaker.namu.core.domain.mission.CertifiedMissionPostCommand;
+import univ.earthbreaker.namu.core.domain.mission.MemberMission;
+import univ.earthbreaker.namu.core.domain.mission.MissionCompleteCommand;
 import univ.earthbreaker.namu.event.EventPublisher;
 import univ.earthbreaker.namu.event.image.DeleteExternalUploadedImageEvent;
 import univ.earthbreaker.namu.event.point.AddRewardPointEvent;
@@ -52,10 +42,10 @@ class MemberMissionCertifyServiceTest {
 				TransactionCallbackWithoutResult callback = invocation.getArgument(0);
 				TransactionStatus status = mock(TransactionStatus.class);
 
-				when(memberMissionFinder.find(MEMBER_NO, DEFAULT_MISSION_NO))
-					.thenReturn(DEFAULT_MISSION_READY);
-				when(missionCertifyHandler.success(DEFAULT_MISSION_READY))
-					.thenReturn(DEFAULT_MISSION_READY.success());
+				when(memberMissionFinder.find(MissionFixture.MEMBER_NO, MissionFixture.DEFAULT_MISSION_NO))
+					.thenReturn(MissionFixture.DEFAULT_MISSION_READY);
+				when(missionCertifyHandler.success(MissionFixture.DEFAULT_MISSION_READY))
+					.thenReturn(MissionFixture.DEFAULT_MISSION_READY.success());
 
 				callback.doInTransaction(status);
 
@@ -64,18 +54,18 @@ class MemberMissionCertifyServiceTest {
 
 		// when
 		memberMissionCertifyService.successMission(
-			new MissionCompleteCommand(MEMBER_NO, DEFAULT_MISSION_NO),
-			new CertifiedMissionPostCommand(MEMBER_NO, MISSION_POST_CONTENT, MISSION_POST_IMAGE_PATH_KEY)
+			new MissionCompleteCommand(MissionFixture.MEMBER_NO, MissionFixture.DEFAULT_MISSION_NO),
+			new CertifiedMissionPostCommand(MissionFixture.MEMBER_NO, MISSION_POST_CONTENT, MISSION_POST_IMAGE_PATH_KEY)
 		);
 
 		// then
-		MemberMission successMission = DEFAULT_MISSION_READY.success();
+		MemberMission successMission = MissionFixture.DEFAULT_MISSION_READY.success();
 		assertAll(
 			() -> verify(eventPublisher)
 				.publish(new AddRewardPointEvent(successMission.getMemberNo(), successMission.getRewardPoint())),
 			() -> verify(eventPublisher)
 				.publish(new PostCreateEvent(
-					MEMBER_NO, successMission.getActivity(), MISSION_POST_CONTENT,
+					MissionFixture.MEMBER_NO, successMission.getActivity(), MISSION_POST_CONTENT,
 					MISSION_POST_IMAGE_PATH_KEY, successMission.getNo()
 				))
 		);
@@ -104,8 +94,8 @@ class MemberMissionCertifyServiceTest {
 
 	    // when
 		memberMissionCertifyService.successMission(
-			new MissionCompleteCommand(MEMBER_NO, DEFAULT_MISSION_NO),
-			new CertifiedMissionPostCommand(MEMBER_NO, MISSION_POST_CONTENT, MISSION_POST_IMAGE_PATH_KEY)
+			new MissionCompleteCommand(MissionFixture.MEMBER_NO, MissionFixture.DEFAULT_MISSION_NO),
+			new CertifiedMissionPostCommand(MissionFixture.MEMBER_NO, MISSION_POST_CONTENT, MISSION_POST_IMAGE_PATH_KEY)
 		);
 
 	    // then
@@ -116,13 +106,14 @@ class MemberMissionCertifyServiceTest {
 	@Test
 	void failureMission() {
 	    // given
-		when(memberMissionFinder.find(MEMBER_NO, DEFAULT_MISSION_NO))
-			.thenReturn(DEFAULT_MISSION_READY);
+		when(memberMissionFinder.find(MissionFixture.MEMBER_NO, MissionFixture.DEFAULT_MISSION_NO))
+			.thenReturn(MissionFixture.DEFAULT_MISSION_READY);
 
 	    // when
-		memberMissionCertifyService.failureMission(new MissionCompleteCommand(MEMBER_NO, DEFAULT_MISSION_NO));
+		memberMissionCertifyService.failureMission(new MissionCompleteCommand(
+			MissionFixture.MEMBER_NO, MissionFixture.DEFAULT_MISSION_NO));
 
 		// then
-		verify(missionCertifyHandler).failure(DEFAULT_MISSION_READY);
+		verify(missionCertifyHandler).failure(MissionFixture.DEFAULT_MISSION_READY);
 	}
 }
