@@ -18,7 +18,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.test.web.servlet.ResultActions;
 
 import univ.earthbreaker.namu.app.api.PresentationTest;
-import univ.earthbreaker.namu.core.domain.member.friend.FollowFriendPushNotificationBridge.FollowResult;
+import univ.earthbreaker.namu.core.domain.member.friend.infra.FollowFriendPushNotificationBridge.FollowResult;
 import univ.earthbreaker.namu.core.domain.member.friend.FriendFollowService;
 import univ.earthbreaker.namu.core.domain.member.friend.FriendRelationCommand;
 import univ.earthbreaker.namu.services.notification.NotificationAdapter;

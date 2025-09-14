@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import univ.earthbreaker.namu.core.domain.post.PostDetailRetrieveService;
-import univ.earthbreaker.namu.core.domain.post.PostReactionResult;
-import univ.earthbreaker.namu.core.domain.post.PostRetrieveDetailQuery;
 import univ.earthbreaker.namu.app.support.AuthMapping;
 import univ.earthbreaker.namu.app.support.LoginMember;
+import univ.earthbreaker.namu.core.domain.post.PostReactionResult;
+import univ.earthbreaker.namu.core.domain.post.PostRetrieveDetailQuery;
+import univ.earthbreaker.namu.core.service.post.PostDetailRetrieveService;
 
 @RestController
 @RequestMapping("/v1/posts")

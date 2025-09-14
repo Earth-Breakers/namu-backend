@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import univ.earthbreaker.namu.core.domain.reaction.ReactionService;
 import univ.earthbreaker.namu.app.support.AuthMapping;
 import univ.earthbreaker.namu.app.support.LoginMember;
+import univ.earthbreaker.namu.core.service.reaction.ReactionService;
 
 @RestController
 @RequestMapping("/v1/reactions")

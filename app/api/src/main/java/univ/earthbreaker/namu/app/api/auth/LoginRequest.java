@@ -1,16 +1,12 @@
 package univ.earthbreaker.namu.app.api.auth;
 
-import univ.earthbreaker.namu.core.domain.account.LoginCommand;
+import univ.earthbreaker.namu.core.domain.account.AuthCommand;
 
 public record LoginRequest(
 	String socialToken,
 	String notificationToken
 ) {
-	public LoginCommand toCommand(String socialId, String socialNickname) {
-		return LoginCommand.builder()
-			.socialId(socialId)
-			.socialNickname(socialNickname)
-			.notificationToken(notificationToken)
-			.build();
+	public AuthCommand toCommand() {
+		return new AuthCommand(socialToken, notificationToken);
 	}
 }

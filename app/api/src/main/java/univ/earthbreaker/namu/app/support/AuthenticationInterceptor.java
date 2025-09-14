@@ -9,7 +9,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import univ.earthbreaker.namu.core.domain.auth.JwtManager;
+import univ.earthbreaker.namu.core.service.auth.JwtManager;
 
 @Component
 public class AuthenticationInterceptor implements HandlerInterceptor {

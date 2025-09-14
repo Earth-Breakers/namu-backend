@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import univ.earthbreaker.namu.app.support.AuthMapping;
 import univ.earthbreaker.namu.app.support.LoginMember;
-import univ.earthbreaker.namu.core.domain.member.friend.FriendFinderService;
+import univ.earthbreaker.namu.core.service.member.friend.FriendFinderService;
 
 @RestController
 @RequestMapping("/v1/friends")

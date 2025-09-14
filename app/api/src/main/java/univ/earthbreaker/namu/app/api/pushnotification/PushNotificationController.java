@@ -8,37 +8,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 import univ.earthbreaker.namu.app.support.AuthMapping;
 import univ.earthbreaker.namu.app.support.LoginMember;
-import univ.earthbreaker.namu.core.domain.pushnotification.PushNotificationConstructResult;
-import univ.earthbreaker.namu.core.domain.pushnotification.PushNotificationConstructService;
-import univ.earthbreaker.namu.infra.notification.NotificationPort;
-import univ.earthbreaker.namu.infra.notification.PushNotificationSourceCommand;
+import univ.earthbreaker.namu.core.service.pushnotification.PushNotificationConstructService;
 
 @RestController
 @RequestMapping("/v1/push-notification")
 public class PushNotificationController {
 
 	private final PushNotificationConstructService pushNotificationConstructService;
-	private final NotificationPort notificationPort;
 
-	public PushNotificationController(
-		PushNotificationConstructService pushNotificationConstructService,
-		NotificationPort notificationPort
-	) {
+	public PushNotificationController(PushNotificationConstructService pushNotificationConstructService) {
 		this.pushNotificationConstructService = pushNotificationConstructService;
-		this.notificationPort = notificationPort;
 	}
 
 	@AuthMapping
 	@PostMapping("/all")
 	public ResponseEntity<Void> pushNotification(@LoginMember Long memberNo) {
-		PushNotificationConstructResult result = pushNotificationConstructService.findAllMemberNotificationToken(memberNo);
-		notificationPort.sendShowOffMessage(
-			new PushNotificationSourceCommand(
-				result.nickname(),
-				result.characterName(),
-				null,
-				result.notificationTokens())
-		);
+		pushNotificationConstructService.findAllMemberNotificationToken(memberNo);
 		return ResponseEntity.ok().build();
 	}
 
@@ -48,14 +33,7 @@ public class PushNotificationController {
 		@LoginMember Long memberNo,
 		@RequestBody PushNotificationRequest request
 	) {
-		PushNotificationConstructResult result = pushNotificationConstructService.findFriendsNotificationToken(memberNo);
-		notificationPort.sendShowOffMessage(
-			new PushNotificationSourceCommand(
-				result.nickname(),
-				result.characterName(),
-				request.content(),
-				result.notificationTokens())
-		);
+		pushNotificationConstructService.findFriendsNotificationToken(memberNo, request.content());
 		return ResponseEntity.ok().build();
 	}
 }

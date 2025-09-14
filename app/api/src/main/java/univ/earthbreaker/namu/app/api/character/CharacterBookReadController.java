@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import univ.earthbreaker.namu.core.domain.character.CharacterType;
-import univ.earthbreaker.namu.core.domain.character.book.CharacterBookDetailReadService;
 import univ.earthbreaker.namu.core.domain.character.book.MemberCharacter;
-import univ.earthbreaker.namu.core.domain.character.book.MemberCharacterFinder;
 import univ.earthbreaker.namu.app.support.AuthMapping;
 import univ.earthbreaker.namu.app.support.LoginMember;
+import univ.earthbreaker.namu.core.service.character.book.CharacterBookDetailReadService;
+import univ.earthbreaker.namu.core.service.character.book.MemberCharacterFinder;
 
 @RestController
 @RequestMapping("/v1/characters/books")

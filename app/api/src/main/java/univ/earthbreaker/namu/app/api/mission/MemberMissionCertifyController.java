@@ -14,9 +14,9 @@
 //
 // import univ.earthbreaker.namu.core.support.AuthMapping;
 // import univ.earthbreaker.namu.core.support.LoginMember;
-// import univ.earthbreaker.namu.core.domain.mission.service.CertifiedMissionPostCommand;
+// import univ.earthbreaker.namu.core.service.mission.CertifiedMissionPostCommand;
 // import univ.earthbreaker.namu.core.service.mission.MemberMissionCertifyService;
-// import univ.earthbreaker.namu.core.domain.mission.service.MissionCompleteCommand;
+// import univ.earthbreaker.namu.core.service.mission.MissionCompleteCommand;
 // import univ.earthbreaker.namu.external.aws.image.ImageManager;
 // import univ.earthbreaker.namu.external.aws.image.ImagePathKeyGenerator;
 // import univ.earthbreaker.namu.external.aws.image.ImageUploadCommand;

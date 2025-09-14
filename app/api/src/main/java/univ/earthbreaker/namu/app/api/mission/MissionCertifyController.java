@@ -13,10 +13,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import univ.earthbreaker.namu.app.support.AuthMapping;
 import univ.earthbreaker.namu.app.support.LoginMember;
+import univ.earthbreaker.namu.core.domain.mission.CertifyResult;
 import univ.earthbreaker.namu.core.domain.mission.MissionCertifyStatus;
-import univ.earthbreaker.namu.core.domain.mission.service.CertifyResult;
-import univ.earthbreaker.namu.core.domain.mission.service.MissionCertifyFacade;
-import univ.earthbreaker.namu.core.domain.mission.service.MissionCertifyTrackingService;
+import univ.earthbreaker.namu.core.service.mission.MissionCertifyFacade;
+import univ.earthbreaker.namu.core.service.mission.MissionCertifyTrackingService;
 
 @RestController
 @RequestMapping("/v2/missions")

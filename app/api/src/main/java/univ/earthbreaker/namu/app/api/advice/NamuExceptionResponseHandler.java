@@ -15,7 +15,6 @@ import univ.earthbreaker.namu.core.domain.common.NotFoundException;
 import univ.earthbreaker.namu.core.domain.auth.UnAuthorizedException;
 import univ.earthbreaker.namu.app.support.AuthenticationException;
 import univ.earthbreaker.namu.app.support.InternalAuthServerException;
-import univ.earthbreaker.namu.infra.client.oauth.OAuthClientException;
 
 @RestControllerAdvice
 public class NamuExceptionResponseHandler {
@@ -40,7 +39,7 @@ public class NamuExceptionResponseHandler {
 			.body(new NamuExceptionResponse(exception.getMessage()));
 	}
 
-	@ExceptionHandler({OAuthClientException.class, UnAuthorizedException.class, AuthenticationException.class})
+	@ExceptionHandler({UnAuthorizedException.class, AuthenticationException.class})
 	public ResponseEntity<NamuExceptionResponse> unauthorized(@NotNull RuntimeException exception) {
 		return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
 			.body(new NamuExceptionResponse(exception.getMessage()));

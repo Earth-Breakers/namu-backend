@@ -8,33 +8,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import univ.earthbreaker.namu.app.support.AuthMapping;
 import univ.earthbreaker.namu.app.support.LoginMember;
-import univ.earthbreaker.namu.core.domain.member.friend.FollowFriendPushNotificationBridge.FollowResult;
-import univ.earthbreaker.namu.core.domain.member.friend.FriendFollowService;
 import univ.earthbreaker.namu.core.domain.member.friend.FriendRelationCommand;
-import univ.earthbreaker.namu.infra.notification.FollowPushNotificationSourceCommand;
-import univ.earthbreaker.namu.infra.notification.NotificationPort;
+import univ.earthbreaker.namu.core.service.member.friend.FriendFollowService;
 
 @RestController
 @RequestMapping("/v1/friends")
 public class FriendFollowController {
 
 	private final FriendFollowService friendFollowService;
-	private final NotificationPort notificationPort;
 
-	public FriendFollowController(FriendFollowService friendFollowService, NotificationPort notificationPort) {
+	public FriendFollowController(FriendFollowService friendFollowService) {
 		this.friendFollowService = friendFollowService;
-		this.notificationPort = notificationPort;
 	}
 
 	@AuthMapping
 	@PostMapping("/follow/{targetMemberNo}")
 	public ResponseEntity<Void> follow(@LoginMember Long memberNo, @PathVariable Long targetMemberNo) {
-		FollowResult followResult = friendFollowService.follow(new FriendRelationCommand(memberNo, targetMemberNo));
-		notificationPort.sendAfterFollow(new FollowPushNotificationSourceCommand(
-			followResult.memberNickname(),
-			followResult.targetNickname(),
-			followResult.targetTokenValue()
-		));
+		friendFollowService.follow(new FriendRelationCommand(memberNo, targetMemberNo));
 		return ResponseEntity.noContent().build();
 	}
 }

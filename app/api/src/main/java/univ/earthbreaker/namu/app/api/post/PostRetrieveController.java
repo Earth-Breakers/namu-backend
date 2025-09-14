@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import univ.earthbreaker.namu.app.support.AuthMapping;
 import univ.earthbreaker.namu.app.support.LoginMember;
-import univ.earthbreaker.namu.core.domain.post.PostRetrieveService;
 import univ.earthbreaker.namu.core.domain.post.RelatedPostResult;
 import univ.earthbreaker.namu.core.domain.post.RelatedPostRetrieveQuery;
+import univ.earthbreaker.namu.core.service.post.PostRetrieveService;
 
 @RestController
 @RequestMapping("/v1/posts")

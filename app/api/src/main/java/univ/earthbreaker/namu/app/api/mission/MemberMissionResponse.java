@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
 
-import univ.earthbreaker.namu.core.domain.mission.service.MemberMissionQueryResult;
+import univ.earthbreaker.namu.core.domain.mission.MemberMissionQueryResult;
 import univ.earthbreaker.namu.core.domain.mission.MemberMission;
 import univ.earthbreaker.namu.core.domain.mission.MissionStatus;
 
@@ -13,7 +13,7 @@ public record MemberMissionResponse(
 	List<MissionResponse> defaultMissions,
 	List<MissionResponse> specialMissions
 ) {
-	static @NotNull MemberMissionResponse from(@NotNull MemberMissionQueryResult result) {
+	static @NotNull MemberMissionResponse from(MemberMissionQueryResult result) {
 		return new MemberMissionResponse(
 			result.todayMissions().stream().map(MissionResponse::toResponse).toList(),
 			result.defaultMissions().stream().map(MissionResponse::toResponse).toList(),
@@ -26,7 +26,7 @@ public record MemberMissionResponse(
 		String title,
 		MissionStatus status
 	) {
-		static @NotNull MissionResponse toResponse(@NotNull MemberMission mission) {
+		static MissionResponse toResponse(MemberMission mission) {
 			return new MissionResponse(mission.getNo(), mission.getActivity(), mission.getStatus());
 		}
 	}
