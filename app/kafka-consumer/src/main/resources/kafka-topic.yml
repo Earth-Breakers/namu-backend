@@ -2,3 +2,5 @@ kafka:
   topics:
     mission-retry:
       name: earthbreaker.namu.mission-retry
+      replicas: 3
+      partitions: 12

@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
@@ -20,6 +21,7 @@ import univ.earthbreaker.namu.app.kafka.consumer.RetryMessage;
 @EnableKafka
 public class KafkaConfig {
 
+	@Primary
 	@Bean
 	@ConfigurationProperties("spring.kafka")
 	public KafkaProperties kafkaProperties() {

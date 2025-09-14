@@ -6,6 +6,9 @@ spring:
     import:
       - classpath:kafka-topic.yml
       - storage-core.yml
+      - auth.yml
+      - clients-oauth.yml
+      - notification.yml
       - logging.yml
   kafka:
     bootstrap-servers: localhost:9092
