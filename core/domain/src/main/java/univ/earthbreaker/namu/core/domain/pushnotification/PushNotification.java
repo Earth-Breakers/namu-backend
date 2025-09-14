@@ -14,11 +14,11 @@ public class PushNotification {
 		this.enable = enable;
 	}
 
-	boolean isNotSame(String token) {
+	public boolean isNotSame(String token) {
 		return !this.token.equals(token);
 	}
 
-	PushNotification modifyToken(String newToken) {
+	public PushNotification modifyToken(String newToken) {
 		return new PushNotification(no, memberNo, newToken, enable);
 	}
 

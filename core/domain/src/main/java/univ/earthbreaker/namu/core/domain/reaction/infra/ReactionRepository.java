@@ -1,10 +1,9 @@
-package univ.earthbreaker.namu.core.domain.reaction;
+package univ.earthbreaker.namu.core.domain.reaction.infra;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
+import univ.earthbreaker.namu.core.domain.reaction.Reaction;
 
-@Repository
 public interface ReactionRepository {
 
 	void reaction(ReactionDbCommand command);

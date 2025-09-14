@@ -12,7 +12,7 @@ public class Reactions {
 		this.values = values;
 	}
 
-	Map<ReactionType, Reactions> groupingByReactionType() {
+	public Map<ReactionType, Reactions> groupingByReactionType() {
 		return values.stream()
 			.collect(Collectors.groupingBy(
 				Reaction::getReactionType,
@@ -20,13 +20,13 @@ public class Reactions {
 			));
 	}
 
-	List<Long> getReactionMembers() {
+	public List<Long> getReactionMembers() {
 		return values.stream()
 			.map(Reaction::getMemberNo)
 			.toList();
 	}
 
-	int getReactionCount() {
+	public int getReactionCount() {
 		return values.size();
 	}
 }

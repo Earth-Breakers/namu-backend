@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.domain.post;
+package univ.earthbreaker.namu.core.domain.post.infra;
 
 public record PostDetailDbQuery(
 	long memberNo,

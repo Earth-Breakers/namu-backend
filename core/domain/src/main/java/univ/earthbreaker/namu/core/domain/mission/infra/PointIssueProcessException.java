@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.domain.mission.service;
+package univ.earthbreaker.namu.core.domain.mission.infra;
 
 public class PointIssueProcessException extends RuntimeException {
 

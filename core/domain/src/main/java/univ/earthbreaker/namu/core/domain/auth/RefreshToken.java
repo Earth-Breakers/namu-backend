@@ -3,8 +3,6 @@ package univ.earthbreaker.namu.core.domain.auth;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-import org.jetbrains.annotations.NotNull;
-
 public class RefreshToken {
 
 	private final Long no;
@@ -19,11 +17,11 @@ public class RefreshToken {
 		this.memberNo = memberNo;
 	}
 
-	boolean isExpired(@NotNull LocalDateTime current) {
+	public boolean isExpired(LocalDateTime current) {
 		return expiresIn.isBefore(current);
 	}
 
-	static @NotNull RefreshToken create(String refreshTokenValue, LocalDateTime expiresIn, long memberNo) {
+	public static RefreshToken create(String refreshTokenValue, LocalDateTime expiresIn, long memberNo) {
 		return new RefreshToken(null, refreshTokenValue, expiresIn, memberNo);
 	}
 

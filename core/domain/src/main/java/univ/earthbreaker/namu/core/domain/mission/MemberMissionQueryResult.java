@@ -1,8 +1,6 @@
-package univ.earthbreaker.namu.core.service.mission;
+package univ.earthbreaker.namu.core.domain.mission;
 
 import java.util.List;
-
-import univ.earthbreaker.namu.core.domain.mission.MemberMission;
 
 public record MemberMissionQueryResult(
 	List<MemberMission> todayMissions,

@@ -1,21 +1,18 @@
-package univ.earthbreaker.namu.core.domain.pushnotification;
+package univ.earthbreaker.namu.core.domain.pushnotification.infra;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.springframework.stereotype.Repository;
+import univ.earthbreaker.namu.core.domain.pushnotification.PushNotification;
 
-@Repository
 public interface PushNotificationRepository {
 
-	@Nullable PushNotification findOrNull(long memberNo);
+	PushNotification findOrNull(long memberNo);
 
 	void modify(PushNotification pushNotification);
 
 	void register(long memberNo, String pushNotificationToken);
 
-	@NotNull List<PushNotification> findAll();
+	List<PushNotification> findAll();
 
-	@NotNull List<PushNotification> findAll(FriendsQuery friends);
+	List<PushNotification> findAll(FriendsQuery friends);
 }

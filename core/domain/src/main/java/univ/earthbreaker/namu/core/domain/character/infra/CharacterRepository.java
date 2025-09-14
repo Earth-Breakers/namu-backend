@@ -1,9 +1,9 @@
-package univ.earthbreaker.namu.core.domain.character;
+package univ.earthbreaker.namu.core.domain.character.infra;
 
 import org.jetbrains.annotations.Nullable;
-import org.springframework.stereotype.Repository;
 
-@Repository
+import univ.earthbreaker.namu.core.domain.character.NamuCharacter;
+
 public interface CharacterRepository {
 
 	@Nullable NamuCharacter findOrNull(NextDeterminedDbQuery requestDto);

@@ -1,15 +1,12 @@
-package univ.earthbreaker.namu.core.domain.auth;
+package univ.earthbreaker.namu.core.domain.auth.infra;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.springframework.stereotype.Repository;
+import univ.earthbreaker.namu.core.domain.auth.RefreshToken;
 
-@Repository
 public interface RefreshTokenRepository {
 
-	void register(@NotNull RefreshToken refreshToken);
+	void register(RefreshToken refreshToken);
 
-	void update(@NotNull RefreshToken refreshToken, Long memberNo);
+	void update(RefreshToken refreshToken, Long memberNo);
 
-	@Nullable RefreshToken findOrNull(String refreshTokenValue);
+	RefreshToken findOrNull(String refreshTokenValue);
 }

@@ -1,15 +1,12 @@
-package univ.earthbreaker.namu.core.domain.character.current;
+package univ.earthbreaker.namu.core.domain.character.current.infra;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.springframework.stereotype.Repository;
+import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacter;
 
-@Repository
 public interface CurrentCharacterRepository {
 
-	@Nullable CurrentCharacter findOrNull(long memberNo);
+	CurrentCharacter findOrNull(long memberNo);
 
-	@NotNull CurrentCharacter register(long memberNo);
+	CurrentCharacter register(long memberNo);
 
 	void updateToInitial(long memberNo);
 

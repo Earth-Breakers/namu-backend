@@ -1,6 +1,4 @@
-package univ.earthbreaker.namu.core.service.mission;
-
-import univ.earthbreaker.namu.core.domain.mission.MissionCertifyProcess;
+package univ.earthbreaker.namu.core.domain.mission;
 
 public record CertifyResult(
 	String requestId,

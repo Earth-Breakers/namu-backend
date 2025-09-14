@@ -1,13 +1,10 @@
-package univ.earthbreaker.namu.core.domain.member;
+package univ.earthbreaker.namu.core.domain.member.infra;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.springframework.stereotype.Repository;
+import univ.earthbreaker.namu.core.domain.member.Member;
 
-@Repository
 public interface MemberRepository {
 
-	@Nullable Member findMemberNoOrNull(long memberNo);
+	Member findMemberNoOrNull(long memberNo);
 
-	@NotNull Long create(String socialNickname);
+	Long create(String socialNickname);
 }

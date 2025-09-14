@@ -1,7 +1,5 @@
 package univ.earthbreaker.namu.core.domain.post;
 
-import org.jetbrains.annotations.NotNull;
-
 import univ.earthbreaker.namu.core.domain.common.NotFoundException;
 
 public class PostNotFoundException extends NotFoundException {
@@ -10,7 +8,7 @@ public class PostNotFoundException extends NotFoundException {
 		super(domainName);
 	}
 
-	public static @NotNull PostNotFoundException notFound() {
+	public static PostNotFoundException notFound() {
 		return new PostNotFoundException("게시글");
 	}
 }

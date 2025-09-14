@@ -1,17 +1,14 @@
-package univ.earthbreaker.namu.core.domain.character.book;
+package univ.earthbreaker.namu.core.domain.character.book.infra;
 
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.springframework.stereotype.Repository;
+import univ.earthbreaker.namu.core.domain.character.book.MemberCharacter;
 
-@Repository
 public interface MemberCharacterRepository {
 
-	@Nullable MemberCharacter findOrNull(long memberNo, long characterNo);
+	MemberCharacter findOrNull(long memberNo, long characterNo);
 
-	@NotNull List<MemberCharacter> findByMemberNo(long memberNo);
+	List<MemberCharacter> findByMemberNo(long memberNo);
 
-	void createOrUpdate(CharacterBookEventHandler.AddFinalCharacterDbCommand command);
+	void createOrUpdate(AddFinalCharacterDbCommand command);
 }

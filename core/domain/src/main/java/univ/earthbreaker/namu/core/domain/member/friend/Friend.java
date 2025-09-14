@@ -13,7 +13,7 @@ public class Friend {
 		this.followings = followings;
 	}
 
-	List<Long> getFollowingMemberNos() {
+	public List<Long> getFollowingMemberNos() {
 		return getFollowings().stream()
 			.map(Following::getFollowerNo)
 			.toList();

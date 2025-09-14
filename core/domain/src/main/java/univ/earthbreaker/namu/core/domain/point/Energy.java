@@ -1,7 +1,5 @@
 package univ.earthbreaker.namu.core.domain.point;
 
-import org.jetbrains.annotations.NotNull;
-
 public class Energy {
 
 	private final long no;
@@ -14,15 +12,15 @@ public class Energy {
 		this.point = point;
 	}
 
-	Energy use(int pointValue) {
+	public Energy use(int pointValue) {
 		return new Energy(no, memberNo, point.minus(pointValue));
 	}
 
-	Energy receive(int pointValue) {
+	public Energy receive(int pointValue) {
 		return new Energy(no, memberNo, point.plus(pointValue));
 	}
 
-	public static @NotNull Energy of(long no, long memberNo, int pointValue) {
+	public static Energy of(long no, long memberNo, int pointValue) {
 		return new Energy(no, memberNo, new Point(pointValue));
 	}
 
@@ -30,7 +28,7 @@ public class Energy {
 
 		private static final int INITIAL_POINT = 0;
 
-		private @NotNull Point minus(int point) {
+		private Point minus(int point) {
 			if (value == INITIAL_POINT) {
 				throw new IllegalArgumentException("사용할 수 있는 포인트가 없습니다");
 			}
@@ -41,7 +39,7 @@ public class Energy {
 			return new Point(minusAfter);
 		}
 
-		private @NotNull Point plus(int point) {
+		private Point plus(int point) {
 			return new Point(value + point);
 		}
 	}

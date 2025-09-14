@@ -1,13 +1,10 @@
-package univ.earthbreaker.namu.core.domain.point;
+package univ.earthbreaker.namu.core.domain.point.infra;
 
-import org.springframework.stereotype.Repository;
+import univ.earthbreaker.namu.core.domain.point.Energy;
 
-import jakarta.validation.constraints.NotNull;
-
-@Repository
 public interface EnergyPointRepository {
 
-	@NotNull Energy find(long memberNo);
+	Energy find(long memberNo);
 
 	void updatePoint(PointUpdateDbCommand command);
 

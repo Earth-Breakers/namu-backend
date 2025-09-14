@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.domain.point;
+package univ.earthbreaker.namu.core.domain.point.infra;
 
 public record PointUpdateDbCommand(
 	long memberNo,

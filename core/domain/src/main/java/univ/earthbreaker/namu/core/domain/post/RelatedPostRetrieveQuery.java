@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import univ.earthbreaker.namu.core.domain.common.SelfValidating;
+import univ.earthbreaker.namu.core.domain.post.infra.RelatedPostDbQuery;
 
 public class RelatedPostRetrieveQuery extends SelfValidating<RelatedPostRetrieveQuery> {
 
@@ -31,7 +32,7 @@ public class RelatedPostRetrieveQuery extends SelfValidating<RelatedPostRetrieve
 		this.validateSelf("memberNo, relatedMissionNo, page 는 null 이 될 수 없습니다");
 	}
 
-	RelatedPostDbQuery toDbQuery() {
+	public RelatedPostDbQuery toDbQuery() {
 		return new RelatedPostDbQuery(memberNo, relatedMissionNo, page, size, sortKey);
 	}
 

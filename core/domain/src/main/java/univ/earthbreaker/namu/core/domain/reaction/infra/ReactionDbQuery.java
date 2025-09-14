@@ -1,4 +1,6 @@
-package univ.earthbreaker.namu.core.domain.reaction;
+package univ.earthbreaker.namu.core.domain.reaction.infra;
+
+import univ.earthbreaker.namu.core.domain.reaction.TargetType;
 
 public record ReactionDbQuery(
 	long memberNo,

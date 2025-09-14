@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.domain.mission.service;
+package univ.earthbreaker.namu.core.domain.mission.infra;
 
 import org.jetbrains.annotations.NotNull;
 

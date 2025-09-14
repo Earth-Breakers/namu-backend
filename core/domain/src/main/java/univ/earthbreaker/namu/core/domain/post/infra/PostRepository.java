@@ -1,12 +1,13 @@
-package univ.earthbreaker.namu.core.domain.post;
+package univ.earthbreaker.namu.core.domain.post.infra;
 
 import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.springframework.stereotype.Repository;
 
-@Repository
+import univ.earthbreaker.namu.core.domain.post.Post;
+import univ.earthbreaker.namu.core.domain.post.RelatedPostResult;
+
 public interface PostRepository {
 
 	void create(PostCreateDbCommand command);

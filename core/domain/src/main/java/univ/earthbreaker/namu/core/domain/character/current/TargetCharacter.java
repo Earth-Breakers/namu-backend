@@ -2,8 +2,6 @@ package univ.earthbreaker.namu.core.domain.character.current;
 
 import java.util.Objects;
 
-import org.jetbrains.annotations.NotNull;
-
 import univ.earthbreaker.namu.core.domain.character.NamuCharacter;
 
 public class TargetCharacter {
@@ -31,7 +29,7 @@ public class TargetCharacter {
 		this.scripts = scripts;
 	}
 
-	static @NotNull TargetCharacter changeTo(@NotNull NamuCharacter namuCharacter) {
+	static TargetCharacter changeTo(NamuCharacter namuCharacter) {
 		return new TargetCharacter(
 			namuCharacter.getNo(),
 			namuCharacter.getGroupNumber(),

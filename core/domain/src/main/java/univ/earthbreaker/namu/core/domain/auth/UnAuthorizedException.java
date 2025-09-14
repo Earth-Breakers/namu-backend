@@ -8,7 +8,7 @@ public class UnAuthorizedException extends RuntimeException {
 		super(message);
 	}
 
-	static @NotNull UnAuthorizedException wrong(String token) {
+	public static @NotNull UnAuthorizedException wrong(String token) {
 		return new UnAuthorizedException(String.format("잘못된 토큰 (%s) 입니다", token));
 	}
 

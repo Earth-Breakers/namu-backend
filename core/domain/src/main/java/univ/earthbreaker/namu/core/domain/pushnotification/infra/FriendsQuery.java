@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.domain.pushnotification;
+package univ.earthbreaker.namu.core.domain.pushnotification.infra;
 
 import java.util.List;
 

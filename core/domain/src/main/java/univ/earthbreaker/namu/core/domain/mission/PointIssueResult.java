@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.service.mission;
+package univ.earthbreaker.namu.core.domain.mission;
 
 public record PointIssueResult(
 	long point,

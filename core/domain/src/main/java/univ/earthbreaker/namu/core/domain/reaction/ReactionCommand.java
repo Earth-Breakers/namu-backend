@@ -3,6 +3,8 @@ package univ.earthbreaker.namu.core.domain.reaction;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import univ.earthbreaker.namu.core.domain.common.SelfValidating;
+import univ.earthbreaker.namu.core.domain.reaction.infra.ReactionDbCommand;
+import univ.earthbreaker.namu.core.domain.reaction.infra.ReactionDbQuery;
 
 public class ReactionCommand extends SelfValidating<ReactionCommand> {
 
@@ -19,7 +21,7 @@ public class ReactionCommand extends SelfValidating<ReactionCommand> {
 		this.validateSelf("targetNo, memberNo 는 null 이 될 수 없고, targetType, reactionType 은 null 이나 공백이 될 수 없습니다");
 	}
 
-	ReactionDbCommand toDbCommand() {
+	public ReactionDbCommand toDbCommand() {
 		return new ReactionDbCommand(
 			memberNo,
 			targetNo,
@@ -28,7 +30,7 @@ public class ReactionCommand extends SelfValidating<ReactionCommand> {
 		);
 	}
 
-	ReactionDbQuery toDbQuery() {
+	public ReactionDbQuery toDbQuery() {
 		return new ReactionDbQuery(
 			memberNo,
 			targetNo,
@@ -36,7 +38,7 @@ public class ReactionCommand extends SelfValidating<ReactionCommand> {
 		);
 	}
 
-	Long getTargetNo() {
+	public Long getTargetNo() {
 		return targetNo;
 	}
 }

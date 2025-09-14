@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.service.member.friend;
+package univ.earthbreaker.namu.core.domain.member.friend.infra;
 
 public interface FollowFriendPushNotificationBridge {
 

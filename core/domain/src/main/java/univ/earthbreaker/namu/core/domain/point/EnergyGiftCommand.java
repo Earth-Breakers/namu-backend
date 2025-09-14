@@ -16,15 +16,15 @@ public class EnergyGiftCommand extends SelfValidating<EnergyGiftCommand> {
 		this.validateSelf("memberNo, targetMemberNo, pointValue 는 null 이 될 수 없습니다");
 	}
 
-	Long getMemberNo() {
+	public Long getMemberNo() {
 		return memberNo;
 	}
 
-	Long getTargetMemberNo() {
+	public Long getTargetMemberNo() {
 		return targetMemberNo;
 	}
 
-	Integer getPointValue() {
+	public Integer getPointValue() {
 		return pointValue;
 	}
 }

@@ -1,4 +1,4 @@
-package univ.earthbreaker.namu.core.service.reaction;
+package univ.earthbreaker.namu.core.domain.reaction.infra;
 
 import java.util.List;
 

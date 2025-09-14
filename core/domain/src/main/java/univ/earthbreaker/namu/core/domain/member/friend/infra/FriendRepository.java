@@ -1,14 +1,12 @@
-package univ.earthbreaker.namu.core.domain.member.friend;
+package univ.earthbreaker.namu.core.domain.member.friend.infra;
 
-import org.jetbrains.annotations.NotNull;
-import org.springframework.stereotype.Repository;
+import univ.earthbreaker.namu.core.domain.member.friend.Friend;
 
-@Repository
 public interface FriendRepository {
 
 	 void register(long memberNo, long targetMemberNo);
 
-	 @NotNull Friend findAll(long memberNo);
+	 Friend findAll(long memberNo);
 
 	 boolean existsBy(long memberNo, long targetMemberNo);
 }

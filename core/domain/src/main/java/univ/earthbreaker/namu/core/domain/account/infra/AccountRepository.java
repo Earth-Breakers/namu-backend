@@ -1,13 +1,11 @@
-package univ.earthbreaker.namu.core.domain.account;
+package univ.earthbreaker.namu.core.domain.account.infra;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.springframework.stereotype.Repository;
+import univ.earthbreaker.namu.core.domain.account.Account;
+import univ.earthbreaker.namu.core.domain.account.AccountCreateCommand;
 
-@Repository
 public interface AccountRepository {
 
-	@Nullable Account findOrNull(String socialId);
+	Account findOrNull(String socialId);
 
-	@NotNull Account create(AccountCreateCommand command);
+	Account create(AccountCreateCommand command);
 }
