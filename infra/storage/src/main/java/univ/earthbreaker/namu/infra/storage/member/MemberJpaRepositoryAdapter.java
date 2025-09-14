@@ -5,7 +5,7 @@ import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Repository;
 
 import univ.earthbreaker.namu.core.domain.member.Member;
-import univ.earthbreaker.namu.core.domain.member.MemberRepository;
+import univ.earthbreaker.namu.core.domain.member.infra.MemberRepository;
 
 @Repository
 public class MemberJpaRepositoryAdapter implements MemberRepository {

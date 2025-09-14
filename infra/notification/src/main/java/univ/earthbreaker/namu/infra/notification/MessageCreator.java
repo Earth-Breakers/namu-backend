@@ -1,8 +1,8 @@
 package univ.earthbreaker.namu.infra.notification;
 
-import java.util.List;
+import static univ.earthbreaker.namu.core.domain.pushnotification.infra.ShowOffNotificationPort.PushNotificationSourceCommand;
 
-import org.jetbrains.annotations.NotNull;
+import java.util.List;
 
 import com.google.firebase.messaging.AndroidConfig;
 import com.google.firebase.messaging.AndroidNotification;
@@ -15,7 +15,7 @@ public class MessageCreator {
 	private MessageCreator() {
 	}
 
-	static List<Message> createMessages(@NotNull PushNotificationSourceCommand sourceCommand) {
+	static List<Message> createMessages(PushNotificationSourceCommand sourceCommand) {
 		String title = String.format(NOTIFICATION_TITLE_FORMAT, sourceCommand.nickname(), sourceCommand.characterName());
 		String messageBody = sourceCommand.messageBody();
 		return sourceCommand.notificationTokens()

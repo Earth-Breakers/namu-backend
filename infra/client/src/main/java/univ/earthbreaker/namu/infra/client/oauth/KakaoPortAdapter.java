@@ -2,12 +2,14 @@ package univ.earthbreaker.namu.infra.client.oauth;
 
 import org.springframework.stereotype.Component;
 
+import univ.earthbreaker.namu.core.domain.account.infra.OAuthClientPort;
+
 @Component
-class KakaoApiAdapter implements OAuthClientApi {
+class KakaoPortAdapter implements OAuthClientPort {
 
 	private final KakaoApiCaller kakaoApiCaller;
 
-	public KakaoApiAdapter(KakaoApiCaller kakaoApiCaller) {
+	public KakaoPortAdapter(KakaoApiCaller kakaoApiCaller) {
 		this.kakaoApiCaller = kakaoApiCaller;
 	}
 

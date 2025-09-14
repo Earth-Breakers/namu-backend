@@ -1,7 +1,5 @@
 package univ.earthbreaker.namu.infra.storage.character;
 
-import static univ.earthbreaker.namu.core.domain.character.book.CharacterBookEventHandler.AddFinalCharacterDbCommand;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,12 +7,11 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Repository;
 
 import univ.earthbreaker.namu.core.domain.character.book.MemberCharacter;
-import univ.earthbreaker.namu.core.domain.character.book.MemberCharacterRepository;
+import univ.earthbreaker.namu.core.domain.character.book.infra.AddFinalCharacterDbCommand;
+import univ.earthbreaker.namu.core.domain.character.book.infra.MemberCharacterRepository;
 
 @Repository
 public class MemberCharacterRepositoryAdapter implements MemberCharacterRepository {
@@ -31,7 +28,7 @@ public class MemberCharacterRepositoryAdapter implements MemberCharacterReposito
 	}
 
 	@Override
-	public @Nullable MemberCharacter findOrNull(long memberNo, long characterNo) {
+	public MemberCharacter findOrNull(long memberNo, long characterNo) {
 		MemberCharacterJpaEntity memberCharacterJpaEntity = memberCharacterJpaRepository
 			.findByMemberNoAndCharacterNo(memberNo, characterNo);
 		if (memberCharacterJpaEntity != null) {
@@ -42,7 +39,7 @@ public class MemberCharacterRepositoryAdapter implements MemberCharacterReposito
 	}
 
 	@Override
-	public @NotNull List<MemberCharacter> findByMemberNo(long memberNo) {
+	public List<MemberCharacter> findByMemberNo(long memberNo) {
 		Map<Long, MemberCharacterJpaEntity> memberCharacterJpaEntityMap
 			= memberCharacterJpaRepository.findByMemberNo(memberNo)
 			.stream()
@@ -71,7 +68,7 @@ public class MemberCharacterRepositoryAdapter implements MemberCharacterReposito
 	}
 
 	@Override
-	public void createOrUpdate(@NotNull AddFinalCharacterDbCommand command) {
+	public void createOrUpdate(AddFinalCharacterDbCommand command) {
 		MemberCharacterJpaEntity memberCharacterJpaEntity = memberCharacterJpaRepository
 			.findByMemberNoAndCharacterNo(command.memberNo(), command.characterNo());
 		if (memberCharacterJpaEntity != null) {

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import univ.earthbreaker.namu.core.domain.account.Account;
 import univ.earthbreaker.namu.core.domain.account.AccountCreateCommand;
-import univ.earthbreaker.namu.core.domain.account.AccountRepository;
+import univ.earthbreaker.namu.core.domain.account.infra.AccountRepository;
 
 @Repository
 public class AccountJpaRepositoryAdapter implements AccountRepository {

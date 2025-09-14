@@ -6,9 +6,9 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Repository;
 
 import univ.earthbreaker.namu.core.domain.reaction.Reaction;
-import univ.earthbreaker.namu.core.domain.reaction.ReactionDbCommand;
-import univ.earthbreaker.namu.core.domain.reaction.ReactionDbQuery;
-import univ.earthbreaker.namu.core.domain.reaction.ReactionRepository;
+import univ.earthbreaker.namu.core.domain.reaction.infra.ReactionDbCommand;
+import univ.earthbreaker.namu.core.domain.reaction.infra.ReactionDbQuery;
+import univ.earthbreaker.namu.core.domain.reaction.infra.ReactionRepository;
 
 @Repository
 public class ReactionRepositoryAdapter implements ReactionRepository {

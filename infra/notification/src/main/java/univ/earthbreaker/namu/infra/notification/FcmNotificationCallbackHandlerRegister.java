@@ -1,13 +1,15 @@
 package univ.earthbreaker.namu.infra.notification;
 
+import static univ.earthbreaker.namu.core.domain.pushnotification.infra.ShowOffNotificationPort.PushNotificationSourceCommand;
+
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
 import com.google.api.core.ApiFuture;
 import com.google.common.util.concurrent.MoreExecutors;
 import com.google.firebase.messaging.BatchResponse;
+
 
 @Component
 public class FcmNotificationCallbackHandlerRegister {
@@ -19,7 +21,7 @@ public class FcmNotificationCallbackHandlerRegister {
 	}
 
 	void register(
-		@NotNull ApiFuture<BatchResponse> messageFuture,
+		ApiFuture<BatchResponse> messageFuture,
 		PushNotificationSourceCommand sourceCommand
 	) {
 		Runnable callbackHandler = () -> {

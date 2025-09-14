@@ -12,11 +12,11 @@ import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Repository;
 
 import univ.earthbreaker.namu.core.domain.post.Post;
-import univ.earthbreaker.namu.core.domain.post.PostCreateDbCommand;
-import univ.earthbreaker.namu.core.domain.post.PostDbQuery;
-import univ.earthbreaker.namu.core.domain.post.PostDetailDbQuery;
-import univ.earthbreaker.namu.core.domain.post.PostRepository;
-import univ.earthbreaker.namu.core.domain.post.RelatedPostDbQuery;
+import univ.earthbreaker.namu.core.domain.post.infra.PostCreateDbCommand;
+import univ.earthbreaker.namu.core.domain.post.infra.PostDbQuery;
+import univ.earthbreaker.namu.core.domain.post.infra.PostDetailDbQuery;
+import univ.earthbreaker.namu.core.domain.post.infra.PostRepository;
+import univ.earthbreaker.namu.core.domain.post.infra.RelatedPostDbQuery;
 import univ.earthbreaker.namu.core.domain.post.RelatedPostResult;
 
 @Repository

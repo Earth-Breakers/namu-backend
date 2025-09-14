@@ -4,8 +4,8 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Repository;
 
 import univ.earthbreaker.namu.core.domain.point.Energy;
-import univ.earthbreaker.namu.core.domain.point.EnergyPointRepository;
-import univ.earthbreaker.namu.core.domain.point.PointUpdateDbCommand;
+import univ.earthbreaker.namu.core.domain.point.infra.EnergyPointRepository;
+import univ.earthbreaker.namu.core.domain.point.infra.PointUpdateDbCommand;
 
 @Repository
 public class EnergyPointRepositoryAdapter implements EnergyPointRepository {

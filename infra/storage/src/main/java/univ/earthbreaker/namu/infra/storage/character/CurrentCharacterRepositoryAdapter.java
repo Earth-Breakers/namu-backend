@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import univ.earthbreaker.namu.core.domain.character.CharacterType;
 import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacter;
-import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacterRepository;
+import univ.earthbreaker.namu.core.domain.character.current.infra.CurrentCharacterRepository;
 
 @Repository
 public class CurrentCharacterRepositoryAdapter implements CurrentCharacterRepository {

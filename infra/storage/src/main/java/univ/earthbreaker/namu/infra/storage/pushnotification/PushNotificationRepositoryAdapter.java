@@ -6,9 +6,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Repository;
 
-import univ.earthbreaker.namu.core.domain.pushnotification.FriendsQuery;
+import univ.earthbreaker.namu.core.domain.pushnotification.infra.FriendsQuery;
 import univ.earthbreaker.namu.core.domain.pushnotification.PushNotification;
-import univ.earthbreaker.namu.core.domain.pushnotification.PushNotificationRepository;
+import univ.earthbreaker.namu.core.domain.pushnotification.infra.PushNotificationRepository;
 
 @Repository
 public class PushNotificationRepositoryAdapter implements PushNotificationRepository {

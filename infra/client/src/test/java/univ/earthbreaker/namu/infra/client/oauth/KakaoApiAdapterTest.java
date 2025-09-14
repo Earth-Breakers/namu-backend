@@ -6,13 +6,15 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import univ.earthbreaker.namu.core.domain.account.infra.OAuthMemberInfoResult;
+
 class KakaoApiAdapterTest {
 
 	private static final String ID = "socialId";
 	private static final String NICKNAME = "socialNickname";
 
 	private final KakaoApiCaller kakaoApiCaller = new KakaoApiCallerImpl();
-	private final KakaoApiAdapter kakaoApiAdapter = new KakaoApiAdapter(kakaoApiCaller);
+	private final KakaoPortAdapter kakaoApiAdapter = new KakaoPortAdapter(kakaoApiCaller);
 
 	@DisplayName("socialToken 를 받아 OAuth 회원의 정보를 가져온다")
 	@Test

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 import univ.earthbreaker.namu.core.domain.mission.infra.ImageManager;
 import univ.earthbreaker.namu.core.domain.mission.infra.ImageUploadCommand;
-import univ.earthbreaker.namu.core.domain.mission.service.ImageProcessException;
+import univ.earthbreaker.namu.core.domain.mission.infra.ImageProcessException;
 import univ.earthbreaker.namu.server.external.api.image.ImageRequest;
 import univ.earthbreaker.namu.server.external.api.image.ImageUploadRequest;
 import univ.earthbreaker.namu.server.external.api.image.ObjectMetaData;

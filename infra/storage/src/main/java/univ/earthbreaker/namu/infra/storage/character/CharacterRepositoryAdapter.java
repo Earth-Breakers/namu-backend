@@ -4,10 +4,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Repository;
 
-import univ.earthbreaker.namu.core.domain.character.CharacterRepository;
+import univ.earthbreaker.namu.core.domain.character.infra.CharacterRepository;
 import univ.earthbreaker.namu.core.domain.character.NamuCharacter;
-import univ.earthbreaker.namu.core.domain.character.NextDeterminedDbQuery;
-import univ.earthbreaker.namu.core.domain.character.NextRandomCharacterDbQuery;
+import univ.earthbreaker.namu.core.domain.character.infra.NextDeterminedDbQuery;
+import univ.earthbreaker.namu.core.domain.character.infra.NextRandomCharacterDbQuery;
 
 @Repository
 public class CharacterRepositoryAdapter implements CharacterRepository {

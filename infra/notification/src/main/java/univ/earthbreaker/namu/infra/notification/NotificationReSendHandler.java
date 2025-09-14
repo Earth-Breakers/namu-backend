@@ -1,11 +1,11 @@
 package univ.earthbreaker.namu.infra.notification;
 
+import static univ.earthbreaker.namu.core.domain.pushnotification.infra.ShowOffNotificationPort.PushNotificationSourceCommand;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -26,18 +26,19 @@ public class NotificationReSendHandler {
 		this.notificationReSender = notificationReSender;
 	}
 
-	void handleFailureMessage(@NotNull PushNotificationSourceCommand failureSourceCommand) {
+	void handleFailureMessage(PushNotificationSourceCommand failureSourceCommand) {
 		List<String> failureNotificationTokens = new ArrayList<>(failureSourceCommand.notificationTokens());
 		BatchMessageResponse messageResponse = null;
 		messageResponse = retryForFailedNotifications(failureSourceCommand, failureNotificationTokens, messageResponse);
-		logNotificationFinalResponse(messageResponse, firebaseBackOff.getCurrentRetryCount(), failureNotificationTokens);
+		logNotificationFinalResponse(messageResponse, firebaseBackOff.getCurrentRetryCount(),
+			failureNotificationTokens);
 		firebaseBackOff.reset();
 	}
 
-	private @NotNull BatchMessageResponse retryForFailedNotifications(
-		@NotNull PushNotificationSourceCommand failureSourceCommand,
-		@NotNull List<String> failureNotificationTokens,
-		@Nullable BatchMessageResponse messageResponse
+	private BatchMessageResponse retryForFailedNotifications(
+		PushNotificationSourceCommand failureSourceCommand,
+		List<String> failureNotificationTokens,
+		BatchMessageResponse messageResponse
 	) {
 		while (!firebaseBackOff.isStopped() && !failureNotificationTokens.isEmpty()) {
 			firebaseBackOff.nextBackOffMillis();
@@ -51,7 +52,7 @@ public class NotificationReSendHandler {
 
 	private List<String> getFailureNotificationTokens(
 		List<String> failureNotificationTokens,
-		@NotNull BatchMessageResponse messageResponse
+		BatchMessageResponse messageResponse
 	) {
 		if (messageResponse.hasFailure()) {
 			return messageResponse.extractFailureTokens(failureNotificationTokens);
@@ -61,7 +62,7 @@ public class NotificationReSendHandler {
 	}
 
 	private void logNotificationFinalResponse(
-		@NotNull BatchMessageResponse messageResponse,
+		BatchMessageResponse messageResponse,
 		long finalRetryCount,
 		List<String> failureNotificationTokens
 	) {

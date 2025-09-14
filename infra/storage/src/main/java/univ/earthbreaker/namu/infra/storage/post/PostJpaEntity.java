@@ -9,7 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import univ.earthbreaker.namu.core.domain.post.Post;
-import univ.earthbreaker.namu.core.domain.post.PostCreateDbCommand;
+import univ.earthbreaker.namu.core.domain.post.infra.PostCreateDbCommand;
 import univ.earthbreaker.namu.infra.storage.common.BaseTimeJpaEntity;
 
 @Entity

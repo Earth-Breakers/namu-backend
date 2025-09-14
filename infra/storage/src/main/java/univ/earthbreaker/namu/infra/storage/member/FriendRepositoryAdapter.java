@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import univ.earthbreaker.namu.core.domain.member.friend.Following;
 import univ.earthbreaker.namu.core.domain.member.friend.Friend;
-import univ.earthbreaker.namu.core.domain.member.friend.FriendRepository;
+import univ.earthbreaker.namu.core.domain.member.friend.infra.FriendRepository;
 
 @Repository
 public class FriendRepositoryAdapter implements FriendRepository {

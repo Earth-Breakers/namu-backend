@@ -5,7 +5,7 @@ import org.jetbrains.annotations.Nullable;
 import org.springframework.stereotype.Repository;
 
 import univ.earthbreaker.namu.core.domain.auth.RefreshToken;
-import univ.earthbreaker.namu.core.domain.auth.RefreshTokenRepository;
+import univ.earthbreaker.namu.core.domain.auth.infra.RefreshTokenRepository;
 
 @Repository
 public class RefreshTokenRepositoryAdapter implements RefreshTokenRepository {
