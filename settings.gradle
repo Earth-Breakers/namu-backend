@@ -11,7 +11,7 @@ rootProject.name = 'namu'
 
 include 'app:api', 'app:batch', 'app:kafka-consumer'
 
-include 'core:domain', 'core:storage'
+include 'core:domain', 'core:service'
 
 include 'infra:storage', 'infra:client', 'infra:kafka', 'infra:notification', 'infra:oauth'
 
