@@ -1,10 +1,8 @@
 package univ.earthbreaker.namu.app.api.post;
 
-import static univ.earthbreaker.namu.core.domain.common.Constant.IMAGE_ACCESS_URL;
+import static univ.earthbreaker.namu.core.domain.common.Constant.*;
 
 import java.util.List;
-
-import org.jetbrains.annotations.NotNull;
 
 import univ.earthbreaker.namu.core.domain.post.Post;
 import univ.earthbreaker.namu.core.domain.post.RelatedPostResult;
@@ -14,7 +12,7 @@ public record RelatedPostFeedResponses(
 	boolean isLastPage
 ) {
 
-	static @NotNull RelatedPostFeedResponses from(@NotNull RelatedPostResult result) {
+	static RelatedPostFeedResponses from(RelatedPostResult result) {
 		List<RelatedPostFeedResponse> responses = result.posts()
 			.stream()
 			.map(RelatedPostFeedResponse::from)
@@ -29,7 +27,7 @@ public record RelatedPostFeedResponses(
 		String title,
 		String imageUrl
 	) {
-		static @NotNull RelatedPostFeedResponse from(@NotNull Post post) {
+		static RelatedPostFeedResponse from(Post post) {
 			return new RelatedPostFeedResponse(
 				post.getNo(),
 				post.getMemberNo(),

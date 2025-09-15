@@ -1,0 +1,16 @@
+dependencies {
+    compileOnly("org.springframework:spring-context")
+    compileOnly project(':event')
+
+    implementation project(':core:domain')
+    implementation project(':server:external')
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'io.github.openfeign:feign-hc5'
+    implementation 'io.github.openfeign:feign-micrometer'
+
+    implementation 'com.amazonaws:aws-java-sdk-s3:1.12.685'
+    implementation 'org.testcontainers:localstack'
+
+    testImplementation 'org.testcontainers:junit-jupiter'
+}

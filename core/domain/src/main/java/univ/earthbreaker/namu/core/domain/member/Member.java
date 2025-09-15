@@ -33,7 +33,7 @@ public class Member {
 		this.status = status;
 	}
 
-	String getNickname() {
+	public String getNickname() {
 		return nickname;
 	}
 

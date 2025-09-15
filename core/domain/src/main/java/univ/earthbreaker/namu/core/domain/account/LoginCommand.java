@@ -1,7 +1,5 @@
 package univ.earthbreaker.namu.core.domain.account;
 
-import org.jetbrains.annotations.NotNull;
-
 import jakarta.validation.constraints.NotBlank;
 import univ.earthbreaker.namu.core.domain.common.SelfValidating;
 
@@ -22,7 +20,7 @@ public class LoginCommand extends SelfValidating<LoginCommand> {
 		return new KakaoAccountCreateCommand(socialId, memberNo);
 	}
 
-	public static @NotNull LoginCommandBuilder builder() {
+	public static LoginCommandBuilder builder() {
 		return new LoginCommandBuilder();
 	}
 

@@ -1,25 +1,22 @@
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.kafka:spring-kafka'
-    implementation project(":app:batch")
 
     implementation project(":core:domain")
-
-    implementation project(":services:auth")
-    implementation project(":services:notification")
-
-    implementation project(":clients:oauth")
-    implementation project(":clients:image")
-    implementation project(":clients:point")
-
+    implementation project(":core:service")
     implementation project(":support:logging")
+
+    runtimeOnly project(":infra:storage")
+    runtimeOnly project(":infra:client")
+    runtimeOnly project(":infra:kafka")
+    runtimeOnly project(":infra:notification")
 
     testImplementation project(":tests:api-docs")
 }
 
 tasks.register('copyResourcesConfig', Copy) {
-    from project(':services:auth').file('src/main/resources')
-    from project(':core:storage').file('src/main/resources')
+    from project(':core:service').file('src/main/resources')
+    from project(':infra:storage').file('src/main/resources')
+    from project(':infra:client').file('src/main/resources')
     from project(':support:logging').file('src/main/resources')
 
     into file("$projectDir/build/resources/main")

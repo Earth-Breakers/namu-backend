@@ -1,6 +1,6 @@
 package univ.earthbreaker.namu.core.domain.mission;
 
-import static univ.earthbreaker.namu.core.domain.mission.MissionRetrieveStrategyFactory.SpecialMissionDate;
+import static univ.earthbreaker.namu.core.domain.mission.service.MissionRetrieveStrategyFactory.SpecialMissionDate;
 import static univ.earthbreaker.namu.core.domain.mission.MissionStatus.READY;
 import static univ.earthbreaker.namu.core.domain.mission.MissionType.DEFAULT;
 import static univ.earthbreaker.namu.core.domain.mission.MissionType.SPECIAL;
@@ -8,6 +8,8 @@ import static univ.earthbreaker.namu.core.domain.mission.MissionType.TODAY;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import univ.earthbreaker.namu.core.domain.mission.service.MemberMissionQueryResult;
 
 public class MissionFixture {
 

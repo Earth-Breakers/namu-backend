@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import univ.earthbreaker.namu.core.domain.character.current.CurrentCharacterInitializeService;
 import univ.earthbreaker.namu.app.support.AuthMapping;
 import univ.earthbreaker.namu.app.support.LoginMember;
+import univ.earthbreaker.namu.core.service.character.current.CurrentCharacterInitializeService;
 
 @RestController
 @RequestMapping("/v1/characters/initialize")

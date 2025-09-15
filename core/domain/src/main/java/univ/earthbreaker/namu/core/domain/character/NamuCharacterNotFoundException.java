@@ -1,7 +1,5 @@
 package univ.earthbreaker.namu.core.domain.character;
 
-import org.jetbrains.annotations.NotNull;
-
 import univ.earthbreaker.namu.core.domain.common.NotFoundException;
 
 public class NamuCharacterNotFoundException extends NotFoundException {
@@ -10,11 +8,11 @@ public class NamuCharacterNotFoundException extends NotFoundException {
 		super(domainName);
 	}
 
-	public static @NotNull NamuCharacterNotFoundException notFoundNext() {
+	public static NamuCharacterNotFoundException notFoundNext() {
 		return new NamuCharacterNotFoundException("다음 성장 형태의 캐릭터");
 	}
 
-	public static @NotNull NamuCharacterNotFoundException notFoundRandom() {
+	public static NamuCharacterNotFoundException notFoundRandom() {
 		return new NamuCharacterNotFoundException("랜덤으로 가져온 캐릭터");
 	}
 }

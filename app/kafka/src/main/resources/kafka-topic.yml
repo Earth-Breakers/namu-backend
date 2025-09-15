@@ -1,4 +1,0 @@
-kafka:
-  topics:
-    mission-retry:
-      name: earthbreaker.namu.mission-retry

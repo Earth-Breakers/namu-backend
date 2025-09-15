@@ -9,13 +9,11 @@ pluginManagement {
 
 rootProject.name = 'namu'
 
-include 'app:api', 'app:batch', 'app:kafka'
+include 'app:api', 'app:batch', 'app:kafka-consumer'
 
-include 'core:domain', 'core:storage'
+include 'core:domain', 'core:service'
 
-include 'services:auth', 'services:notification'
-
-include 'clients:oauth', 'clients:aws', 'clients:image', 'clients:point'
+include 'infra:storage', 'infra:client', 'infra:kafka', 'infra:notification', 'infra:oauth'
 
 include 'event'
 

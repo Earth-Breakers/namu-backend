@@ -1,0 +1,44 @@
+package univ.earthbreaker.namu.infra.client.oauth;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import univ.earthbreaker.namu.core.domain.account.infra.OAuthMemberInfoResult;
+
+class KakaoApiAdapterTest {
+
+	private static final String ID = "socialId";
+	private static final String NICKNAME = "socialNickname";
+
+	private final KakaoApiCaller kakaoApiCaller = new KakaoApiCallerImpl();
+	private final KakaoPortAdapter kakaoApiAdapter = new KakaoPortAdapter(kakaoApiCaller);
+
+	@DisplayName("socialToken 를 받아 OAuth 회원의 정보를 가져온다")
+	@Test
+	void getOAuthMemberInfo() {
+		// when
+		OAuthMemberInfoResult oAuthMemberInfoResult = kakaoApiAdapter.getOAuthMemberInfo("socialToken");
+
+		// then
+		assertAll(
+			() -> assertThat(oAuthMemberInfoResult.id()).isEqualTo(ID),
+			() -> assertThat(oAuthMemberInfoResult.nickname()).isEqualTo(NICKNAME)
+		);
+	}
+
+	private static class KakaoApiCallerImpl implements KakaoApiCaller {
+
+		@Override
+		public KakaoMemberInfoResponse getKakaoUserInfo(String bearerAccessToken) {
+			return new KakaoMemberInfoResponse(
+				ID,
+				new KakaoAccount(
+					new Profile(NICKNAME)
+				)
+			);
+		}
+	}
+}

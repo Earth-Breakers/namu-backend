@@ -1,17 +1,15 @@
 package univ.earthbreaker.namu.core.domain.post;
 
+import static univ.earthbreaker.namu.core.domain.reaction.infra.ReactionBridge.ReactionStatus;
+
 import java.util.List;
-
-import org.jetbrains.annotations.NotNull;
-
-import univ.earthbreaker.namu.core.domain.reaction.ReactionBridge.ReactionStatus;
 
 public record PostReactionResult(
 	Post post,
 	PostReactionStatus reactionStatus
 ) {
 
-	static @NotNull PostReactionResult of(Post post, @NotNull ReactionStatus reactionStatus) {
+	public static PostReactionResult of(Post post, ReactionStatus reactionStatus) {
 		List<PostReactionStatus.Info> infos = reactionStatus.statuses()
 			.stream()
 			.map(status -> new PostReactionStatus.Info(

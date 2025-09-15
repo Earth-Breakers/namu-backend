@@ -6,23 +6,23 @@ public class MemberMissions {
 
 	private final List<MemberMission> values;
 
-	MemberMissions(List<MemberMission> values) {
+	public MemberMissions(List<MemberMission> values) {
 		this.values = values;
 	}
 
-	List<MemberMission> findTodayMissions() {
+	public List<MemberMission> findTodayMissions() {
 		return values.stream()
 			.filter(MemberMission::isToday)
 			.toList();
 	}
 
-	List<MemberMission> findDefaultMissions() {
+	public List<MemberMission> findDefaultMissions() {
 		return values.stream()
 			.filter(MemberMission::isDefault)
 			.toList();
 	}
 
-	List<MemberMission> findSpecialMissions() {
+	public List<MemberMission> findSpecialMissions() {
 		return values.stream()
 			.filter(MemberMission::isSpecial)
 			.toList();

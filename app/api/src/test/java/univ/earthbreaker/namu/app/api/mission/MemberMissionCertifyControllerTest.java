@@ -24,7 +24,7 @@ import org.springframework.mock.web.MockPart;
 import org.springframework.test.web.servlet.ResultActions;
 
 import univ.earthbreaker.namu.app.api.PresentationTest;
-import univ.earthbreaker.namu.core.domain.mission.MemberMissionCertifyService;
+import univ.earthbreaker.namu.core.domain.mission.service.MemberMissionCertifyService;
 import univ.earthbreaker.namu.external.aws.image.ImageManager;
 import univ.earthbreaker.namu.external.aws.image.ImagePathKeyGenerator;
 import univ.earthbreaker.namu.external.aws.image.ImageUploadCommand;

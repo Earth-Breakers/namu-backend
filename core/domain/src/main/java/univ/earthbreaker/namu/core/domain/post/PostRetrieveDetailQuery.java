@@ -14,11 +14,11 @@ public class PostRetrieveDetailQuery extends SelfValidating<PostRetrieveDetailQu
 		this.validateSelf("memberNo, postNo 는 null 이 될 수 없습니다");
 	}
 
-	Long getMemberNo() {
+	public Long getMemberNo() {
 		return memberNo;
 	}
 
-	Long getPostNo() {
+	public Long getPostNo() {
 		return postNo;
 	}
 }

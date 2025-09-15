@@ -2,8 +2,6 @@ package univ.earthbreaker.namu.core.domain.character.current;
 
 import java.util.Objects;
 
-import org.jetbrains.annotations.NotNull;
-
 import univ.earthbreaker.namu.core.domain.character.CharacterType;
 import univ.earthbreaker.namu.core.domain.character.NamuCharacter;
 
@@ -32,11 +30,11 @@ public class CurrentCharacter {
 	 * 초기 상태가 아닐 경우에는 주어진 에너지 타입이 현재의 캐릭터 타입과 일치해야 합니다.
 	 *
 	 * @param givenEnergyType 회원이 선택한 에너지 종류
-	 * @param energyExp 에너지 포인트
+	 * @param energyExp       에너지 포인트
 	 * @return 에너지를 받은 현재 캐릭터
 	 * @throws CurrentCharacterBadRequestException 타입 불일치 시 예외 발생
 	 */
-	CurrentCharacter giveEnergyExp(@NotNull CharacterType givenEnergyType, int energyExp) {
+	public CurrentCharacter giveEnergyExp(CharacterType givenEnergyType, int energyExp) {
 		if (characterType.isInitial()) {
 			return new CurrentCharacter(master, character, givenEnergyType, status.addExp(energyExp));
 		} else if (characterType.equals(givenEnergyType)) {
@@ -46,7 +44,7 @@ public class CurrentCharacter {
 		}
 	}
 
-	CurrentCharacter growToNext(@NotNull NamuCharacter namuCharacter) {
+	public CurrentCharacter growToNext(NamuCharacter namuCharacter) {
 		if (!namuCharacter.getType().equals(characterType)) {
 			throw new IllegalStateException("캐릭터를 성장시키기 위해서는 캐릭터의 종류가 같아야 합니다");
 		}
@@ -62,7 +60,7 @@ public class CurrentCharacter {
 		);
 	}
 
-	int calculateExpectedNextLevel() {
+	public int calculateExpectedNextLevel() {
 		int expectLevelAfterUp = status.calculateToNextLevelValue();
 		if (status.isExpectLevelOverFlow(expectLevelAfterUp)) {
 			throw new IllegalStateException("잘못된 요청으로 현재 혀용하는 level 의 최대치를 초과했습니다");
@@ -70,27 +68,27 @@ public class CurrentCharacter {
 		return expectLevelAfterUp;
 	}
 
-	boolean cannotLevelUp() {
+	public boolean cannotLevelUp() {
 		return !status.isCanLevelUp();
 	}
 
-	boolean levelIsNotFinal() {
+	public boolean levelIsNotFinal() {
 		return !status.isLevelFinal();
 	}
 
-	boolean levelIsNotEnd() {
+	public boolean levelIsNotEnd() {
 		return !status.isLevelEnd();
 	}
 
-	boolean levelIsNotMiddle() {
+	public boolean levelIsNotMiddle() {
 		return !status.isLevelMiddle();
 	}
 
-	boolean levelIsNotBegin() {
+	public boolean levelIsNotBegin() {
 		return !status.isLevelBegin();
 	}
 
-	public static @NotNull CurrentCharacter of(
+	public static CurrentCharacter of(
 		long memberNo,
 		long characterNo,
 		CharacterType energyType,
@@ -111,7 +109,7 @@ public class CurrentCharacter {
 		);
 	}
 
-	public static @NotNull CurrentCharacter initialize(
+	public static CurrentCharacter initialize(
 		long memberNo,
 		long characterNo,
 		int requiredExp,

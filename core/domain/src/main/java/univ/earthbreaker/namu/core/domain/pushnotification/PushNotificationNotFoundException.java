@@ -1,7 +1,5 @@
 package univ.earthbreaker.namu.core.domain.pushnotification;
 
-import org.jetbrains.annotations.NotNull;
-
 import univ.earthbreaker.namu.core.domain.common.NotFoundException;
 
 public class PushNotificationNotFoundException extends NotFoundException {
@@ -12,7 +10,7 @@ public class PushNotificationNotFoundException extends NotFoundException {
 		super(domainName);
 	}
 
-	static @NotNull PushNotificationNotFoundException notFount() {
+	public static PushNotificationNotFoundException notFount() {
 		return new PushNotificationNotFoundException(PUSH_NOTIFICATION_DOMAIN_NAME);
 	}
 }

@@ -34,7 +34,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 
 import univ.earthbreaker.namu.app.api.PresentationTest;
-import univ.earthbreaker.namu.core.domain.mission.MemberMissionQueryService;
+import univ.earthbreaker.namu.core.domain.mission.service.MemberMissionQueryService;
 
 class MemberMissionQueryControllerTest extends PresentationTest {
 

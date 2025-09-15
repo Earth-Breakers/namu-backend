@@ -1,7 +1,6 @@
 package univ.earthbreaker.namu.app.api.auth;
 
-import static univ.earthbreaker.namu.app.support.HttpHeaderUtils.REFRESH_TOKEN;
-import static univ.earthbreaker.namu.app.support.HttpHeaderUtils.withBearerToken;
+import static univ.earthbreaker.namu.app.support.HttpHeaderUtils.*;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -10,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import univ.earthbreaker.namu.core.auth.TokenReissueService;
-import univ.earthbreaker.namu.core.auth.TokenResult;
+import univ.earthbreaker.namu.core.domain.auth.TokenResult;
+import univ.earthbreaker.namu.core.service.auth.TokenReissueService;
 
 @RestController
 @RequestMapping("/v1/auth")

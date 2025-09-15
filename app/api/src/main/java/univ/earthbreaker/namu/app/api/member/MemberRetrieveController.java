@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import univ.earthbreaker.namu.app.support.AuthMapping;
 import univ.earthbreaker.namu.app.support.LoginMember;
 import univ.earthbreaker.namu.core.domain.member.Member;
-import univ.earthbreaker.namu.core.domain.member.MemberRetrieveService;
+import univ.earthbreaker.namu.core.service.member.MemberRetrieveService;
 
 @RestController
 @RequestMapping("/v1/members")

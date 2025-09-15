@@ -16,11 +16,11 @@ public class PostRetrieveAllQuery extends SelfValidating<PostRetrieveAllQuery> {
 		this.validateSelf("memberNo, date 는 null 이 될 수 없습니다");
 	}
 
-	Long getMemberNo() {
+	public Long getMemberNo() {
 		return memberNo;
 	}
 
-	LocalDate getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 }

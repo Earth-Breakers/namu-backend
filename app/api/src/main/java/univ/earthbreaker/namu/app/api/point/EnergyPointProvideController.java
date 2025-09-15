@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import univ.earthbreaker.namu.app.support.AuthMapping;
 import univ.earthbreaker.namu.app.support.LoginMember;
-import univ.earthbreaker.namu.core.domain.point.EnergyPointProvideService;
+import univ.earthbreaker.namu.core.service.point.EnergyPointProvideService;
 
 @RestController
 @RequestMapping("/v1/points")

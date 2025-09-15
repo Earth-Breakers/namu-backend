@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import univ.earthbreaker.namu.app.support.AuthMapping;
 import univ.earthbreaker.namu.app.support.LoginMember;
 import univ.earthbreaker.namu.core.domain.mission.MemberMissionQueryResult;
-import univ.earthbreaker.namu.core.domain.mission.MemberMissionQueryService;
+import univ.earthbreaker.namu.core.service.mission.MemberMissionQueryService;
 
 @RestController
 @RequestMapping("/v1/missions")

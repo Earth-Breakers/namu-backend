@@ -9,7 +9,7 @@ import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.stereotype.Component;
 
 import univ.earthbreaker.namu.batch.core.BatchException;
-import univ.earthbreaker.namu.core.storage.mission.FixMissionJpaEntity;
+import univ.earthbreaker.namu.infra.storage.mission.FixMissionJpaEntity;
 
 @Component
 @StepScope

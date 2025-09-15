@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.batch.item.Chunk;
 import org.springframework.batch.item.ItemWriter;
 
-import univ.earthbreaker.namu.core.storage.mission.MemberMissionBatchRepository;
+import univ.earthbreaker.namu.infra.storage.mission.MemberMissionBatchRepository;
 
 public class MemberMissionItemWriter implements ItemWriter<MemberBatchEntity> {
 

@@ -1,7 +1,5 @@
 package univ.earthbreaker.namu.core.domain.post;
 
-import org.jetbrains.annotations.NotNull;
-
 public class Post {
 
 	private final long no;
@@ -20,7 +18,7 @@ public class Post {
 		this.missionId = missionId;
 	}
 
-	public static @NotNull Post of(
+	public static Post of(
 		long no,
 		long memberNo,
 		String nickname,

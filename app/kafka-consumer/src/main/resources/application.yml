@@ -1,0 +1,37 @@
+spring.application.name: kafka-consumer-app
+spring.profiles.active: local
+
+spring:
+  config:
+    import:
+      - classpath:kafka-topic.yml
+      - storage-core.yml
+      - auth.yml
+      - clients-oauth.yml
+      - notification.yml
+      - logging.yml
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: mission-retry-consumer
+      properties:
+        session.timeout.ms: 10000
+        heartbeat.interval.ms: 3000
+        request.timeout.ms: 3000
+
+        max.poll.interval.ms: 300000
+        max.poll.records: 10
+
+        enable.auto.commit: true
+        auto.commit.interval: 1000
+
+        auto.offset.reset: latest
+
+server:
+  port: 8085
+
+---
+spring.config.activate.on-profile: local
+
+---
+spring.config.activate.on-profile: dev

@@ -1,8 +1,6 @@
 package univ.earthbreaker.namu.app.api.post;
 
-import static univ.earthbreaker.namu.core.domain.common.Constant.IMAGE_ACCESS_URL;
-
-import org.jetbrains.annotations.NotNull;
+import static univ.earthbreaker.namu.core.domain.common.Constant.*;
 
 import univ.earthbreaker.namu.core.domain.post.Post;
 import univ.earthbreaker.namu.core.domain.post.PostReactionResult.PostReactionStatus;
@@ -17,7 +15,7 @@ public record PostDetailResponse(
 	long relatedMissionNo,
 	PostReactionStatus reactionStatus
 ) {
-	static @NotNull PostDetailResponse of(@NotNull Post post, @NotNull PostReactionStatus reactionStatus) {
+	static PostDetailResponse of(Post post, PostReactionStatus reactionStatus) {
 		return new PostDetailResponse(
 			post.getNo(),
 			post.getMemberNo(),
