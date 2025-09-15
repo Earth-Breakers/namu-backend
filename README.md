@@ -27,3 +27,5 @@
 - [이벤트를 활용해 외부 네트워크 작업과 DB 트랜잭션 분리하기](https://chanwoo.vercel.app/graduation-8)
 - [Spring Batch 에서 Step 간 데이터 공유하기 2 ](https://chanwoo.vercel.app/graduation-11)
 - [@TransactionalEventListener(AFTER_ROLLBACK) 사용 시 트랜잭션 리소스가 반납되지 않아 발생한 문제와 해결](https://chanwoo.vercel.app/graduation-12)
+- [네트워크 지연으로 인한 HTTP 스레드 블로킹 및 병목 문제 해결기 : SSE vs Polling 도입 판단의 기준](https://chanwoo.vercel.app/graduation-13)
+- [네트워크 지연으로 인한 HTTP 스레드 블로킹 및 병목 문제 해결기 : 카프카 도입까지의 사고의 흐름](https://chanwoo.vercel.app/graduation-14)
