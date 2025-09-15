@@ -8,6 +8,7 @@
 ### 모듈과 아키텍처
 
 - [졸업 프로젝트 서버 아키텍처 (feat.DDD)](https://chanwoo.vercel.app/graduation-1)
+- [모듈 구조와 아키텍처 설명](https://github.com/Earth-Breakers/namu-backend/blob/develop/MODULE-N-ARCH.md)
 
 ### 로깅 및 모니터링
 
