@@ -8,6 +8,7 @@ import univ.earthbreaker.namu.core.domain.mission.MissionCompleteCommand;
 import univ.earthbreaker.namu.core.support.retry.RetryHandler;
 import univ.earthbreaker.namu.core.support.tx.TransactionHandler;
 import univ.earthbreaker.namu.event.EventPublisher;
+import univ.earthbreaker.namu.event.image.DeleteExternalUploadedImageEvent;
 import univ.earthbreaker.namu.event.point.AddRewardPointEvent;
 import univ.earthbreaker.namu.event.post.PostCreateEvent;
 
@@ -34,18 +35,19 @@ public class MemberMissionCertifyService {
 		this.retryHandler = retryHandler;
 	}
 
-	public void successMission(
-		MissionCompleteCommand mc,
-		CertifiedMissionPostCommand pc
-	) {
-		retryHandler.execute(() -> // 실패 발생 시 재시도
-			transactionHandler.execute(() -> {
+	public void successMission(MissionCompleteCommand mc, CertifiedMissionPostCommand pc) {
+		retryHandler.execute(
+			() -> transactionHandler.execute(() -> { // 실패 발생 시 재시도
 				MemberMission memberMission = memberMissionFinder.find(mc.memberNo(), mc.missionNo());
 				MemberMission successMission = missionCertifyHandler.success(memberMission);
 				publishRewardEventForSuccessMission(successMission); // 리워드 포인트 지급 이벤트 발행
 				publishCreatePostEventForSuccessMission(pc, successMission); // 게시글 생성 이벤트 발행
 				return null;
-			})
+			}),
+			ex -> { // 재시도마저 실패했을 경우
+				eventPublisher.publish(new DeleteExternalUploadedImageEvent(pc.imagePathKey()));
+				return null;
+			}
 		);
 	}
 
