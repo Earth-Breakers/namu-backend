@@ -7,7 +7,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import univ.earthbreaker.namu.core.domain.mission.MissionCertifyProcess;
-import univ.earthbreaker.namu.core.domain.mission.MissionCertifyStatus;
+import univ.earthbreaker.namu.core.domain.mission.MissionCertifyHistory;
 import univ.earthbreaker.namu.infra.storage.common.BaseTimeJpaEntity;
 
 @Entity
@@ -38,7 +38,7 @@ public class MissionCertifyHistoryJpaEntity extends BaseTimeJpaEntity {
 		this.process = process;
 	}
 
-	MissionCertifyStatus toDomainEntity() {
-		return new MissionCertifyStatus(requestId, memberNo, missionNo, process);
+	MissionCertifyHistory toDomainEntity() {
+		return new MissionCertifyHistory(requestId, memberNo, missionNo, process);
 	}
 }

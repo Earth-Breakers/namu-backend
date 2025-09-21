@@ -1,13 +1,13 @@
 package univ.earthbreaker.namu.core.domain.mission;
 
-public class MissionCertifyStatus {
+public class MissionCertifyHistory {
 
 	private final String requestId;
 	private final long memberNo;
 	private final long missionNo;
 	private final MissionCertifyProcess process;
 
-	public MissionCertifyStatus(String requestId, long memberNo, long missionNo, MissionCertifyProcess process) {
+	public MissionCertifyHistory(String requestId, long memberNo, long missionNo, MissionCertifyProcess process) {
 		this.requestId = requestId;
 		this.memberNo = memberNo;
 		this.missionNo = missionNo;

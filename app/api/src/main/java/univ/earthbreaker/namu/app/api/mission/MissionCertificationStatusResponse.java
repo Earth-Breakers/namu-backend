@@ -1,6 +1,6 @@
 package univ.earthbreaker.namu.app.api.mission;
 
-import univ.earthbreaker.namu.core.domain.mission.MissionCertifyStatus;
+import univ.earthbreaker.namu.core.domain.mission.MissionCertifyHistory;
 
 public record MissionCertificationStatusResponse(
 	String requestId,
@@ -8,7 +8,7 @@ public record MissionCertificationStatusResponse(
 	long missionNo,
 	String process
 ) {
-	static MissionCertificationStatusResponse from(MissionCertifyStatus status) {
+	static MissionCertificationStatusResponse from(MissionCertifyHistory status) {
 		return new MissionCertificationStatusResponse(
 			status.getRequestId(),
 			status.getMemberNo(),

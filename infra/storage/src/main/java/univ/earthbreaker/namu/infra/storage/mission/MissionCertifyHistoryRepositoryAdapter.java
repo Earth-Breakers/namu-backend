@@ -3,15 +3,15 @@ package univ.earthbreaker.namu.infra.storage.mission;
 import org.springframework.stereotype.Component;
 
 import univ.earthbreaker.namu.core.domain.mission.MissionCertifyProcess;
-import univ.earthbreaker.namu.core.domain.mission.MissionCertifyStatus;
-import univ.earthbreaker.namu.core.domain.mission.infra.MissionCertifyStatusRepository;
+import univ.earthbreaker.namu.core.domain.mission.MissionCertifyHistory;
+import univ.earthbreaker.namu.core.domain.mission.infra.MissionCertifyHistoryRepository;
 
 @Component
-public class MissionCertifyStatusRepositoryAdapter implements MissionCertifyStatusRepository {
+public class MissionCertifyHistoryRepositoryAdapter implements MissionCertifyHistoryRepository {
 
 	private final MissionCertifyHistoryJpaRepository jpaRepository;
 
-	public MissionCertifyStatusRepositoryAdapter(MissionCertifyHistoryJpaRepository jpaRepository) {
+	public MissionCertifyHistoryRepositoryAdapter(MissionCertifyHistoryJpaRepository jpaRepository) {
 		this.jpaRepository = jpaRepository;
 	}
 
@@ -31,7 +31,7 @@ public class MissionCertifyStatusRepositoryAdapter implements MissionCertifyStat
 	}
 
 	@Override
-	public MissionCertifyStatus retrieve(String requestId) {
+	public MissionCertifyHistory retrieve(String requestId) {
 		return jpaRepository.findByRequestId(requestId).toDomainEntity();
 	}
 }

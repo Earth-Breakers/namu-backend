@@ -3,39 +3,39 @@ package univ.earthbreaker.namu.core.service.mission;
 import org.springframework.stereotype.Service;
 
 import univ.earthbreaker.namu.core.domain.mission.MissionCertifyProcess;
-import univ.earthbreaker.namu.core.domain.mission.MissionCertifyStatus;
-import univ.earthbreaker.namu.core.domain.mission.infra.MissionCertifyStatusRepository;
+import univ.earthbreaker.namu.core.domain.mission.MissionCertifyHistory;
+import univ.earthbreaker.namu.core.domain.mission.infra.MissionCertifyHistoryRepository;
 import univ.earthbreaker.namu.core.support.tx.TransactionHandler;
 
 @Service
 public class MissionCertifyTrackingService {
 
-	private final MissionCertifyStatusRepository missionCertifyStatusRepository;
+	private final MissionCertifyHistoryRepository missionCertifyHistoryRepository;
 	private final TransactionHandler transactionHandler;
 
 	public MissionCertifyTrackingService(
-		MissionCertifyStatusRepository missionCertifyStatusRepository,
+		MissionCertifyHistoryRepository missionCertifyHistoryRepository,
 		TransactionHandler transactionHandler
 	) {
-		this.missionCertifyStatusRepository = missionCertifyStatusRepository;
+		this.missionCertifyHistoryRepository = missionCertifyHistoryRepository;
 		this.transactionHandler = transactionHandler;
 	}
 
 	public void register(String requestId, long memberNo, long missionNo) {
 		transactionHandler.execute(() -> {
-			missionCertifyStatusRepository.register(requestId, memberNo, missionNo);
+			missionCertifyHistoryRepository.register(requestId, memberNo, missionNo);
 			return null;
 		});
 	}
 
 	public void update(String requestId, MissionCertifyProcess process) {
 		transactionHandler.execute(() -> {
-			missionCertifyStatusRepository.update(requestId, process);
+			missionCertifyHistoryRepository.update(requestId, process);
 			return null;
 		});
 	}
 
-	public MissionCertifyStatus retrieve(String requestId) {
-		return missionCertifyStatusRepository.retrieve(requestId);
+	public MissionCertifyHistory retrieve(String requestId) {
+		return missionCertifyHistoryRepository.retrieve(requestId);
 	}
 }

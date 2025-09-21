@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import univ.earthbreaker.namu.app.support.AuthMapping;
 import univ.earthbreaker.namu.app.support.LoginMember;
 import univ.earthbreaker.namu.core.domain.mission.CertifyResult;
-import univ.earthbreaker.namu.core.domain.mission.MissionCertifyStatus;
+import univ.earthbreaker.namu.core.domain.mission.MissionCertifyHistory;
 import univ.earthbreaker.namu.core.service.mission.MissionCertifyFacade;
 import univ.earthbreaker.namu.core.service.mission.MissionCertifyTrackingService;
 
@@ -51,7 +51,7 @@ public class MissionCertifyController {
 
 	@GetMapping("/certification/status/{requestId}")
 	public ResponseEntity<MissionCertificationStatusResponse> pollCertifyProcess(@PathVariable String requestId) {
-		MissionCertifyStatus status = missionCertifyTrackingService.retrieve(requestId);
+		MissionCertifyHistory status = missionCertifyTrackingService.retrieve(requestId);
 		return ResponseEntity.ok(MissionCertificationStatusResponse.from(status));
 	}
 }
