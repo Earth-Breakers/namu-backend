@@ -71,9 +71,22 @@ database:
   datasource:
     core:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://namu-db-core-mysql.c52imsc2yfxs.ap-northeast-2.rds.amazonaws.com:3306/namu_dev
-      username: namu_admin
-      password: ~namu!password!~
+      jdbc-url: jdbc:mysql://${STORAGE_DATABASE_CORE_DB_URL}/${STORAGE_DATABASE_CORE_DB_NAME}
+      username: ${STORAGE_DATABASE_CORE_DB_USERNAME}
+      password: ${STORAGE_DATABASE_CORE_DB_PASSWORD}
+      pool-name: core-db-pool
+      data-source-properties:
+        socketTimeout: 3000
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+        useLocalSessionState: true
+        rewriteBatchedStatements: true
+        cacheResultSetMetadata: true
+        cacheServerConfiguration: true
+        elideSetAutoCommits: true
+        maintainTimeStats: false
 
 ---
 spring.config.activate.on-profile: staging
