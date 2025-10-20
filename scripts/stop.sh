@@ -1,4 +1,5 @@
-BASE_PATH="/home/ubuntu"
+#!/bin/bash
+BASE_PATH="/home/ubuntu/namu-server"
 
 LOG_PATH="$BASE_PATH/log"
 DEPLOY_LOG="$LOG_PATH/deploy.log"
