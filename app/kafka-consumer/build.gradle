@@ -1,3 +1,6 @@
+bootJar.enabled = true
+jar.enabled = false
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.kafka:spring-kafka'
@@ -15,6 +18,7 @@ dependencies {
 tasks.register('copyResourcesConfig', Copy) {
     from project(':core:service').file('src/main/resources')
     from project(':infra:storage').file('src/main/resources')
+    from project(':infra:kafka').file('src/main/resources')
     from project(':support:logging').file('src/main/resources')
 
     into file("$projectDir/build/resources/main")

@@ -1,0 +1,27 @@
+version: 0.0
+os: linux
+
+files:
+  - source:  /
+    destination: /home/ubuntu/namu-consumer-server
+    overwrite: yes
+
+permissions:
+  - object: /
+    pattern: "**"
+    owner: ubuntu
+    group: ubuntu
+
+hooks:
+  AfterInstall:
+    - location: stop.sh
+      timeout: 60
+      runas: ubuntu
+  ApplicationStart:
+    - location: deploy.sh
+      timeout: 90
+      runas: ubuntu
+  ValidateService:
+    - location: healthCheck.sh
+      timeout: 60
+      runas: ubuntu

@@ -1,0 +1,24 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - echo Build Started on `date`
+      - chmod +x ./gradlew
+      - ./gradlew :app:kafka-consumer:clean :app:kafka-consumer:build -x test
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo $(basename ./app/kafka-consumer/build/libs/*.jar)
+      - pwd
+
+artifacts:
+  files:
+    - appspec-consumer.yml
+    - app/kafka-consumer/build/libs/*.jar
+    - scripts/consumer/**
+  discard-paths: yes
+
+cache:
+  paths:
+    - '/root/.gradle/caches/**/*'

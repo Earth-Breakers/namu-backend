@@ -26,6 +26,18 @@ spring.config.activate.on-profile: local-dev
 ---
 spring.config.activate.on-profile: dev
 
+spring:
+  kafka:
+    bootstrap-servers: ${BOOTSTRAP_SERVER}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringDeserializer
+      properties:
+        acks: all
+        enable.idempotence: true
+        retries: 2147483647
+        max.in.flight.requests.per.connection: 1
+
 ---
 spring.config.activate.on-profile: staging
 
