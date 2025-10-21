@@ -27,7 +27,7 @@ tasks.register('copyResourcesConfig', Copy) {
     into file("$projectDir/build/resources/main")
 
     include '*.yml'
-    include 'firebase/*.json'
+    include '/firebase/*.json'
 }
 
 processResources.dependsOn('copyResourcesConfig')
