@@ -9,12 +9,13 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
+      - mv appspec-consumer.yml appspec.yml
       - echo $(basename ./app/kafka-consumer/build/libs/*.jar)
       - pwd
 
 artifacts:
   files:
-    - appspec-consumer.yml
+    - appspec.yml
     - app/kafka-consumer/build/libs/*.jar
     - scripts/consumer/**
   discard-paths: yes
