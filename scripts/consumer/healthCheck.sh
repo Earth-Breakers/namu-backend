@@ -3,7 +3,7 @@ echo "> Health check 시작"
 
 for RETRY_COUNT in {1..15}
 do
-  HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/health)
+  HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8085/health)
 
   if [ "$HTTP_STATUS" -eq 200 ]
   then
@@ -24,6 +24,6 @@ do
 done
 
 CURRENT_TIME=$(date +%c)
-EXECUTED_PROCESS_PID=$(lsof -t -i tcp:8080)
+EXECUTED_PROCESS_PID=$(lsof -t -i tcp:8085)
 echo "$CURRENT_TIME > 현재 애플리케이션이 $EXECUTED_PROCESS_PID pid 에서 실행중입니다."
 exit 0
