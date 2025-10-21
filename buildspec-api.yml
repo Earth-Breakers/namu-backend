@@ -9,6 +9,7 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
+      - mv appspec-api.yml appspec.yml
       - echo $(basename ./app/api/build/libs/*.jar)
       - pwd
 
