@@ -15,7 +15,7 @@ phases:
 
 artifacts:
   files:
-    - appspec-consumer.yml
+    - appspec.yml
     - app/kafka-consumer/build/libs/*.jar
     - scripts/consumer/**
   discard-paths: yes
