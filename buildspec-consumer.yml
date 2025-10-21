@@ -9,6 +9,7 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
+      - mv appspec-consumer.yml appspec.yml
       - echo $(basename ./app/kafka-consumer/build/libs/*.jar)
       - pwd
 
